@@ -23,24 +23,18 @@
     html, body { height: 100%; background: var(--cream); font-family: 'DM Sans', sans-serif; color: var(--text-dark); overflow: hidden; }
     #app { height: 100%; display: flex; flex-direction: column; }
 
-    /* HEADER */
-    .header {
-      background: var(--charcoal); flex-shrink: 0;
-      padding: calc(var(--safe-top) + 16px) 20px 16px;
-    }
+    .header { background: var(--charcoal); flex-shrink: 0; padding: calc(var(--safe-top) + 16px) 20px 16px; }
     .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
     .header-eyebrow { font-size: 10px; color: var(--taupe); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 3px; }
     .header-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--cream); letter-spacing: 0.03em; }
-    .add-fab {
-      width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2); color: var(--cream);
-      font-size: 22px; line-height: 1; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-      transition: background 0.2s;
+    .header-actions { display: flex; gap: 8px; align-items: center; }
+    .icon-btn {
+      width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2); color: var(--cream); font-size: 15px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .add-fab:active { background: rgba(255,255,255,0.22); }
-
-    /* NAV TABS */
+    .icon-btn:active { background: rgba(255,255,255,0.25); }
+    .icon-btn.add-icon { font-size: 20px; }
     .nav { display: flex; gap: 2px; }
     .nav-btn {
       flex: 1; background: none; border: none; cursor: pointer;
@@ -50,43 +44,25 @@
     }
     .nav-btn.active { color: var(--cream); background: rgba(255,255,255,0.12); }
 
-    /* SCROLL AREA */
     .scroll-area { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: calc(var(--safe-bottom) + 24px); }
 
-    /* STATS */
     .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-bottom: 1px solid var(--border); }
     .stat { background: var(--white); padding: 14px 16px; }
     .stat-dot { width: 5px; height: 5px; border-radius: 50%; margin-bottom: 6px; }
     .stat-val { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--charcoal); line-height: 1; }
     .stat-lbl { font-size: 9px; color: var(--text-light); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 3px; }
 
-    /* SEARCH */
     .search-bar { padding: 12px 16px; background: var(--linen); border-bottom: 1px solid var(--border); position: relative; }
     .search-bar svg { position: absolute; left: 28px; top: 50%; transform: translateY(-50%); color: var(--text-light); pointer-events: none; }
-    .search-input {
-      width: 100%; padding: 9px 12px 9px 36px; border: 1px solid var(--border);
-      background: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px;
-      color: var(--text-dark); border-radius: 6px; outline: none;
-      -webkit-appearance: none;
-    }
+    .search-input { width: 100%; padding: 9px 12px 9px 36px; border: 1px solid var(--border); background: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text-dark); border-radius: 6px; outline: none; -webkit-appearance: none; }
     .search-input:focus { border-color: var(--taupe); }
-
-    /* CAT PILLS */
     .cat-scroll { display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px; background: var(--linen); border-bottom: 1px solid var(--border); scrollbar-width: none; }
     .cat-scroll::-webkit-scrollbar { display: none; }
-    .pill {
-      flex-shrink: 0; padding: 6px 12px; border: 1px solid var(--border); background: var(--white);
-      font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--text-med);
-      border-radius: 20px; cursor: pointer; transition: all 0.15s; white-space: nowrap;
-    }
+    .pill { flex-shrink: 0; padding: 6px 12px; border: 1px solid var(--border); background: var(--white); font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--text-med); border-radius: 20px; cursor: pointer; white-space: nowrap; }
     .pill.active { background: var(--charcoal); border-color: var(--charcoal); color: var(--cream); }
 
-    /* PRODUCT CARDS */
     .product-list { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
-    .product-card {
-      background: var(--white); border: 1px solid var(--border); border-radius: 6px;
-      padding: 14px 16px; transition: box-shadow 0.2s;
-    }
+    .product-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; }
     .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
     .card-name { font-size: 14px; font-weight: 500; color: var(--text-dark); line-height: 1.3; flex: 1; margin-right: 10px; }
     .card-brand { font-size: 11px; color: var(--text-light); margin-top: 2px; }
@@ -96,23 +72,18 @@
     .card-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--stone); }
     .card-price { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: var(--charcoal); }
     .card-actions { display: flex; gap: 6px; }
-    .action-btn {
-      padding: 5px 12px; border: 1px solid var(--border); background: none;
-      font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--text-med);
-      border-radius: 4px; cursor: pointer; transition: all 0.15s;
-    }
+    .action-btn { padding: 5px 12px; border: 1px solid var(--border); background: none; font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--text-med); border-radius: 4px; cursor: pointer; }
     .action-btn:active { background: var(--linen); }
     .action-btn.del:active { border-color: #8B3A3A; color: #8B3A3A; }
-    .days-tag { font-size: 12px; font-weight: 500; }
-    .days-ok { color: var(--text-med); }
-    .days-warn { color: #8B6914; }
-    .days-exp { color: #8B3A3A; }
+    .days-ok { color: var(--text-med); font-size: 12px; font-weight: 500; }
+    .days-warn { color: #8B6914; font-size: 12px; font-weight: 500; }
+    .days-exp { color: #8B3A3A; font-size: 12px; font-weight: 500; }
     .empty { padding: 60px 20px; text-align: center; color: var(--text-light); font-size: 14px; }
 
-    /* SHOPPING */
-    .page-header { padding: 20px 16px 4px; }
+    .page-header { padding: 20px 16px 8px; display: flex; justify-content: space-between; align-items: flex-end; }
     .page-eyebrow { font-size: 10px; color: var(--text-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
     .page-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--charcoal); }
+
     .shop-list { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
     .shop-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; }
     .shop-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
@@ -122,40 +93,34 @@
     .shop-meta { display: flex; gap: 8px; align-items: center; }
     .shop-where { font-size: 11px; color: var(--text-med); }
     .shop-note { font-size: 11px; color: var(--text-light); font-style: italic; margin-top: 6px; }
+    .shop-bottom { display: flex; justify-content: flex-end; gap: 6px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--stone); }
     .shop-total { margin: 4px 16px 0; background: var(--linen); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
     .shop-total-lbl { font-size: 11px; color: var(--text-med); letter-spacing: 0.06em; text-transform: uppercase; }
     .shop-total-val { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--charcoal); }
 
-    /* ROUTINE */
     .routine-list { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
     .routine-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
     .routine-card-header { background: var(--linen); padding: 8px 14px; display: flex; align-items: center; gap: 10px; }
     .routine-step-num { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--stone); min-width: 28px; }
-    .routine-step-name { font-size: 11px; font-weight: 500; color: var(--text-med); letter-spacing: 0.08em; text-transform: uppercase; }
+    .routine-step-name { font-size: 11px; font-weight: 500; color: var(--text-med); letter-spacing: 0.08em; text-transform: uppercase; flex: 1; }
     .routine-slots { display: grid; grid-template-columns: 1fr 1fr; }
     .routine-slot { padding: 10px 14px; border-top: 1px solid var(--stone); }
     .routine-slot:first-child { border-right: 1px solid var(--stone); }
     .routine-slot-lbl { font-size: 9px; color: var(--text-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px; }
     .routine-slot-val { font-size: 12px; color: var(--text-dark); line-height: 1.4; }
     .weekly-section { padding: 0 16px 8px; }
-    .weekly-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; margin-bottom: 8px; }
+    .weekly-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
     .weekly-freq { font-size: 10px; color: var(--text-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px; }
     .weekly-name { font-size: 13px; font-weight: 500; color: var(--text-dark); margin-bottom: 3px; }
     .weekly-note { font-size: 11px; color: var(--text-light); font-style: italic; }
+    .small-actions { display: flex; gap: 5px; flex-shrink: 0; }
+    .sm-btn { padding: 4px 9px; border: 1px solid var(--border); background: none; font-family: 'DM Sans', sans-serif; font-size: 10px; color: var(--text-med); border-radius: 4px; cursor: pointer; }
+    .sm-btn:active { background: var(--linen); }
+    .sm-btn.del:active { border-color: #8B3A3A; color: #8B3A3A; }
 
-    /* MODAL / DRAWER */
-    .overlay {
-      position: fixed; inset: 0; background: rgba(44,44,44,0.55);
-      z-index: 300; display: flex; align-items: flex-end;
-      backdrop-filter: blur(2px); animation: fadeIn 0.15s ease;
-    }
-    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
-    .drawer {
-      width: 100%; background: var(--white); border-radius: 16px 16px 0 0;
-      max-height: 92vh; display: flex; flex-direction: column;
-      animation: slideUp 0.25s cubic-bezier(0.32,0.72,0,1);
-      padding-bottom: var(--safe-bottom);
-    }
+    .overlay { position: fixed; inset: 0; background: rgba(44,44,44,0.55); z-index: 300; display: flex; align-items: flex-end; backdrop-filter: blur(2px); }
+    .overlay.hidden { display: none; }
+    .drawer { width: 100%; background: var(--white); border-radius: 16px 16px 0 0; max-height: 92vh; display: flex; flex-direction: column; animation: slideUp 0.25s cubic-bezier(0.32,0.72,0,1); padding-bottom: var(--safe-bottom); }
     @keyframes slideUp { from { transform: translateY(100%) } to { transform: translateY(0) } }
     .drawer-handle { width: 36px; height: 4px; background: var(--stone); border-radius: 2px; margin: 12px auto 0; }
     .drawer-header { padding: 16px 20px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
@@ -166,33 +131,32 @@
     .field { display: flex; flex-direction: column; gap: 5px; }
     .field.full { grid-column: 1 / -1; }
     .field label { font-size: 10px; color: var(--text-light); letter-spacing: 0.09em; text-transform: uppercase; }
-    .field input, .field select, .field textarea {
-      padding: 10px 12px; border: 1px solid var(--border); background: var(--cream);
-      font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-dark);
-      border-radius: 6px; outline: none; -webkit-appearance: none;
-      transition: border-color 0.2s;
-    }
+    .field input, .field select, .field textarea { padding: 10px 12px; border: 1px solid var(--border); background: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-dark); border-radius: 6px; outline: none; -webkit-appearance: none; }
     .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--taupe); background: var(--white); }
-    .field textarea { resize: none; min-height: 70px; }
+    .field textarea { resize: none; min-height: 64px; }
     .drawer-footer { padding: 12px 20px 8px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
     .btn-cancel { flex: 1; padding: 12px; background: none; border: 1px solid var(--border); font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text-med); border-radius: 8px; cursor: pointer; }
     .btn-save { flex: 2; padding: 12px; background: var(--charcoal); border: none; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--cream); letter-spacing: 0.05em; border-radius: 8px; cursor: pointer; }
     .btn-save:active { background: var(--warm-gray); }
 
-    /* HIDDEN */
+    .toast { position: fixed; bottom: calc(var(--safe-bottom) + 24px); left: 50%; transform: translateX(-50%) translateY(16px); background: var(--charcoal); color: var(--cream); padding: 9px 18px; border-radius: 20px; font-size: 12px; letter-spacing: 0.04em; opacity: 0; transition: all 0.25s; z-index: 500; white-space: nowrap; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     .hidden { display: none !important; }
   </style>
 </head>
 <body>
 <div id="app">
-  <!-- HEADER -->
   <header class="header">
     <div class="header-top">
       <div>
         <div class="header-eyebrow">Personal Care</div>
         <div class="header-title">Skincare Inventory</div>
       </div>
-      <button class="add-fab" id="addBtn" style="display:none">+</button>
+      <div class="header-actions">
+        <button class="icon-btn hidden" id="importBtn" title="Import data">⬆</button>
+        <button class="icon-btn hidden" id="exportBtn" title="Export data">⬇</button>
+        <button class="icon-btn add-icon" id="addBtn">+</button>
+      </div>
     </div>
     <nav class="nav">
       <button class="nav-btn active" data-tab="inventory">Inventory</button>
@@ -201,10 +165,8 @@
     </nav>
   </header>
 
-  <!-- SCROLL AREA -->
   <div class="scroll-area" id="scrollArea">
-
-    <!-- INVENTORY TAB -->
+    <!-- INVENTORY -->
     <div id="tab-inventory">
       <div class="stats-row" id="statsRow"></div>
       <div class="search-bar">
@@ -215,419 +177,383 @@
       <div class="product-list" id="productList"></div>
     </div>
 
-    <!-- SHOPPING TAB -->
+    <!-- SHOPPING -->
     <div id="tab-shopping" class="hidden">
       <div class="page-header">
-        <div class="page-eyebrow">Wishlist</div>
-        <div class="page-title">Shopping List</div>
+        <div><div class="page-eyebrow">Wishlist</div><div class="page-title">Shopping List</div></div>
       </div>
       <div class="shop-list" id="shopList"></div>
-      <div class="shop-total">
+      <div class="shop-total" style="margin-bottom:16px">
         <span class="shop-total-lbl">Estimated Total</span>
-        <span class="shop-total-val" id="shopTotal"></span>
+        <span class="shop-total-val" id="shopTotal">₹0</span>
       </div>
     </div>
 
-    <!-- ROUTINE TAB -->
+    <!-- ROUTINE -->
     <div id="tab-routine" class="hidden">
       <div class="page-header">
-        <div class="page-eyebrow">Daily Protocol</div>
-        <div class="page-title">Skincare Routine</div>
+        <div><div class="page-eyebrow">Daily Protocol</div><div class="page-title">Skincare Routine</div></div>
       </div>
       <div class="routine-list" id="routineList"></div>
       <div class="page-header" style="padding-top:8px">
-        <div class="page-eyebrow">Weekly</div>
+        <div><div class="page-eyebrow">Weekly Treatments</div></div>
+        <button class="sm-btn" onclick="openAddWeekly()" style="margin-bottom:2px">+ Add</button>
       </div>
       <div class="weekly-section" id="weeklyList"></div>
     </div>
-
   </div>
 
-  <!-- DRAWER MODAL -->
-  <div class="overlay hidden" id="overlay">
+  <!-- PRODUCT DRAWER -->
+  <div class="overlay hidden" id="productOverlay">
     <div class="drawer">
       <div class="drawer-handle"></div>
       <div class="drawer-header">
-        <span class="drawer-title" id="drawerTitle">Add Product</span>
-        <button class="drawer-close" id="drawerClose">×</button>
+        <span class="drawer-title" id="productDrawerTitle">Add Product</span>
+        <button class="drawer-close" id="pClose">×</button>
       </div>
       <div class="drawer-body">
-        <div class="field full">
-          <label>Product Name</label>
-          <input id="f-name" placeholder="e.g. Vitamin C Serum" />
+        <div class="field full"><label>Product Name</label><input id="f-name" placeholder="e.g. Vitamin C Serum" /></div>
+        <div class="drawer-row">
+          <div class="field"><label>Brand</label><input id="f-brand" placeholder="e.g. Minimalist" /></div>
+          <div class="field"><label>Category</label><select id="f-category"></select></div>
         </div>
         <div class="drawer-row">
-          <div class="field">
-            <label>Brand</label>
-            <input id="f-brand" placeholder="e.g. Minimalist" />
-          </div>
-          <div class="field">
-            <label>Category</label>
-            <select id="f-category"></select>
-          </div>
+          <div class="field"><label>Routine Step</label><input id="f-step" placeholder="e.g. Step 3 – AM" /></div>
+          <div class="field"><label>Size (ml/g)</label><input id="f-size" type="number" placeholder="30" /></div>
         </div>
         <div class="drawer-row">
-          <div class="field">
-            <label>Routine Step</label>
-            <input id="f-step" placeholder="e.g. Step 3 – AM" />
-          </div>
-          <div class="field">
-            <label>Size (ml/g)</label>
-            <input id="f-size" type="number" placeholder="30" />
-          </div>
+          <div class="field"><label>Purchase Date</label><input id="f-purchaseDate" type="date" /></div>
+          <div class="field"><label>Expiry Date</label><input id="f-expiryDate" type="date" /></div>
         </div>
         <div class="drawer-row">
-          <div class="field">
-            <label>Purchase Date</label>
-            <input id="f-purchaseDate" type="date" />
-          </div>
-          <div class="field">
-            <label>Expiry Date</label>
-            <input id="f-expiryDate" type="date" />
-          </div>
+          <div class="field"><label>Quantity</label><input id="f-qty" type="number" min="0" value="1" /></div>
+          <div class="field"><label>Price (₹)</label><input id="f-price" type="number" placeholder="499" /></div>
         </div>
-        <div class="drawer-row">
-          <div class="field">
-            <label>Quantity</label>
-            <input id="f-qty" type="number" min="0" value="1" />
-          </div>
-          <div class="field">
-            <label>Price (₹)</label>
-            <input id="f-price" type="number" placeholder="499" />
-          </div>
-        </div>
-        <div class="field full">
-          <label>Notes</label>
-          <textarea id="f-notes" placeholder="Usage tips, skin type notes…"></textarea>
-        </div>
+        <div class="field full"><label>Notes</label><textarea id="f-notes" placeholder="Usage tips…"></textarea></div>
       </div>
       <div class="drawer-footer">
-        <button class="btn-cancel" id="drawerCancel">Cancel</button>
-        <button class="btn-save" id="drawerSave">Save Product</button>
+        <button class="btn-cancel" id="pCancel">Cancel</button>
+        <button class="btn-save" id="pSave">Save Product</button>
       </div>
     </div>
   </div>
+
+  <!-- SHOPPING DRAWER -->
+  <div class="overlay hidden" id="shopOverlay">
+    <div class="drawer">
+      <div class="drawer-handle"></div>
+      <div class="drawer-header">
+        <span class="drawer-title" id="shopDrawerTitle">Add Item</span>
+        <button class="drawer-close" id="sClose">×</button>
+      </div>
+      <div class="drawer-body">
+        <div class="field full"><label>Product Name</label><input id="s-name" placeholder="e.g. Snail Mucin Essence" /></div>
+        <div class="drawer-row">
+          <div class="field"><label>Brand</label><input id="s-brand" placeholder="e.g. COSRX" /></div>
+          <div class="field"><label>Category</label><select id="s-category"></select></div>
+        </div>
+        <div class="drawer-row">
+          <div class="field"><label>Priority</label><select id="s-priority"><option>High</option><option>Medium</option><option>Low</option></select></div>
+          <div class="field"><label>Price (₹)</label><input id="s-price" type="number" placeholder="999" /></div>
+        </div>
+        <div class="field full"><label>Where to Buy</label><input id="s-where" placeholder="e.g. Nykaa / Amazon" /></div>
+        <div class="field full"><label>Notes</label><textarea id="s-notes" placeholder="Any details…"></textarea></div>
+      </div>
+      <div class="drawer-footer">
+        <button class="btn-cancel" id="sCancel">Cancel</button>
+        <button class="btn-save" id="sSave">Save Item</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROUTINE STEP DRAWER -->
+  <div class="overlay hidden" id="routineOverlay">
+    <div class="drawer">
+      <div class="drawer-handle"></div>
+      <div class="drawer-header">
+        <span class="drawer-title" id="routineDrawerTitle">Add Step</span>
+        <button class="drawer-close" id="rClose">×</button>
+      </div>
+      <div class="drawer-body">
+        <div class="drawer-row">
+          <div class="field"><label>Step No.</label><input id="r-step" placeholder="e.g. 07" /></div>
+          <div class="field"><label>Step Name</label><input id="r-name" placeholder="e.g. Essence" /></div>
+        </div>
+        <div class="field full"><label>Morning (AM) Product</label><input id="r-am" placeholder="e.g. Rose Water Toner" /></div>
+        <div class="field full"><label>Evening (PM) Product</label><input id="r-pm" placeholder="e.g. HA 2% + B5" /></div>
+      </div>
+      <div class="drawer-footer">
+        <button class="btn-cancel" id="rCancel">Cancel</button>
+        <button class="btn-save" id="rSave">Save Step</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEKLY TREATMENT DRAWER -->
+  <div class="overlay hidden" id="weeklyOverlay">
+    <div class="drawer">
+      <div class="drawer-handle"></div>
+      <div class="drawer-header">
+        <span class="drawer-title" id="weeklyDrawerTitle">Add Treatment</span>
+        <button class="drawer-close" id="wClose">×</button>
+      </div>
+      <div class="drawer-body">
+        <div class="field full"><label>Frequency</label><input id="w-freq" placeholder="e.g. Weekly / Monthly" /></div>
+        <div class="field full"><label>Treatment Name</label><input id="w-name" placeholder="e.g. Face Mask" /></div>
+        <div class="field full"><label>Notes</label><textarea id="w-note" placeholder="Instructions or details…"></textarea></div>
+      </div>
+      <div class="drawer-footer">
+        <button class="btn-cancel" id="wCancel">Cancel</button>
+        <button class="btn-save" id="wSave">Save Treatment</button>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="importFile" accept=".json" class="hidden" />
+  <div class="toast" id="toast"></div>
 </div>
 
 <script>
-const CATEGORIES = ["All","Cleanser","Toner","Serum","Moisturiser","Sunscreen","Eye Care","Exfoliant","Face Oil","Essence","Lip Care"];
+const CATS = ["All","Cleanser","Toner","Serum","Moisturiser","Sunscreen","Eye Care","Exfoliant","Face Oil","Essence","Lip Care"];
+const CAT_OPTS = CATS.slice(1);
+const STATUS = { active:{label:"Active",color:"#6B7D6E",bg:"#EEF1EE"}, expiring:{label:"Expiring Soon",color:"#8B6914",bg:"#F5EDD4"}, expired:{label:"Expired",color:"#8B3A3A",bg:"#F5E4E4"}, low:{label:"Low Stock",color:"#4A6B8A",bg:"#E4EDF5"} };
+const PRI   = { High:{color:"#8B3A3A",bg:"#F5E4E4"}, Medium:{color:"#8B6914",bg:"#F5EDD4"}, Low:{color:"#5A6B5A",bg:"#E8EEE8"} };
 
-const STATUS_CONFIG = {
-  active:   { label: "Active",        color: "#6B7D6E", bg: "#EEF1EE" },
-  expiring: { label: "Expiring Soon", color: "#8B6914", bg: "#F5EDD4" },
-  expired:  { label: "Expired",       color: "#8B3A3A", bg: "#F5E4E4" },
-  low:      { label: "Low Stock",     color: "#4A6B8A", bg: "#E4EDF5" },
-};
-const PRIORITY_CONFIG = {
-  High:   { color: "#8B3A3A", bg: "#F5E4E4" },
-  Medium: { color: "#8B6914", bg: "#F5EDD4" },
-  Low:    { color: "#5A6B5A", bg: "#E8EEE8" },
-};
-
-let products = [
-  { id:1, name:"Vitamin C Brightening Serum", brand:"Minimalist", category:"Serum", step:"Step 3 – AM", size:30, purchaseDate:"2025-01-10", expiryDate:"2026-01-10", qty:1, price:699, notes:"Use within 3 months of opening" },
-  { id:2, name:"Niacinamide 10% + Zinc 1%", brand:"Minimalist", category:"Serum", step:"Step 3 – AM/PM", size:30, purchaseDate:"2025-02-05", expiryDate:"2026-08-05", qty:2, price:599, notes:"Helps with pores & sebum" },
-  { id:3, name:"Ceramide Moisturiser", brand:"CeraVe", category:"Moisturiser", step:"Step 4 – PM", size:88, purchaseDate:"2024-11-15", expiryDate:"2026-11-15", qty:1, price:899, notes:"Fragrance-free, gentle" },
-  { id:4, name:"SPF 50+ Sunscreen PA++++", brand:"Re'equil", category:"Sunscreen", step:"Step 5 – AM", size:80, purchaseDate:"2025-03-01", expiryDate:"2026-03-01", qty:2, price:545, notes:"Reapply every 2 hrs outdoors" },
-  { id:5, name:"Gentle Foaming Cleanser", brand:"Cetaphil", category:"Cleanser", step:"Step 1 – AM/PM", size:250, purchaseDate:"2025-01-20", expiryDate:"2027-01-20", qty:1, price:425, notes:"Low pH, suitable daily use" },
-  { id:6, name:"Retinol 0.3% Serum", brand:"Minimalist", category:"Serum", step:"Step 3 – PM", size:30, purchaseDate:"2024-12-01", expiryDate:"2025-12-01", qty:1, price:649, notes:"Introduce slowly; use with moisturiser" },
-  { id:7, name:"Rose Water Toner", brand:"Forest Essentials", category:"Toner", step:"Step 2 – AM/PM", size:200, purchaseDate:"2025-04-10", expiryDate:"2026-04-10", qty:1, price:850, notes:"Hydrating & soothing" },
-  { id:8, name:"AHA 25% + BHA 2% Peeling Solution", brand:"The Ordinary", category:"Exfoliant", step:"Weekly", size:30, purchaseDate:"2025-02-14", expiryDate:"2026-02-14", qty:1, price:799, notes:"Max 10 min; do not use daily" },
-  { id:9, name:"Eye Cream SPF", brand:"Kiehl's", category:"Eye Care", step:"Step 4 – AM", size:14, purchaseDate:"2025-03-20", expiryDate:"2026-09-20", qty:1, price:3200, notes:"Pat gently around orbital bone" },
-  { id:10, name:"Hyaluronic Acid 2% + B5", brand:"The Ordinary", category:"Serum", step:"Step 2 – AM/PM", size:30, purchaseDate:"2025-04-01", expiryDate:"2026-10-01", qty:3, price:379, notes:"Apply on damp skin" },
-  { id:11, name:"Face Oil (Rosehip)", brand:"Plum", category:"Face Oil", step:"Step 5 – PM", size:30, purchaseDate:"2024-10-01", expiryDate:"2025-10-01", qty:1, price:595, notes:"Speeds up skin repair" },
-  { id:12, name:"Micellar Cleansing Water", brand:"Simple", category:"Cleanser", step:"Step 1 – AM", size:400, purchaseDate:"2025-01-05", expiryDate:"2027-07-05", qty:1, price:365, notes:"No-rinse; great for lazy mornings" },
+const DEF_PRODUCTS = [
+  {id:1,name:"Vitamin C Brightening Serum",brand:"Minimalist",category:"Serum",step:"Step 3 – AM",size:30,purchaseDate:"2025-01-10",expiryDate:"2026-01-10",qty:1,price:699,notes:"Use within 3 months of opening"},
+  {id:2,name:"Niacinamide 10% + Zinc 1%",brand:"Minimalist",category:"Serum",step:"Step 3 – AM/PM",size:30,purchaseDate:"2025-02-05",expiryDate:"2026-08-05",qty:2,price:599,notes:"Helps with pores & sebum"},
+  {id:3,name:"Ceramide Moisturiser",brand:"CeraVe",category:"Moisturiser",step:"Step 4 – PM",size:88,purchaseDate:"2024-11-15",expiryDate:"2026-11-15",qty:1,price:899,notes:"Fragrance-free, gentle"},
+  {id:4,name:"SPF 50+ Sunscreen PA++++",brand:"Re'equil",category:"Sunscreen",step:"Step 5 – AM",size:80,purchaseDate:"2025-03-01",expiryDate:"2026-03-01",qty:2,price:545,notes:"Reapply every 2 hrs outdoors"},
+  {id:5,name:"Gentle Foaming Cleanser",brand:"Cetaphil",category:"Cleanser",step:"Step 1 – AM/PM",size:250,purchaseDate:"2025-01-20",expiryDate:"2027-01-20",qty:1,price:425,notes:"Low pH, suitable daily use"},
+  {id:6,name:"Retinol 0.3% Serum",brand:"Minimalist",category:"Serum",step:"Step 3 – PM",size:30,purchaseDate:"2024-12-01",expiryDate:"2025-12-01",qty:1,price:649,notes:"Introduce slowly; use with moisturiser"},
+  {id:7,name:"Rose Water Toner",brand:"Forest Essentials",category:"Toner",step:"Step 2 – AM/PM",size:200,purchaseDate:"2025-04-10",expiryDate:"2026-04-10",qty:1,price:850,notes:"Hydrating & soothing"},
+  {id:8,name:"AHA 25% + BHA 2% Peeling Solution",brand:"The Ordinary",category:"Exfoliant",step:"Weekly",size:30,purchaseDate:"2025-02-14",expiryDate:"2026-02-14",qty:1,price:799,notes:"Max 10 min; do not use daily"},
+  {id:9,name:"Eye Cream SPF",brand:"Kiehl's",category:"Eye Care",step:"Step 4 – AM",size:14,purchaseDate:"2025-03-20",expiryDate:"2026-09-20",qty:1,price:3200,notes:"Pat gently around orbital bone"},
+  {id:10,name:"Hyaluronic Acid 2% + B5",brand:"The Ordinary",category:"Serum",step:"Step 2 – AM/PM",size:30,purchaseDate:"2025-04-01",expiryDate:"2026-10-01",qty:3,price:379,notes:"Apply on damp skin"},
+  {id:11,name:"Face Oil (Rosehip)",brand:"Plum",category:"Face Oil",step:"Step 5 – PM",size:30,purchaseDate:"2024-10-01",expiryDate:"2025-10-01",qty:1,price:595,notes:"Speeds up skin repair"},
+  {id:12,name:"Micellar Cleansing Water",brand:"Simple",category:"Cleanser",step:"Step 1 – AM",size:400,purchaseDate:"2025-01-05",expiryDate:"2027-07-05",qty:1,price:365,notes:"No-rinse; great for lazy mornings"},
+];
+const DEF_SHOPPING = [
+  {id:1,name:"Snail Mucin Essence",brand:"COSRX",category:"Essence",priority:"High",price:1299,where:"Nykaa / Amazon",notes:"96% Snail Secretion Filtrate"},
+  {id:2,name:"Barrier Repair Moisturiser",brand:"Dr. G",category:"Moisturiser",priority:"Medium",price:1800,where:"MyGlamm",notes:"For compromised skin days"},
+  {id:3,name:"Azelaic Acid 10%",brand:"Paula's Choice",category:"Serum",priority:"Low",price:2200,where:"Paula's Choice IN",notes:"For PIH & redness"},
+  {id:4,name:"Lip SPF Balm",brand:"dot & key",category:"Lip Care",priority:"High",price:349,where:"Nykaa",notes:"Tinted + SPF 30"},
+  {id:5,name:"Enzyme Powder Cleanser",brand:"Hanskin",category:"Cleanser",priority:"Low",price:950,where:"Amazon",notes:"Once-weekly deep cleanse"},
+];
+const DEF_ROUTINE = [
+  {id:1,step:"01",name:"Cleanser",am:"Cetaphil Gentle Foaming Cleanser",pm:"Simple Micellar Cleansing Water"},
+  {id:2,step:"02",name:"Toner",am:"Rose Water Toner",pm:"HA 2% + B5 on damp skin"},
+  {id:3,step:"03",name:"Serum",am:"Vitamin C Serum",pm:"Retinol 0.3% OR Niacinamide"},
+  {id:4,step:"04",name:"Eye Care",am:"Kiehl's Eye Cream SPF",pm:"Kiehl's Eye Cream SPF"},
+  {id:5,step:"05",name:"Moisturiser",am:"CeraVe Ceramide Moisturiser",pm:"CeraVe + Rosehip Oil"},
+  {id:6,step:"06",name:"Sunscreen",am:"Re'equil SPF 50+ PA++++",pm:"—"},
+];
+const DEF_WEEKLY = [
+  {id:1,freq:"Weekly",name:"AHA/BHA Exfoliant",note:"The Ordinary Peeling Solution – max 10 min, PM only"},
+  {id:2,freq:"Monthly",name:"Face Mask",note:"Clay mask or hydrating sheet mask"},
 ];
 
-const SHOPPING = [
-  { id:1, name:"Snail Mucin Essence", brand:"COSRX", category:"Essence", priority:"High", price:1299, where:"Nykaa / Amazon", notes:"96% Snail Secretion Filtrate" },
-  { id:2, name:"Barrier Repair Moisturiser", brand:"Dr. G", category:"Moisturiser", priority:"Medium", price:1800, where:"MyGlamm", notes:"For compromised skin days" },
-  { id:3, name:"Azelaic Acid 10%", brand:"Paula's Choice", category:"Serum", priority:"Low", price:2200, where:"Paula's Choice IN", notes:"For PIH & redness" },
-  { id:4, name:"Lip SPF Balm", brand:"dot & key", category:"Lip Care", priority:"High", price:349, where:"Nykaa", notes:"Tinted + SPF 30" },
-  { id:5, name:"Enzyme Powder Cleanser", brand:"Hanskin", category:"Cleanser", priority:"Low", price:950, where:"Amazon", notes:"Once-weekly deep cleanse" },
-];
+const KEY = "skincare_data_v2";
+function persist() { try { localStorage.setItem(KEY, JSON.stringify({products,shopping,routine,weekly})); } catch(e){} }
+function restore() { try { const d=localStorage.getItem(KEY); if(d) return JSON.parse(d); } catch(e){} return null; }
 
-const ROUTINE = [
-  { step:"01", name:"Cleanser", am:"Cetaphil Gentle Foaming Cleanser", pm:"Simple Micellar Cleansing Water" },
-  { step:"02", name:"Toner", am:"Rose Water Toner", pm:"HA 2% + B5 on damp skin" },
-  { step:"03", name:"Serum", am:"Vitamin C Serum", pm:"Retinol 0.3% OR Niacinamide" },
-  { step:"04", name:"Eye Care", am:"Kiehl's Eye Cream SPF", pm:"Kiehl's Eye Cream SPF" },
-  { step:"05", name:"Moisturiser", am:"CeraVe Ceramide Moisturiser", pm:"CeraVe + Rosehip Oil" },
-  { step:"06", name:"Sunscreen", am:"Re'equil SPF 50+ PA++++", pm:"—" },
-];
+const stored = restore();
+let products = stored?.products || JSON.parse(JSON.stringify(DEF_PRODUCTS));
+let shopping = stored?.shopping || JSON.parse(JSON.stringify(DEF_SHOPPING));
+let routine  = stored?.routine  || JSON.parse(JSON.stringify(DEF_ROUTINE));
+let weekly   = stored?.weekly   || JSON.parse(JSON.stringify(DEF_WEEKLY));
 
-const WEEKLY = [
-  { freq:"Weekly", name:"AHA/BHA Exfoliant", note:"The Ordinary Peeling Solution – max 10 min, PM only" },
-  { freq:"Monthly", name:"Face Mask", note:"Clay mask or hydrating sheet mask" },
-];
+let tab = "inventory", search = "", cat = "All";
+let epId=null, esId=null, erId=null, ewId=null;
 
-const fmt = n => "₹" + Number(n).toLocaleString("en-IN");
+const fmt = n => "₹"+Number(n).toLocaleString("en-IN");
+const daysLeft = d => Math.floor((new Date(d)-new Date())/86400000);
+const statusOf = (d,q) => d<0?"expired":d<90?"expiring":q<=1?"low":"active";
+function toast(msg) { const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2200); }
+const el = id => document.getElementById(id);
+const hide = id => el(id).classList.add("hidden");
+const show = id => el(id).classList.remove("hidden");
 
-function getDaysLeft(d) {
-  return Math.floor((new Date(d) - new Date()) / 86400000);
-}
-function getStatus(days, qty) {
-  if (days < 0) return "expired";
-  if (days < 90) return "expiring";
-  if (qty <= 1) return "low";
-  return "active";
-}
-
-// ── LOCAL STORAGE ─────────────────────────────
-const STORAGE_KEY = "skincare_products_v1";
-
-function saveToStorage() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(products)); } catch(e) {}
-}
-
-function loadFromStorage() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) return JSON.parse(saved);
-  } catch(e) {}
-  return null;
-}
-
-let currentTab = "inventory";
-let searchVal = "";
-let catFilter = "All";
-let editId = null;
-
-// ── RENDER STATS ──────────────────────────────
 function renderStats() {
-  const statuses = products.map(p => getStatus(getDaysLeft(p.expiryDate), p.qty));
-  const totalVal = products.reduce((s,p) => s + p.qty * p.price, 0);
-  const rows = [
-    { label:"Products", val: products.length, dot:"#3C3C3C" },
-    { label:"Value", val: fmt(totalVal), dot:"#6B7D6E" },
-    { label:"Expiring", val: statuses.filter(s=>s==="expiring").length, dot:"#8B6914" },
-  ];
-  document.getElementById("statsRow").innerHTML = rows.map(r =>
-    `<div class="stat">
-      <div class="stat-dot" style="background:${r.dot}"></div>
-      <div class="stat-val">${r.val}</div>
-      <div class="stat-lbl">${r.label}</div>
-    </div>`
-  ).join("");
+  const ss = products.map(p=>statusOf(daysLeft(p.expiryDate),p.qty));
+  const val = products.reduce((s,p)=>s+p.qty*p.price,0);
+  el("statsRow").innerHTML = [
+    {lbl:"Products",val:products.length,dot:"#3C3C3C"},
+    {lbl:"Value",val:fmt(val),dot:"#6B7D6E"},
+    {lbl:"Expiring",val:ss.filter(s=>s==="expiring").length,dot:"#8B6914"},
+  ].map(r=>`<div class="stat"><div class="stat-dot" style="background:${r.dot}"></div><div class="stat-val">${r.val}</div><div class="stat-lbl">${r.lbl}</div></div>`).join("");
 }
-
-// ── RENDER CATS ───────────────────────────────
 function renderCats() {
-  document.getElementById("catScroll").innerHTML = CATEGORIES.map(c =>
-    `<button class="pill ${catFilter===c?"active":""}" data-cat="${c}">${c}</button>`
-  ).join("");
+  el("catScroll").innerHTML = CATS.map(c=>`<button class="pill ${cat===c?"active":""}" data-cat="${c}">${c}</button>`).join("");
 }
-
-// ── RENDER PRODUCTS ───────────────────────────
 function renderProducts() {
-  const filtered = products.filter(p => {
-    const s = searchVal.toLowerCase();
-    return (p.name.toLowerCase().includes(s) || p.brand.toLowerCase().includes(s))
-      && (catFilter === "All" || p.category === catFilter);
+  const list = products.filter(p=>{
+    const q=search.toLowerCase();
+    return (p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q))&&(cat==="All"||p.category===cat);
   });
-  if (!filtered.length) {
-    document.getElementById("productList").innerHTML = `<div class="empty">No products found</div>`;
-    return;
-  }
-  document.getElementById("productList").innerHTML = filtered.map(p => {
-    const days = getDaysLeft(p.expiryDate);
-    const st = getStatus(days, p.qty);
-    const sc = STATUS_CONFIG[st];
-    const daysClass = days < 0 ? "days-exp" : days < 90 ? "days-warn" : "days-ok";
-    const daysLabel = days < 0 ? `${Math.abs(days)}d ago` : `${days}d left`;
+  if(!list.length){el("productList").innerHTML=`<div class="empty">No products found</div>`;return;}
+  el("productList").innerHTML=list.map(p=>{
+    const d=daysLeft(p.expiryDate), sc=STATUS[statusOf(d,p.qty)];
+    const dc=d<0?"days-exp":d<90?"days-warn":"days-ok";
     return `<div class="product-card">
-      <div class="card-top">
-        <div>
-          <div class="card-name">${p.name}</div>
-          <div class="card-brand">${p.brand}</div>
-        </div>
-        <span class="badge" style="color:${sc.color};background:${sc.bg};flex-shrink:0">${sc.label}</span>
-      </div>
-      <div class="card-meta">
-        <span class="meta-chip">${p.category}</span>
-        <span class="meta-chip">${p.step}</span>
+      <div class="card-top"><div><div class="card-name">${p.name}</div><div class="card-brand">${p.brand}</div></div>
+        <span class="badge" style="color:${sc.color};background:${sc.bg};flex-shrink:0">${sc.label}</span></div>
+      <div class="card-meta"><span class="meta-chip">${p.category}</span><span class="meta-chip">${p.step}</span>
         <span class="meta-chip">${p.size}ml</span>
-        <span class="days-tag ${daysClass}">${daysLabel}</span>
-      </div>
+        <span class="${dc}">${d<0?Math.abs(d)+"d ago":d+"d left"}</span></div>
       <div class="card-bottom">
-        <div class="card-price">${fmt(p.qty * p.price)} <span style="font-size:12px;color:var(--text-light);font-family:'DM Sans',sans-serif">×${p.qty}</span></div>
+        <div class="card-price">${fmt(p.qty*p.price)} <span style="font-size:12px;color:var(--text-light);font-family:'DM Sans',sans-serif">×${p.qty}</span></div>
         <div class="card-actions">
-          <button class="action-btn" onclick="openEdit(${p.id})">Edit</button>
-          <button class="action-btn del" onclick="deleteProduct(${p.id})">Remove</button>
+          <button class="action-btn" onclick="openEditP(${p.id})">Edit</button>
+          <button class="action-btn del" onclick="delProduct(${p.id})">Remove</button>
         </div>
-      </div>
-    </div>`;
+      </div></div>`;
   }).join("");
 }
-
-// ── RENDER SHOPPING ───────────────────────────
 function renderShopping() {
-  document.getElementById("shopList").innerHTML = SHOPPING.map(item => {
-    const pc = PRIORITY_CONFIG[item.priority];
+  if(!shopping.length){el("shopList").innerHTML=`<div class="empty">No items — tap + to add</div>`;}
+  else el("shopList").innerHTML=shopping.map(item=>{
+    const pc=PRI[item.priority]||PRI.Medium;
     return `<div class="shop-card">
-      <div class="shop-card-top">
-        <div>
-          <div class="shop-name">${item.name}</div>
-          <div class="shop-brand">${item.brand} · ${item.category}</div>
-        </div>
-        <div class="shop-price">${fmt(item.price)}</div>
-      </div>
-      <div class="shop-meta">
-        <span class="badge" style="color:${pc.color};background:${pc.bg}">${item.priority}</span>
-        <span class="shop-where">${item.where}</span>
-      </div>
-      <div class="shop-note">${item.notes}</div>
-    </div>`;
+      <div class="shop-card-top"><div><div class="shop-name">${item.name}</div><div class="shop-brand">${item.brand} · ${item.category}</div></div>
+        <div class="shop-price">${fmt(item.price)}</div></div>
+      <div class="shop-meta"><span class="badge" style="color:${pc.color};background:${pc.bg}">${item.priority}</span>
+        <span class="shop-where">${item.where||""}</span></div>
+      ${item.notes?`<div class="shop-note">${item.notes}</div>`:""}
+      <div class="shop-bottom">
+        <button class="action-btn" onclick="openEditS(${item.id})">Edit</button>
+        <button class="action-btn del" onclick="delShop(${item.id})">Remove</button>
+      </div></div>`;
   }).join("");
-  document.getElementById("shopTotal").textContent = fmt(SHOPPING.reduce((s,i)=>s+i.price,0));
+  el("shopTotal").textContent=fmt(shopping.reduce((s,i)=>s+i.price,0));
 }
-
-// ── RENDER ROUTINE ────────────────────────────
 function renderRoutine() {
-  document.getElementById("routineList").innerHTML = ROUTINE.map(r =>
-    `<div class="routine-card">
-      <div class="routine-card-header">
-        <div class="routine-step-num">${r.step}</div>
-        <div class="routine-step-name">${r.name}</div>
+  el("routineList").innerHTML=routine.map(r=>`<div class="routine-card">
+    <div class="routine-card-header">
+      <div class="routine-step-num">${r.step}</div>
+      <div class="routine-step-name">${r.name}</div>
+      <div class="small-actions">
+        <button class="sm-btn" onclick="openEditR(${r.id})">Edit</button>
+        <button class="sm-btn del" onclick="delRoutine(${r.id})">×</button>
       </div>
-      <div class="routine-slots">
-        <div class="routine-slot">
-          <div class="routine-slot-lbl">Morning</div>
-          <div class="routine-slot-val">${r.am}</div>
-        </div>
-        <div class="routine-slot">
-          <div class="routine-slot-lbl">Evening</div>
-          <div class="routine-slot-val">${r.pm}</div>
-        </div>
-      </div>
-    </div>`
-  ).join("");
-  document.getElementById("weeklyList").innerHTML = WEEKLY.map(w =>
-    `<div class="weekly-card">
-      <div class="weekly-freq">${w.freq}</div>
-      <div class="weekly-name">${w.name}</div>
-      <div class="weekly-note">${w.note}</div>
-    </div>`
-  ).join("");
+    </div>
+    <div class="routine-slots">
+      <div class="routine-slot"><div class="routine-slot-lbl">Morning</div><div class="routine-slot-val">${r.am}</div></div>
+      <div class="routine-slot"><div class="routine-slot-lbl">Evening</div><div class="routine-slot-val">${r.pm}</div></div>
+    </div></div>`).join("");
+  el("weeklyList").innerHTML=weekly.map(w=>`<div class="weekly-card">
+    <div><div class="weekly-freq">${w.freq}</div><div class="weekly-name">${w.name}</div><div class="weekly-note">${w.note}</div></div>
+    <div class="small-actions">
+      <button class="sm-btn" onclick="openEditW(${w.id})">Edit</button>
+      <button class="sm-btn del" onclick="delWeekly(${w.id})">×</button>
+    </div></div>`).join("");
 }
 
-// ── TABS ──────────────────────────────────────
-function switchTab(tab) {
-  currentTab = tab;
-  ["inventory","shopping","routine"].forEach(t => {
-    document.getElementById(`tab-${t}`).classList.toggle("hidden", t !== tab);
-  });
-  document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
-  document.getElementById("addBtn").style.display = tab === "inventory" ? "flex" : "none";
-  document.getElementById("scrollArea").scrollTop = 0;
-  if (tab === "shopping") renderShopping();
-  if (tab === "routine") renderRoutine();
+function switchTab(t) {
+  tab=t;
+  ["inventory","shopping","routine"].forEach(x=>el(`tab-${x}`).classList.toggle("hidden",x!==t));
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));
+  el("exportBtn").classList.toggle("hidden", t!=="inventory");
+  el("importBtn").classList.toggle("hidden", t!=="inventory");
+  el("scrollArea").scrollTop=0;
+  if(t==="shopping") renderShopping();
+  if(t==="routine") renderRoutine();
 }
 
-// ── MODAL ─────────────────────────────────────
-function openAdd() {
-  editId = null;
-  document.getElementById("drawerTitle").textContent = "Add Product";
-  ["name","brand","step","notes"].forEach(f => document.getElementById("f-"+f).value = "");
-  document.getElementById("f-category").value = "Serum";
-  document.getElementById("f-size").value = "";
-  document.getElementById("f-purchaseDate").value = "";
-  document.getElementById("f-expiryDate").value = "";
-  document.getElementById("f-qty").value = 1;
-  document.getElementById("f-price").value = "";
-  showDrawer();
+// ── PRODUCT CRUD ──────────────────────────────
+function openAddP(){ epId=null; el("productDrawerTitle").textContent="Add Product"; ["name","brand","step","notes","size","purchaseDate","expiryDate","price"].forEach(f=>el("f-"+f).value=""); el("f-category").value="Serum"; el("f-qty").value=1; show("productOverlay"); }
+function openEditP(id){ epId=id; const p=products.find(x=>x.id===id); el("productDrawerTitle").textContent="Edit Product"; ["name","brand","step","notes","size","purchaseDate","expiryDate","qty","price"].forEach(f=>el("f-"+f).value=p[f]||""); el("f-category").value=p.category; show("productOverlay"); }
+function saveP(){
+  const name=el("f-name").value.trim(), brand=el("f-brand").value.trim(), exp=el("f-expiryDate").value;
+  if(!name||!brand||!exp){toast("Name, brand & expiry required");return;}
+  const p={id:epId||Date.now(),name,brand,category:el("f-category").value,step:el("f-step").value,size:Number(el("f-size").value)||0,purchaseDate:el("f-purchaseDate").value,expiryDate:exp,qty:Number(el("f-qty").value)||1,price:Number(el("f-price").value)||0,notes:el("f-notes").value};
+  if(epId) products=products.map(x=>x.id===epId?p:x); else products.push(p);
+  hide("productOverlay"); persist(); renderStats(); renderProducts(); toast("Saved ✓");
 }
-function openEdit(id) {
-  editId = id;
-  const p = products.find(x => x.id === id);
-  document.getElementById("drawerTitle").textContent = "Edit Product";
-  document.getElementById("f-name").value = p.name;
-  document.getElementById("f-brand").value = p.brand;
-  document.getElementById("f-category").value = p.category;
-  document.getElementById("f-step").value = p.step;
-  document.getElementById("f-size").value = p.size;
-  document.getElementById("f-purchaseDate").value = p.purchaseDate;
-  document.getElementById("f-expiryDate").value = p.expiryDate;
-  document.getElementById("f-qty").value = p.qty;
-  document.getElementById("f-price").value = p.price;
-  document.getElementById("f-notes").value = p.notes;
-  showDrawer();
-}
-function showDrawer() { document.getElementById("overlay").classList.remove("hidden"); }
-function hideDrawer() { document.getElementById("overlay").classList.add("hidden"); }
+function delProduct(id){ if(!confirm("Remove this product?"))return; products=products.filter(x=>x.id!==id); persist(); renderStats(); renderProducts(); toast("Removed"); }
 
-function saveProduct() {
-  const name = document.getElementById("f-name").value.trim();
-  const brand = document.getElementById("f-brand").value.trim();
-  const expiryDate = document.getElementById("f-expiryDate").value;
-  if (!name || !brand || !expiryDate) { alert("Name, brand and expiry date are required."); return; }
-  const product = {
-    id: editId || Date.now(),
-    name, brand,
-    category: document.getElementById("f-category").value,
-    step: document.getElementById("f-step").value,
-    size: Number(document.getElementById("f-size").value) || 0,
-    purchaseDate: document.getElementById("f-purchaseDate").value,
-    expiryDate,
-    qty: Number(document.getElementById("f-qty").value) || 1,
-    price: Number(document.getElementById("f-price").value) || 0,
-    notes: document.getElementById("f-notes").value,
+// ── SHOPPING CRUD ─────────────────────────────
+function openAddS(){ esId=null; el("shopDrawerTitle").textContent="Add Item"; ["name","brand","where","notes","price"].forEach(f=>el("s-"+f).value=""); el("s-category").value="Serum"; el("s-priority").value="Medium"; show("shopOverlay"); }
+function openEditS(id){ esId=id; const i=shopping.find(x=>x.id===id); el("shopDrawerTitle").textContent="Edit Item"; ["name","brand","where","notes","price"].forEach(f=>el("s-"+f).value=i[f]||""); el("s-category").value=i.category; el("s-priority").value=i.priority; show("shopOverlay"); }
+function saveS(){
+  const name=el("s-name").value.trim(); if(!name){toast("Name required");return;}
+  const item={id:esId||Date.now(),name,brand:el("s-brand").value,category:el("s-category").value,priority:el("s-priority").value,price:Number(el("s-price").value)||0,where:el("s-where").value,notes:el("s-notes").value};
+  if(esId) shopping=shopping.map(x=>x.id===esId?item:x); else shopping.push(item);
+  hide("shopOverlay"); persist(); renderShopping(); toast("Saved ✓");
+}
+function delShop(id){ if(!confirm("Remove this item?"))return; shopping=shopping.filter(x=>x.id!==id); persist(); renderShopping(); toast("Removed"); }
+
+// ── ROUTINE CRUD ──────────────────────────────
+function openAddR(){ erId=null; el("routineDrawerTitle").textContent="Add Step"; ["step","name","am","pm"].forEach(f=>el("r-"+f).value=""); show("routineOverlay"); }
+function openEditR(id){ erId=id; const r=routine.find(x=>x.id===id); el("routineDrawerTitle").textContent="Edit Step"; ["step","name","am","pm"].forEach(f=>el("r-"+f).value=r[f]||""); show("routineOverlay"); }
+function saveR(){
+  const name=el("r-name").value.trim(); if(!name){toast("Step name required");return;}
+  const r={id:erId||Date.now(),step:el("r-step").value,name,am:el("r-am").value,pm:el("r-pm").value};
+  if(erId) routine=routine.map(x=>x.id===erId?r:x); else routine.push(r);
+  hide("routineOverlay"); persist(); renderRoutine(); toast("Saved ✓");
+}
+function delRoutine(id){ if(!confirm("Remove this step?"))return; routine=routine.filter(x=>x.id!==id); persist(); renderRoutine(); toast("Removed"); }
+
+// ── WEEKLY CRUD ───────────────────────────────
+function openAddWeekly(){ ewId=null; el("weeklyDrawerTitle").textContent="Add Treatment"; ["freq","name","note"].forEach(f=>el("w-"+f).value=""); show("weeklyOverlay"); }
+function openEditW(id){ ewId=id; const w=weekly.find(x=>x.id===id); el("weeklyDrawerTitle").textContent="Edit Treatment"; ["freq","name","note"].forEach(f=>el("w-"+f).value=w[f]||""); show("weeklyOverlay"); }
+function saveW(){
+  const name=el("w-name").value.trim(); if(!name){toast("Name required");return;}
+  const w={id:ewId||Date.now(),freq:el("w-freq").value,name,note:el("w-note").value};
+  if(ewId) weekly=weekly.map(x=>x.id===ewId?w:x); else weekly.push(w);
+  hide("weeklyOverlay"); persist(); renderRoutine(); toast("Saved ✓");
+}
+function delWeekly(id){ if(!confirm("Remove?"))return; weekly=weekly.filter(x=>x.id!==id); persist(); renderRoutine(); toast("Removed"); }
+
+// ── EXPORT / IMPORT ───────────────────────────
+function exportData(){
+  const blob=new Blob([JSON.stringify({products,shopping,routine,weekly},null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob), a=document.createElement("a");
+  a.href=url; a.download=`skincare-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(url); toast("Exported ✓");
+}
+function importData(file){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const d=JSON.parse(e.target.result);
+      if(!d.products) throw 0;
+      products=d.products; shopping=d.shopping||[]; routine=d.routine||[]; weekly=d.weekly||[];
+      persist(); renderStats(); renderProducts(); renderCats(); toast("Imported ✓");
+    }catch{ toast("Invalid file"); }
   };
-  if (editId) {
-    products = products.map(p => p.id === editId ? product : p);
-  } else {
-    products.push(product);
-  }
-  hideDrawer();
-  saveToStorage();
-  renderAll();
-}
-
-function deleteProduct(id) {
-  if (!confirm("Remove this product?")) return;
-  products = products.filter(p => p.id !== id);
-  saveToStorage();
-  renderAll();
-}
-
-function renderAll() {
-  renderStats();
-  renderProducts();
+  reader.readAsText(file);
 }
 
 // ── INIT ──────────────────────────────────────
-// Load saved products or use defaults
-const saved = loadFromStorage();
-if (saved) products = saved;
+el("f-category").innerHTML=CAT_OPTS.map(c=>`<option>${c}</option>`).join("");
+el("s-category").innerHTML=CAT_OPTS.map(c=>`<option>${c}</option>`).join("");
 
-// Populate category select
-document.getElementById("f-category").innerHTML = CATEGORIES.slice(1).map(c => `<option>${c}</option>`).join("");
+document.querySelectorAll(".nav-btn").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
 
-// Event listeners
-document.querySelectorAll(".nav-btn").forEach(b => b.addEventListener("click", () => switchTab(b.dataset.tab)));
-document.getElementById("addBtn").addEventListener("click", openAdd);
-document.getElementById("drawerClose").addEventListener("click", hideDrawer);
-document.getElementById("drawerCancel").addEventListener("click", hideDrawer);
-document.getElementById("drawerSave").addEventListener("click", saveProduct);
-document.getElementById("overlay").addEventListener("click", e => { if (e.target === e.currentTarget) hideDrawer(); });
+el("addBtn").addEventListener("click",()=>{ if(tab==="inventory") openAddP(); else if(tab==="shopping") openAddS(); else if(tab==="routine") openAddR(); });
+el("exportBtn").addEventListener("click", exportData);
+el("importBtn").addEventListener("click",()=>el("importFile").click());
+el("importFile").addEventListener("change",e=>{ if(e.target.files[0]){importData(e.target.files[0]); e.target.value="";} });
 
-document.getElementById("searchInput").addEventListener("input", e => {
-  searchVal = e.target.value;
-  renderProducts();
+// Drawer bindings
+[["productOverlay","pClose","pCancel","pSave",saveP],
+ ["shopOverlay","sClose","sCancel","sSave",saveS],
+ ["routineOverlay","rClose","rCancel","rSave",saveR],
+ ["weeklyOverlay","wClose","wCancel","wSave",saveW]
+].forEach(([ov,cl,cn,sv,fn])=>{
+  el(cl).onclick=el(cn).onclick=()=>hide(ov);
+  el(sv).onclick=fn;
+  el(ov).addEventListener("click",e=>{ if(e.target===e.currentTarget) hide(ov); });
 });
 
-document.getElementById("catScroll").addEventListener("click", e => {
-  if (e.target.dataset.cat) {
-    catFilter = e.target.dataset.cat;
-    renderCats();
-    renderProducts();
-  }
-});
+el("searchInput").addEventListener("input",e=>{search=e.target.value; renderProducts();});
+el("catScroll").addEventListener("click",e=>{ if(e.target.dataset.cat){cat=e.target.dataset.cat; renderCats(); renderProducts();} });
 
-// Initial render
-document.getElementById("addBtn").style.display = "flex";
-renderAll();
-renderCats();
+// Show export/import on inventory tab by default
+show("exportBtn"); show("importBtn");
+
+renderStats(); renderProducts(); renderCats();
 </script>
 </body>
 </html>
