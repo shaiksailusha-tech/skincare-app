@@ -63,13 +63,11 @@
 
     /* DRAGGABLE LISTS */
     .draggable-list{padding:12px 16px;display:flex;flex-direction:column;gap:8px}
-    .drag-item{touch-action:none;user-select:none;cursor:grab;position:relative}
-    .drag-item.is-dragging{opacity:.35;transform:scale(.98)}
-    .drag-item.drag-above{border-top:2px solid var(--taupe)!important;border-radius:6px}
-    .drag-item.drag-below{border-bottom:2px solid var(--taupe)!important;border-radius:6px}
+    .drag-item{touch-action:pan-y;user-select:none;position:relative}
+    .drag-item.is-dragging{opacity:.3}
 
     /* DRAG HANDLE */
-    .drag-handle{width:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;cursor:grab;flex-shrink:0;padding:0 4px;opacity:.3}
+    .drag-handle{width:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;cursor:grab;flex-shrink:0;padding:0 4px;opacity:.3;touch-action:none}
     .drag-handle span{display:block;width:16px;height:2px;background:var(--text-dark);border-radius:2px}
 
     /* CARDS */
@@ -384,84 +382,129 @@ const hide=id=>el(id).classList.add("hidden");
 const show=id=>el(id).classList.remove("hidden");
 
 // ── DRAG & DROP ENGINE ────────────────────────
-// Generic touch drag-to-reorder for a container of items
-// Each item needs data-id attribute; handle triggered by .drag-handle child
-function makeDraggable(container, getData, setData, onDrop) {
-  let dragEl=null, startIndex=-1, clone=null, startY=0, scrollEl=null;
+// Single global engine — one ghost, one set of listeners, no conflicts.
 
-  function getItems(){return Array.from(container.querySelectorAll(".drag-item"));}
-  function indexOfEl(el){return getItems().indexOf(el);}
+const DRAG={
+  el:null, container:null, getData:null, setData:null, onDrop:null,
+  startIdx:-1, dropIdx:-1, ghostOffsetY:0, scrollEl:null
+};
 
+// Create ghost element
+function _createGhost(item, touchY){
+  _removeGhost();
+  const r=item.getBoundingClientRect();
+  DRAG.ghostOffsetY=touchY-r.top;
+  const g=item.cloneNode(true);
+  g.id="_ghost";
+  g.style.cssText=`position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;
+    z-index:9999;pointer-events:none;opacity:0.93;
+    box-shadow:0 8px 28px rgba(0,0,0,0.22);transform:scale(1.02);
+    border-radius:6px;background:white;`;
+  document.body.appendChild(g);
+}
+function _removeGhost(){
+  const g=document.getElementById("_ghost");
+  if(g) g.remove();
+}
+function _moveGhost(touchY){
+  const g=document.getElementById("_ghost");
+  if(g) g.style.top=(touchY-DRAG.ghostOffsetY)+"px";
+}
+
+// Drop indicator line
+function _getLine(){
+  let l=document.getElementById("_dropLine");
+  if(!l){
+    l=document.createElement("div");
+    l.id="_dropLine";
+    l.style.cssText="position:fixed;left:16px;right:16px;height:3px;background:#8C7B75;border-radius:2px;z-index:9998;pointer-events:none;display:none;";
+    document.body.appendChild(l);
+  }
+  return l;
+}
+function _showLine(y){
+  const l=_getLine();
+  l.style.display="block";
+  l.style.top=(y-1)+"px";
+}
+function _hideLine(){ _getLine().style.display="none"; }
+
+// Figure out where finger is and return drop index
+function _calcDrop(touchY){
+  const items=Array.from(DRAG.container.querySelectorAll(":scope > .drag-item"));
+  let idx=items.length;
+  let lineY=null;
+  for(let i=0;i<items.length;i++){
+    if(items[i]===DRAG.el) continue;
+    const r=items[i].getBoundingClientRect();
+    if(touchY < r.top+r.height/2){
+      idx=i; lineY=r.top; break;
+    } else {
+      lineY=r.bottom;
+    }
+  }
+  if(lineY!==null) _showLine(Math.max(60,Math.min(window.innerHeight-10,lineY)));
+  return idx;
+}
+
+function _endDrag(){
+  if(!DRAG.el) return;
+  // restore original item
+  DRAG.el.style.opacity="";
+  _removeGhost();
+  _hideLine();
+
+  // reorder
+  const data=DRAG.getData();
+  const moved=data.splice(DRAG.startIdx,1)[0];
+  let fi=DRAG.dropIdx;
+  if(fi>DRAG.startIdx) fi--;
+  fi=Math.max(0,Math.min(fi,data.length));
+  data.splice(fi,0,moved);
+  DRAG.setData(data);
+
+  const cb=DRAG.onDrop;
+  // clear state first, then re-render
+  DRAG.el=null; DRAG.container=null;
+  cb();
+}
+
+// Global listeners (attached once)
+document.addEventListener("touchmove", e=>{
+  if(!DRAG.el) return;
+  e.preventDefault();
+  const y=e.touches[0].clientY;
+  _moveGhost(y);
+  DRAG.dropIdx=_calcDrop(y);
+  if(DRAG.scrollEl){
+    const sr=DRAG.scrollEl.getBoundingClientRect();
+    if(y>sr.bottom-70) DRAG.scrollEl.scrollTop+=10;
+    else if(y<sr.top+70) DRAG.scrollEl.scrollTop-=10;
+  }
+},{passive:false});
+
+document.addEventListener("touchend", ()=>{ _endDrag(); });
+document.addEventListener("touchcancel", ()=>{ _endDrag(); });
+
+// Register a container for drag-to-reorder
+function makeDraggable(container, getData, setData, onDrop){
   container.addEventListener("touchstart", e=>{
     const handle=e.target.closest(".drag-handle");
     if(!handle) return;
     const item=handle.closest(".drag-item");
-    if(!item) return;
+    if(!item||!container.contains(item)) return;
     e.preventDefault();
-    scrollEl=item.closest(".scroll-area");
-
-    dragEl=item;
-    startIndex=indexOfEl(dragEl);
-    dragEl.classList.add("is-dragging");
-
-    startY=e.touches[0].clientY;
+    DRAG.el=item;
+    DRAG.container=container;
+    DRAG.getData=getData;
+    DRAG.setData=setData;
+    DRAG.onDrop=onDrop;
+    DRAG.scrollEl=document.getElementById("scrollArea");
+    DRAG.startIdx=Array.from(container.querySelectorAll(":scope > .drag-item")).indexOf(item);
+    DRAG.dropIdx=DRAG.startIdx;
+    item.style.opacity="0.25";
+    _createGhost(item, e.touches[0].clientY);
   },{passive:false});
-
-  container.addEventListener("touchmove", e=>{
-    if(!dragEl) return;
-    e.preventDefault();
-    const touch=e.touches[0];
-    const y=touch.clientY;
-    const items=getItems();
-
-    // find target
-    let target=null;
-    for(const it of items){
-      if(it===dragEl) continue;
-      const r=it.getBoundingClientRect();
-      const mid=r.top+r.height/2;
-      if(y<mid){target=it;break;}
-    }
-
-    items.forEach(i=>{i.classList.remove("drag-above","drag-below");});
-    if(target){
-      target.classList.add("drag-above");
-    } else {
-      const last=items[items.length-1];
-      if(last&&last!==dragEl) last.classList.add("drag-below");
-    }
-
-    // auto-scroll
-    if(scrollEl){
-      const sr=scrollEl.getBoundingClientRect();
-      if(y>sr.bottom-60) scrollEl.scrollTop+=8;
-      if(y<sr.top+60) scrollEl.scrollTop-=8;
-    }
-  },{passive:false});
-
-  container.addEventListener("touchend", e=>{
-    if(!dragEl) return;
-    const items=getItems();
-    items.forEach(i=>i.classList.remove("drag-above","drag-below"));
-    dragEl.classList.remove("is-dragging");
-
-    // find drop position
-    const touch=e.changedTouches[0];
-    const y=touch.clientY;
-    let newIndex=items.length-1;
-    for(let i=0;i<items.length;i++){
-      if(items[i]===dragEl) continue;
-      const r=items[i].getBoundingClientRect();
-      if(y<r.top+r.height/2){newIndex=i>indexOfEl(dragEl)?i-1:i;break;}
-    }
-    const data=getData();
-    const moved=data.splice(startIndex,1)[0];
-    const finalIndex=Math.max(0,Math.min(newIndex,data.length));
-    data.splice(finalIndex,0,moved);
-    setData(data);
-    onDrop();
-    dragEl=null;
-  });
 }
 
 // Nav tab drag reorder
