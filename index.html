@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Skincare"/>
@@ -11,220 +11,229 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{
-  --ch:#3C3C3C;--tpe:#8C7B75;--stn:#E8E4E0;--ln:#F2EDE8;--crm:#FAF8F5;
-  --wh:#FFFFFF;--td:#2C2C2C;--tm:#5A5550;--tl:#8C8580;--bdr:#DDD8D2;
-  --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);
-}
+:root{--ch:#3C3C3C;--tpe:#8C7B75;--stn:#E8E4E0;--ln:#F2EDE8;--crm:#FAF8F5;--wh:#FFFFFF;--td:#2C2C2C;--tm:#5A5550;--tl:#8C8580;--bdr:#DDD8D2;--green:#6B7D6E;--amber:#8B6914;--red:#8B3A3A;--blue:#4A6B8A;--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)}
+[data-theme="dark"]{--ch:#1C1C1E;--tpe:#9A8B85;--stn:#2C2C2E;--ln:#252527;--crm:#1C1C1E;--wh:#2C2C2E;--td:#F0EBE6;--tm:#B0AAA5;--tl:#706860;--bdr:#3A3A3C}
 html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;color:var(--td);overflow:hidden}
 #app{height:100%;display:flex;flex-direction:column}
-
-/* HEADER */
-.hdr{background:var(--ch);flex-shrink:0;padding:calc(var(--st) + 14px) 18px 14px}
+.hdr{background:var(--ch);flex-shrink:0;padding:calc(var(--st)+14px) 18px 14px}
 .hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .hdr-eye{font-size:10px;color:var(--tpe);letter-spacing:.14em;text-transform:uppercase;margin-bottom:2px}
 .hdr-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--crm)}
-.hdr-acts{display:flex;gap:7px}
-.ibtn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:var(--crm);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.ibtn.lg{font-size:20px}
-.ibtn:active{background:rgba(255,255,255,.25)}
+.hdr-acts{display:flex;gap:7px;align-items:center}
+.ibtn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:var(--crm);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ibtn.lg{font-size:20px}.ibtn:active{background:rgba(255,255,255,.22)}
 .nav{display:flex;gap:2px}
-.nbtn{flex:1;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;color:rgba(250,248,245,.45);letter-spacing:.08em;text-transform:uppercase;padding:8px 4px;border-radius:3px}
-.nbtn.on{color:var(--crm);background:rgba(255,255,255,.12)}
-
-/* SCROLL */
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--sb) + 20px)}
-
-/* STATS */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bdr);border-bottom:1px solid var(--bdr)}
-.stat{background:var(--wh);padding:13px 15px}
+.nbtn{flex:1;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:10px;color:rgba(250,248,245,.42);letter-spacing:.07em;text-transform:uppercase;padding:8px 4px;border-radius:3px;position:relative}
+.nbtn.on{color:var(--crm);background:rgba(255,255,255,.11)}
+.ntab-dot{position:absolute;top:4px;right:calc(50% - 14px);width:5px;height:5px;background:#E8A020;border-radius:50%}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--sb)+20px)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bdr);border-bottom:1px solid var(--bdr)}
+.stat{background:var(--wh);padding:12px 10px}
 .sdot{width:5px;height:5px;border-radius:50%;margin-bottom:5px}
-.sval{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:300;color:var(--ch);line-height:1}
-.slbl{font-size:9px;color:var(--tl);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
-
-/* SEARCH */
-.srch{padding:11px 15px;background:var(--ln);border-bottom:1px solid var(--bdr);position:relative}
+.sval{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--ch);line-height:1}
+.slbl{font-size:9px;color:var(--tl);letter-spacing:.07em;text-transform:uppercase;margin-top:2px}
+.srch{padding:10px 15px;background:var(--ln);border-bottom:1px solid var(--bdr);position:relative}
 .srch svg{position:absolute;left:27px;top:50%;transform:translateY(-50%);color:var(--tl);pointer-events:none}
-.sinput{width:100%;padding:9px 11px 9px 34px;border:1px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--td);border-radius:6px;outline:none;-webkit-appearance:none}
+.sinput{width:100%;padding:8px 11px 8px 34px;border:1px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--td);border-radius:6px;outline:none;-webkit-appearance:none}
 .sinput:focus{border-color:var(--tpe)}
-.cats{display:flex;gap:6px;overflow-x:auto;padding:9px 15px;background:var(--ln);border-bottom:1px solid var(--bdr);scrollbar-width:none}
+.cats{display:flex;gap:6px;overflow-x:auto;padding:8px 15px;background:var(--ln);border-bottom:1px solid var(--bdr);scrollbar-width:none}
 .cats::-webkit-scrollbar{display:none}
 .pill{flex-shrink:0;padding:5px 12px;border:1px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:11px;color:var(--tm);border-radius:20px;cursor:pointer;white-space:nowrap}
 .pill.on{background:var(--ch);border-color:var(--ch);color:var(--crm)}
-
-/* CARDS */
-.clist{padding:11px 15px;display:flex;flex-direction:column;gap:8px}
-.card{background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:13px 15px;display:flex;align-items:stretch;cursor:pointer}
-.card-body{flex:1;min-width:0}
-.ctop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:9px}
-.cname{font-size:14px;font-weight:500;color:var(--td);line-height:1.3;flex:1;margin-right:8px}
-.cbrand{font-size:11px;color:var(--tl);margin-top:2px}
-.cmeta{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.chip{font-size:11px;color:var(--tm);background:var(--ln);padding:3px 8px;border-radius:4px}
-.badge{display:inline-block;padding:3px 9px;border-radius:4px;font-size:11px;font-weight:500}
-.cbot{display:flex;justify-content:space-between;align-items:center;margin-top:9px;padding-top:9px;border-top:1px solid var(--stn)}
-.cprice{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--ch)}
-.cacts{display:flex;gap:5px}
-.abtn{padding:5px 11px;border:1px solid var(--bdr);background:none;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--tm);border-radius:4px;cursor:pointer}
-.abtn:active{background:var(--ln)}
-.abtn.del:active{border-color:#8B3A3A;color:#8B3A3A}
-.dok{color:var(--tm);font-size:12px;font-weight:500}
-.dwarn{color:#8B6914;font-size:12px;font-weight:500}
-.dexp{color:#8B3A3A;font-size:12px;font-weight:500}
-.empty{padding:60px 20px;text-align:center;color:var(--tl);font-size:14px}
-
-/* DRAG HANDLE */
-.dh{width:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;cursor:grab;flex-shrink:0;padding:0 3px;opacity:.28;touch-action:none}
-.dh span{display:block;width:14px;height:2px;background:var(--td);border-radius:2px}
-.dragging{opacity:.25}
-.drag-hint{font-size:9px;color:var(--tl);text-align:center;padding:6px 0 0;letter-spacing:.06em;text-transform:uppercase}
-
-/* PAGE HEADER */
-.phdr{padding:18px 15px 7px;display:flex;justify-content:space-between;align-items:flex-end}
-.peye{font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
-.ptitle{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ch)}
-
-/* BACKUP BANNER */
+.sortbar{display:flex;gap:6px;overflow-x:auto;padding:7px 15px;background:var(--crm);border-bottom:1px solid var(--bdr);scrollbar-width:none;align-items:center}
+.sortbar::-webkit-scrollbar{display:none}
+.sortbar-lbl{font-size:10px;color:var(--tl);letter-spacing:.08em;text-transform:uppercase;flex-shrink:0}
+.spill{flex-shrink:0;padding:5px 11px;border:1px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:11px;color:var(--tm);border-radius:20px;cursor:pointer;white-space:nowrap}
+.spill.on{background:var(--ch);border-color:var(--ch);color:var(--crm)}
 .backup-banner{display:flex;align-items:center;gap:10px;padding:10px 15px;background:#FFF8E8;border-bottom:1px solid #E8D8A0}
+[data-theme="dark"] .backup-banner{background:#2A2210;border-color:#4A3A10}
 .backup-banner.hi{display:none!important}
 .backup-msg{flex:1;font-size:12px;color:#7A5C00}
-.backup-btn{padding:6px 12px;background:#C9A030;border:none;font-family:'DM Sans',sans-serif;font-size:11px;color:#fff;border-radius:5px;cursor:pointer;flex-shrink:0}
-.backup-btn:active{opacity:.85}
-.backup-dismiss{background:none;border:none;font-size:16px;color:#A08040;cursor:pointer;flex-shrink:0;line-height:1;padding:0 2px}
-.sortbar{display:flex;gap:6px;overflow-x:auto;padding:8px 15px;background:var(--crm);border-bottom:1px solid var(--bdr);scrollbar-width:none;align-items:center}
-.sortbar::-webkit-scrollbar{display:none}
-.sortbar-lbl{font-size:10px;color:var(--tl);letter-spacing:.08em;text-transform:uppercase;flex-shrink:0;margin-right:2px}
-.spill{flex-shrink:0;padding:5px 12px;border:1px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:11px;color:var(--tm);border-radius:20px;cursor:pointer;white-space:nowrap}
-.spill.on{background:var(--ch);border-color:var(--ch);color:var(--crm)}
-/* Category drag handle in shopping header */
-.sec-dh{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;cursor:grab;padding:2px 6px 2px 0;opacity:.35;touch-action:none;flex-shrink:0}
-.sec-dh span{display:block;width:12px;height:2px;background:var(--tm);border-radius:2px}
-.sechdr{gap:4px}
-.sec.ghost-cat{opacity:.35;transform:scale(.98)}
+[data-theme="dark"] .backup-msg{color:#C9A030}
+.backup-btn{padding:5px 11px;background:#C9A030;border:none;font-family:'DM Sans',sans-serif;font-size:11px;color:#fff;border-radius:5px;cursor:pointer;flex-shrink:0}
+.backup-dismiss{background:none;border:none;font-size:16px;color:#A08040;cursor:pointer;flex-shrink:0;line-height:1}
+.clist{padding:11px 15px;display:flex;flex-direction:column;gap:8px}
+.card{background:var(--wh);border:1px solid var(--bdr);border-radius:7px;display:flex;align-items:stretch;cursor:pointer;overflow:hidden}
+.card.expiring-card{border-color:#C9A030}.card.expired-card{border-color:#C97878}.card.lowstock-card{border-color:#6B9ABF}
+.card.selected-card{border-color:var(--tpe);background:rgba(140,123,117,.06)}
+.card-img{width:54px;flex-shrink:0;background:var(--ln);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-img-ph{font-size:20px;opacity:.35}
+.card-body{flex:1;padding:11px 12px;min-width:0}
+.ctop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px}
+.cname{font-size:13px;font-weight:500;color:var(--td);line-height:1.3;flex:1;margin-right:7px}
+.cbrand{font-size:11px;color:var(--tl);margin-top:1px}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:500}
+.cmeta{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.chip{font-size:11px;color:var(--tm);background:var(--ln);padding:3px 7px;border-radius:4px}
+.cbot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:1px solid var(--stn)}
+.cprice{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ch)}
+.cacts{display:flex;gap:5px}
+.abtn{padding:4px 10px;border:1px solid var(--bdr);background:none;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--tm);border-radius:4px;cursor:pointer}
+.abtn:active{background:var(--ln)}.abtn.del:active{border-color:var(--red);color:var(--red)}.abtn.dup{color:var(--blue)}
+.dok{color:var(--tm);font-size:11px;font-weight:500}.dwarn{color:var(--amber);font-size:11px;font-weight:500}.dexp{color:var(--red);font-size:11px;font-weight:500}
+.empty{padding:50px 20px;text-align:center;color:var(--tl);font-size:14px}
+.dh{width:24px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;cursor:grab;flex-shrink:0;padding:0 3px;opacity:.25;touch-action:none}
+.dh span{display:block;width:13px;height:2px;background:var(--td);border-radius:2px}
+.dragging{opacity:.22}
+.drag-hint{font-size:9px;color:var(--tl);text-align:center;padding:5px 0 0;letter-spacing:.06em;text-transform:uppercase}
+.phdr{padding:16px 15px 6px;display:flex;justify-content:space-between;align-items:flex-end}
+.peye{font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.ptitle{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ch)}
 .shsec{padding:8px 15px 4px}
-.sec{margin-bottom:11px;border:1px solid var(--bdr);border-radius:8px;overflow:hidden}
-.sechdr{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;background:var(--ln);cursor:pointer;user-select:none}
-.secl{display:flex;align-items:center;gap:9px}
+.sec{margin-bottom:10px;border:1px solid var(--bdr);border-radius:8px;overflow:hidden}
+.sechdr{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:var(--ln);user-select:none}
+.secl{display:flex;align-items:center;gap:8px;cursor:pointer;flex:1}
 .secname{font-size:11px;font-weight:500;color:var(--tm);letter-spacing:.08em;text-transform:uppercase}
 .seccnt{font-size:10px;color:var(--tl);background:var(--stn);padding:2px 7px;border-radius:10px}
-.secr{display:flex;align-items:center;gap:8px}
+.secr{display:flex;align-items:center;gap:7px;cursor:pointer}
 .secsub{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--tpe)}
 .secchev{font-size:10px;color:var(--tl);transition:transform .2s}
 .sec.col .secchev{transform:rotate(-90deg)}
-.secbody{display:flex;flex-direction:column}
-.sec.col .secbody{display:none}
-.scard{background:var(--wh);border-top:1px solid var(--bdr);padding:11px 13px;display:flex;align-items:stretch;cursor:pointer}
-.scard:first-child{border-top:none}
+.secbody{display:flex;flex-direction:column}.sec.col .secbody{display:none}
+.scard{background:var(--wh);border-top:1px solid var(--bdr);padding:10px 12px;display:flex;align-items:center;cursor:pointer}
+.scard:first-child{border-top:none}.scard.purchased{opacity:.5}
 .scinner{flex:1;min-width:0}
-.sctop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px}
-.scname{font-size:13px;font-weight:500;color:var(--td);line-height:1.3}
-.scbrand{font-size:11px;color:var(--tl);margin-top:1px}
-.scprice{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--ch);flex-shrink:0;margin-left:9px}
+.sctop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.scname{font-size:13px;font-weight:500;color:var(--td)}.scbrand{font-size:11px;color:var(--tl);margin-top:1px}
+.scprice{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ch);flex-shrink:0;margin-left:8px}
 .scmeta{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.scwhere{font-size:11px;color:var(--tm)}
-.scnote{font-size:11px;color:var(--tl);font-style:italic;margin-top:5px}
+.scwhere{font-size:11px;color:var(--tm)}.scnote{font-size:11px;color:var(--tl);font-style:italic;margin-top:4px}
 .scbot{display:flex;justify-content:flex-end;gap:5px;margin-top:7px;padding-top:7px;border-top:1px solid var(--stn)}
-.pribar{width:4px;flex-shrink:0;margin:-11px 10px -11px -13px;align-self:stretch;border-radius:0}
-.sechint{font-size:9px;color:var(--tl);text-align:right;padding:4px 13px 2px;background:var(--wh);border-top:1px solid var(--stn);letter-spacing:.05em;text-transform:uppercase}
-.total{margin:4px 15px 15px;background:var(--ln);border:1px solid var(--bdr);border-radius:6px;padding:13px 15px;display:flex;justify-content:space-between;align-items:center}
+.pribar{width:4px;flex-shrink:0;align-self:stretch;margin-right:8px}
+.sechint{font-size:9px;color:var(--tl);text-align:right;padding:3px 12px 2px;background:var(--wh);border-top:1px solid var(--stn);letter-spacing:.05em;text-transform:uppercase}
+.total{margin:4px 15px 8px;background:var(--ln);border:1px solid var(--bdr);border-radius:6px;padding:12px 15px;display:flex;justify-content:space-between;align-items:center}
 .tlbl{font-size:11px;color:var(--tm);letter-spacing:.06em;text-transform:uppercase}
-.tval{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:400;color:var(--ch)}
-
-/* CATEGORY PICKER */
-.cat-picker-btn{width:100%;padding:10px 12px;border:1px solid var(--bdr);background:var(--crm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--td);border-radius:6px;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between}
-.cat-picker-btn::after{content:"›";font-size:16px;color:var(--tl)}
-.cat-picker-btn.selected{border-color:var(--tpe);background:var(--wh);color:var(--td)}
-.cpchip{padding:8px 14px;border:1.5px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:12px;color:var(--tm);border-radius:20px;cursor:pointer;transition:all .15s}
-.cpchip.on{background:var(--ch);border-color:var(--ch);color:var(--crm)}
-.mcitem{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--stn);background:var(--wh)}
-.mcitem:last-child{border-bottom:none}
-.mcname{flex:1;font-size:14px;color:var(--td)}
-.mccnt{font-size:11px;color:var(--tl);background:var(--ln);padding:2px 8px;border-radius:10px}
-.rcat-group{margin-bottom:4px}
-.rcat-hdr{font-size:10px;font-weight:500;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;padding:10px 15px 4px}
-.rcat-body{display:flex;flex-direction:column;gap:8px;padding:0 0 4px}
+.tval{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ch)}
+.budget-bar-wrap{margin:0 15px 8px;background:var(--ln);border:1px solid var(--bdr);border-radius:6px;padding:10px 14px}
+.budget-bar-top{display:flex;justify-content:space-between;margin-bottom:6px}
+.budget-lbl{font-size:10px;color:var(--tl);letter-spacing:.08em;text-transform:uppercase}
+.budget-amt{font-size:12px;color:var(--tm)}
+.budget-track{height:5px;background:var(--stn);border-radius:3px;overflow:hidden}
+.budget-fill{height:100%;border-radius:3px;transition:width .4s}
+.purch-check{width:20px;height:20px;border:1.5px solid var(--bdr);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;margin-right:8px;transition:all .15s}
+.purch-check.done{background:var(--green);border-color:var(--green);color:#fff;font-size:11px}
+.streak-banner{margin:10px 15px 0;background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:10px 14px;display:flex;align-items:center;gap:12px}
+.streak-fire{font-size:24px}
+.streak-count{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--ch);line-height:1}
+.streak-lbl{font-size:10px;color:var(--tl);letter-spacing:.08em;text-transform:uppercase;margin-top:1px}
+.streak-today{font-size:11px;color:var(--tm);margin-top:4px}
 .rlist{padding:11px 15px;display:flex;flex-direction:column;gap:8px}
+.rcat-group{margin-bottom:4px}.rcat-hdr{font-size:10px;font-weight:500;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;padding:10px 15px 4px}
+.rcat-body{display:flex;flex-direction:column;gap:8px;padding:0 0 4px}
 .rcard{background:var(--wh);border:1px solid var(--bdr);border-radius:7px;overflow:hidden;display:flex;align-items:stretch}
 .rdragcol{display:flex;align-items:center;background:var(--ln);padding:0 5px;border-right:1px solid var(--bdr)}
 .rbody{flex:1;min-width:0}
-.rchdr{background:var(--ln);padding:8px 13px;display:flex;align-items:center;gap:9px}
-.rnum{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--stn);min-width:26px}
+.rchdr{background:var(--ln);padding:7px 12px;display:flex;align-items:center;gap:8px}
+.rnum{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--stn);min-width:24px}
 .rname{font-size:11px;font-weight:500;color:var(--tm);letter-spacing:.08em;text-transform:uppercase;flex:1}
 .racts{display:flex;gap:5px}
 .rslots{display:grid;grid-template-columns:1fr 1fr}
-.rslot{padding:9px 13px;border-top:1px solid var(--stn)}
-.rslot:first-child{border-right:1px solid var(--stn)}
-.rslbl{font-size:9px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+.rslot{padding:8px 12px;border-top:1px solid var(--stn)}.rslot:first-child{border-right:1px solid var(--stn)}
+.rslbl{font-size:9px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;display:flex;align-items:center;justify-content:space-between}
 .rsval{font-size:12px;color:var(--td);line-height:1.4}
+.rcheck{width:18px;height:18px;border:1.5px solid var(--bdr);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.rcheck.done{background:var(--green);border-color:var(--green);color:#fff;font-size:10px}
 .wsec{padding:0 15px 8px}
 .wcard{background:var(--wh);border:1px solid var(--bdr);border-radius:7px;margin-bottom:8px;display:flex;align-items:stretch}
 .wdragcol{display:flex;align-items:center;background:var(--ln);padding:0 5px;border-right:1px solid var(--bdr);border-radius:7px 0 0 7px}
-.winner{flex:1;padding:11px 13px;display:flex;justify-content:space-between;align-items:flex-start;gap:9px}
+.winner{flex:1;padding:10px 12px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;cursor:pointer}
 .wfreq{font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
-.wname{font-size:13px;font-weight:500;color:var(--td);margin-bottom:2px}
-.wnote{font-size:11px;color:var(--tl);font-style:italic}
+.wname{font-size:13px;font-weight:500;color:var(--td);margin-bottom:2px}.wnote{font-size:11px;color:var(--tl);font-style:italic}
 .sacts{display:flex;gap:5px;flex-shrink:0}
 .sbtn{padding:4px 8px;border:1px solid var(--bdr);background:none;font-family:'DM Sans',sans-serif;font-size:10px;color:var(--tm);border-radius:4px;cursor:pointer}
-.sbtn:active{background:var(--ln)}
-.sbtn.del:active{border-color:#8B3A3A;color:#8B3A3A}
-
-/* OVERLAY / DRAWER */
-.ov{position:fixed;inset:0;background:rgba(44,44,44,.56);z-index:300;display:flex;align-items:flex-end;backdrop-filter:blur(2px)}
+.sbtn:active{background:var(--ln)}.sbtn.del:active{border-color:var(--red);color:var(--red)}
+.journal-list{padding:11px 15px;display:flex;flex-direction:column;gap:8px}
+.jcard{background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:12px 14px;cursor:pointer}
+.jdate{font-size:10px;color:var(--tl);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.jtext{font-size:13px;color:var(--td);line-height:1.6}.jmood{font-size:18px;margin-bottom:5px}
+.jtags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.jtag{font-size:10px;color:var(--tm);background:var(--ln);padding:2px 8px;border-radius:10px}
+.ov{position:fixed;inset:0;background:rgba(30,30,30,.58);z-index:300;display:flex;align-items:flex-end;backdrop-filter:blur(2px)}
 .ov.hi{display:none}
-.drw{width:100%;background:var(--wh);border-radius:16px 16px 0 0;max-height:92vh;display:flex;flex-direction:column;animation:sup .24s cubic-bezier(.32,.72,0,1);padding-bottom:var(--sb)}
+.drw{width:100%;background:var(--wh);border-radius:16px 16px 0 0;max-height:92vh;display:flex;flex-direction:column;animation:sup .22s cubic-bezier(.32,.72,0,1);padding-bottom:var(--sb)}
 @keyframes sup{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .drwbar{width:36px;height:4px;background:var(--stn);border-radius:2px;margin:11px auto 0}
-.drwhdr{padding:15px 19px 13px;border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center}
+.drwhdr{padding:14px 18px 12px;border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center}
 .drwtitle{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--td)}
 .drwclose{background:none;border:none;font-size:22px;color:var(--tl);cursor:pointer;padding:0 3px;line-height:1}
-.drwbody{padding:15px 19px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:13px}
-.drow{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.fld{display:flex;flex-direction:column;gap:4px}
-.fld.full{grid-column:1/-1}
+.drwbody{padding:14px 18px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:12px}
+.drow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fld{display:flex;flex-direction:column;gap:4px}.fld.full{grid-column:1/-1}
 .fld label{font-size:10px;color:var(--tl);letter-spacing:.09em;text-transform:uppercase}
-.fld input,.fld select,.fld textarea{padding:10px 11px;border:1px solid var(--bdr);background:var(--crm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--td);border-radius:6px;outline:none;-webkit-appearance:none}
+.fld input,.fld select,.fld textarea{padding:9px 11px;border:1px solid var(--bdr);background:var(--crm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--td);border-radius:6px;outline:none;-webkit-appearance:none}
 .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--tpe);background:var(--wh)}
-.fld textarea{resize:none;min-height:62px}
-.drwfoot{padding:11px 19px 7px;border-top:1px solid var(--bdr);display:flex;gap:9px}
-.bcancel{flex:1;padding:12px;background:none;border:1px solid var(--bdr);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--tm);border-radius:8px;cursor:pointer}
-.bsave{flex:2;padding:12px;background:var(--ch);border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--crm);letter-spacing:.04em;border-radius:8px;cursor:pointer}
+.fld textarea{resize:none;min-height:60px}
+.drwfoot{padding:10px 18px 7px;border-top:1px solid var(--bdr);display:flex;gap:8px}
+.bcancel{flex:1;padding:11px;background:none;border:1px solid var(--bdr);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--tm);border-radius:8px;cursor:pointer}
+.bsave{flex:2;padding:11px;background:var(--ch);border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--crm);letter-spacing:.04em;border-radius:8px;cursor:pointer}
 .bsave:active{opacity:.85}
-
-/* VIEW DRAWER */
-.vrow{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--stn)}
-.vrow:last-child{border-bottom:none}
+.vrow{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--stn)}.vrow:last-child{border-bottom:none}
 .vlbl{font-size:10px;color:var(--tl);letter-spacing:.09em;text-transform:uppercase;padding-top:1px;flex-shrink:0;width:105px}
 .vval{font-size:13px;color:var(--td);text-align:right;flex:1}
-.vbig{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;color:var(--ch)}
+.vbig{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ch)}
 .vnote{font-size:12px;color:var(--tm);font-style:italic;line-height:1.5;text-align:right}
-.bdel{flex:1;padding:12px;background:none;border:1px solid #e0c8c8;font-family:'DM Sans',sans-serif;font-size:13px;color:#8B3A3A;border-radius:8px;cursor:pointer}
-
-/* TOAST */
-.toast{position:fixed;bottom:calc(var(--sb) + 22px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--ch);color:var(--crm);padding:8px 17px;border-radius:20px;font-size:12px;opacity:0;transition:all .22s;z-index:999;white-space:nowrap;pointer-events:none}
+.bdel{flex:1;padding:11px;background:none;border:1px solid #e0c8c8;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--red);border-radius:8px;cursor:pointer}
+.photo-btn{width:100%;height:80px;border:2px dashed var(--bdr);background:var(--crm);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;color:var(--tl);font-size:12px}
+.photo-preview{width:100%;height:80px;object-fit:cover;border-radius:8px;cursor:pointer}
+.cat-picker-btn{width:100%;padding:9px 11px;border:1px solid var(--bdr);background:var(--crm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--tl);border-radius:6px;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between}
+.cat-picker-btn::after{content:"\203A";font-size:16px;color:var(--tl)}
+.cat-picker-btn.selected{border-color:var(--tpe);background:var(--wh);color:var(--td)}
+.cpchip{padding:7px 13px;border:1.5px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:12px;color:var(--tm);border-radius:20px;cursor:pointer}
+.cpchip.on{background:var(--ch);border-color:var(--ch);color:var(--crm)}
+.mcitem{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--stn);background:var(--wh)}.mcitem:last-child{border-bottom:none}
+.mcname{flex:1;font-size:14px;color:var(--td)}.mccnt{font-size:11px;color:var(--tl);background:var(--ln);padding:2px 8px;border-radius:10px}
+.conf-box{background:var(--wh);border-radius:14px;padding:22px 18px;width:100%;max-width:320px;text-align:center}
+.conf-msg{font-size:15px;color:var(--td);margin-bottom:6px;font-weight:500}.conf-sub{font-size:12px;color:var(--tl);margin-bottom:18px}
+.conf-acts{display:flex;gap:9px}
+.conf-no{flex:1;padding:10px;background:none;border:1px solid var(--bdr);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--tm);border-radius:8px;cursor:pointer}
+.conf-yes{flex:1;padding:10px;background:var(--red);border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:#fff;border-radius:8px;cursor:pointer}
+.batch-bar{position:fixed;bottom:calc(var(--sb)+10px);left:15px;right:15px;background:var(--ch);color:var(--crm);border-radius:10px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:200;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.batch-bar.hi{display:none}.batch-info{font-size:13px}.batch-acts{display:flex;gap:8px}
+.batch-btn{padding:6px 12px;background:rgba(255,255,255,.15);border:none;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--crm);border-radius:6px;cursor:pointer}
+.onboard{position:fixed;inset:0;background:var(--ch);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 28px calc(var(--sb)+30px);overflow-y:auto}
+.onboard.hi{display:none}.ob-emoji{font-size:52px;margin-bottom:16px}
+.ob-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--crm);text-align:center;margin-bottom:8px}
+.ob-sub{font-size:13px;color:rgba(250,248,245,.6);text-align:center;line-height:1.6;margin-bottom:24px}
+.ob-features{display:flex;flex-direction:column;gap:11px;width:100%;margin-bottom:24px}
+.ob-feat{display:flex;align-items:center;gap:12px}
+.ob-feat-icon{font-size:20px;width:34px;text-align:center}
+.ob-feat-text{font-size:13px;color:rgba(250,248,245,.75);line-height:1.4}
+.ob-start{width:100%;padding:14px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--crm);border-radius:10px;cursor:pointer;letter-spacing:.04em}
+.ob-start:active{background:rgba(255,255,255,.22)}
+.toast{position:fixed;bottom:calc(var(--sb)+22px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--ch);color:var(--crm);padding:8px 16px;border-radius:20px;font-size:12px;opacity:0;transition:all .22s;z-index:1000;white-space:nowrap;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .hi{display:none!important}
 </style>
 </head>
 <body>
+<div class="onboard" id="onboard">
+  <div class="ob-emoji">✨</div>
+  <div class="ob-title">Your Skincare Space</div>
+  <div class="ob-sub">Track products, build routines, and journal your skin — all in one place.</div>
+  <div class="ob-features">
+    <div class="ob-feat"><div class="ob-feat-icon">🧴</div><div class="ob-feat-text">Inventory with photos, expiry alerts and PAO tracker</div></div>
+    <div class="ob-feat"><div class="ob-feat-icon">🛒</div><div class="ob-feat-text">Shopping list with categories, budget and purchase flow</div></div>
+    <div class="ob-feat"><div class="ob-feat-icon">☀️</div><div class="ob-feat-text">AM/PM routine tracker with daily streak</div></div>
+    <div class="ob-feat"><div class="ob-feat-icon">📓</div><div class="ob-feat-text">Skin journal — log moods, reactions and notes daily</div></div>
+  </div>
+  <button class="ob-start" id="obStart">Get Started →</button>
+</div>
 <div id="app">
   <header class="hdr">
     <div class="hdr-top">
-      <div>
-        <div class="hdr-eye">Personal Care</div>
-        <div class="hdr-title">Skincare</div>
-      </div>
+      <div><div class="hdr-eye">Personal Care</div><div class="hdr-title">Skincare</div></div>
       <div class="hdr-acts">
         <button class="ibtn hi" id="btnImport">⬆</button>
         <button class="ibtn hi" id="btnExport">⬇</button>
+        <button class="ibtn hi" id="btnBatch">☐</button>
+        <button class="ibtn" id="btnDark">◐</button>
         <button class="ibtn lg" id="btnAdd">+</button>
       </div>
     </div>
     <nav class="nav" id="navBar"></nav>
   </header>
-
   <div class="scroll" id="scrollArea">
-
-    <!-- INVENTORY TAB -->
     <div id="tab-inventory">
       <div class="stats" id="statsRow"></div>
       <div class="backup-banner hi" id="backupBanner">
@@ -232,1140 +241,592 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
         <button class="backup-btn" id="backupNow">Export now</button>
         <button class="backup-dismiss" id="backupDismiss">×</button>
       </div>
-      <div class="srch">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input class="sinput" id="searchInput" placeholder="Search…" type="search"/>
-      </div>
+      <div class="srch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="sinput" id="searchInput" placeholder="Search products…" type="search"/></div>
       <div class="cats" id="catsRow"></div>
       <div class="sortbar" id="invSortBar"></div>
       <div class="drag-hint" id="invDragHint">Hold ≡ to reorder</div>
       <div class="clist" id="productList"></div>
     </div>
-
-    <!-- SHOPPING TAB -->
     <div id="tab-shopping" class="hi">
-      <div class="phdr">
-        <div><div class="peye">Wishlist</div><div class="ptitle">Shopping List</div></div>
-        <button class="sbtn" id="btnManageCats">Manage Categories</button>
-      </div>
+      <div class="phdr"><div><div class="peye">Wishlist</div><div class="ptitle">Shopping List</div></div><button class="sbtn" id="btnManageCats">Manage Categories</button></div>
+      <div class="srch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="sinput" id="shopSearchInput" placeholder="Search shopping list…" type="search"/></div>
       <div class="sortbar" id="shopSortBar"></div>
+      <div class="budget-bar-wrap hi" id="budgetWrap"><div class="budget-bar-top"><span class="budget-lbl">Budget</span><span class="budget-amt" id="budgetAmt"></span></div><div class="budget-track"><div class="budget-fill" id="budgetFill"></div></div></div>
       <div class="shsec" id="shopSections"></div>
       <div class="total"><span class="tlbl">Estimated Total</span><span class="tval" id="shopTotal">₹0</span></div>
     </div>
-
-    <!-- ROUTINE TAB -->
     <div id="tab-routine" class="hi">
       <div class="phdr"><div><div class="peye">Daily Protocol</div><div class="ptitle">Routine</div></div></div>
+      <div id="streakBanner"></div>
+      <div class="srch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="sinput" id="routSearchInput" placeholder="Search routine…" type="search"/></div>
       <div class="drag-hint">Hold ≡ to reorder</div>
       <div class="rlist" id="routineList"></div>
-      <div class="phdr" style="padding-top:6px">
-        <div><div class="peye">Weekly Treatments</div></div>
-        <button class="sbtn" id="btnAddWeekly">+ Add</button>
-      </div>
+      <div class="phdr" style="padding-top:4px"><div><div class="peye">Weekly Treatments</div></div><button class="sbtn" id="btnAddWeekly">+ Add</button></div>
       <div class="drag-hint" style="padding-bottom:2px">Hold ≡ to reorder</div>
       <div class="wsec" id="weeklyList"></div>
     </div>
-
-  </div><!-- /scroll -->
-
-  <!-- VIEW OVERLAY -->
-  <div class="ov hi" id="viewOv">
-    <div class="drw">
-      <div class="drwbar"></div>
-      <div class="drwhdr">
-        <div><div style="font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px" id="viewEye"></div><span class="drwtitle" id="viewTitle"></span></div>
-        <button class="drwclose" id="viewClose">×</button>
-      </div>
-      <div class="drwbody" id="viewBody"></div>
-      <div class="drwfoot">
-        <button class="bdel" id="viewDel">Remove</button>
-        <button class="bsave" id="viewEdit">Edit</button>
-      </div>
+    <div id="tab-journal" class="hi">
+      <div class="phdr"><div><div class="peye">Daily Log</div><div class="ptitle">Skin Journal</div></div></div>
+      <div class="srch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="sinput" id="journalSearchInput" placeholder="Search journal…" type="search"/></div>
+      <div class="journal-list" id="journalList"></div>
+    </div>
+  </div>
+  <div class="batch-bar hi" id="batchBar">
+    <span class="batch-info"><span id="batchCount">0</span> selected</span>
+    <div class="batch-acts">
+      <button class="batch-btn" id="batchCatBtn">Category</button>
+      <button class="batch-btn" id="batchDelBtn" style="background:rgba(200,80,80,.3)">Remove</button>
+      <button class="batch-btn" id="batchCancelBtn">Cancel</button>
     </div>
   </div>
 
-  <!-- CATEGORY PICKER OVERLAY -->
-  <div class="ov hi" id="catPickerOv" style="z-index:500">
-    <div class="drw">
-      <div class="drwbar"></div>
-      <div class="drwhdr">
-        <span class="drwtitle">Choose Category</span>
-        <button class="drwclose" id="catPickerClose">×</button>
-      </div>
-      <div class="drwbody" style="gap:0;padding:12px 19px">
-        <div id="catPickerGrid" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px"></div>
-        <div style="border-top:1px solid var(--stn);padding-top:14px">
-          <div style="font-size:10px;color:var(--tl);letter-spacing:.09em;text-transform:uppercase;margin-bottom:8px">Add new category</div>
-          <div style="display:flex;gap:8px">
-            <input id="catPickerNew" placeholder="e.g. Eye Care" style="flex:1;padding:10px 11px;border:1px solid var(--bdr);background:var(--crm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--td);border-radius:6px;outline:none;-webkit-appearance:none"/>
-            <button id="catPickerAdd" style="padding:10px 16px;background:var(--ch);border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--crm);border-radius:6px;cursor:pointer;flex-shrink:0">Add</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MANAGE CATEGORIES OVERLAY -->
-  <div class="ov hi" id="mancatOv">
-    <div class="drw">
-      <div class="drwbar"></div>
-      <div class="drwhdr">
-        <span class="drwtitle">Manage Categories</span>
-        <button class="drwclose" id="mancatClose">×</button>
-      </div>
-      <div style="padding:10px 19px 4px;font-size:11px;color:var(--tl)">Hold ≡ to drag and reorder categories</div>
-      <div class="drwbody" style="padding:8px 19px;gap:0" id="mancatList"></div>
-    </div>
-  </div>
-
-  <!-- CONFIRM OVERLAY -->
-  <div class="ov hi" id="confirmOv" style="align-items:center;padding:24px">
-    <div style="background:var(--wh);border-radius:14px;padding:24px 20px;width:100%;max-width:320px;text-align:center">
-      <div style="font-size:15px;color:var(--td);margin-bottom:8px;font-weight:500" id="confirmMsg">Are you sure?</div>
-      <div style="font-size:12px;color:var(--tl);margin-bottom:20px" id="confirmSub"></div>
-      <div style="display:flex;gap:10px">
-        <button id="confirmNo" style="flex:1;padding:11px;background:none;border:1px solid var(--bdr);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--tm);border-radius:8px;cursor:pointer">Cancel</button>
-        <button id="confirmYes" style="flex:1;padding:11px;background:#8B3A3A;border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:#fff;border-radius:8px;cursor:pointer">Remove</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- PRODUCT OVERLAY -->
-  <div class="ov hi" id="prodOv">
-    <div class="drw">
-      <div class="drwbar"></div>
-      <div class="drwhdr"><span class="drwtitle" id="prodTitle">Add Product</span><button class="drwclose" id="prodClose">×</button></div>
-      <div class="drwbody">
-        <div class="fld full"><label>Product Name</label><input id="f-name" placeholder="e.g. Vitamin C Serum"/></div>
-        <div class="drow">
-          <div class="fld"><label>Brand</label><input id="f-brand" placeholder="e.g. Minimalist"/></div>
-          <div class="fld"><label>Category</label>
-            <button type="button" class="cat-picker-btn" id="f-cat-btn" onclick="openCatPicker('prod')">Select category</button>
-            <input type="hidden" id="f-cat" value=""/>
-          </div>
-        </div>
-        <div class="drow">
-          <div class="fld"><label>Routine Step</label><input id="f-step" placeholder="e.g. Step 3"/></div>
-          <div class="fld"><label>Size (ml/g)</label><input id="f-size" type="number" placeholder="30"/></div>
-        </div>
-        <div class="drow">
-          <div class="fld"><label>Purchase Date</label><input id="f-pdate" type="date"/></div>
-          <div class="fld"><label>Expiry Date</label><input id="f-edate" type="date"/></div>
-        </div>
-        <div class="drow">
-          <div class="fld"><label>Quantity</label><input id="f-qty" type="number" min="0" value="1"/></div>
-          <div class="fld"><label>Price (₹)</label><input id="f-price" type="number" placeholder="499"/></div>
-        </div>
-        <div class="fld full"><label>Notes</label><textarea id="f-notes" placeholder="Usage tips…"></textarea></div>
-      </div>
-      <div class="drwfoot"><button class="bcancel" id="prodCancel">Cancel</button><button class="bsave" id="prodSave">Save</button></div>
-    </div>
-  </div>
-
-  <!-- SHOPPING OVERLAY -->
-  <div class="ov hi" id="shopOv">
-    <div class="drw">
-      <div class="drwbar"></div>
-      <div class="drwhdr"><span class="drwtitle" id="shopTitle">Add Item</span><button class="drwclose" id="shopClose">×</button></div>
-      <div class="drwbody">
-        <div class="fld full"><label>Product Name</label><input id="s-name" placeholder="e.g. Snail Mucin"/></div>
-        <div class="drow">
-          <div class="fld"><label>Brand</label><input id="s-brand" placeholder="e.g. COSRX"/></div>
-          <div class="fld"><label>Category</label>
-            <button type="button" class="cat-picker-btn" id="s-cat-btn" onclick="openCatPicker('shop')">Select category</button>
-            <input type="hidden" id="s-cat" value=""/>
-          </div>
-        </div>
-        <div class="drow">
-          <div class="fld"><label>Priority</label><select id="s-pri"><option>High</option><option>Medium</option><option>Low</option></select></div>
-          <div class="fld"><label>Price (₹)</label><input id="s-price" type="number" placeholder="999"/></div>
-        </div>
-        <div class="fld full"><label>Where to Buy</label><input id="s-where" placeholder="e.g. Nykaa"/></div>
-        <div class="fld full"><label>Notes</label><textarea id="s-notes" placeholder="Any details…"></textarea></div>
-      </div>
-      <div class="drwfoot"><button class="bcancel" id="shopCancel">Cancel</button><button class="bsave" id="shopSave">Save</button></div>
-    </div>
-  </div>
-
-  <!-- ROUTINE OVERLAY -->
-  <div class="ov hi" id="routOv">
-    <div class="drw">
-      <div class="drwbar"></div>
-      <div class="drwhdr"><span class="drwtitle" id="routTitle">Add Step</span><button class="drwclose" id="routClose">×</button></div>
-      <div class="drwbody">
-        <div class="drow">
-          <div class="fld"><label>Step No.</label><input id="r-step" placeholder="01"/></div>
-          <div class="fld"><label>Step Name</label><input id="r-name" placeholder="e.g. Toner"/></div>
-        </div>
-        <div class="fld full"><label>Category <span style="font-size:9px;color:var(--tl)">(groups steps together)</span></label>
-          <button type="button" class="cat-picker-btn" id="r-cat-btn" onclick="openCatPicker('rout')">None (leave ungrouped)</button>
-          <input type="hidden" id="r-cat" value=""/>
-        </div>
-        <div class="fld full"><label>Morning (AM)</label><input id="r-am" placeholder="e.g. Rose Water Toner"/></div>
-        <div class="fld full"><label>Evening (PM)</label><input id="r-pm" placeholder="e.g. HA 2% + B5"/></div>
-      </div>
-      <div class="drwfoot"><button class="bcancel" id="routCancel">Cancel</button><button class="bsave" id="routSave">Save</button></div>
-    </div>
-  </div>
-
-  <!-- WEEKLY OVERLAY -->
-  <div class="ov hi" id="weekOv">
-    <div class="drw">
-      <div class="drwbar"></div>
-      <div class="drwhdr"><span class="drwtitle" id="weekTitle">Add Treatment</span><button class="drwclose" id="weekClose">×</button></div>
-      <div class="drwbody">
-        <div class="fld full"><label>Frequency</label><input id="w-freq" placeholder="e.g. Weekly"/></div>
-        <div class="fld full"><label>Treatment Name</label><input id="w-name" placeholder="e.g. Face Mask"/></div>
-        <div class="fld full"><label>Notes</label><textarea id="w-note" placeholder="Instructions…"></textarea></div>
-      </div>
-      <div class="drwfoot"><button class="bcancel" id="weekCancel">Cancel</button><button class="bsave" id="weekSave">Save</button></div>
-    </div>
-  </div>
-
+  <!-- VIEW -->
+  <div class="ov hi" id="viewOv"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><div><div id="viewEye" style="font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px"></div><span class="drwtitle" id="viewTitle"></span></div><button class="drwclose" id="viewClose">×</button></div><div class="drwbody" id="viewBody"></div><div class="drwfoot"><button class="bdel" id="viewDel">Remove</button><button class="bsave" id="viewEdit">Edit</button></div></div></div>
+  <!-- PRODUCT -->
+  <div class="ov hi" id="prodOv"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle" id="prodTitle">Add Product</span><button class="drwclose" id="prodClose">×</button></div><div class="drwbody">
+    <div class="fld full"><label>Photo</label><input type="file" id="fPhotoInput" accept="image/*" class="hi"/><img id="fPhotoPreview" class="photo-preview hi" alt=""/><button type="button" class="photo-btn" id="fPhotoBtn"><span style="font-size:22px">📷</span><span>Tap to add photo</span></button></div>
+    <div class="fld full"><label>Product Name</label><input id="fName" placeholder="e.g. Vitamin C Serum"/></div>
+    <div class="drow"><div class="fld"><label>Brand</label><input id="fBrand" placeholder="e.g. Minimalist"/></div><div class="fld"><label>Category</label><button type="button" class="cat-picker-btn" id="fCatBtn" onclick="openCatPicker('prod')">Select</button><input type="hidden" id="fCat"/></div></div>
+    <div class="drow"><div class="fld"><label>Routine Step</label><input id="fStep" placeholder="e.g. Step 3"/></div><div class="fld"><label>Size (ml/g)</label><input id="fSize" type="number" placeholder="30"/></div></div>
+    <div class="drow"><div class="fld"><label>Purchase Date</label><input id="fPdate" type="date"/></div><div class="fld"><label>Expiry Date</label><input id="fEdate" type="date"/></div></div>
+    <div class="drow"><div class="fld"><label>Date Opened (PAO)</label><input id="fOdate" type="date"/></div><div class="fld"><label>PAO (months)</label><input id="fPao" type="number" placeholder="12" min="1" max="36"/></div></div>
+    <div class="drow"><div class="fld"><label>Quantity</label><input id="fQty" type="number" min="0" value="1"/></div><div class="fld"><label>Price (₹)</label><input id="fPrice" type="number" placeholder="499"/></div></div>
+    <div class="fld full"><label>Notes</label><textarea id="fNotes" placeholder="Usage tips…"></textarea></div>
+  </div><div class="drwfoot"><button class="bcancel" id="prodCancel">Cancel</button><button class="bsave" id="prodSave">Save</button></div></div></div>
+  <!-- SHOPPING -->
+  <div class="ov hi" id="shopOv"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle" id="shopTitle">Add Item</span><button class="drwclose" id="shopClose">×</button></div><div class="drwbody">
+    <div class="fld full"><label>Product Name</label><input id="sName" placeholder="e.g. Snail Mucin"/></div>
+    <div class="drow"><div class="fld"><label>Brand</label><input id="sBrand" placeholder="e.g. COSRX"/></div><div class="fld"><label>Category</label><button type="button" class="cat-picker-btn" id="sCatBtn" onclick="openCatPicker('shop')">Select</button><input type="hidden" id="sCat"/></div></div>
+    <div class="drow"><div class="fld"><label>Priority</label><select id="sPri"><option>High</option><option>Medium</option><option>Low</option></select></div><div class="fld"><label>Price (₹)</label><input id="sPrice" type="number" placeholder="999"/></div></div>
+    <div class="fld full"><label>Where to Buy</label><input id="sWhere" placeholder="e.g. Nykaa"/></div>
+    <div class="fld full"><label>Notes</label><textarea id="sNotes" placeholder="Any details…"></textarea></div>
+  </div><div class="drwfoot"><button class="bcancel" id="shopCancel">Cancel</button><button class="bsave" id="shopSave">Save</button></div></div></div>
+  <!-- BUDGET -->
+  <div class="ov hi" id="budgetOv"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle">Set Budget</span><button class="drwclose" id="budgetClose">×</button></div><div class="drwbody"><div class="fld full"><label>Monthly Shopping Budget (₹)</label><input id="bAmount" type="number" placeholder="5000"/></div><p style="font-size:12px;color:var(--tl)">Leave blank to remove the budget tracker.</p></div><div class="drwfoot"><button class="bcancel" id="budgetCancel">Cancel</button><button class="bsave" id="budgetSave">Save</button></div></div></div>
+  <!-- ROUTINE -->
+  <div class="ov hi" id="routOv"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle" id="routTitle">Add Step</span><button class="drwclose" id="routClose">×</button></div><div class="drwbody">
+    <div class="drow"><div class="fld"><label>Step No.</label><input id="rStep" placeholder="01"/></div><div class="fld"><label>Step Name</label><input id="rName" placeholder="e.g. Toner"/></div></div>
+    <div class="fld full"><label>Category <span style="font-size:9px;color:var(--tl)">(groups steps)</span></label><button type="button" class="cat-picker-btn" id="rCatBtn" onclick="openCatPicker('rout')">None</button><input type="hidden" id="rCat"/></div>
+    <div class="fld full"><label>Morning (AM)</label><input id="rAm" placeholder="e.g. Rose Water Toner"/></div>
+    <div class="fld full"><label>Evening (PM)</label><input id="rPm" placeholder="e.g. HA 2% + B5"/></div>
+  </div><div class="drwfoot"><button class="bcancel" id="routCancel">Cancel</button><button class="bsave" id="routSave">Save</button></div></div></div>
+  <!-- WEEKLY -->
+  <div class="ov hi" id="weekOv"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle" id="weekTitle">Add Treatment</span><button class="drwclose" id="weekClose">×</button></div><div class="drwbody"><div class="fld full"><label>Frequency</label><input id="wFreq" placeholder="e.g. Weekly"/></div><div class="fld full"><label>Treatment Name</label><input id="wName" placeholder="e.g. Face Mask"/></div><div class="fld full"><label>Notes</label><textarea id="wNote" placeholder="Instructions…"></textarea></div></div><div class="drwfoot"><button class="bcancel" id="weekCancel">Cancel</button><button class="bsave" id="weekSave">Save</button></div></div></div>
+  <!-- JOURNAL -->
+  <div class="ov hi" id="journalOv"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle" id="journalTitle">New Entry</span><button class="drwclose" id="journalClose">×</button></div><div class="drwbody">
+    <div class="fld full"><label>Date</label><input id="jDate" type="date"/></div>
+    <div class="fld full"><label>Mood / Skin Feeling</label><div style="display:flex;gap:8px;flex-wrap:wrap" id="moodPicker"><button type="button" class="cpchip" data-mood="😊" onclick="pickMood('😊')">😊 Good</button><button type="button" class="cpchip" data-mood="😐" onclick="pickMood('😐')">😐 Okay</button><button type="button" class="cpchip" data-mood="😔" onclick="pickMood('😔')">😔 Bad</button><button type="button" class="cpchip" data-mood="🔴" onclick="pickMood('🔴')">🔴 Breakout</button><button type="button" class="cpchip" data-mood="💧" onclick="pickMood('💧')">💧 Dry</button><button type="button" class="cpchip" data-mood="✨" onclick="pickMood('✨')">✨ Glowing</button></div><input type="hidden" id="jMood"/></div>
+    <div class="fld full"><label>Notes</label><textarea id="jText" placeholder="How does your skin feel today?" style="min-height:90px"></textarea></div>
+    <div class="fld full"><label>Tags (comma separated)</label><input id="jTags" placeholder="e.g. dry, breakout, new product"/></div>
+  </div><div class="drwfoot"><button class="bcancel" id="journalCancel">Cancel</button><button class="bsave" id="journalSave">Save</button></div></div></div>
+  <!-- CAT PICKER -->
+  <div class="ov hi" id="catPickerOv" style="z-index:500"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle">Choose Category</span><button class="drwclose" id="catPickerClose">×</button></div><div class="drwbody" style="gap:0;padding:12px 18px"><div id="catPickerGrid" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px"></div><div style="border-top:1px solid var(--stn);padding-top:12px"><div style="font-size:10px;color:var(--tl);letter-spacing:.09em;text-transform:uppercase;margin-bottom:7px">Add new category</div><div style="display:flex;gap:8px"><input id="catPickerNew" placeholder="e.g. Eye Care" style="flex:1;padding:9px 11px;border:1px solid var(--bdr);background:var(--crm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--td);border-radius:6px;outline:none;-webkit-appearance:none"/><button id="catPickerAdd" style="padding:9px 14px;background:var(--ch);border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--crm);border-radius:6px;cursor:pointer;flex-shrink:0">Add</button></div></div></div></div></div>
+  <!-- MANAGE CATS -->
+  <div class="ov hi" id="mancatOv"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle">Manage Categories</span><button class="drwclose" id="mancatClose">×</button></div><div style="padding:8px 18px 4px;font-size:11px;color:var(--tl)">Hold ≡ to drag and reorder</div><div class="drwbody" style="padding:8px 18px;gap:0" id="mancatList"></div></div></div>
+  <!-- BATCH CAT -->
+  <div class="ov hi" id="batchCatOv" style="z-index:500"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle">Set Category</span><button class="drwclose" id="batchCatClose">×</button></div><div class="drwbody" style="gap:0;padding:12px 18px"><div id="batchCatGrid" style="display:flex;flex-wrap:wrap;gap:8px"></div></div></div></div>
+  <!-- CONFIRM -->
+  <div class="ov hi" id="confirmOv" style="align-items:center;padding:22px"><div class="conf-box"><div class="conf-msg" id="confirmMsg">Are you sure?</div><div class="conf-sub" id="confirmSub"></div><div class="conf-acts"><button class="conf-no" id="confirmNo">Cancel</button><button class="conf-yes" id="confirmYes">Remove</button></div></div></div>
   <input type="file" id="importFile" accept=".json" class="hi"/>
   <div class="toast" id="toast"></div>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-
-// ── DATA ──────────────────────────────────────
-const CATS = ["All","Cleanser","Toner","Serum","Moisturiser","Sunscreen","Eye Care","Exfoliant","Face Oil","Essence","Lip Care"];
-const CATOPTS = CATS.slice(1);
-const ST = {
-  active:   {lbl:"Active",        c:"#6B7D6E", bg:"#EEF1EE"},
-  expiring: {lbl:"Expiring Soon", c:"#8B6914", bg:"#F5EDD4"},
-  expired:  {lbl:"Expired",       c:"#8B3A3A", bg:"#F5E4E4"},
-  low:      {lbl:"Low Stock",     c:"#4A6B8A", bg:"#E4EDF5"},
-};
-const PRI = {
-  High:   {c:"#8B3A3A", bg:"#F5E4E4", bar:"#C97878"},
-  Medium: {c:"#8B6914", bg:"#F5EDD4", bar:"#C9A96E"},
-  Low:    {c:"#5A6B5A", bg:"#E8EEE8", bar:"#8FAF90"},
-};
-
-const DEF_PRODS = [
-  {id:1,name:"Vitamin C Brightening Serum",brand:"Minimalist",category:"Serum",step:"Step 3 – AM",size:30,pdate:"2025-01-10",edate:"2026-01-10",qty:1,price:699,notes:"Use within 3 months of opening"},
-  {id:2,name:"Niacinamide 10% + Zinc 1%",brand:"Minimalist",category:"Serum",step:"Step 3 – AM/PM",size:30,pdate:"2025-02-05",edate:"2026-08-05",qty:2,price:599,notes:"Helps with pores & sebum"},
-  {id:3,name:"Ceramide Moisturiser",brand:"CeraVe",category:"Moisturiser",step:"Step 4 – PM",size:88,pdate:"2024-11-15",edate:"2026-11-15",qty:1,price:899,notes:"Fragrance-free, gentle"},
-  {id:4,name:"SPF 50+ Sunscreen PA++++",brand:"Re'equil",category:"Sunscreen",step:"Step 5 – AM",size:80,pdate:"2025-03-01",edate:"2026-03-01",qty:2,price:545,notes:"Reapply every 2 hrs outdoors"},
-  {id:5,name:"Gentle Foaming Cleanser",brand:"Cetaphil",category:"Cleanser",step:"Step 1 – AM/PM",size:250,pdate:"2025-01-20",edate:"2027-01-20",qty:1,price:425,notes:"Low pH, suitable daily use"},
-  {id:6,name:"Retinol 0.3% Serum",brand:"Minimalist",category:"Serum",step:"Step 3 – PM",size:30,pdate:"2024-12-01",edate:"2025-12-01",qty:1,price:649,notes:"Introduce slowly; use with moisturiser"},
-  {id:7,name:"Rose Water Toner",brand:"Forest Essentials",category:"Toner",step:"Step 2 – AM/PM",size:200,pdate:"2025-04-10",edate:"2026-04-10",qty:1,price:850,notes:"Hydrating & soothing"},
-  {id:8,name:"AHA 25% + BHA 2% Peeling Solution",brand:"The Ordinary",category:"Exfoliant",step:"Weekly",size:30,pdate:"2025-02-14",edate:"2026-02-14",qty:1,price:799,notes:"Max 10 min; do not use daily"},
-  {id:9,name:"Eye Cream SPF",brand:"Kiehl's",category:"Eye Care",step:"Step 4 – AM",size:14,pdate:"2025-03-20",edate:"2026-09-20",qty:1,price:3200,notes:"Pat gently around orbital bone"},
-  {id:10,name:"Hyaluronic Acid 2% + B5",brand:"The Ordinary",category:"Serum",step:"Step 2 – AM/PM",size:30,pdate:"2025-04-01",edate:"2026-10-01",qty:3,price:379,notes:"Apply on damp skin"},
-  {id:11,name:"Face Oil (Rosehip)",brand:"Plum",category:"Face Oil",step:"Step 5 – PM",size:30,pdate:"2024-10-01",edate:"2025-10-01",qty:1,price:595,notes:"Speeds up skin repair"},
-  {id:12,name:"Micellar Cleansing Water",brand:"Simple",category:"Cleanser",step:"Step 1 – AM",size:400,pdate:"2025-01-05",edate:"2027-07-05",qty:1,price:365,notes:"No-rinse; great for lazy mornings"},
+document.addEventListener('DOMContentLoaded',function(){
+const CATOPTS=["Cleanser","Toner","Serum","Moisturiser","Sunscreen","Eye Care","Exfoliant","Face Oil","Essence","Lip Care"];
+const ST={active:{lbl:"Active",c:"#6B7D6E",bg:"#EEF1EE"},expiring:{lbl:"Expiring Soon",c:"#8B6914",bg:"#F5EDD4"},expired:{lbl:"Expired",c:"#8B3A3A",bg:"#F5E4E4"},low:{lbl:"Low Stock",c:"#4A6B8A",bg:"#E4EDF5"}};
+const PRI={High:{c:"#8B3A3A",bg:"#F5E4E4",bar:"#C97878"},Medium:{c:"#8B6914",bg:"#F5EDD4",bar:"#C9A96E"},Low:{c:"#5A6B5A",bg:"#E8EEE8",bar:"#8FAF90"}};
+const KEY="skincare_v5",BKEY="skincare_lastExport",DEF_TABS=["inventory","shopping","routine","journal"];
+const DEF_PRODS=[
+  {id:1,name:"Vitamin C Brightening Serum",brand:"Minimalist",category:"Serum",step:"Step 3 – AM",size:30,pdate:"2025-01-10",edate:"2026-01-10",odate:"",pao:12,qty:1,price:699,notes:"Use within 3 months of opening",photo:""},
+  {id:2,name:"Niacinamide 10% + Zinc 1%",brand:"Minimalist",category:"Serum",step:"Step 3 – AM/PM",size:30,pdate:"2025-02-05",edate:"2026-08-05",odate:"",pao:12,qty:2,price:599,notes:"Helps with pores & sebum",photo:""},
+  {id:3,name:"Ceramide Moisturiser",brand:"CeraVe",category:"Moisturiser",step:"Step 4 – PM",size:88,pdate:"2024-11-15",edate:"2026-11-15",odate:"",pao:12,qty:1,price:899,notes:"Fragrance-free, gentle",photo:""},
+  {id:4,name:"SPF 50+ Sunscreen PA++++",brand:"Re'equil",category:"Sunscreen",step:"Step 5 – AM",size:80,pdate:"2025-03-01",edate:"2026-03-01",odate:"",pao:12,qty:2,price:545,notes:"Reapply every 2 hrs outdoors",photo:""},
+  {id:5,name:"Gentle Foaming Cleanser",brand:"Cetaphil",category:"Cleanser",step:"Step 1 – AM/PM",size:250,pdate:"2025-01-20",edate:"2027-01-20",odate:"",pao:24,qty:1,price:425,notes:"Low pH, suitable daily use",photo:""},
+  {id:6,name:"Retinol 0.3% Serum",brand:"Minimalist",category:"Serum",step:"Step 3 – PM",size:30,pdate:"2024-12-01",edate:"2025-12-01",odate:"",pao:12,qty:1,price:649,notes:"Introduce slowly",photo:""},
+  {id:7,name:"Rose Water Toner",brand:"Forest Essentials",category:"Toner",step:"Step 2 – AM/PM",size:200,pdate:"2025-04-10",edate:"2026-04-10",odate:"",pao:12,qty:1,price:850,notes:"Hydrating & soothing",photo:""},
+  {id:8,name:"AHA 25% + BHA 2% Peeling Solution",brand:"The Ordinary",category:"Exfoliant",step:"Weekly",size:30,pdate:"2025-02-14",edate:"2026-02-14",odate:"",pao:12,qty:1,price:799,notes:"Max 10 min; PM only",photo:""},
+  {id:9,name:"Eye Cream SPF",brand:"Kiehl's",category:"Eye Care",step:"Step 4 – AM",size:14,pdate:"2025-03-20",edate:"2026-09-20",odate:"",pao:12,qty:1,price:3200,notes:"Pat gently around orbital bone",photo:""},
+  {id:10,name:"Hyaluronic Acid 2% + B5",brand:"The Ordinary",category:"Serum",step:"Step 2 – AM/PM",size:30,pdate:"2025-04-01",edate:"2026-10-01",odate:"",pao:12,qty:3,price:379,notes:"Apply on damp skin",photo:""},
+  {id:11,name:"Face Oil (Rosehip)",brand:"Plum",category:"Face Oil",step:"Step 5 – PM",size:30,pdate:"2024-10-01",edate:"2025-10-01",odate:"",pao:12,qty:1,price:595,notes:"Speeds up skin repair",photo:""},
+  {id:12,name:"Micellar Cleansing Water",brand:"Simple",category:"Cleanser",step:"Step 1 – AM",size:400,pdate:"2025-01-05",edate:"2027-07-05",odate:"",pao:24,qty:1,price:365,notes:"No-rinse; great for lazy mornings",photo:""},
 ];
-const DEF_SHOP = [
-  {id:1,name:"Snail Mucin Essence",brand:"COSRX",category:"Essence",priority:"High",price:1299,where:"Nykaa / Amazon",notes:"96% Snail Secretion Filtrate"},
-  {id:2,name:"Barrier Repair Moisturiser",brand:"Dr. G",category:"Moisturiser",priority:"Medium",price:1800,where:"MyGlamm",notes:"For compromised skin days"},
-  {id:3,name:"Azelaic Acid 10%",brand:"Paula's Choice",category:"Serum",priority:"Low",price:2200,where:"Paula's Choice IN",notes:"For PIH & redness"},
-  {id:4,name:"Lip SPF Balm",brand:"dot & key",category:"Lip Care",priority:"High",price:349,where:"Nykaa",notes:"Tinted + SPF 30"},
-  {id:5,name:"Enzyme Powder Cleanser",brand:"Hanskin",category:"Cleanser",priority:"Low",price:950,where:"Amazon",notes:"Once-weekly deep cleanse"},
+const DEF_SHOP=[
+  {id:1,name:"Snail Mucin Essence",brand:"COSRX",category:"Essence",priority:"High",price:1299,where:"Nykaa / Amazon",notes:"96% Snail Secretion Filtrate",purchased:false},
+  {id:2,name:"Barrier Repair Moisturiser",brand:"Dr. G",category:"Moisturiser",priority:"Medium",price:1800,where:"MyGlamm",notes:"For compromised skin days",purchased:false},
+  {id:3,name:"Azelaic Acid 10%",brand:"Paula's Choice",category:"Serum",priority:"Low",price:2200,where:"Paula's Choice IN",notes:"For PIH & redness",purchased:false},
+  {id:4,name:"Lip SPF Balm",brand:"dot & key",category:"Lip Care",priority:"High",price:349,where:"Nykaa",notes:"Tinted + SPF 30",purchased:false},
+  {id:5,name:"Enzyme Powder Cleanser",brand:"Hanskin",category:"Cleanser",priority:"Low",price:950,where:"Amazon",notes:"Once-weekly deep cleanse",purchased:false},
 ];
-const DEF_ROUT = [
-  {id:1,step:"01",name:"Cleanser",am:"Cetaphil Gentle Foaming Cleanser",pm:"Simple Micellar Cleansing Water"},
-  {id:2,step:"02",name:"Toner",am:"Rose Water Toner",pm:"HA 2% + B5 on damp skin"},
-  {id:3,step:"03",name:"Serum",am:"Vitamin C Serum",pm:"Retinol 0.3% OR Niacinamide"},
-  {id:4,step:"04",name:"Eye Care",am:"Kiehl's Eye Cream SPF",pm:"Kiehl's Eye Cream SPF"},
-  {id:5,step:"05",name:"Moisturiser",am:"CeraVe Ceramide Moisturiser",pm:"CeraVe + Rosehip Oil"},
-  {id:6,step:"06",name:"Sunscreen",am:"Re'equil SPF 50+ PA++++",pm:"—"},
+const DEF_ROUT=[
+  {id:1,step:"01",name:"Cleanser",category:"",am:"Cetaphil Gentle Foaming Cleanser",pm:"Simple Micellar Cleansing Water"},
+  {id:2,step:"02",name:"Toner",category:"",am:"Rose Water Toner",pm:"HA 2% + B5 on damp skin"},
+  {id:3,step:"03",name:"Serum",category:"",am:"Vitamin C Serum",pm:"Retinol 0.3% OR Niacinamide"},
+  {id:4,step:"04",name:"Eye Care",category:"",am:"Kiehl's Eye Cream SPF",pm:"Kiehl's Eye Cream SPF"},
+  {id:5,step:"05",name:"Moisturiser",category:"",am:"CeraVe Ceramide Moisturiser",pm:"CeraVe + Rosehip Oil"},
+  {id:6,step:"06",name:"Sunscreen",category:"",am:"Re'equil SPF 50+ PA++++",pm:"—"},
 ];
-const DEF_WEEK = [
-  {id:1,freq:"Weekly",name:"AHA/BHA Exfoliant",note:"The Ordinary Peeling Solution – max 10 min, PM only"},
-  {id:2,freq:"Monthly",name:"Face Mask",note:"Clay mask or hydrating sheet mask"},
-];
-const DEF_TABS = ["inventory","shopping","routine"];
+const DEF_WEEK=[{id:1,freq:"Weekly",name:"AHA/BHA Exfoliant",note:"The Ordinary Peeling Solution – max 10 min, PM only"},{id:2,freq:"Monthly",name:"Face Mask",note:"Clay mask or hydrating sheet mask"}];
 
-// ── BACKUP REMINDER ───────────────────────────
-const BACKUP_KEY = "skincare_lastExport";
-const REMIND_AFTER_CHANGES = 5;   // show banner after this many saves without export
-const REMIND_AFTER_DAYS    = 3;   // also show if exported more than N days ago
-
-let changesSinceExport = 0;
-let bannerDismissedAt  = 0;       // timestamp of last dismiss
-
-function getLastExport() {
-  try { return Number(localStorage.getItem(BACKUP_KEY)||0); } catch(e){ return 0; }
-}
-function setLastExport() {
-  try { localStorage.setItem(BACKUP_KEY, Date.now()); } catch(e){}
-}
-
-function checkBackupReminder() {
-  // Don't re-show if dismissed in the last 10 minutes
-  if (Date.now() - bannerDismissedAt < 10 * 60 * 1000) return;
-
-  const lastExport = getLastExport();
-  const daysSince  = (Date.now() - lastExport) / (1000 * 60 * 60 * 24);
-  const neverExported = lastExport === 0;
-
-  let msg = null;
-  if (neverExported && changesSinceExport >= REMIND_AFTER_CHANGES) {
-    msg = "You haven't backed up yet — export to keep your data safe.";
-  } else if (!neverExported && daysSince > REMIND_AFTER_DAYS) {
-    const days = Math.floor(daysSince);
-    msg = `Last backup was ${days} day${days===1?"":"s"} ago — consider exporting.`;
-  } else if (changesSinceExport >= REMIND_AFTER_CHANGES) {
-    msg = `${changesSinceExport} changes since last backup — export to be safe.`;
+function ld(){try{const d=localStorage.getItem(KEY);return d?JSON.parse(d):null;}catch(e){return null;}}
+function sd(){try{localStorage.setItem(KEY,JSON.stringify({prods,shop,rout,week,tabOrder,shopCatOrder,budget,journal,darkMode,cIC,cSC,cRC}));}catch(e){}}
+function gle(){try{return Number(localStorage.getItem(BKEY)||0);}catch(e){return 0;}}
+function sle(){try{localStorage.setItem(BKEY,Date.now());}catch(e){}}
+const st=ld();
+let prods=st?.prods||JSON.parse(JSON.stringify(DEF_PRODS));
+let shop=st?.shop||JSON.parse(JSON.stringify(DEF_SHOP));
+let rout=st?.rout||JSON.parse(JSON.stringify(DEF_ROUT));
+let week=st?.week||JSON.parse(JSON.stringify(DEF_WEEK));
+let tabOrder=st?.tabOrder||[...DEF_TABS];
+let shopCatOrder=st?.shopCatOrder||[];
+let budget=st?.budget||0;
+let journal=st?.journal||[];
+let darkMode=st?.darkMode||false;
+let cIC=st?.cIC||[];let cSC=st?.cSC||[];let cRC=st?.cRC||[];
+prods=prods.map(p=>({odate:"",pao:12,photo:"",...p}));
+shop=shop.map(s=>({purchased:false,...s}));
+rout=rout.map(r=>({category:"",...r}));
+let curTab=tabOrder[0]||"inventory";
+let srch="",catF="All",shopSrch="",routSrch="",jSrch="";
+let invSort="none",shopSort="none";
+let epId=null,esId=null,erId=null,ewId=null,ejId=null;
+const coll=new Set();
+let batchMode=false;
+const batchSel=new Set();
+let cse=0,bda=0,_ccb=null,_cpc=null,_cpb64="",_jmood="";
+const TODAY=new Date().toISOString().slice(0,10);
+function lc(){try{return JSON.parse(localStorage.getItem("sk_comp")||"{}");}catch(e){return{};}}
+function sc(c){try{localStorage.setItem("sk_comp",JSON.stringify(c));}catch(e){}}
+let comp=lc();
+function lstr(){try{return JSON.parse(localStorage.getItem("sk_streak")||"{}");}catch(e){return{};}}
+function sstr(s){try{localStorage.setItem("sk_streak",JSON.stringify(s));}catch(e){}}
+function calcStreak(){
+  const s=lstr();const tot=rout.length*2;
+  const done=rout.reduce((a,r)=>{if(comp[`${TODAY}_${r.id}_am`])a++;if(comp[`${TODAY}_${r.id}_pm`])a++;return a;},0);
+  if(tot>0&&done===tot&&s.last!==TODAY){
+    const yest=new Date();yest.setDate(yest.getDate()-1);const ys=yest.toISOString().slice(0,10);
+    const ns=s.last===ys?(s.n||0)+1:1;sstr({n:ns,last:TODAY});return ns;
   }
+  return s.n||0;
+}
+const $=id=>document.getElementById(id);
+const fmt=n=>"₹"+Number(n).toLocaleString("en-IN");
+const dl=d=>Math.floor((new Date(d)-new Date())/86400000);
+const so=(d,q)=>d<0?"expired":d<90?"expiring":q<=1?"low":"active";
+function pe(od,pao){if(!od||!pao)return null;const d=new Date(od);d.setMonth(d.getMonth()+Number(pao));return d.toISOString().slice(0,10);}
+function ee(p){const x=pe(p.odate,p.pao);if(!x)return p.edate;if(!p.edate)return x;return x<p.edate?x:p.edate;}
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2000);}
+function sov(id){$(id).classList.remove("hi");}function hov(id){$(id).classList.add("hi");}
+function save(){sd();cse++;clearTimeout(save._t);save._t=setTimeout(checkBR,1500);}
+function checkBR(){
+  if(Date.now()-bda<600000)return;
+  const last=gle(),days=(Date.now()-last)/86400000,never=last===0;
+  let msg=null;
+  if(never&&cse>=5)msg="You haven't backed up yet.";
+  else if(!never&&days>3)msg="Last backup was "+Math.floor(days)+" days ago.";
+  else if(cse>=5)msg=cse+" changes since last backup.";
+  if(msg){$("backupMsg").textContent=msg;$("backupBanner").classList.remove("hi");}
+}
+function applyDark(){document.documentElement.setAttribute("data-theme",darkMode?"dark":"light");}
+applyDark();
 
-  if (msg) {
-    $("backupMsg").textContent = msg;
-    $("backupBanner").classList.remove("hi");
-  }
+/* DRAG ENGINE */
+const D={el:null,con:null,gd:null,sd:null,cb:null,si:-1,di:-1,oy:0,sc:null};
+function mg(item,ty){const g=document.getElementById("_g");if(g)g.remove();const r=item.getBoundingClientRect();D.oy=ty-r.top;const c=item.cloneNode(true);c.id="_g";c.style.cssText=`position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;z-index:9999;pointer-events:none;opacity:.9;box-shadow:0 8px 28px rgba(0,0,0,.2);transform:scale(1.02);border-radius:7px;background:var(--wh)`;document.body.appendChild(c);}
+function rg(){const g=document.getElementById("_g");if(g)g.remove();}
+function mvg(ty){const g=document.getElementById("_g");if(g)g.style.top=(ty-D.oy)+"px";}
+function gl(){let l=document.getElementById("_dl");if(!l){l=document.createElement("div");l.id="_dl";l.style.cssText="position:fixed;left:14px;right:14px;height:3px;background:#8C7B75;border-radius:2px;z-index:9998;pointer-events:none;display:none";document.body.appendChild(l);}return l;}
+function sl(y){const l=gl();l.style.display="block";l.style.top=(y-1)+"px";}
+function hl(){const l=gl();if(l)l.style.display="none";}
+function cd(ty){const items=Array.from(D.con.querySelectorAll(":scope > .di"));let idx=items.length,ly=null;for(let i=0;i<items.length;i++){if(items[i]===D.el)continue;const r=items[i].getBoundingClientRect();if(ty<r.top+r.height/2){idx=i;ly=r.top;break;}else ly=r.bottom;}if(ly!==null)sl(Math.max(60,Math.min(window.innerHeight-10,ly)));return idx;}
+function ed(){if(!D.el)return;D.el.classList.remove("dragging");rg();hl();const data=D.gd();const mv=data.splice(D.si,1)[0];let fi=D.di>D.si?D.di-1:D.di;fi=Math.max(0,Math.min(fi,data.length));data.splice(fi,0,mv);D.sd(data);const cb=D.cb;D.el=null;D.con=null;cb();}
+document.addEventListener("touchmove",e=>{if(!D.el)return;e.preventDefault();const y=e.touches[0].clientY;mvg(y);D.di=cd(y);if(D.sc){const sr=D.sc.getBoundingClientRect();if(y>sr.bottom-70)D.sc.scrollTop+=10;else if(y<sr.top+70)D.sc.scrollTop-=10;}},{passive:false});
+document.addEventListener("touchend",ed);document.addEventListener("touchcancel",ed);
+function mdr(con,gd,sd,cb){con.addEventListener("touchstart",e=>{const h=e.target.closest(".dh");if(!h)return;const item=h.closest(".di");if(!item||!con.contains(item))return;e.preventDefault();D.el=item;D.con=con;D.gd=gd;D.sd=sd;D.cb=cb;D.sc=$("scrollArea");D.si=Array.from(con.querySelectorAll(":scope > .di")).indexOf(item);D.di=D.si;item.classList.add("dragging");mg(item,e.touches[0].clientY);},{passive:false});}
+
+/* NAV */
+function ac(){return prods.filter(p=>{const d=dl(ee(p));return["expiring","expired","low"].includes(so(d,p.qty));}).length;}
+function rp(){const tot=rout.length*2;const done=rout.reduce((a,r)=>{if(comp[`${TODAY}_${r.id}_am`])a++;if(comp[`${TODAY}_${r.id}_pm`])a++;return a;},0);return{done,tot};}
+function renderNav(){
+  const lbl={inventory:"Inventory",shopping:"Shopping",routine:"Routine",journal:"Journal"};
+  const alrt=ac();const{done,tot}=rp();
+  $("navBar").innerHTML=tabOrder.map(t=>{
+    let dot="";
+    if(t==="inventory"&&alrt>0)dot=`<span class="ntab-dot"></span>`;
+    if(t==="routine"&&done<tot)dot=`<span class="ntab-dot" style="background:rgba(255,255,255,.35)"></span>`;
+    return `<button class="nbtn ${curTab===t?"on":""}" data-tab="${t}">${lbl[t]||t}${dot}</button>`;
+  }).join("");
+  $("navBar").querySelectorAll(".nbtn").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
+}
+function switchTab(t){
+  curTab=t;
+  ["inventory","shopping","routine","journal"].forEach(x=>$("tab-"+x).classList.toggle("hi",x!==t));
+  $("btnExport").classList.toggle("hi",t!=="inventory");
+  $("btnImport").classList.toggle("hi",t!=="inventory");
+  $("btnBatch").classList.toggle("hi",t!=="inventory");
+  $("scrollArea").scrollTop=0;renderNav();
+  if(t==="shopping")renderShop();
+  if(t==="routine")renderRout();
+  if(t==="journal")renderJournal();
 }
 
-function saveWithReminder() {
-  save();
-  changesSinceExport++;
-  // Slight delay so banner doesn't flash on every save
-  clearTimeout(saveWithReminder._t);
-  saveWithReminder._t = setTimeout(checkBackupReminder, 1500);
+/* INVENTORY */
+function renderStats(){
+  const vs=prods.map(p=>so(dl(ee(p)),p.qty));
+  const val=prods.reduce((s,p)=>s+p.qty*p.price,0);
+  const alrt=vs.filter(s=>["expiring","expired","low"].includes(s)).length;
+  $("statsRow").innerHTML=[
+    {lbl:"Products",val:prods.length,dot:"#3C3C3C"},
+    {lbl:"Value",val:fmt(val),dot:"#6B7D6E"},
+    {lbl:"Expiring",val:vs.filter(s=>s==="expiring").length,dot:"#8B6914"},
+    {lbl:"⚠ Alerts",val:alrt,dot:"#8B3A3A"},
+  ].map(r=>`<div class="stat"><div class="sdot" style="background:${r.dot}"></div><div class="sval">${r.val}</div><div class="slbl">${r.lbl}</div></div>`).join("");
 }
-function save() {
-  try { localStorage.setItem(KEY, JSON.stringify({prods, shop, rout, week, tabOrder, shopCatOrder})); } catch(e){}
+function renderCats(){
+  const used=[...new Set(prods.map(p=>p.category).filter(Boolean))].sort();
+  const all=["All",...used];
+  if(catF!=="All"&&!used.includes(catF))catF="All";
+  $("catsRow").innerHTML=all.map(c=>`<button class="pill ${catF===c?"on":""}" data-cat="${c}">${c}</button>`).join("");
 }
-function load() {
-  try { const d = localStorage.getItem(KEY); return d ? JSON.parse(d) : null; } catch(e){ return null; }
-}
-const stored = load();
-let prods    = stored ? stored.prods    : JSON.parse(JSON.stringify(DEF_PRODS));
-let shop     = stored ? stored.shop     : JSON.parse(JSON.stringify(DEF_SHOP));
-let rout     = stored ? stored.rout     : JSON.parse(JSON.stringify(DEF_ROUT));
-let week     = stored ? stored.week     : JSON.parse(JSON.stringify(DEF_WEEK));
-let tabOrder = stored ? stored.tabOrder : [...DEF_TABS];
-
-let curTab = tabOrder[0];
-let srch = "", catF = "All";
-let epId = null, esId = null, erId = null, ewId = null;
-const collapsed = new Set();
-
-// Sort state
-let invSort = "none"; // none | name | expiry | price | category | status
-let shopSort = "none"; // none | name | price | priority | category
-let shopCatOrder = stored ? (stored.shopCatOrder || []) : [];
-
-// ── HELPERS ───────────────────────────────────
-const $ = id => document.getElementById(id);
-const fmt = n => "₹" + Number(n).toLocaleString("en-IN");
-const daysLeft = d => Math.floor((new Date(d) - new Date()) / 86400000);
-const statusOf = (d, q) => d < 0 ? "expired" : d < 90 ? "expiring" : q <= 1 ? "low" : "active";
-function showToast(msg) {
-  const t = $("toast"); t.textContent = msg; t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 2000);
-}
-function showOv(id) { $(id).classList.remove("hi"); }
-function hideOv(id) { $(id).classList.add("hi"); }
-function bindOv(ovId, closeIds, saveFn) {
-  closeIds.forEach(id => $(id).onclick = () => hideOv(ovId));
-  $(ovId).addEventListener("click", e => { if (e.target === e.currentTarget) hideOv(ovId); });
-  if (saveFn) saveFn();
-}
-
-// ── DRAG & DROP ───────────────────────────────
-const DRAG = { el:null, con:null, getData:null, setData:null, onDrop:null, startIdx:-1, dropIdx:-1, offY:0, scrollEl:null };
-
-function makeGhost(item, ty) {
-  removeGhost();
-  const r = item.getBoundingClientRect();
-  DRAG.offY = ty - r.top;
-  const g = item.cloneNode(true);
-  g.id = "_ghost";
-  g.style.cssText = `position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;z-index:9999;pointer-events:none;opacity:.9;box-shadow:0 8px 28px rgba(0,0,0,.2);transform:scale(1.02);border-radius:7px;background:#fff;`;
-  document.body.appendChild(g);
-}
-function removeGhost() { const g = $("_ghost"); if (g) g.remove(); }
-function moveGhost(ty) { const g = $("_ghost"); if (g) g.style.top = (ty - DRAG.offY) + "px"; }
-
-function getLine() {
-  let l = $("_dline");
-  if (!l) {
-    l = document.createElement("div"); l.id = "_dline";
-    l.style.cssText = "position:fixed;left:14px;right:14px;height:3px;background:#8C7B75;border-radius:2px;z-index:9998;pointer-events:none;display:none;";
-    document.body.appendChild(l);
-  }
-  return l;
-}
-function showLine(y) { const l = getLine(); l.style.display = "block"; l.style.top = (y-1) + "px"; }
-function hideLine() { const l = getLine(); if(l) l.style.display = "none"; }
-
-function calcDrop(ty) {
-  const items = Array.from(DRAG.con.querySelectorAll(":scope > .di"));
-  let idx = items.length, lineY = null;
-  for (let i = 0; i < items.length; i++) {
-    if (items[i] === DRAG.el) continue;
-    const r = items[i].getBoundingClientRect();
-    if (ty < r.top + r.height / 2) { idx = i; lineY = r.top; break; }
-    else lineY = r.bottom;
-  }
-  if (lineY !== null) showLine(Math.max(60, Math.min(window.innerHeight - 10, lineY)));
-  return idx;
-}
-
-function endDrag() {
-  if (!DRAG.el) return;
-  DRAG.el.classList.remove("dragging");
-  removeGhost(); hideLine();
-  const data = DRAG.getData();
-  const moved = data.splice(DRAG.startIdx, 1)[0];
-  let fi = DRAG.dropIdx > DRAG.startIdx ? DRAG.dropIdx - 1 : DRAG.dropIdx;
-  fi = Math.max(0, Math.min(fi, data.length));
-  data.splice(fi, 0, moved);
-  DRAG.setData(data);
-  const cb = DRAG.onDrop;
-  DRAG.el = null; DRAG.con = null;
-  cb();
-}
-
-document.addEventListener("touchmove", e => {
-  if (!DRAG.el) return;
-  e.preventDefault();
-  const y = e.touches[0].clientY;
-  moveGhost(y);
-  DRAG.dropIdx = calcDrop(y);
-  if (DRAG.scrollEl) {
-    const sr = DRAG.scrollEl.getBoundingClientRect();
-    if (y > sr.bottom - 70) DRAG.scrollEl.scrollTop += 10;
-    else if (y < sr.top + 70) DRAG.scrollEl.scrollTop -= 10;
-  }
-}, {passive: false});
-
-document.addEventListener("touchend", endDrag);
-document.addEventListener("touchcancel", endDrag);
-
-function makeDraggable(container, getData, setData, onDrop) {
-  container.addEventListener("touchstart", e => {
-    const handle = e.target.closest(".dh");
-    if (!handle) return;
-    const item = handle.closest(".di");
-    if (!item || !container.contains(item)) return;
-    e.preventDefault();
-    DRAG.el = item; DRAG.con = container;
-    DRAG.getData = getData; DRAG.setData = setData; DRAG.onDrop = onDrop;
-    DRAG.scrollEl = $("scrollArea");
-    DRAG.startIdx = Array.from(container.querySelectorAll(":scope > .di")).indexOf(item);
-    DRAG.dropIdx = DRAG.startIdx;
-    item.classList.add("dragging");
-    makeGhost(item, e.touches[0].clientY);
-  }, {passive: false});
-}
-
-// ── NAV ───────────────────────────────────────
-function renderNav() {
-  const lbl = {inventory:"Inventory", shopping:"Shopping", routine:"Routine"};
-  $("navBar").innerHTML = tabOrder.map(t =>
-    `<button class="nbtn ${curTab===t?"on":""}" data-tab="${t}">${lbl[t]}</button>`
-  ).join("");
-  $("navBar").querySelectorAll(".nbtn").forEach(b =>
-    b.addEventListener("click", () => switchTab(b.dataset.tab))
-  );
-}
-
-function switchTab(t) {
-  curTab = t;
-  ["inventory","shopping","routine"].forEach(x => {
-    $(("tab-"+x)).classList.toggle("hi", x !== t);
-  });
-  $("btnExport").classList.toggle("hi", t !== "inventory");
-  $("btnImport").classList.toggle("hi", t !== "inventory");
-  $("scrollArea").scrollTop = 0;
-  renderNav();
-  if (t === "shopping") renderShop();
-  if (t === "routine") renderRout();
-}
-
-// ── RENDER INVENTORY ──────────────────────────
-function renderStats() {
-  const ss = prods.map(p => statusOf(daysLeft(p.edate), p.qty));
-  const val = prods.reduce((s,p) => s + p.qty * p.price, 0);
-  $("statsRow").innerHTML = [
-    {lbl:"Products", val:prods.length,                              dot:"#3C3C3C"},
-    {lbl:"Value",    val:fmt(val),                                  dot:"#6B7D6E"},
-    {lbl:"Expiring", val:ss.filter(s=>s==="expiring").length,       dot:"#8B6914"},
-  ].map(r => `<div class="stat"><div class="sdot" style="background:${r.dot}"></div><div class="sval">${r.val}</div><div class="slbl">${r.lbl}</div></div>`).join("");
-}
-
-function renderCats() {
-  const usedCats = [...new Set(prods.map(p=>p.category).filter(Boolean))].sort();
-  const allCats = ["All", ...usedCats];
-  // reset filter if current cat no longer exists
-  if (catF !== "All" && !usedCats.includes(catF)) catF = "All";
-  $("catsRow").innerHTML = allCats.map(c =>
-    `<button class="pill ${catF===c?"on":""}" data-cat="${c}">${c}</button>`
-  ).join("");
-}
-
-// ── SORT BARS ─────────────────────────────────
-const INV_SORTS = [
-  {key:"name",     lbl:"Name A–Z"},
-  {key:"expiry",   lbl:"Expiry ↑"},
-  {key:"price",    lbl:"Price ↑"},
-  {key:"category", lbl:"Category"},
-  {key:"status",   lbl:"Expiring first"},
-];
-const SHOP_SORTS = [
-  {key:"name",     lbl:"Name A–Z"},
-  {key:"price",    lbl:"Price ↑"},
-  {key:"priority", lbl:"Priority"},
-  {key:"category", lbl:"Category A–Z"},
-];
-
-function renderInvSortBar() {
-  $("invSortBar").innerHTML = `<span class="sortbar-lbl">Sort</span>` +
-    INV_SORTS.map(s =>
-      `<button class="spill ${invSort===s.key?"on":""}" data-isort="${s.key}">${s.lbl}</button>`
-    ).join("");
-  $("invDragHint").style.display = invSort === "none" ? "" : "none";
-}
-
-function renderShopSortBar() {
-  $("shopSortBar").innerHTML = `<span class="sortbar-lbl">Sort</span>` +
-    SHOP_SORTS.map(s =>
-      `<button class="spill ${shopSort===s.key?"on":""}" data-ssort="${s.key}">${s.lbl}</button>`
-    ).join("");
-}
-
-function sortedProds(list) {
-  if (invSort === "none") return list;
-  const sorted = [...list];
-  if (invSort === "name")     sorted.sort((a,b) => a.name.localeCompare(b.name));
-  if (invSort === "expiry")   sorted.sort((a,b) => new Date(a.edate) - new Date(b.edate));
-  if (invSort === "price")    sorted.sort((a,b) => a.price - b.price);
-  if (invSort === "category") sorted.sort((a,b) => (a.category||"").localeCompare(b.category||""));
-  if (invSort === "status") {
-    const order = {expired:0, expiring:1, low:2, active:3};
-    sorted.sort((a,b) => order[statusOf(daysLeft(a.edate),a.qty)] - order[statusOf(daysLeft(b.edate),b.qty)]);
-  }
-  return sorted;
-}
-
-function sortedShopItems(list) {
-  if (shopSort === "none") return list;
-  const sorted = [...list];
-  if (shopSort === "name")     sorted.sort((a,b) => a.name.localeCompare(b.name));
-  if (shopSort === "price")    sorted.sort((a,b) => a.price - b.price);
-  if (shopSort === "priority") { const o={High:0,Medium:1,Low:2}; sorted.sort((a,b)=>(o[a.priority]||1)-(o[b.priority]||1)); }
-  if (shopSort === "category") sorted.sort((a,b) => (a.category||"").localeCompare(b.category||""));
-  return sorted;
-}
-
-function renderProds() {
-  renderInvSortBar();
-  let list = prods.filter(p => {
-    const q = srch.toLowerCase();
-    return (p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q))
-        && (catF === "All" || p.category === catF);
-  });
-  list = sortedProds(list);
-  const con = $("productList");
-  if (!list.length) { con.innerHTML = `<div class="empty">No products found</div>`; return; }
-  con.innerHTML = list.map(p => {
-    const d = daysLeft(p.edate), s = ST[statusOf(d, p.qty)];
-    const dc = d < 0 ? "dexp" : d < 90 ? "dwarn" : "dok";
-    return `<div class="di card" data-id="${p.id}">
-      <div class="dh" onclick="event.stopPropagation()"><span></span><span></span><span></span></div>
-      <div class="card-body" onclick="viewProd(${p.id})">
-        <div class="ctop">
-          <div><div class="cname">${p.name}</div><div class="cbrand">${p.brand}</div></div>
-          <span class="badge" style="color:${s.c};background:${s.bg}">${s.lbl}</span>
-        </div>
-        <div class="cmeta">
-          <span class="chip">${p.category}</span>
-          <span class="chip">${p.step||""}</span>
-          ${p.size?`<span class="chip">${p.size}ml</span>`:""}
-          <span class="${dc}">${d<0?Math.abs(d)+"d ago":d+"d left"}</span>
-        </div>
-        <div class="cbot">
-          <div class="cprice">${fmt(p.qty*p.price)} <span style="font-size:11px;color:var(--tl);font-family:'DM Sans',sans-serif">×${p.qty}</span></div>
+const IS=[{key:"name",lbl:"Name A–Z"},{key:"expiry",lbl:"Expiry ↑"},{key:"price",lbl:"Price ↑"},{key:"category",lbl:"Category"},{key:"status",lbl:"Expiring first"}];
+function renderISB(){$("invSortBar").innerHTML=`<span class="sortbar-lbl">Sort</span>`+IS.map(s=>`<button class="spill ${invSort===s.key?"on":""}" data-isort="${s.key}">${s.lbl}</button>`).join("");$("invDragHint").style.display=invSort==="none"?"":"none";}
+function sP(list){if(invSort==="none")return list;const s=[...list];if(invSort==="name")s.sort((a,b)=>a.name.localeCompare(b.name));if(invSort==="expiry")s.sort((a,b)=>new Date(ee(a))-new Date(ee(b)));if(invSort==="price")s.sort((a,b)=>a.price-b.price);if(invSort==="category")s.sort((a,b)=>(a.category||"").localeCompare(b.category||""));if(invSort==="status"){const o={expired:0,expiring:1,low:2,active:3};s.sort((a,b)=>o[so(dl(ee(a)),a.qty)]-o[so(dl(ee(b)),b.qty)]);}return s;}
+function renderProds(){
+  renderISB();
+  let list=prods.filter(p=>{const q=srch.toLowerCase();return(p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q))&&(catF==="All"||p.category===catF);});
+  list=sP(list);const con=$("productList");
+  if(!list.length){con.innerHTML=`<div class="empty">No products found</div>`;return;}
+  con.innerHTML=list.map(p=>{
+    const ed2=ee(p),d=dl(ed2),s=ST[so(d,p.qty)];
+    const dc=d<0?"dexp":d<90?"dwarn":"dok";
+    const sk=so(d,p.qty);
+    const bc=sk==="expiring"?" expiring-card":sk==="expired"?" expired-card":sk==="low"?" lowstock-card":"";
+    const sel=batchSel.has(p.id)?" selected-card":"";
+    const paoi=p.odate&&p.pao?`<span class="chip" style="background:#EEF1EE;color:#6B7D6E">PAO ${p.pao}m</span>`:"";
+    return `<div class="di card${bc}${sel}" data-id="${p.id}" onclick="hCC(${p.id},event)">
+      <div class="card-img">${p.photo?`<img src="${p.photo}" alt=""/>`:`<div class="card-img-ph">🧴</div>`}</div>
+      <div class="card-body">
+        <div class="ctop"><div><div class="cname">${p.name}</div><div class="cbrand">${p.brand}</div></div><span class="badge" style="color:${s.c};background:${s.bg}">${s.lbl}</span></div>
+        <div class="cmeta"><span class="chip">${p.category}</span>${p.step?`<span class="chip">${p.step}</span>`:""}${p.size?`<span class="chip">${p.size}ml</span>`:""}${paoi}<span class="${dc}">${d<0?Math.abs(d)+"d ago":d+"d left"}</span></div>
+        <div class="cbot"><div class="cprice">${fmt(p.qty*p.price)} <span style="font-size:11px;color:var(--tl);font-family:'DM Sans',sans-serif">×${p.qty}</span></div>
           <div class="cacts" onclick="event.stopPropagation()">
+            <button class="abtn dup" onclick="dupP(${p.id})" title="Duplicate">⊕</button>
             <button class="abtn" onclick="editProd(${p.id})">Edit</button>
-            <button class="abtn del" onclick="delProd(${p.id})">Remove</button>
+            <button class="abtn del" onclick="delProd(${p.id})">×</button>
           </div>
         </div>
       </div>
+      ${invSort==="none"?`<div class="dh" onclick="event.stopPropagation()"><span></span><span></span><span></span></div>`:""}
     </div>`;
   }).join("");
-  if (invSort === "none") {
-    makeDraggable(con, ()=>prods, v=>{prods=v;}, ()=>{saveWithReminder();renderStats();renderProds();});
-  }
+  if(invSort==="none")mdr(con,()=>prods,v=>{prods=v;},()=>{save();renderStats();renderProds();});
 }
+function hCC(id,event){if(batchMode){batchSel.has(id)?batchSel.delete(id):batchSel.add(id);$("batchCount").textContent=batchSel.size;renderProds();}else viewProd(id);}
 
-// ── RENDER SHOPPING ───────────────────────────
-function getShopCatOrder() {
-  // Build current unique categories preserving shopCatOrder for known ones, appending new ones
-  const allCats = [...new Set(shop.map(i=>i.category||"Other"))];
-  const known = shopCatOrder.filter(c => allCats.includes(c));
-  const newCats = allCats.filter(c => !known.includes(c));
-  shopCatOrder = [...known, ...newCats];
-  return shopCatOrder;
-}
-
-function renderShop() {
-  renderShopSortBar();
-  const wrap = $("shopSections");
-  if (!shop.length) { wrap.innerHTML = `<div class="empty">No items — tap + to add</div>`; $("shopTotal").textContent = fmt(0); return; }
-
-  const catOrder = getShopCatOrder();
-  const catMap = new Map();
-  shop.forEach(item => { const c = item.category||"Other"; if(!catMap.has(c)) catMap.set(c,[]); catMap.get(c).push(item); });
-
-  wrap.innerHTML = "";
-  catOrder.filter(cat => catMap.has(cat)).forEach(cat => {
-    let items = catMap.get(cat);
-    if (shopSort !== "none") items = sortedShopItems(items);
-    const isCol = collapsed.has(cat);
-    const sub = items.reduce((s,i) => s + i.price, 0);
-    const sec = document.createElement("div");
-    sec.className = "sec di" + (isCol?" col":""); // di = draggable for category reorder
-    sec.dataset.id = cat;
-    sec.innerHTML = `
+/* SHOPPING */
+const SS=[{key:"name",lbl:"Name A–Z"},{key:"price",lbl:"Price ↑"},{key:"priority",lbl:"Priority"},{key:"category",lbl:"Category A–Z"}];
+function renderSSB(){$("shopSortBar").innerHTML=`<span class="sortbar-lbl">Sort</span>`+SS.map(s=>`<button class="spill ${shopSort===s.key?"on":""}" data-ssort="${s.key}">${s.lbl}</button>`).join("")+`<button class="spill" id="budgetBtn" style="margin-left:6px">💰 Budget</button>`;$("budgetBtn").onclick=()=>{$("bAmount").value=budget||"";sov("budgetOv");};}
+function gSCO(){const all=[...new Set(shop.map(i=>i.category||"Other"))];const kn=shopCatOrder.filter(c=>all.includes(c));shopCatOrder=[...kn,...all.filter(c=>!kn.includes(c))];return shopCatOrder;}
+function sSh(list){if(shopSort==="none")return list;const s=[...list];if(shopSort==="name")s.sort((a,b)=>a.name.localeCompare(b.name));if(shopSort==="price")s.sort((a,b)=>a.price-b.price);if(shopSort==="priority"){const o={High:0,Medium:1,Low:2};s.sort((a,b)=>(o[a.priority]||1)-(o[b.priority]||1));}if(shopSort==="category")s.sort((a,b)=>(a.category||"").localeCompare(b.category||""));return s;}
+function renderShop(){
+  renderSSB();
+  if(budget>0){const tot=shop.reduce((s,i)=>s+i.price,0);const pct=Math.min(100,(tot/budget)*100);const col=pct>100?"#C97878":pct>80?"#C9A030":"#6B7D6E";$("budgetWrap").classList.remove("hi");$("budgetAmt").textContent=fmt(tot)+" / "+fmt(budget);$("budgetFill").style.width=pct+"%";$("budgetFill").style.background=col;}else{$("budgetWrap").classList.add("hi");}
+  const wrap=$("shopSections");const q=shopSrch.toLowerCase();
+  let filt=q?shop.filter(i=>i.name.toLowerCase().includes(q)||i.brand.toLowerCase().includes(q)):shop;
+  if(!filt.length){wrap.innerHTML=`<div class="empty">No items — tap + to add</div>`;$("shopTotal").textContent=fmt(0);return;}
+  const co=gSCO();const cm=new Map();
+  filt.forEach(item=>{const c=item.category||"Other";if(!cm.has(c))cm.set(c,[]);cm.get(c).push(item);});
+  wrap.innerHTML="";
+  co.filter(cat=>cm.has(cat)).forEach(cat=>{
+    let items=cm.get(cat);if(shopSort!=="none")items=sSh(items);
+    const isC=coll.has(cat);const sub=items.reduce((s,i)=>s+i.price,0);const pc=items.filter(i=>i.purchased).length;
+    const sec=document.createElement("div");sec.className="sec di"+(isC?" col":"");sec.dataset.id=cat;
+    sec.innerHTML=`
       <div class="sechdr">
-        <div class="secl" onclick="toggleSec('${cat}')" style="flex:1;cursor:pointer">
-          <span class="secname">${cat}</span><span class="seccnt">${items.length}</span>
-        </div>
-        <div class="secr" onclick="toggleSec('${cat}')" style="cursor:pointer">
-          <span class="secsub">${fmt(sub)}</span><span class="secchev">▾</span>
-        </div>
+        <div class="secl" onclick="tSec('${cat}')"><span class="secname">${cat}</span><span class="seccnt">${items.length}${pc?" · "+pc+" ✓":""}</span></div>
+        <div class="secr" onclick="tSec('${cat}')"><span class="secsub">${fmt(sub)}</span><span class="secchev">▾</span></div>
       </div>
       <div class="secbody">
-        ${shopSort==="none"?'<div class="sechint">Hold ≡ to reorder items</div>':""}
-        ${items.map(item => {
-          const p = PRI[item.priority]||PRI.Medium;
-          return `<div class="di scard" data-id="${item.id}">
+        ${shopSort==="none"?'<div class="sechint">Hold ≡ to reorder</div>':""}
+        ${items.map(item=>{
+          const p=PRI[item.priority]||PRI.Medium;
+          return `<div class="di scard ${item.purchased?"purchased":""}" data-id="${item.id}">
             <div class="pribar" style="background:${p.bar}"></div>
-            ${shopSort==="none"?`<div class="dh" style="opacity:.22" onclick="event.stopPropagation()"><span></span><span></span><span></span></div>`:""}
+            <div class="purch-check ${item.purchased?"done":""}" onclick="tPurch(${item.id})">${item.purchased?"✓":""}</div>
+            ${shopSort==="none"?`<div class="dh" style="opacity:.2" onclick="event.stopPropagation()"><span></span><span></span><span></span></div>`:""}
             <div class="scinner" onclick="viewShop(${item.id})">
-              <div class="sctop">
-                <div><div class="scname">${item.name}</div><div class="scbrand">${item.brand}</div></div>
-                <div class="scprice">${fmt(item.price)}</div>
-              </div>
-              <div class="scmeta">
-                <span class="badge" style="color:${p.c};background:${p.bg};font-size:10px;padding:2px 8px">${item.priority}</span>
-                ${item.where?`<span class="scwhere">${item.where}</span>`:""}
-              </div>
+              <div class="sctop"><div><div class="scname">${item.name}</div><div class="scbrand">${item.brand}</div></div><div class="scprice">${fmt(item.price)}</div></div>
+              <div class="scmeta"><span class="badge" style="color:${p.c};background:${p.bg};font-size:10px;padding:2px 7px">${item.priority}</span>${item.where?`<span class="scwhere">${item.where}</span>`:""}</div>
               ${item.notes?`<div class="scnote">${item.notes}</div>`:""}
               <div class="scbot" onclick="event.stopPropagation()">
+                ${item.purchased?`<button class="abtn" onclick="mToInv(${item.id})" style="color:#6B7D6E;font-size:10px">→ Inventory</button>`:""}
                 <button class="abtn" onclick="editShop(${item.id})">Edit</button>
-                <button class="abtn del" onclick="delShop(${item.id})">Remove</button>
+                <button class="abtn del" onclick="delShop(${item.id})">×</button>
               </div>
             </div>
           </div>`;
         }).join("")}
       </div>`;
     wrap.appendChild(sec);
-
-    // Item drag within section (only when not sorted)
-    if (shopSort === "none") {
-      const body = sec.querySelector(".secbody");
-      makeDraggable(body,
-        () => shop.filter(i=>(i.category||"Other")===cat),
-        reordered => { shop = rebuildShop(cat, reordered); },
-        () => { save(); renderShop(); }
-      );
-    }
+    if(shopSort==="none"){const body=sec.querySelector(".secbody");mdr(body,()=>shop.filter(i=>(i.category||"Other")===cat),rv=>{shop=rbSh(cat,rv);},()=>{save();renderShop();});}
   });
-
-  $("shopTotal").textContent = fmt(shop.reduce((s,i)=>s+i.price,0));
+  $("shopTotal").textContent=fmt(shop.reduce((s,i)=>s+i.price,0));
+}
+function rbSh(cat,rv){let ri=0;return shop.map(item=>(item.category||"Other")===cat?rv[ri++]:item);}
+function tSec(cat){coll.has(cat)?coll.delete(cat):coll.add(cat);renderShop();}
+function tPurch(id){shop=shop.map(i=>i.id===id?{...i,purchased:!i.purchased}:i);save();renderShop();}
+function mToInv(id){
+  const item=shop.find(i=>i.id===id);if(!item)return;
+  prods.push({id:Date.now(),name:item.name,brand:item.brand,category:item.category,step:"",size:0,pdate:TODAY,edate:"",odate:TODAY,pao:12,qty:1,price:item.price,notes:"",photo:""});
+  shop=shop.filter(i=>i.id!==id);save();renderStats();renderCats();renderProds();renderShop();toast(item.name+" moved to Inventory ✓");
 }
 
-function rebuildShop(cat, reordered) {
-  let ri = 0;
-  return shop.map(item => (item.category||"Other")===cat ? reordered[ri++] : item);
-}
-
-function toggleSec(cat) {
-  collapsed.has(cat) ? collapsed.delete(cat) : collapsed.add(cat);
-  renderShop();
-}
-
-// ── RENDER ROUTINE ────────────────────────────
-function renderRout() {
-  const rc = $("routineList");
-
-  // Group steps by category; uncategorised steps render ungrouped
-  const catMap = new Map();
-  const uncategorised = [];
-  rout.forEach(r => {
-    const c = r.category ? r.category.trim() : "";
-    if(c){ if(!catMap.has(c)) catMap.set(c,[]); catMap.get(c).push(r); }
-    else uncategorised.push(r);
-  });
-
-  function stepCard(r) {
-    return `<div class="di rcard" data-id="${r.id}">
-      <div class="rdragcol"><div class="dh"><span></span><span></span><span></span></div></div>
-      <div class="rbody" onclick="viewRout(${r.id})" style="cursor:pointer">
-        <div class="rchdr">
-          <div class="rnum">${r.step}</div>
-          <div class="rname">${r.name}</div>
-          <div class="racts" onclick="event.stopPropagation()">
-            <button class="sbtn" onclick="editRout(${r.id})">Edit</button>
-            <button class="sbtn del" onclick="delRout(${r.id})">×</button>
-          </div>
-        </div>
-        <div class="rslots">
-          <div class="rslot"><div class="rslbl">Morning</div><div class="rsval">${r.am}</div></div>
-          <div class="rslot"><div class="rslbl">Evening</div><div class="rsval">${r.pm}</div></div>
-        </div>
-      </div>
-    </div>`;
+/* ROUTINE */
+function renderRout(){
+  const streak=calcStreak();const{done,tot}=rp();const allD=done===tot&&tot>0;
+  $("streakBanner").innerHTML=`<div class="streak-banner"><div class="streak-fire">${allD?"🔥":"☀️"}</div><div><div class="streak-count">${streak}</div><div class="streak-lbl">Day Streak</div><div class="streak-today">${allD?"Today complete! 🎉":"Today: "+done+"/"+tot+" steps done"}</div></div></div>`;
+  const q=routSrch.toLowerCase();
+  let fr=q?rout.filter(r=>r.name.toLowerCase().includes(q)||r.am.toLowerCase().includes(q)||r.pm.toLowerCase().includes(q)):rout;
+  const rc=$("routineList");const cm=new Map();const unc=[];
+  fr.forEach(r=>{const c=(r.category||"").trim();if(c){if(!cm.has(c))cm.set(c,[]);cm.get(c).push(r);}else unc.push(r);});
+  function sc2(r){
+    const am=!!comp[`${TODAY}_${r.id}_am`],pm=!!comp[`${TODAY}_${r.id}_pm`];
+    return `<div class="di rcard" data-id="${r.id}"><div class="rdragcol"><div class="dh"><span></span><span></span><span></span></div></div><div class="rbody" onclick="viewRout(${r.id})" style="cursor:pointer"><div class="rchdr"><div class="rnum">${r.step}</div><div class="rname">${r.name}</div><div class="racts" onclick="event.stopPropagation()"><button class="sbtn" onclick="editRout(${r.id})">Edit</button><button class="sbtn del" onclick="delRout(${r.id})">×</button></div></div><div class="rslots"><div class="rslot"><div class="rslbl">Morning <span class="rcheck ${am?"done":""}" onclick="tCheck(${r.id},'am',event)">${am?"✓":""}</span></div><div class="rsval">${r.am}</div></div><div class="rslot"><div class="rslbl">Evening <span class="rcheck ${pm?"done":""}" onclick="tCheck(${r.id},'pm',event)">${pm?"✓":""}</span></div><div class="rsval">${r.pm}</div></div></div></div></div>`;
   }
+  let html="";
+  cm.forEach((items,cat)=>{html+=`<div class="rcat-group"><div class="rcat-hdr">${cat}</div><div class="rcat-body" data-rcat="${cat}">${items.map(sc2).join("")}</div></div>`;});
+  html+=unc.map(sc2).join("");rc.innerHTML=html;
+  cm.forEach((items,cat)=>{const body=rc.querySelector(`.rcat-body[data-rcat="${cat}"]`);if(body)mdr(body,()=>rout.filter(r=>(r.category||"").trim()===cat),rv=>{rout=rbRt(cat,rv);},()=>{save();renderRout();});});
+  mdr(rc,()=>rout,v=>{rout=v;},()=>{save();renderRout();});
+  const wc=$("weeklyList");
+  wc.innerHTML=week.map(w=>`<div class="di wcard" data-id="${w.id}"><div class="wdragcol"><div class="dh"><span></span><span></span><span></span></div></div><div class="winner" onclick="viewWeek(${w.id})"><div><div class="wfreq">${w.freq}</div><div class="wname">${w.name}</div><div class="wnote">${w.note}</div></div><div class="sacts" onclick="event.stopPropagation()"><button class="sbtn" onclick="editWeek(${w.id})">Edit</button><button class="sbtn del" onclick="delWeek(${w.id})">×</button></div></div></div>`).join("");
+  mdr(wc,()=>week,v=>{week=v;},()=>{save();renderRout();});
+  renderNav();
+}
+function rbRt(cat,rv){let ri=0;return rout.map(r=>(r.category||"").trim()===cat?rv[ri++]:r);}
+function tCheck(rid,slot,ev){ev.stopPropagation();const k=`${TODAY}_${rid}_${slot}`;if(comp[k])delete comp[k];else comp[k]=true;sc(comp);renderRout();}
 
-  let html = "";
-
-  // Render category groups
-  catMap.forEach((items, cat) => {
-    html += `<div class="rcat-group">
-      <div class="rcat-hdr">${cat}</div>
-      <div class="rcat-body" data-rcat="${cat}">
-        ${items.map(stepCard).join("")}
-      </div>
-    </div>`;
-  });
-
-  // Render uncategorised steps
-  if(uncategorised.length) {
-    html += uncategorised.map(stepCard).join("");
-  }
-
-  rc.innerHTML = html;
-
-  // Make each category group's body draggable
-  catMap.forEach((items, cat) => {
-    const body = rc.querySelector(`.rcat-body[data-rcat="${cat}"]`);
-    if(body) makeDraggable(body,
-      () => rout.filter(r=>(r.category||"").trim()===cat),
-      reordered => { rout = rebuildRout(cat, reordered); },
-      () => { save(); renderRout(); }
-    );
-  });
-
-  // Uncategorised steps: make the whole list draggable for those items
-  // They live directly in rc but mixed with group divs — handle separately via index
-  makeDraggable(rc,
-    () => rout,
-    v => { rout = v; },
-    () => { save(); renderRout(); }
-  );
-
-  // Weekly
-  const wc = $("weeklyList");
-  wc.innerHTML = week.map(w => `<div class="di wcard" data-id="${w.id}">
-    <div class="wdragcol"><div class="dh"><span></span><span></span><span></span></div></div>
-    <div class="winner" onclick="viewWeek(${w.id})" style="cursor:pointer">
-      <div><div class="wfreq">${w.freq}</div><div class="wname">${w.name}</div><div class="wnote">${w.note}</div></div>
-      <div class="sacts" onclick="event.stopPropagation()">
-        <button class="sbtn" onclick="editWeek(${w.id})">Edit</button>
-        <button class="sbtn del" onclick="delWeek(${w.id})">×</button>
-      </div>
-    </div>
-  </div>`).join("");
-  makeDraggable(wc, ()=>week, v=>{week=v;}, ()=>{saveWithReminder();renderRout();});
+/* JOURNAL */
+function renderJournal(){
+  const q=jSrch.toLowerCase();
+  const list=q?journal.filter(e=>e.text.toLowerCase().includes(q)||(e.tags||[]).join(" ").toLowerCase().includes(q)):journal;
+  const jl=$("journalList");
+  if(!list.length){jl.innerHTML=`<div class="empty">No entries yet — tap + to start</div>`;return;}
+  jl.innerHTML=[...list].sort((a,b)=>b.date.localeCompare(a.date)).map(e=>`<div class="jcard" onclick="viewJournal(${e.id})"><div class="jdate">${e.date}</div>${e.mood?`<div class="jmood">${e.mood}</div>`:""}<div class="jtext">${e.text.slice(0,160)}${e.text.length>160?"…":""}</div>${e.tags&&e.tags.length?`<div class="jtags">${e.tags.map(t=>`<span class="jtag">${t}</span>`).join("")}</div>`:""}</div>`).join("");
 }
 
-function rebuildRout(cat, reordered) {
-  let ri = 0;
-  return rout.map(r => (r.category||"").trim()===cat ? reordered[ri++] : r);
+/* VIEW */
+function viewProd(id){
+  const p=prods.find(x=>x.id===id);const ed2=ee(p);const d=dl(ed2),s=ST[so(d,p.qty)];const pei=pe(p.odate,p.pao);
+  $("viewEye").textContent=p.category;$("viewTitle").textContent=p.name;
+  $("viewBody").innerHTML=`${p.photo?`<img src="${p.photo}" style="width:100%;max-height:180px;object-fit:cover;border-radius:6px;margin-bottom:8px" alt=""/>`:""}<div class="vrow"><span class="vlbl">Brand</span><span class="vval">${p.brand}</span></div><div class="vrow"><span class="vlbl">Status</span><span class="vval"><span class="badge" style="color:${s.c};background:${s.bg}">${s.lbl}</span></span></div><div class="vrow"><span class="vlbl">Step</span><span class="vval">${p.step||"—"}</span></div><div class="vrow"><span class="vlbl">Size</span><span class="vval">${p.size?p.size+"ml":"—"}</span></div><div class="vrow"><span class="vlbl">Quantity</span><span class="vval">${p.qty}</span></div><div class="vrow"><span class="vlbl">Price</span><span class="vval vbig">${fmt(p.price)}</span></div><div class="vrow"><span class="vlbl">Total Value</span><span class="vval">${fmt(p.qty*p.price)}</span></div><div class="vrow"><span class="vlbl">Purchased</span><span class="vval">${p.pdate||"—"}</span></div><div class="vrow"><span class="vlbl">Expires</span><span class="vval" style="color:${d<0?"var(--red)":d<90?"var(--amber)":"inherit"}">${ed2||"—"} ${ed2?"("+( d<0?Math.abs(d)+"d ago":d+"d left")+")":""}</span></div>${p.odate&&p.pao?`<div class="vrow"><span class="vlbl">Opened</span><span class="vval">${p.odate} · PAO ${p.pao}m</span></div><div class="vrow"><span class="vlbl">PAO Expiry</span><span class="vval" style="color:${pei&&dl(pei)<90?"var(--amber)":"inherit"}">${pei||"—"}</span></div>`:""}${p.notes?`<div class="vrow"><span class="vlbl">Notes</span><span class="vval vnote">${p.notes}</span></div>`:""}`;
+  $("viewEdit").onclick=()=>{hov("viewOv");editProd(id);};$("viewDel").onclick=()=>{hov("viewOv");delProd(id);};sov("viewOv");
+}
+function viewShop(id){
+  const item=shop.find(x=>x.id===id);const p=PRI[item.priority]||PRI.Medium;
+  $("viewEye").textContent=item.category;$("viewTitle").textContent=item.name;
+  $("viewBody").innerHTML=`<div class="vrow"><span class="vlbl">Brand</span><span class="vval">${item.brand||"—"}</span></div><div class="vrow"><span class="vlbl">Priority</span><span class="vval"><span class="badge" style="color:${p.c};background:${p.bg}">${item.priority}</span></span></div><div class="vrow"><span class="vlbl">Price</span><span class="vval vbig">${fmt(item.price)}</span></div><div class="vrow"><span class="vlbl">Where to Buy</span><span class="vval">${item.where||"—"}</span></div><div class="vrow"><span class="vlbl">Status</span><span class="vval">${item.purchased?"✓ Purchased":"Not yet purchased"}</span></div>${item.notes?`<div class="vrow"><span class="vlbl">Notes</span><span class="vval vnote">${item.notes}</span></div>`:""}`;
+  $("viewEdit").onclick=()=>{hov("viewOv");editShop(id);};$("viewDel").onclick=()=>{hov("viewOv");delShop(id);};sov("viewOv");
+}
+function viewRout(id){
+  const r=rout.find(x=>x.id===id);const am=!!comp[`${TODAY}_${r.id}_am`],pm=!!comp[`${TODAY}_${r.id}_pm`];
+  $("viewEye").textContent="Routine Step";$("viewTitle").textContent=r.name;
+  $("viewBody").innerHTML=`<div class="vrow"><span class="vlbl">Step No.</span><span class="vval">${r.step}</span></div><div class="vrow"><span class="vlbl">Morning</span><span class="vval">${r.am||"—"} ${am?"✓":""}</span></div><div class="vrow"><span class="vlbl">Evening</span><span class="vval">${r.pm||"—"} ${pm?"✓":""}</span></div>${r.category?`<div class="vrow"><span class="vlbl">Category</span><span class="vval">${r.category}</span></div>`:""}`;
+  $("viewEdit").onclick=()=>{hov("viewOv");editRout(id);};$("viewDel").onclick=()=>{hov("viewOv");delRout(id);};sov("viewOv");
+}
+function viewWeek(id){
+  const w=week.find(x=>x.id===id);
+  $("viewEye").textContent="Weekly Treatment";$("viewTitle").textContent=w.name;
+  $("viewBody").innerHTML=`<div class="vrow"><span class="vlbl">Frequency</span><span class="vval">${w.freq||"—"}</span></div><div class="vrow"><span class="vlbl">Notes</span><span class="vval vnote">${w.note||"—"}</span></div>`;
+  $("viewEdit").onclick=()=>{hov("viewOv");editWeek(id);};$("viewDel").onclick=()=>{hov("viewOv");delWeek(id);};sov("viewOv");
+}
+function viewJournal(id){
+  const e=journal.find(x=>x.id===id);
+  $("viewEye").textContent="Journal Entry";$("viewTitle").textContent=e.date;
+  $("viewBody").innerHTML=`${e.mood?`<div class="vrow"><span class="vlbl">Mood</span><span class="vval" style="font-size:20px">${e.mood}</span></div>`:""}<div class="vrow"><span class="vlbl">Notes</span><span class="vval vnote" style="text-align:left">${e.text||"—"}</span></div>${e.tags&&e.tags.length?`<div class="vrow"><span class="vlbl">Tags</span><span class="vval">${e.tags.join(", ")}</span></div>`:""}`;
+  $("viewEdit").onclick=()=>{hov("viewOv");openJournal(id);};$("viewDel").onclick=()=>{hov("viewOv");delJournal(id);};sov("viewOv");
 }
 
-// ── VIEW DRAWER ───────────────────────────────
-function viewProd(id) {
-  const p = prods.find(x=>x.id===id);
-  const d = daysLeft(p.edate), s = ST[statusOf(d,p.qty)];
-  $("viewEye").textContent = p.category;
-  $("viewTitle").textContent = p.name;
-  $("viewBody").innerHTML = `
-    <div class="vrow"><span class="vlbl">Brand</span><span class="vval">${p.brand}</span></div>
-    <div class="vrow"><span class="vlbl">Status</span><span class="vval"><span class="badge" style="color:${s.c};background:${s.bg}">${s.lbl}</span></span></div>
-    <div class="vrow"><span class="vlbl">Step</span><span class="vval">${p.step||"—"}</span></div>
-    <div class="vrow"><span class="vlbl">Size</span><span class="vval">${p.size?p.size+"ml":"—"}</span></div>
-    <div class="vrow"><span class="vlbl">Quantity</span><span class="vval">${p.qty}</span></div>
-    <div class="vrow"><span class="vlbl">Price</span><span class="vval vbig">${fmt(p.price)}</span></div>
-    <div class="vrow"><span class="vlbl">Total Value</span><span class="vval">${fmt(p.qty*p.price)}</span></div>
-    <div class="vrow"><span class="vlbl">Purchased</span><span class="vval">${p.pdate||"—"}</span></div>
-    <div class="vrow"><span class="vlbl">Expires</span><span class="vval" style="color:${d<0?"#8B3A3A":d<90?"#8B6914":"inherit"}">${p.edate} (${d<0?Math.abs(d)+"d ago":d+"d left"})</span></div>
-    ${p.notes?`<div class="vrow"><span class="vlbl">Notes</span><span class="vval vnote">${p.notes}</span></div>`:""}
-  `;
-  $("viewEdit").onclick = () => { hideOv("viewOv"); editProd(id); };
-  $("viewDel").onclick  = () => { hideOv("viewOv"); delProd(id); };
-  showOv("viewOv");
+/* PRODUCT CRUD */
+function setCB(btnId,val,ph){const b=$(btnId);b.textContent=val||ph;b.classList.toggle("selected",!!val);}
+function openProd(id){
+  epId=id;$("prodTitle").textContent=id?"Edit Product":"Add Product";_cpb64="";
+  if(id){const p=prods.find(x=>x.id===id);$("fName").value=p.name;$("fBrand").value=p.brand;$("fCat").value=p.category||"";setCB("fCatBtn",p.category,"Select");$("fStep").value=p.step;$("fSize").value=p.size;$("fPdate").value=p.pdate;$("fEdate").value=p.edate;$("fOdate").value=p.odate||"";$("fPao").value=p.pao||"";$("fQty").value=p.qty;$("fPrice").value=p.price;$("fNotes").value=p.notes;_cpb64=p.photo||"";}
+  else{["fName","fBrand","fStep","fSize","fPdate","fEdate","fOdate","fPao","fPrice","fNotes"].forEach(f=>$(f).value="");$("fCat").value="";setCB("fCatBtn","","Select");$("fQty").value=1;}
+  uPhUI();sov("prodOv");
 }
+function editProd(id){openProd(id);}
+function saveProd(){
+  const name=$("fName").value.trim(),brand=$("fBrand").value.trim();
+  if(!name||!brand){toast("Name and brand required");return;}
+  const p={id:epId||Date.now(),name,brand,category:$("fCat").value,step:$("fStep").value,size:Number($("fSize").value)||0,pdate:$("fPdate").value,edate:$("fEdate").value,odate:$("fOdate").value,pao:Number($("fPao").value)||0,qty:Number($("fQty").value)||1,price:Number($("fPrice").value)||0,notes:$("fNotes").value,photo:_cpb64};
+  if(epId)prods=prods.map(x=>x.id===epId?p:x);else prods.push(p);
+  hov("prodOv");save();renderStats();renderCats();renderProds();toast("Saved ✓");
+}
+function dupP(id){const p=prods.find(x=>x.id===id);const dup={...p,id:Date.now(),name:p.name+" (copy)"};prods.splice(prods.indexOf(p)+1,0,dup);save();renderStats();renderProds();toast("Duplicated ✓");}
+function delProd(id){askConf("Remove this product?","",()=>{prods=prods.filter(x=>x.id!==id);save();renderStats();renderCats();renderProds();toast("Removed");});}
+function uPhUI(){const has=!!_cpb64;$("fPhotoPreview").classList.toggle("hi",!has);$("fPhotoBtn").classList.toggle("hi",has);if(has)$("fPhotoPreview").src=_cpb64;}
+$("fPhotoBtn").onclick=()=>$("fPhotoInput").click();
+$("fPhotoPreview").onclick=()=>$("fPhotoInput").click();
+$("fPhotoInput").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{_cpb64=ev.target.result;uPhUI();};r.readAsDataURL(f);};
 
-function viewShop(id) {
-  const item = shop.find(x=>x.id===id);
-  const p = PRI[item.priority]||PRI.Medium;
-  $("viewEye").textContent = item.category;
-  $("viewTitle").textContent = item.name;
-  $("viewBody").innerHTML = `
-    <div class="vrow"><span class="vlbl">Brand</span><span class="vval">${item.brand||"—"}</span></div>
-    <div class="vrow"><span class="vlbl">Priority</span><span class="vval"><span class="badge" style="color:${p.c};background:${p.bg}">${item.priority}</span></span></div>
-    <div class="vrow"><span class="vlbl">Price</span><span class="vval vbig">${fmt(item.price)}</span></div>
-    <div class="vrow"><span class="vlbl">Where to Buy</span><span class="vval">${item.where||"—"}</span></div>
-    ${item.notes?`<div class="vrow"><span class="vlbl">Notes</span><span class="vval vnote">${item.notes}</span></div>`:""}
-  `;
-  $("viewEdit").onclick = () => { hideOv("viewOv"); editShop(id); };
-  $("viewDel").onclick  = () => { hideOv("viewOv"); delShop(id); };
-  showOv("viewOv");
-}
-
-// ── CUSTOM CONFIRM ────────────────────────────
-let _confirmCb = null;
-function askConfirm(msg, sub, cb) {
-  $("confirmMsg").textContent = msg;
-  $("confirmSub").textContent = sub || "";
-  _confirmCb = cb;
-  showOv("confirmOv");
-}
-
-// ── ROUTINE VIEW ──────────────────────────────
-function viewRout(id) {
-  const r = rout.find(x=>x.id===id);
-  $("viewEye").textContent = "Routine Step";
-  $("viewTitle").textContent = r.name;
-  $("viewBody").innerHTML = `
-    <div class="vrow"><span class="vlbl">Step No.</span><span class="vval">${r.step}</span></div>
-    <div class="vrow"><span class="vlbl">Morning</span><span class="vval">${r.am||"—"}</span></div>
-    <div class="vrow"><span class="vlbl">Evening</span><span class="vval">${r.pm||"—"}</span></div>
-  `;
-  $("viewEdit").onclick = () => { hideOv("viewOv"); editRout(id); };
-  $("viewDel").onclick  = () => { hideOv("viewOv"); delRout(id); };
-  showOv("viewOv");
-}
-
-function viewWeek(id) {
-  const w = week.find(x=>x.id===id);
-  $("viewEye").textContent = "Weekly Treatment";
-  $("viewTitle").textContent = w.name;
-  $("viewBody").innerHTML = `
-    <div class="vrow"><span class="vlbl">Frequency</span><span class="vval">${w.freq||"—"}</span></div>
-    <div class="vrow"><span class="vlbl">Notes</span><span class="vval vnote">${w.note||"—"}</span></div>
-  `;
-  $("viewEdit").onclick = () => { hideOv("viewOv"); editWeek(id); };
-  $("viewDel").onclick  = () => { hideOv("viewOv"); delWeek(id); };
-  showOv("viewOv");
-}
-function openProd(id) {
-  epId = id;
-  $("prodTitle").textContent = id ? "Edit Product" : "Add Product";
-  if (id) {
-    const p = prods.find(x=>x.id===id);
-    $("f-name").value=p.name; $("f-brand").value=p.brand;
-    $("f-cat").value=p.category||"";
-    $("f-cat-btn").textContent=p.category||"Select category";
-    $("f-cat-btn").classList.toggle("selected", !!p.category);
-    $("f-step").value=p.step; $("f-size").value=p.size; $("f-pdate").value=p.pdate;
-    $("f-edate").value=p.edate; $("f-qty").value=p.qty; $("f-price").value=p.price;
-    $("f-notes").value=p.notes;
-  } else {
-    ["f-name","f-brand","f-step","f-size","f-pdate","f-edate","f-price","f-notes"].forEach(f=>$(f).value="");
-    $("f-cat").value=""; $("f-cat-btn").textContent="Select category";
-    $("f-cat-btn").classList.remove("selected"); $("f-qty").value=1;
-  }
-  showOv("prodOv");
-}
-function editProd(id) { openProd(id); }
-function saveProd() {
-  const name=$("f-name").value.trim(), brand=$("f-brand").value.trim(), edate=$("f-edate").value;
-  if(!name||!brand||!edate){showToast("Name, brand & expiry required");return;}
-  const p={id:epId||Date.now(),name,brand,category:$("f-cat").value,step:$("f-step").value,
-    size:Number($("f-size").value)||0,pdate:$("f-pdate").value,edate,
-    qty:Number($("f-qty").value)||1,price:Number($("f-price").value)||0,notes:$("f-notes").value};
-  if(epId) prods=prods.map(x=>x.id===epId?p:x); else prods.push(p);
-  hideOv("prodOv"); saveWithReminder(); refreshDataLists(); renderStats(); renderCats(); renderProds(); showToast("Saved ✓");
-}
-function delProd(id) {
-  askConfirm("Remove this product?", "This cannot be undone.", () => {
-    prods=prods.filter(x=>x.id!==id); saveWithReminder(); refreshDataLists(); renderStats(); renderCats(); renderProds(); showToast("Removed");
-  });
-}
-
-// ── SHOPPING CRUD ─────────────────────────────
-function openShop(id) {
-  esId = id;
-  $("shopTitle").textContent = id ? "Edit Item" : "Add Item";
-  if(id){
-    const i=shop.find(x=>x.id===id);
-    $("s-name").value=i.name; $("s-brand").value=i.brand;
-    $("s-cat").value=i.category||"";
-    $("s-cat-btn").textContent=i.category||"Select category";
-    $("s-cat-btn").classList.toggle("selected", !!i.category);
-    $("s-pri").value=i.priority; $("s-price").value=i.price;
-    $("s-where").value=i.where; $("s-notes").value=i.notes;
-  } else {
-    ["s-name","s-brand","s-where","s-notes","s-price"].forEach(f=>$(f).value="");
-    $("s-cat").value=""; $("s-cat-btn").textContent="Select category";
-    $("s-cat-btn").classList.remove("selected"); $("s-pri").value="Medium";
-  }
-  showOv("shopOv");
-}
+/* SHOPPING CRUD */
+function openShop(id){esId=id;$("shopTitle").textContent=id?"Edit Item":"Add Item";if(id){const i=shop.find(x=>x.id===id);$("sName").value=i.name;$("sBrand").value=i.brand;$("sCat").value=i.category||"";setCB("sCatBtn",i.category,"Select");$("sPri").value=i.priority;$("sPrice").value=i.price;$("sWhere").value=i.where;$("sNotes").value=i.notes;}else{["sName","sBrand","sWhere","sNotes","sPrice"].forEach(f=>$(f).value="");$("sCat").value="";setCB("sCatBtn","","Select");$("sPri").value="Medium";}sov("shopOv");}
 function editShop(id){openShop(id);}
-function saveShop(){
-  const name=$("s-name").value.trim(); if(!name){showToast("Name required");return;}
-  const cat=$("s-cat").value.trim()||"Other";
-  const item={id:esId||Date.now(),name,brand:$("s-brand").value,category:cat,
-    priority:$("s-pri").value,price:Number($("s-price").value)||0,
-    where:$("s-where").value,notes:$("s-notes").value};
-  if(esId) shop=shop.map(x=>x.id===esId?item:x); else shop.push(item);
-  hideOv("shopOv"); saveWithReminder(); refreshDataLists(); renderShop(); showToast("Saved ✓");
-}
-function delShop(id){
-  askConfirm("Remove this item?", "This cannot be undone.", () => {
-    shop=shop.filter(x=>x.id!==id); saveWithReminder(); renderShop(); showToast("Removed");
-  });
-}
+function saveShop(){const name=$("sName").value.trim();if(!name){toast("Name required");return;}const cat=$("sCat").value.trim()||"Other";const item={id:esId||Date.now(),name,brand:$("sBrand").value,category:cat,priority:$("sPri").value,price:Number($("sPrice").value)||0,where:$("sWhere").value,notes:$("sNotes").value,purchased:false};if(esId)shop=shop.map(x=>x.id===esId?{...item,purchased:shop.find(s=>s.id===esId)?.purchased||false}:x);else shop.push(item);hov("shopOv");save();renderShop();toast("Saved ✓");}
+function delShop(id){askConf("Remove this item?","",()=>{shop=shop.filter(x=>x.id!==id);save();renderShop();toast("Removed");});}
 
-// ── ROUTINE CRUD ──────────────────────────────
-function openRout(id){
-  erId=id; $("routTitle").textContent=id?"Edit Step":"Add Step";
-  if(id){
-    const r=rout.find(x=>x.id===id);
-    $("r-step").value=r.step; $("r-name").value=r.name;
-    $("r-cat").value=r.category||"";
-    $("r-cat-btn").textContent=r.category||"None (leave ungrouped)";
-    $("r-cat-btn").classList.toggle("selected", !!r.category);
-    $("r-am").value=r.am; $("r-pm").value=r.pm;
-  } else {
-    ["r-step","r-name","r-am","r-pm"].forEach(f=>$(f).value="");
-    $("r-cat").value=""; $("r-cat-btn").textContent="None (leave ungrouped)";
-    $("r-cat-btn").classList.remove("selected");
-  }
-  showOv("routOv");
-}
+/* ROUTINE CRUD */
+function openRout(id){erId=id;$("routTitle").textContent=id?"Edit Step":"Add Step";if(id){const r=rout.find(x=>x.id===id);$("rStep").value=r.step;$("rName").value=r.name;$("rCat").value=r.category||"";setCB("rCatBtn",r.category,"None");$("rAm").value=r.am;$("rPm").value=r.pm;}else{["rStep","rName","rAm","rPm"].forEach(f=>$(f).value="");$("rCat").value="";setCB("rCatBtn","","None");}sov("routOv");}
 function editRout(id){openRout(id);}
-function saveRout(){
-  const name=$("r-name").value.trim(); if(!name){showToast("Step name required");return;}
-  const r={id:erId||Date.now(),step:$("r-step").value,name,category:$("r-cat").value.trim(),am:$("r-am").value,pm:$("r-pm").value};
-  if(erId) rout=rout.map(x=>x.id===erId?r:x); else rout.push(r);
-  hideOv("routOv"); saveWithReminder(); refreshDataLists(); renderRout(); showToast("Saved ✓");
-}
-function delRout(id){
-  askConfirm("Remove this step?", "This cannot be undone.", () => {
-    rout=rout.filter(x=>x.id!==id); saveWithReminder(); renderRout(); showToast("Removed");
-  });
-}
+function saveRout(){const name=$("rName").value.trim();if(!name){toast("Step name required");return;}const r={id:erId||Date.now(),step:$("rStep").value,name,category:$("rCat").value.trim(),am:$("rAm").value,pm:$("rPm").value};if(erId)rout=rout.map(x=>x.id===erId?r:x);else rout.push(r);hov("routOv");save();renderRout();toast("Saved ✓");}
+function delRout(id){askConf("Remove this step?","",()=>{rout=rout.filter(x=>x.id!==id);save();renderRout();toast("Removed");});}
 
-// ── WEEKLY CRUD ───────────────────────────────
-function openWeek(id){
-  ewId=id; $("weekTitle").textContent=id?"Edit Treatment":"Add Treatment";
-  if(id){const w=week.find(x=>x.id===id);$("w-freq").value=w.freq;$("w-name").value=w.name;$("w-note").value=w.note;}
-  else{["w-freq","w-name","w-note"].forEach(f=>$(f).value="");}
-  showOv("weekOv");
-}
+/* WEEKLY CRUD */
+function openWeek(id){ewId=id;$("weekTitle").textContent=id?"Edit Treatment":"Add Treatment";if(id){const w=week.find(x=>x.id===id);$("wFreq").value=w.freq;$("wName").value=w.name;$("wNote").value=w.note;}else{["wFreq","wName","wNote"].forEach(f=>$(f).value="");}sov("weekOv");}
 function editWeek(id){openWeek(id);}
-function saveWeek(){
-  const name=$("w-name").value.trim(); if(!name){showToast("Name required");return;}
-  const w={id:ewId||Date.now(),freq:$("w-freq").value,name,note:$("w-note").value};
-  if(ewId) week=week.map(x=>x.id===ewId?w:x); else week.push(w);
-  hideOv("weekOv"); saveWithReminder(); renderRout(); showToast("Saved ✓");
+function saveWeek(){const name=$("wName").value.trim();if(!name){toast("Name required");return;}const w={id:ewId||Date.now(),freq:$("wFreq").value,name,note:$("wNote").value};if(ewId)week=week.map(x=>x.id===ewId?w:x);else week.push(w);hov("weekOv");save();renderRout();toast("Saved ✓");}
+function delWeek(id){askConf("Remove?","",()=>{week=week.filter(x=>x.id!==id);save();renderRout();toast("Removed");});}
+
+/* JOURNAL CRUD */
+function openJournal(id){ejId=id;$("journalTitle").textContent=id?"Edit Entry":"New Entry";_jmood="";if(id){const e=journal.find(x=>x.id===id);$("jDate").value=e.date;$("jText").value=e.text;$("jTags").value=(e.tags||[]).join(", ");_jmood=e.mood||"";}else{$("jDate").value=TODAY;$("jText").value="";$("jTags").value="";}$("jMood").value=_jmood;document.querySelectorAll("#moodPicker .cpchip").forEach(b=>b.classList.toggle("on",b.dataset.mood===_jmood));sov("journalOv");}
+function pickMood(m){_jmood=_jmood===m?"":m;$("jMood").value=_jmood;document.querySelectorAll("#moodPicker .cpchip").forEach(b=>b.classList.toggle("on",b.dataset.mood===_jmood));}
+function saveJournal(){const text=$("jText").value.trim();if(!text){toast("Write something first");return;}const e={id:ejId||Date.now(),date:$("jDate").value||TODAY,mood:_jmood,text,tags:$("jTags").value.split(",").map(t=>t.trim()).filter(Boolean)};if(ejId)journal=journal.map(x=>x.id===ejId?e:x);else journal.push(e);hov("journalOv");save();renderJournal();toast("Saved ✓");}
+function delJournal(id){askConf("Delete this entry?","",()=>{journal=journal.filter(x=>x.id!==id);save();renderJournal();toast("Deleted");});}
+
+/* BATCH */
+function enterBatch(){batchMode=true;batchSel.clear();$("batchBar").classList.remove("hi");$("btnBatch").textContent="✕";renderProds();}
+function exitBatch(){batchMode=false;batchSel.clear();$("batchBar").classList.add("hi");$("btnBatch").textContent="☐";renderProds();}
+$("batchCancelBtn").onclick=exitBatch;
+$("batchDelBtn").onclick=()=>{if(!batchSel.size)return;askConf("Remove "+batchSel.size+" product"+(batchSel.size>1?"s":"")+"?","",()=>{prods=prods.filter(p=>!batchSel.has(p.id));exitBatch();save();renderStats();renderCats();renderProds();toast("Removed");});};
+$("batchCatBtn").onclick=()=>{
+  if(!batchSel.size)return;
+  const cats=gCats("prod");
+  $("batchCatGrid").innerHTML=cats.map(c=>`<button class="cpchip" onclick="applyBC('${c.replace(/'/g,"\\'")}')">${c}</button>`).join("");
+  sov("batchCatOv");
+};
+$("batchCatClose").onclick=()=>hov("batchCatOv");
+function applyBC(cat){prods=prods.map(p=>batchSel.has(p.id)?{...p,category:cat}:p);hov("batchCatOv");exitBatch();save();renderStats();renderCats();renderProds();toast("Category updated ✓");}
+
+/* CAT PICKER */
+function gCats(ctx){
+  if(ctx==="prod")return[...new Set([...CATOPTS,...prods.map(p=>p.category).filter(Boolean),...cIC])];
+  if(ctx==="shop")return[...new Set([...CATOPTS,...shop.map(i=>i.category).filter(Boolean),...cSC])];
+  if(ctx==="rout")return[...new Set([...rout.map(r=>r.category).filter(Boolean),...cRC])];
+  return[];
 }
-function delWeek(id){
-  askConfirm("Remove this treatment?", "This cannot be undone.", () => {
-    week=week.filter(x=>x.id!==id); saveWithReminder(); renderRout(); showToast("Removed");
-  });
+function openCatPicker(ctx){_cpc=ctx;renderCP();sov("catPickerOv");}
+function renderCP(){
+  const ctx=_cpc;const cats=gCats(ctx);
+  const hidId=ctx==="prod"?"fCat":ctx==="shop"?"sCat":"rCat";
+  const cur=$(hidId).value;const showNone=ctx==="rout";
+  $("catPickerGrid").innerHTML=(showNone?`<button class="cpchip ${cur===""?"on":""}" onclick="pickCat('')">None</button>`:"")+cats.map(c=>`<button class="cpchip ${cur===c?"on":""}" onclick="pickCat('${c.replace(/'/g,"\\'")}')">${c}</button>`).join("");
+  $("catPickerNew").value="";
 }
-
-// ── CATEGORY PICKER ───────────────────────────
-// Custom categories stored per section
-let customInvCats  = [];
-let customShopCats = [];
-let customRoutCats = [];
-
-let _catPickerContext = null; // 'prod' | 'shop' | 'rout'
-
-function getCatsForContext(ctx) {
-  if (ctx === 'prod') return [...new Set([...CATOPTS, ...prods.map(p=>p.category).filter(Boolean), ...customInvCats])];
-  if (ctx === 'shop') return [...new Set([...CATOPTS, ...shop.map(i=>i.category).filter(Boolean), ...customShopCats])];
-  if (ctx === 'rout') return [...new Set([...rout.map(r=>r.category).filter(Boolean), ...customRoutCats])];
-  return [];
+function pickCat(val){
+  const ctx=_cpc;
+  const hidId=ctx==="prod"?"fCat":ctx==="shop"?"sCat":"rCat";
+  const btnId=ctx==="prod"?"fCatBtn":ctx==="shop"?"sCatBtn":"rCatBtn";
+  const ph=ctx==="rout"?"None":"Select";
+  $(hidId).value=val;setCB(btnId,val,ph);hov("catPickerOv");
 }
-
-function getHiddenId(ctx)  { return ctx==='prod'?'f-cat': ctx==='shop'?'s-cat':'r-cat'; }
-function getBtnId(ctx)     { return ctx==='prod'?'f-cat-btn': ctx==='shop'?'s-cat-btn':'r-cat-btn'; }
-
-function openCatPicker(ctx) {
-  _catPickerContext = ctx;
-  renderCatPicker();
-  showOv("catPickerOv");
+function addNC(){
+  const ctx=_cpc;const val=$("catPickerNew").value.trim();if(!val)return;
+  if(ctx==="prod")cIC=[...new Set([...cIC,val])];
+  if(ctx==="shop")cSC=[...new Set([...cSC,val])];
+  if(ctx==="rout")cRC=[...new Set([...cRC,val])];
+  renderCP();pickCat(val);
 }
+$("catPickerClose").onclick=()=>hov("catPickerOv");
+$("catPickerOv").onclick=e=>{if(e.target===$("catPickerOv"))hov("catPickerOv");};
+$("catPickerAdd").onclick=addNC;
+$("catPickerNew").onkeydown=e=>{if(e.key==="Enter")addNC();};
 
-function renderCatPicker() {
-  const ctx = _catPickerContext;
-  const cats = getCatsForContext(ctx);
-  const current = $(getHiddenId(ctx)).value;
-  const grid = $("catPickerGrid");
-
-  // For routine, show a "None" option too
-  const showNone = ctx === 'rout';
-  grid.innerHTML = (showNone ? `<button class="cpchip ${current===''?'on':''}" onclick="pickCat('')">None</button>` : '')
-    + cats.map(c =>
-        `<button class="cpchip ${current===c?'on':''}" onclick="pickCat('${c.replace(/'/g,"\\\'")}')">${c}</button>`
-      ).join("");
-
-  $("catPickerNew").value = "";
+/* MANAGE CATS */
+function openMC(){
+  const co=gSCO();const cm=new Map();shop.forEach(i=>{const c=i.category||"Other";cm.set(c,(cm.get(c)||0)+1);});
+  const list=$("mancatList");
+  list.innerHTML=co.map(cat=>`<div class="di mcitem" data-id="${cat}"><div class="dh"><span></span><span></span><span></span></div><span class="mcname">${cat}</span><span class="mccnt">${cm.get(cat)||0} item${(cm.get(cat)||0)===1?"":"s"}</span></div>`).join("");
+  mdr(list,()=>shopCatOrder,v=>{shopCatOrder=v;},()=>{save();openMC();renderShop();});
+  sov("mancatOv");
 }
+$("mancatClose").onclick=()=>hov("mancatOv");$("mancatOv").onclick=e=>{if(e.target===$("mancatOv"))hov("mancatOv");};
 
-function pickCat(val) {
-  const ctx = _catPickerContext;
-  $(getHiddenId(ctx)).value = val;
-  const btn = $(getBtnId(ctx));
-  btn.textContent = val || (ctx==='rout' ? "None (leave ungrouped)" : "Select category");
-  btn.classList.toggle("selected", !!val);
-  hideOv("catPickerOv");
-}
+/* BUDGET */
+$("budgetClose").onclick=$("budgetCancel").onclick=()=>hov("budgetOv");
+$("budgetSave").onclick=()=>{budget=Number($("bAmount").value)||0;hov("budgetOv");save();renderShop();toast(budget?"Budget set ✓":"Budget removed");};
 
-function addNewCat() {
-  const ctx = _catPickerContext;
-  const val = $("catPickerNew").value.trim();
-  if (!val) return;
-  if (ctx === 'prod')  customInvCats  = [...new Set([...customInvCats,  val])];
-  if (ctx === 'shop')  customShopCats = [...new Set([...customShopCats, val])];
-  if (ctx === 'rout')  customRoutCats = [...new Set([...customRoutCats, val])];
-  renderCatPicker();
-  // Auto-select the new category
-  pickCat(val);
-}
+/* CONFIRM */
+function askConf(msg,sub,cb){$("confirmMsg").textContent=msg;$("confirmSub").textContent=sub||"";_ccb=cb;sov("confirmOv");}
+$("confirmNo").onclick=()=>hov("confirmOv");
+$("confirmYes").onclick=()=>{hov("confirmOv");if(_ccb){_ccb();_ccb=null;}};
+$("confirmOv").onclick=e=>{if(e.target===$("confirmOv"))hov("confirmOv");};
 
-$("catPickerClose").onclick = () => hideOv("catPickerOv");
-$("catPickerOv").onclick    = e => { if(e.target===$("catPickerOv")) hideOv("catPickerOv"); };
-$("catPickerAdd").onclick   = addNewCat;
-$("catPickerNew").onkeydown = e => { if(e.key==="Enter") addNewCat(); };
-window.openCatPicker = openCatPicker;
-window.pickCat = pickCat;
-function openManageCats() {
-  renderManageCats();
-  showOv("mancatOv");
-}
-
-function renderManageCats() {
-  const catOrder = getShopCatOrder();
-  const catMap = new Map();
-  shop.forEach(i => { const c = i.category||"Other"; catMap.set(c,(catMap.get(c)||0)+1); });
-  const list = $("mancatList");
-  list.innerHTML = catOrder.map(cat =>
-    `<div class="di mcitem" data-id="${cat}">
-      <div class="dh"><span></span><span></span><span></span></div>
-      <span class="mcname">${cat}</span>
-      <span class="mccnt">${catMap.get(cat)||0} item${(catMap.get(cat)||0)===1?"":"s"}</span>
-    </div>`
-  ).join("");
-  makeDraggable(list,
-    () => shopCatOrder,
-    v => { shopCatOrder = v; },
-    () => { save(); renderManageCats(); renderShop(); }
-  );
-}
-
-$("mancatClose").onclick = () => hideOv("mancatOv");
-$("mancatOv").onclick = e => { if(e.target===$("mancatOv")) hideOv("mancatOv"); };
-$("btnManageCats").onclick = openManageCats;
+/* EXPORT / IMPORT */
 function exportData(){
-  const blob=new Blob([JSON.stringify({prods,shop,rout,week,tabOrder,shopCatOrder},null,2)],{type:"application/json"});
+  const blob=new Blob([JSON.stringify({prods,shop,rout,week,tabOrder,shopCatOrder,budget,journal,cIC,cSC,cRC},null,2)],{type:"application/json"});
   const url=URL.createObjectURL(blob),a=document.createElement("a");
-  a.href=url; a.download=`skincare-${new Date().toISOString().slice(0,10)}.json`;
-  a.click(); URL.revokeObjectURL(url);
-  setLastExport();
-  changesSinceExport=0;
-  $("backupBanner").classList.add("hi");
-  showToast("Exported ✓");
+  a.href=url;a.download="skincare-"+TODAY+".json";a.click();URL.revokeObjectURL(url);
+  sle();cse=0;$("backupBanner").classList.add("hi");toast("Exported ✓");
 }
 function importData(file){
   const reader=new FileReader();
   reader.onload=e=>{
     try{
-      const d=JSON.parse(e.target.result);
-      if(!d.prods) throw 0;
-      prods=d.prods; shop=d.shop||[]; rout=d.rout||[]; week=d.week||[]; tabOrder=d.tabOrder||[...DEF_TABS];
-      save(); renderNav(); renderStats(); renderProds(); renderCats(); showToast("Imported ✓");
-    }catch{showToast("Invalid file");}
+      const d=JSON.parse(e.target.result);if(!d.prods)throw 0;
+      prods=d.prods.map(p=>({odate:"",pao:12,photo:"",...p}));
+      shop=(d.shop||[]).map(s=>({purchased:false,...s}));
+      rout=(d.rout||[]).map(r=>({category:"",...r}));
+      week=d.week||[];tabOrder=d.tabOrder||[...DEF_TABS];shopCatOrder=d.shopCatOrder||[];
+      budget=d.budget||0;journal=d.journal||[];cIC=d.cIC||[];cSC=d.cSC||[];cRC=d.cRC||[];
+      save();renderNav();renderStats();renderCats();renderProds();toast("Imported ✓");
+    }catch{toast("Invalid file");}
   };
   reader.readAsText(file);
 }
 
-// ── POPULATE SELECTS ──────────────────────────
-function refreshDataLists() {
-  // no-op: category picker now handles its own list dynamically
-}
-refreshDataLists();
+/* ONBOARDING */
+function checkOB(){if(!localStorage.getItem("sk_ob"))sov("onboard");else hov("onboard");}
+$("obStart").onclick=()=>{localStorage.setItem("sk_ob","1");hov("onboard");};
 
-// ── EVENT LISTENERS ───────────────────────────
-$("btnAdd").onclick = () => {
-  if(curTab==="inventory") openProd(null);
-  else if(curTab==="shopping") openShop(null);
-  else if(curTab==="routine") openRout(null);
-};
-$("btnExport").onclick = exportData;
-$("btnImport").onclick = () => $("importFile").click();
-$("importFile").onchange = e => { if(e.target.files[0]){importData(e.target.files[0]);e.target.value="";} };
-$("btnAddWeekly").onclick = () => openWeek(null);
+/* EVENT LISTENERS */
+$("btnAdd").onclick=()=>{if(curTab==="inventory")openProd(null);else if(curTab==="shopping")openShop(null);else if(curTab==="routine")openRout(null);else if(curTab==="journal")openJournal(null);};
+$("btnExport").onclick=exportData;
+$("btnImport").onclick=()=>$("importFile").click();
+$("importFile").onchange=e=>{if(e.target.files[0]){importData(e.target.files[0]);e.target.value="";}};
+$("btnBatch").onclick=()=>{if(batchMode)exitBatch();else enterBatch();};
+$("btnDark").onclick=()=>{darkMode=!darkMode;applyDark();sd();};
+$("btnAddWeekly").onclick=()=>openWeek(null);
+$("btnManageCats").onclick=openMC;
+$("backupNow").onclick=exportData;
+$("backupDismiss").onclick=()=>{bda=Date.now();$("backupBanner").classList.add("hi");};
+$("viewClose").onclick=()=>hov("viewOv");$("viewOv").onclick=e=>{if(e.target===$("viewOv"))hov("viewOv");};
+$("prodClose").onclick=$("prodCancel").onclick=()=>hov("prodOv");$("prodSave").onclick=saveProd;$("prodOv").onclick=e=>{if(e.target===$("prodOv"))hov("prodOv");};
+$("shopClose").onclick=$("shopCancel").onclick=()=>hov("shopOv");$("shopSave").onclick=saveShop;$("shopOv").onclick=e=>{if(e.target===$("shopOv"))hov("shopOv");};
+$("routClose").onclick=$("routCancel").onclick=()=>hov("routOv");$("routSave").onclick=saveRout;$("routOv").onclick=e=>{if(e.target===$("routOv"))hov("routOv");};
+$("weekClose").onclick=$("weekCancel").onclick=()=>hov("weekOv");$("weekSave").onclick=saveWeek;$("weekOv").onclick=e=>{if(e.target===$("weekOv"))hov("weekOv");};
+$("journalClose").onclick=$("journalCancel").onclick=()=>hov("journalOv");$("journalSave").onclick=saveJournal;$("journalOv").onclick=e=>{if(e.target===$("journalOv"))hov("journalOv");};
+$("searchInput").oninput=e=>{srch=e.target.value;renderProds();};
+$("shopSearchInput").oninput=e=>{shopSrch=e.target.value;renderShop();};
+$("routSearchInput").oninput=e=>{routSrch=e.target.value;renderRout();};
+$("journalSearchInput").oninput=e=>{jSrch=e.target.value;renderJournal();};
+$("catsRow").onclick=e=>{if(e.target.dataset.cat){catF=e.target.dataset.cat;renderCats();renderProds();}};
+$("invSortBar").onclick=e=>{const k=e.target.dataset.isort;if(!k)return;invSort=invSort===k?"none":k;renderProds();};
+$("shopSortBar").onclick=e=>{const k=e.target.dataset.ssort;if(!k)return;shopSort=shopSort===k?"none":k;renderShop();};
 
-// Overlay close bindings
-$("confirmNo").onclick  = () => hideOv("confirmOv");
-$("confirmYes").onclick = () => { hideOv("confirmOv"); if(_confirmCb){_confirmCb();_confirmCb=null;} };
-$("confirmOv").onclick  = e => { if(e.target===$("confirmOv")) hideOv("confirmOv"); };
-$("viewClose").onclick  = () => hideOv("viewOv");
-$("viewOv").onclick     = e => { if(e.target===$("viewOv")) hideOv("viewOv"); };
-$("prodClose").onclick  = $("prodCancel").onclick  = () => hideOv("prodOv");
-$("shopClose").onclick  = $("shopCancel").onclick  = () => hideOv("shopOv");
-$("routClose").onclick  = $("routCancel").onclick  = () => hideOv("routOv");
-$("weekClose").onclick  = $("weekCancel").onclick  = () => hideOv("weekOv");
-$("prodOv").onclick     = e => { if(e.target===$("prodOv")) hideOv("prodOv"); };
-$("shopOv").onclick     = e => { if(e.target===$("shopOv")) hideOv("shopOv"); };
-$("routOv").onclick     = e => { if(e.target===$("routOv")) hideOv("routOv"); };
-$("weekOv").onclick     = e => { if(e.target===$("weekOv")) hideOv("weekOv"); };
-$("prodSave").onclick   = saveProd;
-$("shopSave").onclick   = saveShop;
-$("routSave").onclick   = saveRout;
-$("weekSave").onclick   = saveWeek;
+/* EXPOSE GLOBALS */
+window.hCC=hCC;window.viewProd=viewProd;window.editProd=editProd;window.delProd=delProd;window.dupP=dupP;
+window.viewShop=viewShop;window.editShop=editShop;window.delShop=delShop;window.tPurch=tPurch;window.mToInv=mToInv;window.tSec=tSec;
+window.viewRout=viewRout;window.editRout=editRout;window.delRout=delRout;window.tCheck=tCheck;
+window.viewWeek=viewWeek;window.editWeek=editWeek;window.delWeek=delWeek;
+window.viewJournal=viewJournal;window.openJournal=openJournal;window.delJournal=delJournal;
+window.openCatPicker=openCatPicker;window.pickCat=pickCat;window.pickMood=pickMood;window.applyBC=applyBC;
 
-$("searchInput").oninput = e => { srch = e.target.value; renderProds(); };
-$("catsRow").onclick = e => {
-  if(e.target.dataset.cat){ catF=e.target.dataset.cat; renderCats(); renderProds(); }
-};
-$("invSortBar").onclick = e => {
-  const key = e.target.dataset.isort;
-  if(!key) return;
-  invSort = invSort === key ? "none" : key;
-  renderProds();
-};
-$("shopSortBar").onclick = e => {
-  const key = e.target.dataset.ssort;
-  if(!key) return;
-  shopSort = shopSort === key ? "none" : key;
-  renderShop();
-};
-
-// ── INITIAL RENDER ────────────────────────────
-$("btnExport").classList.remove("hi");
-$("btnImport").classList.remove("hi");
-$("backupNow").onclick     = exportData;
-$("backupDismiss").onclick = () => { bannerDismissedAt=Date.now(); $("backupBanner").classList.add("hi"); };
-refreshDataLists();
-renderNav();
-renderStats();
-renderProds();
-renderCats();
-// Check on load if overdue for a backup
-setTimeout(checkBackupReminder, 2000);
-
-// Expose functions needed by inline onclick handlers to global scope
-window.viewProd   = viewProd;
-window.editProd   = editProd;
-window.delProd    = delProd;
-window.viewShop   = viewShop;
-window.editShop   = editShop;
-window.delShop    = delShop;
-window.toggleSec  = toggleSec;
-window.viewRout   = viewRout;
-window.editRout   = editRout;
-window.delRout    = delRout;
-window.viewWeek   = viewWeek;
-window.editWeek   = editWeek;
-window.delWeek    = delWeek;
-
-}); // end DOMContentLoaded
+/* INIT */
+$("btnExport").classList.remove("hi");$("btnImport").classList.remove("hi");
+checkOB();renderNav();renderStats();renderCats();renderProds();
+setTimeout(checkBR,2500);
+});
 </script>
 </body>
 </html>
