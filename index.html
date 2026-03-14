@@ -84,7 +84,13 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
 .peye{font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
 .ptitle{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ch)}
 
-/* SORT BAR */
+/* BACKUP BANNER */
+.backup-banner{display:flex;align-items:center;gap:10px;padding:10px 15px;background:#FFF8E8;border-bottom:1px solid #E8D8A0}
+.backup-banner.hi{display:none!important}
+.backup-msg{flex:1;font-size:12px;color:#7A5C00}
+.backup-btn{padding:6px 12px;background:#C9A030;border:none;font-family:'DM Sans',sans-serif;font-size:11px;color:#fff;border-radius:5px;cursor:pointer;flex-shrink:0}
+.backup-btn:active{opacity:.85}
+.backup-dismiss{background:none;border:none;font-size:16px;color:#A08040;cursor:pointer;flex-shrink:0;line-height:1;padding:0 2px}
 .sortbar{display:flex;gap:6px;overflow-x:auto;padding:8px 15px;background:var(--crm);border-bottom:1px solid var(--bdr);scrollbar-width:none;align-items:center}
 .sortbar::-webkit-scrollbar{display:none}
 .sortbar-lbl{font-size:10px;color:var(--tl);letter-spacing:.08em;text-transform:uppercase;flex-shrink:0;margin-right:2px}
@@ -221,6 +227,11 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
     <!-- INVENTORY TAB -->
     <div id="tab-inventory">
       <div class="stats" id="statsRow"></div>
+      <div class="backup-banner hi" id="backupBanner">
+        <div class="backup-msg" id="backupMsg">Back up your data</div>
+        <button class="backup-btn" id="backupNow">Export now</button>
+        <button class="backup-dismiss" id="backupDismiss">×</button>
+      </div>
       <div class="srch">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <input class="sinput" id="searchInput" placeholder="Search…" type="search"/>
@@ -468,8 +479,52 @@ const DEF_WEEK = [
 ];
 const DEF_TABS = ["inventory","shopping","routine"];
 
-// ── STORAGE ───────────────────────────────────
-const KEY = "skincare_v4";
+// ── BACKUP REMINDER ───────────────────────────
+const BACKUP_KEY = "skincare_lastExport";
+const REMIND_AFTER_CHANGES = 5;   // show banner after this many saves without export
+const REMIND_AFTER_DAYS    = 3;   // also show if exported more than N days ago
+
+let changesSinceExport = 0;
+let bannerDismissedAt  = 0;       // timestamp of last dismiss
+
+function getLastExport() {
+  try { return Number(localStorage.getItem(BACKUP_KEY)||0); } catch(e){ return 0; }
+}
+function setLastExport() {
+  try { localStorage.setItem(BACKUP_KEY, Date.now()); } catch(e){}
+}
+
+function checkBackupReminder() {
+  // Don't re-show if dismissed in the last 10 minutes
+  if (Date.now() - bannerDismissedAt < 10 * 60 * 1000) return;
+
+  const lastExport = getLastExport();
+  const daysSince  = (Date.now() - lastExport) / (1000 * 60 * 60 * 24);
+  const neverExported = lastExport === 0;
+
+  let msg = null;
+  if (neverExported && changesSinceExport >= REMIND_AFTER_CHANGES) {
+    msg = "You haven't backed up yet — export to keep your data safe.";
+  } else if (!neverExported && daysSince > REMIND_AFTER_DAYS) {
+    const days = Math.floor(daysSince);
+    msg = `Last backup was ${days} day${days===1?"":"s"} ago — consider exporting.`;
+  } else if (changesSinceExport >= REMIND_AFTER_CHANGES) {
+    msg = `${changesSinceExport} changes since last backup — export to be safe.`;
+  }
+
+  if (msg) {
+    $("backupMsg").textContent = msg;
+    $("backupBanner").classList.remove("hi");
+  }
+}
+
+function saveWithReminder() {
+  save();
+  changesSinceExport++;
+  // Slight delay so banner doesn't flash on every save
+  clearTimeout(saveWithReminder._t);
+  saveWithReminder._t = setTimeout(checkBackupReminder, 1500);
+}
 function save() {
   try { localStorage.setItem(KEY, JSON.stringify({prods, shop, rout, week, tabOrder, shopCatOrder})); } catch(e){}
 }
@@ -734,7 +789,7 @@ function renderProds() {
     </div>`;
   }).join("");
   if (invSort === "none") {
-    makeDraggable(con, ()=>prods, v=>{prods=v;}, ()=>{save();renderStats();renderProds();});
+    makeDraggable(con, ()=>prods, v=>{prods=v;}, ()=>{saveWithReminder();renderStats();renderProds();});
   }
 }
 
@@ -908,7 +963,7 @@ function renderRout() {
       </div>
     </div>
   </div>`).join("");
-  makeDraggable(wc, ()=>week, v=>{week=v;}, ()=>{save();renderRout();});
+  makeDraggable(wc, ()=>week, v=>{week=v;}, ()=>{saveWithReminder();renderRout();});
 }
 
 function rebuildRout(cat, reordered) {
@@ -1019,11 +1074,11 @@ function saveProd() {
     size:Number($("f-size").value)||0,pdate:$("f-pdate").value,edate,
     qty:Number($("f-qty").value)||1,price:Number($("f-price").value)||0,notes:$("f-notes").value};
   if(epId) prods=prods.map(x=>x.id===epId?p:x); else prods.push(p);
-  hideOv("prodOv"); save(); refreshDataLists(); renderStats(); renderCats(); renderProds(); showToast("Saved ✓");
+  hideOv("prodOv"); saveWithReminder(); refreshDataLists(); renderStats(); renderCats(); renderProds(); showToast("Saved ✓");
 }
 function delProd(id) {
   askConfirm("Remove this product?", "This cannot be undone.", () => {
-    prods=prods.filter(x=>x.id!==id); save(); refreshDataLists(); renderStats(); renderCats(); renderProds(); showToast("Removed");
+    prods=prods.filter(x=>x.id!==id); saveWithReminder(); refreshDataLists(); renderStats(); renderCats(); renderProds(); showToast("Removed");
   });
 }
 
@@ -1054,11 +1109,11 @@ function saveShop(){
     priority:$("s-pri").value,price:Number($("s-price").value)||0,
     where:$("s-where").value,notes:$("s-notes").value};
   if(esId) shop=shop.map(x=>x.id===esId?item:x); else shop.push(item);
-  hideOv("shopOv"); save(); refreshDataLists(); renderShop(); showToast("Saved ✓");
+  hideOv("shopOv"); saveWithReminder(); refreshDataLists(); renderShop(); showToast("Saved ✓");
 }
 function delShop(id){
   askConfirm("Remove this item?", "This cannot be undone.", () => {
-    shop=shop.filter(x=>x.id!==id); save(); renderShop(); showToast("Removed");
+    shop=shop.filter(x=>x.id!==id); saveWithReminder(); renderShop(); showToast("Removed");
   });
 }
 
@@ -1084,11 +1139,11 @@ function saveRout(){
   const name=$("r-name").value.trim(); if(!name){showToast("Step name required");return;}
   const r={id:erId||Date.now(),step:$("r-step").value,name,category:$("r-cat").value.trim(),am:$("r-am").value,pm:$("r-pm").value};
   if(erId) rout=rout.map(x=>x.id===erId?r:x); else rout.push(r);
-  hideOv("routOv"); save(); refreshDataLists(); renderRout(); showToast("Saved ✓");
+  hideOv("routOv"); saveWithReminder(); refreshDataLists(); renderRout(); showToast("Saved ✓");
 }
 function delRout(id){
   askConfirm("Remove this step?", "This cannot be undone.", () => {
-    rout=rout.filter(x=>x.id!==id); save(); renderRout(); showToast("Removed");
+    rout=rout.filter(x=>x.id!==id); saveWithReminder(); renderRout(); showToast("Removed");
   });
 }
 
@@ -1104,11 +1159,11 @@ function saveWeek(){
   const name=$("w-name").value.trim(); if(!name){showToast("Name required");return;}
   const w={id:ewId||Date.now(),freq:$("w-freq").value,name,note:$("w-note").value};
   if(ewId) week=week.map(x=>x.id===ewId?w:x); else week.push(w);
-  hideOv("weekOv"); save(); renderRout(); showToast("Saved ✓");
+  hideOv("weekOv"); saveWithReminder(); renderRout(); showToast("Saved ✓");
 }
 function delWeek(id){
   askConfirm("Remove this treatment?", "This cannot be undone.", () => {
-    week=week.filter(x=>x.id!==id); save(); renderRout(); showToast("Removed");
+    week=week.filter(x=>x.id!==id); saveWithReminder(); renderRout(); showToast("Removed");
   });
 }
 
@@ -1207,10 +1262,14 @@ $("mancatClose").onclick = () => hideOv("mancatOv");
 $("mancatOv").onclick = e => { if(e.target===$("mancatOv")) hideOv("mancatOv"); };
 $("btnManageCats").onclick = openManageCats;
 function exportData(){
-  const blob=new Blob([JSON.stringify({prods,shop,rout,week,tabOrder},null,2)],{type:"application/json"});
+  const blob=new Blob([JSON.stringify({prods,shop,rout,week,tabOrder,shopCatOrder},null,2)],{type:"application/json"});
   const url=URL.createObjectURL(blob),a=document.createElement("a");
   a.href=url; a.download=`skincare-${new Date().toISOString().slice(0,10)}.json`;
-  a.click(); URL.revokeObjectURL(url); showToast("Exported ✓");
+  a.click(); URL.revokeObjectURL(url);
+  setLastExport();
+  changesSinceExport=0;
+  $("backupBanner").classList.add("hi");
+  showToast("Exported ✓");
 }
 function importData(file){
   const reader=new FileReader();
@@ -1281,11 +1340,15 @@ $("shopSortBar").onclick = e => {
 // ── INITIAL RENDER ────────────────────────────
 $("btnExport").classList.remove("hi");
 $("btnImport").classList.remove("hi");
+$("backupNow").onclick     = exportData;
+$("backupDismiss").onclick = () => { bannerDismissedAt=Date.now(); $("backupBanner").classList.add("hi"); };
 refreshDataLists();
 renderNav();
 renderStats();
 renderProds();
 renderCats();
+// Check on load if overdue for a backup
+setTimeout(checkBackupReminder, 2000);
 
 // Expose functions needed by inline onclick handlers to global scope
 window.viewProd   = viewProd;
