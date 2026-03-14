@@ -84,7 +84,17 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
 .peye{font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
 .ptitle{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ch)}
 
-/* SHOPPING */
+/* SORT BAR */
+.sortbar{display:flex;gap:6px;overflow-x:auto;padding:8px 15px;background:var(--crm);border-bottom:1px solid var(--bdr);scrollbar-width:none;align-items:center}
+.sortbar::-webkit-scrollbar{display:none}
+.sortbar-lbl{font-size:10px;color:var(--tl);letter-spacing:.08em;text-transform:uppercase;flex-shrink:0;margin-right:2px}
+.spill{flex-shrink:0;padding:5px 12px;border:1px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:11px;color:var(--tm);border-radius:20px;cursor:pointer;white-space:nowrap}
+.spill.on{background:var(--ch);border-color:var(--ch);color:var(--crm)}
+/* Category drag handle in shopping header */
+.sec-dh{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;cursor:grab;padding:2px 6px 2px 0;opacity:.35;touch-action:none;flex-shrink:0}
+.sec-dh span{display:block;width:12px;height:2px;background:var(--tm);border-radius:2px}
+.sechdr{gap:4px}
+.sec.ghost-cat{opacity:.35;transform:scale(.98)}
 .shsec{padding:8px 15px 4px}
 .sec{margin-bottom:11px;border:1px solid var(--bdr);border-radius:8px;overflow:hidden}
 .sechdr{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;background:var(--ln);cursor:pointer;user-select:none}
@@ -114,7 +124,16 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
 .tlbl{font-size:11px;color:var(--tm);letter-spacing:.06em;text-transform:uppercase}
 .tval{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:400;color:var(--ch)}
 
-/* ROUTINE CATEGORY GROUPS */
+/* CATEGORY PICKER */
+.cat-picker-btn{width:100%;padding:10px 12px;border:1px solid var(--bdr);background:var(--crm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--td);border-radius:6px;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between}
+.cat-picker-btn::after{content:"›";font-size:16px;color:var(--tl)}
+.cat-picker-btn.selected{border-color:var(--tpe);background:var(--wh);color:var(--td)}
+.cpchip{padding:8px 14px;border:1.5px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:12px;color:var(--tm);border-radius:20px;cursor:pointer;transition:all .15s}
+.cpchip.on{background:var(--ch);border-color:var(--ch);color:var(--crm)}
+.mcitem{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--stn);background:var(--wh)}
+.mcitem:last-child{border-bottom:none}
+.mcname{flex:1;font-size:14px;color:var(--td)}
+.mccnt{font-size:11px;color:var(--tl);background:var(--ln);padding:2px 8px;border-radius:10px}
 .rcat-group{margin-bottom:4px}
 .rcat-hdr{font-size:10px;font-weight:500;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;padding:10px 15px 4px}
 .rcat-body{display:flex;flex-direction:column;gap:8px;padding:0 0 4px}
@@ -207,13 +226,18 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
         <input class="sinput" id="searchInput" placeholder="Search…" type="search"/>
       </div>
       <div class="cats" id="catsRow"></div>
-      <div class="drag-hint">Hold ≡ to reorder</div>
+      <div class="sortbar" id="invSortBar"></div>
+      <div class="drag-hint" id="invDragHint">Hold ≡ to reorder</div>
       <div class="clist" id="productList"></div>
     </div>
 
     <!-- SHOPPING TAB -->
     <div id="tab-shopping" class="hi">
-      <div class="phdr"><div><div class="peye">Wishlist</div><div class="ptitle">Shopping List</div></div></div>
+      <div class="phdr">
+        <div><div class="peye">Wishlist</div><div class="ptitle">Shopping List</div></div>
+        <button class="sbtn" id="btnManageCats">Manage Categories</button>
+      </div>
+      <div class="sortbar" id="shopSortBar"></div>
       <div class="shsec" id="shopSections"></div>
       <div class="total"><span class="tlbl">Estimated Total</span><span class="tval" id="shopTotal">₹0</span></div>
     </div>
@@ -249,6 +273,40 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
     </div>
   </div>
 
+  <!-- CATEGORY PICKER OVERLAY -->
+  <div class="ov hi" id="catPickerOv" style="z-index:500">
+    <div class="drw">
+      <div class="drwbar"></div>
+      <div class="drwhdr">
+        <span class="drwtitle">Choose Category</span>
+        <button class="drwclose" id="catPickerClose">×</button>
+      </div>
+      <div class="drwbody" style="gap:0;padding:12px 19px">
+        <div id="catPickerGrid" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px"></div>
+        <div style="border-top:1px solid var(--stn);padding-top:14px">
+          <div style="font-size:10px;color:var(--tl);letter-spacing:.09em;text-transform:uppercase;margin-bottom:8px">Add new category</div>
+          <div style="display:flex;gap:8px">
+            <input id="catPickerNew" placeholder="e.g. Eye Care" style="flex:1;padding:10px 11px;border:1px solid var(--bdr);background:var(--crm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--td);border-radius:6px;outline:none;-webkit-appearance:none"/>
+            <button id="catPickerAdd" style="padding:10px 16px;background:var(--ch);border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--crm);border-radius:6px;cursor:pointer;flex-shrink:0">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANAGE CATEGORIES OVERLAY -->
+  <div class="ov hi" id="mancatOv">
+    <div class="drw">
+      <div class="drwbar"></div>
+      <div class="drwhdr">
+        <span class="drwtitle">Manage Categories</span>
+        <button class="drwclose" id="mancatClose">×</button>
+      </div>
+      <div style="padding:10px 19px 4px;font-size:11px;color:var(--tl)">Hold ≡ to drag and reorder categories</div>
+      <div class="drwbody" style="padding:8px 19px;gap:0" id="mancatList"></div>
+    </div>
+  </div>
+
   <!-- CONFIRM OVERLAY -->
   <div class="ov hi" id="confirmOv" style="align-items:center;padding:24px">
     <div style="background:var(--wh);border-radius:14px;padding:24px 20px;width:100%;max-width:320px;text-align:center">
@@ -270,7 +328,10 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
         <div class="fld full"><label>Product Name</label><input id="f-name" placeholder="e.g. Vitamin C Serum"/></div>
         <div class="drow">
           <div class="fld"><label>Brand</label><input id="f-brand" placeholder="e.g. Minimalist"/></div>
-          <div class="fld"><label>Category</label><select id="f-cat"></select></div>
+          <div class="fld"><label>Category</label>
+            <button type="button" class="cat-picker-btn" id="f-cat-btn" onclick="openCatPicker('prod')">Select category</button>
+            <input type="hidden" id="f-cat" value=""/>
+          </div>
         </div>
         <div class="drow">
           <div class="fld"><label>Routine Step</label><input id="f-step" placeholder="e.g. Step 3"/></div>
@@ -300,8 +361,8 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
         <div class="drow">
           <div class="fld"><label>Brand</label><input id="s-brand" placeholder="e.g. COSRX"/></div>
           <div class="fld"><label>Category</label>
-            <input id="s-cat" list="s-cat-list" placeholder="e.g. Serum" autocomplete="off"/>
-            <datalist id="s-cat-list"></datalist>
+            <button type="button" class="cat-picker-btn" id="s-cat-btn" onclick="openCatPicker('shop')">Select category</button>
+            <input type="hidden" id="s-cat" value=""/>
           </div>
         </div>
         <div class="drow">
@@ -326,8 +387,8 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
           <div class="fld"><label>Step Name</label><input id="r-name" placeholder="e.g. Toner"/></div>
         </div>
         <div class="fld full"><label>Category <span style="font-size:9px;color:var(--tl)">(groups steps together)</span></label>
-          <input id="r-cat" list="r-cat-list" placeholder="e.g. AM Routine · or leave blank" autocomplete="off"/>
-          <datalist id="r-cat-list"></datalist>
+          <button type="button" class="cat-picker-btn" id="r-cat-btn" onclick="openCatPicker('rout')">None (leave ungrouped)</button>
+          <input type="hidden" id="r-cat" value=""/>
         </div>
         <div class="fld full"><label>Morning (AM)</label><input id="r-am" placeholder="e.g. Rose Water Toner"/></div>
         <div class="fld full"><label>Evening (PM)</label><input id="r-pm" placeholder="e.g. HA 2% + B5"/></div>
@@ -410,7 +471,7 @@ const DEF_TABS = ["inventory","shopping","routine"];
 // ── STORAGE ───────────────────────────────────
 const KEY = "skincare_v4";
 function save() {
-  try { localStorage.setItem(KEY, JSON.stringify({prods, shop, rout, week, tabOrder})); } catch(e){}
+  try { localStorage.setItem(KEY, JSON.stringify({prods, shop, rout, week, tabOrder, shopCatOrder})); } catch(e){}
 }
 function load() {
   try { const d = localStorage.getItem(KEY); return d ? JSON.parse(d) : null; } catch(e){ return null; }
@@ -426,6 +487,11 @@ let curTab = tabOrder[0];
 let srch = "", catF = "All";
 let epId = null, esId = null, erId = null, ewId = null;
 const collapsed = new Set();
+
+// Sort state
+let invSort = "none"; // none | name | expiry | price | category | status
+let shopSort = "none"; // none | name | price | priority | category
+let shopCatOrder = stored ? (stored.shopCatOrder || []) : [];
 
 // ── HELPERS ───────────────────────────────────
 const $ = id => document.getElementById(id);
@@ -568,17 +634,77 @@ function renderStats() {
 }
 
 function renderCats() {
-  $("catsRow").innerHTML = CATS.map(c =>
+  const usedCats = [...new Set(prods.map(p=>p.category).filter(Boolean))].sort();
+  const allCats = ["All", ...usedCats];
+  // reset filter if current cat no longer exists
+  if (catF !== "All" && !usedCats.includes(catF)) catF = "All";
+  $("catsRow").innerHTML = allCats.map(c =>
     `<button class="pill ${catF===c?"on":""}" data-cat="${c}">${c}</button>`
   ).join("");
 }
 
+// ── SORT BARS ─────────────────────────────────
+const INV_SORTS = [
+  {key:"name",     lbl:"Name A–Z"},
+  {key:"expiry",   lbl:"Expiry ↑"},
+  {key:"price",    lbl:"Price ↑"},
+  {key:"category", lbl:"Category"},
+  {key:"status",   lbl:"Expiring first"},
+];
+const SHOP_SORTS = [
+  {key:"name",     lbl:"Name A–Z"},
+  {key:"price",    lbl:"Price ↑"},
+  {key:"priority", lbl:"Priority"},
+  {key:"category", lbl:"Category A–Z"},
+];
+
+function renderInvSortBar() {
+  $("invSortBar").innerHTML = `<span class="sortbar-lbl">Sort</span>` +
+    INV_SORTS.map(s =>
+      `<button class="spill ${invSort===s.key?"on":""}" data-isort="${s.key}">${s.lbl}</button>`
+    ).join("");
+  $("invDragHint").style.display = invSort === "none" ? "" : "none";
+}
+
+function renderShopSortBar() {
+  $("shopSortBar").innerHTML = `<span class="sortbar-lbl">Sort</span>` +
+    SHOP_SORTS.map(s =>
+      `<button class="spill ${shopSort===s.key?"on":""}" data-ssort="${s.key}">${s.lbl}</button>`
+    ).join("");
+}
+
+function sortedProds(list) {
+  if (invSort === "none") return list;
+  const sorted = [...list];
+  if (invSort === "name")     sorted.sort((a,b) => a.name.localeCompare(b.name));
+  if (invSort === "expiry")   sorted.sort((a,b) => new Date(a.edate) - new Date(b.edate));
+  if (invSort === "price")    sorted.sort((a,b) => a.price - b.price);
+  if (invSort === "category") sorted.sort((a,b) => (a.category||"").localeCompare(b.category||""));
+  if (invSort === "status") {
+    const order = {expired:0, expiring:1, low:2, active:3};
+    sorted.sort((a,b) => order[statusOf(daysLeft(a.edate),a.qty)] - order[statusOf(daysLeft(b.edate),b.qty)]);
+  }
+  return sorted;
+}
+
+function sortedShopItems(list) {
+  if (shopSort === "none") return list;
+  const sorted = [...list];
+  if (shopSort === "name")     sorted.sort((a,b) => a.name.localeCompare(b.name));
+  if (shopSort === "price")    sorted.sort((a,b) => a.price - b.price);
+  if (shopSort === "priority") { const o={High:0,Medium:1,Low:2}; sorted.sort((a,b)=>(o[a.priority]||1)-(o[b.priority]||1)); }
+  if (shopSort === "category") sorted.sort((a,b) => (a.category||"").localeCompare(b.category||""));
+  return sorted;
+}
+
 function renderProds() {
-  const list = prods.filter(p => {
+  renderInvSortBar();
+  let list = prods.filter(p => {
     const q = srch.toLowerCase();
     return (p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q))
         && (catF === "All" || p.category === catF);
   });
+  list = sortedProds(list);
   const con = $("productList");
   if (!list.length) { con.innerHTML = `<div class="empty">No products found</div>`; return; }
   con.innerHTML = list.map(p => {
@@ -607,34 +733,55 @@ function renderProds() {
       </div>
     </div>`;
   }).join("");
-  makeDraggable(con, ()=>prods, v=>{prods=v;}, ()=>{save();renderStats();renderProds();});
+  if (invSort === "none") {
+    makeDraggable(con, ()=>prods, v=>{prods=v;}, ()=>{save();renderStats();renderProds();});
+  }
 }
 
 // ── RENDER SHOPPING ───────────────────────────
+function getShopCatOrder() {
+  // Build current unique categories preserving shopCatOrder for known ones, appending new ones
+  const allCats = [...new Set(shop.map(i=>i.category||"Other"))];
+  const known = shopCatOrder.filter(c => allCats.includes(c));
+  const newCats = allCats.filter(c => !known.includes(c));
+  shopCatOrder = [...known, ...newCats];
+  return shopCatOrder;
+}
+
 function renderShop() {
+  renderShopSortBar();
   const wrap = $("shopSections");
   if (!shop.length) { wrap.innerHTML = `<div class="empty">No items — tap + to add</div>`; $("shopTotal").textContent = fmt(0); return; }
+
+  const catOrder = getShopCatOrder();
   const catMap = new Map();
   shop.forEach(item => { const c = item.category||"Other"; if(!catMap.has(c)) catMap.set(c,[]); catMap.get(c).push(item); });
+
   wrap.innerHTML = "";
-  catMap.forEach((items, cat) => {
+  catOrder.filter(cat => catMap.has(cat)).forEach(cat => {
+    let items = catMap.get(cat);
+    if (shopSort !== "none") items = sortedShopItems(items);
     const isCol = collapsed.has(cat);
     const sub = items.reduce((s,i) => s + i.price, 0);
     const sec = document.createElement("div");
-    sec.className = "sec" + (isCol?" col":"");
-    const cid = "sc_" + cat.replace(/\W/g,"_");
+    sec.className = "sec di" + (isCol?" col":""); // di = draggable for category reorder
+    sec.dataset.id = cat;
     sec.innerHTML = `
-      <div class="sechdr" onclick="toggleSec('${cat}')">
-        <div class="secl"><span class="secname">${cat}</span><span class="seccnt">${items.length}</span></div>
-        <div class="secr"><span class="secsub">${fmt(sub)}</span><span class="secchev">▾</span></div>
+      <div class="sechdr">
+        <div class="secl" onclick="toggleSec('${cat}')" style="flex:1;cursor:pointer">
+          <span class="secname">${cat}</span><span class="seccnt">${items.length}</span>
+        </div>
+        <div class="secr" onclick="toggleSec('${cat}')" style="cursor:pointer">
+          <span class="secsub">${fmt(sub)}</span><span class="secchev">▾</span>
+        </div>
       </div>
-      <div class="secbody" id="${cid}">
-        <div class="sechint">Hold ≡ to reorder</div>
+      <div class="secbody">
+        ${shopSort==="none"?'<div class="sechint">Hold ≡ to reorder items</div>':""}
         ${items.map(item => {
           const p = PRI[item.priority]||PRI.Medium;
           return `<div class="di scard" data-id="${item.id}">
             <div class="pribar" style="background:${p.bar}"></div>
-            <div class="dh" style="opacity:.22" onclick="event.stopPropagation()"><span></span><span></span><span></span></div>
+            ${shopSort==="none"?`<div class="dh" style="opacity:.22" onclick="event.stopPropagation()"><span></span><span></span><span></span></div>`:""}
             <div class="scinner" onclick="viewShop(${item.id})">
               <div class="sctop">
                 <div><div class="scname">${item.name}</div><div class="scbrand">${item.brand}</div></div>
@@ -654,13 +801,18 @@ function renderShop() {
         }).join("")}
       </div>`;
     wrap.appendChild(sec);
-    const body = sec.querySelector(".secbody");
-    makeDraggable(body,
-      () => shop.filter(i=>(i.category||"Other")===cat),
-      reordered => { shop = rebuildShop(cat, reordered); },
-      () => { save(); renderShop(); }
-    );
+
+    // Item drag within section (only when not sorted)
+    if (shopSort === "none") {
+      const body = sec.querySelector(".secbody");
+      makeDraggable(body,
+        () => shop.filter(i=>(i.category||"Other")===cat),
+        reordered => { shop = rebuildShop(cat, reordered); },
+        () => { save(); renderShop(); }
+      );
+    }
   });
+
   $("shopTotal").textContent = fmt(shop.reduce((s,i)=>s+i.price,0));
 }
 
@@ -845,13 +997,17 @@ function openProd(id) {
   $("prodTitle").textContent = id ? "Edit Product" : "Add Product";
   if (id) {
     const p = prods.find(x=>x.id===id);
-    $("f-name").value=p.name; $("f-brand").value=p.brand; $("f-cat").value=p.category;
+    $("f-name").value=p.name; $("f-brand").value=p.brand;
+    $("f-cat").value=p.category||"";
+    $("f-cat-btn").textContent=p.category||"Select category";
+    $("f-cat-btn").classList.toggle("selected", !!p.category);
     $("f-step").value=p.step; $("f-size").value=p.size; $("f-pdate").value=p.pdate;
     $("f-edate").value=p.edate; $("f-qty").value=p.qty; $("f-price").value=p.price;
     $("f-notes").value=p.notes;
   } else {
     ["f-name","f-brand","f-step","f-size","f-pdate","f-edate","f-price","f-notes"].forEach(f=>$(f).value="");
-    $("f-cat").value="Serum"; $("f-qty").value=1;
+    $("f-cat").value=""; $("f-cat-btn").textContent="Select category";
+    $("f-cat-btn").classList.remove("selected"); $("f-qty").value=1;
   }
   showOv("prodOv");
 }
@@ -863,11 +1019,11 @@ function saveProd() {
     size:Number($("f-size").value)||0,pdate:$("f-pdate").value,edate,
     qty:Number($("f-qty").value)||1,price:Number($("f-price").value)||0,notes:$("f-notes").value};
   if(epId) prods=prods.map(x=>x.id===epId?p:x); else prods.push(p);
-  hideOv("prodOv"); save(); renderStats(); renderProds(); showToast("Saved ✓");
+  hideOv("prodOv"); save(); refreshDataLists(); renderStats(); renderCats(); renderProds(); showToast("Saved ✓");
 }
 function delProd(id) {
   askConfirm("Remove this product?", "This cannot be undone.", () => {
-    prods=prods.filter(x=>x.id!==id); save(); renderStats(); renderProds(); showToast("Removed");
+    prods=prods.filter(x=>x.id!==id); save(); refreshDataLists(); renderStats(); renderCats(); renderProds(); showToast("Removed");
   });
 }
 
@@ -875,15 +1031,18 @@ function delProd(id) {
 function openShop(id) {
   esId = id;
   $("shopTitle").textContent = id ? "Edit Item" : "Add Item";
-  refreshDataLists();
   if(id){
     const i=shop.find(x=>x.id===id);
-    $("s-name").value=i.name; $("s-brand").value=i.brand; $("s-cat").value=i.category;
+    $("s-name").value=i.name; $("s-brand").value=i.brand;
+    $("s-cat").value=i.category||"";
+    $("s-cat-btn").textContent=i.category||"Select category";
+    $("s-cat-btn").classList.toggle("selected", !!i.category);
     $("s-pri").value=i.priority; $("s-price").value=i.price;
     $("s-where").value=i.where; $("s-notes").value=i.notes;
   } else {
     ["s-name","s-brand","s-where","s-notes","s-price"].forEach(f=>$(f).value="");
-    $("s-cat").value=""; $("s-pri").value="Medium";
+    $("s-cat").value=""; $("s-cat-btn").textContent="Select category";
+    $("s-cat-btn").classList.remove("selected"); $("s-pri").value="Medium";
   }
   showOv("shopOv");
 }
@@ -906,9 +1065,18 @@ function delShop(id){
 // ── ROUTINE CRUD ──────────────────────────────
 function openRout(id){
   erId=id; $("routTitle").textContent=id?"Edit Step":"Add Step";
-  refreshDataLists();
-  if(id){const r=rout.find(x=>x.id===id);$("r-step").value=r.step;$("r-name").value=r.name;$("r-cat").value=r.category||"";$("r-am").value=r.am;$("r-pm").value=r.pm;}
-  else{["r-step","r-name","r-cat","r-am","r-pm"].forEach(f=>$(f).value="");}
+  if(id){
+    const r=rout.find(x=>x.id===id);
+    $("r-step").value=r.step; $("r-name").value=r.name;
+    $("r-cat").value=r.category||"";
+    $("r-cat-btn").textContent=r.category||"None (leave ungrouped)";
+    $("r-cat-btn").classList.toggle("selected", !!r.category);
+    $("r-am").value=r.am; $("r-pm").value=r.pm;
+  } else {
+    ["r-step","r-name","r-am","r-pm"].forEach(f=>$(f).value="");
+    $("r-cat").value=""; $("r-cat-btn").textContent="None (leave ungrouped)";
+    $("r-cat-btn").classList.remove("selected");
+  }
   showOv("routOv");
 }
 function editRout(id){openRout(id);}
@@ -944,7 +1112,100 @@ function delWeek(id){
   });
 }
 
-// ── EXPORT / IMPORT ───────────────────────────
+// ── CATEGORY PICKER ───────────────────────────
+// Custom categories stored per section
+let customInvCats  = [];
+let customShopCats = [];
+let customRoutCats = [];
+
+let _catPickerContext = null; // 'prod' | 'shop' | 'rout'
+
+function getCatsForContext(ctx) {
+  if (ctx === 'prod') return [...new Set([...CATOPTS, ...prods.map(p=>p.category).filter(Boolean), ...customInvCats])];
+  if (ctx === 'shop') return [...new Set([...CATOPTS, ...shop.map(i=>i.category).filter(Boolean), ...customShopCats])];
+  if (ctx === 'rout') return [...new Set([...rout.map(r=>r.category).filter(Boolean), ...customRoutCats])];
+  return [];
+}
+
+function getHiddenId(ctx)  { return ctx==='prod'?'f-cat': ctx==='shop'?'s-cat':'r-cat'; }
+function getBtnId(ctx)     { return ctx==='prod'?'f-cat-btn': ctx==='shop'?'s-cat-btn':'r-cat-btn'; }
+
+function openCatPicker(ctx) {
+  _catPickerContext = ctx;
+  renderCatPicker();
+  showOv("catPickerOv");
+}
+
+function renderCatPicker() {
+  const ctx = _catPickerContext;
+  const cats = getCatsForContext(ctx);
+  const current = $(getHiddenId(ctx)).value;
+  const grid = $("catPickerGrid");
+
+  // For routine, show a "None" option too
+  const showNone = ctx === 'rout';
+  grid.innerHTML = (showNone ? `<button class="cpchip ${current===''?'on':''}" onclick="pickCat('')">None</button>` : '')
+    + cats.map(c =>
+        `<button class="cpchip ${current===c?'on':''}" onclick="pickCat('${c.replace(/'/g,"\\\'")}')">${c}</button>`
+      ).join("");
+
+  $("catPickerNew").value = "";
+}
+
+function pickCat(val) {
+  const ctx = _catPickerContext;
+  $(getHiddenId(ctx)).value = val;
+  const btn = $(getBtnId(ctx));
+  btn.textContent = val || (ctx==='rout' ? "None (leave ungrouped)" : "Select category");
+  btn.classList.toggle("selected", !!val);
+  hideOv("catPickerOv");
+}
+
+function addNewCat() {
+  const ctx = _catPickerContext;
+  const val = $("catPickerNew").value.trim();
+  if (!val) return;
+  if (ctx === 'prod')  customInvCats  = [...new Set([...customInvCats,  val])];
+  if (ctx === 'shop')  customShopCats = [...new Set([...customShopCats, val])];
+  if (ctx === 'rout')  customRoutCats = [...new Set([...customRoutCats, val])];
+  renderCatPicker();
+  // Auto-select the new category
+  pickCat(val);
+}
+
+$("catPickerClose").onclick = () => hideOv("catPickerOv");
+$("catPickerOv").onclick    = e => { if(e.target===$("catPickerOv")) hideOv("catPickerOv"); };
+$("catPickerAdd").onclick   = addNewCat;
+$("catPickerNew").onkeydown = e => { if(e.key==="Enter") addNewCat(); };
+window.openCatPicker = openCatPicker;
+window.pickCat = pickCat;
+function openManageCats() {
+  renderManageCats();
+  showOv("mancatOv");
+}
+
+function renderManageCats() {
+  const catOrder = getShopCatOrder();
+  const catMap = new Map();
+  shop.forEach(i => { const c = i.category||"Other"; catMap.set(c,(catMap.get(c)||0)+1); });
+  const list = $("mancatList");
+  list.innerHTML = catOrder.map(cat =>
+    `<div class="di mcitem" data-id="${cat}">
+      <div class="dh"><span></span><span></span><span></span></div>
+      <span class="mcname">${cat}</span>
+      <span class="mccnt">${catMap.get(cat)||0} item${(catMap.get(cat)||0)===1?"":"s"}</span>
+    </div>`
+  ).join("");
+  makeDraggable(list,
+    () => shopCatOrder,
+    v => { shopCatOrder = v; },
+    () => { save(); renderManageCats(); renderShop(); }
+  );
+}
+
+$("mancatClose").onclick = () => hideOv("mancatOv");
+$("mancatOv").onclick = e => { if(e.target===$("mancatOv")) hideOv("mancatOv"); };
+$("btnManageCats").onclick = openManageCats;
 function exportData(){
   const blob=new Blob([JSON.stringify({prods,shop,rout,week,tabOrder},null,2)],{type:"application/json"});
   const url=URL.createObjectURL(blob),a=document.createElement("a");
@@ -965,16 +1226,10 @@ function importData(file){
 }
 
 // ── POPULATE SELECTS ──────────────────────────
-$("f-cat").innerHTML = CATOPTS.map(c=>`<option>${c}</option>`).join("");
-
 function refreshDataLists() {
-  // Shopping categories: preset + any custom ones already in use
-  const shopCats = [...new Set([...CATOPTS, ...shop.map(i=>i.category).filter(Boolean)])];
-  $("s-cat-list").innerHTML = shopCats.map(c=>`<option value="${c}">`).join("");
-  // Routine categories: any already in use
-  const routCats = [...new Set(rout.map(r=>r.category).filter(Boolean))];
-  $("r-cat-list").innerHTML = routCats.map(c=>`<option value="${c}">`).join("");
+  // no-op: category picker now handles its own list dynamically
 }
+refreshDataLists();
 
 // ── EVENT LISTENERS ───────────────────────────
 $("btnAdd").onclick = () => {
@@ -1009,6 +1264,18 @@ $("weekSave").onclick   = saveWeek;
 $("searchInput").oninput = e => { srch = e.target.value; renderProds(); };
 $("catsRow").onclick = e => {
   if(e.target.dataset.cat){ catF=e.target.dataset.cat; renderCats(); renderProds(); }
+};
+$("invSortBar").onclick = e => {
+  const key = e.target.dataset.isort;
+  if(!key) return;
+  invSort = invSort === key ? "none" : key;
+  renderProds();
+};
+$("shopSortBar").onclick = e => {
+  const key = e.target.dataset.ssort;
+  if(!key) return;
+  shopSort = shopSort === key ? "none" : key;
+  renderShop();
 };
 
 // ── INITIAL RENDER ────────────────────────────
