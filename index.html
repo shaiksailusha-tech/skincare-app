@@ -9,10 +9,13 @@
 <meta name="theme-color" content="#3C3C3C"/>
 <title>Skincare</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+</head>
 <style>
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{--ch:#3C3C3C;--tpe:#8C7B75;--stn:#E8E4E0;--ln:#F2EDE8;--crm:#FAF8F5;--wh:#FFFFFF;--td:#2C2C2C;--tm:#5A5550;--tl:#8C8580;--bdr:#DDD8D2;--green:#6B7D6E;--amber:#8B6914;--red:#8B3A3A;--blue:#4A6B8A;--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)}
-[data-theme="dark"]{--ch:#1C1C1E;--tpe:#9A8B85;--stn:#2C2C2E;--ln:#252527;--crm:#1C1C1E;--wh:#2C2C2E;--td:#F0EBE6;--tm:#B0AAA5;--tl:#706860;--bdr:#3A3A3C}
+[data-theme="dark"]{--ch:#1C1C1E;--tpe:#9A8B85;--stn:#2C2C2E;--ln:#252527;--crm:#1C1C1E;--wh:#2C2C2E;--td:#F0EBE6;--tm:#B0AAA5;--tl:#706860;--bdr:#3A3A3C;--green:#7A9D7C;--amber:#C4A040;--red:#C47878;--blue:#6A9AB8}
 html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;color:var(--td);overflow:hidden}
 #app{height:100%;display:flex;flex-direction:column}
 .hdr{background:var(--ch);flex-shrink:0;padding:calc(var(--st)+14px) 18px 14px}
@@ -204,9 +207,78 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
 .toast{position:fixed;bottom:calc(var(--sb)+22px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--ch);color:var(--crm);padding:8px 16px;border-radius:20px;font-size:12px;opacity:0;transition:all .22s;z-index:1000;white-space:nowrap;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .hi{display:none!important}
+/* SWIPE ACTIONS */
+.swipeable{position:relative;overflow:hidden;touch-action:pan-y}
+.swipe-bg{position:absolute;inset:0;display:flex;align-items:center;border-radius:7px;pointer-events:none}
+.swipe-bg-left{background:var(--green);padding-left:20px;justify-content:flex-start}
+.swipe-bg-right{background:var(--red);padding-right:20px;justify-content:flex-end}
+.swipe-icon{font-size:13px;color:#fff;font-weight:500;letter-spacing:.04em}
+.swipe-content{position:relative;z-index:1;background:var(--wh);border-radius:7px;transition:transform .15s ease;will-change:transform}
+.swipe-content.swiping{transition:none}
+.fld input.invalid,.fld select.invalid{border-color:var(--red)!important;background:#FFF5F5}
+.fld input.valid{border-color:var(--green)}
+.field-error{font-size:10px;color:var(--red);margin-top:2px}
+.field-hint{font-size:10px;color:var(--tl);margin-top:2px}
+.progress-btn{padding:5px 12px;border:1px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:11px;color:var(--tm);border-radius:20px;cursor:pointer;white-space:nowrap}
+.progress-btn.on{background:var(--ch);border-color:var(--ch);color:var(--crm)}
+.ba-pair{background:var(--wh);border:1px solid var(--bdr);border-radius:7px;overflow:hidden;margin-bottom:10px}
+.ba-pair-hdr{padding:8px 12px;background:var(--ln);display:flex;justify-content:space-between;align-items:center}
+.ba-pair-title{font-size:11px;font-weight:500;color:var(--tm);letter-spacing:.07em;text-transform:uppercase}
+.ba-pair-imgs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bdr)}
+.ba-img-wrap{position:relative;background:var(--ln)}
+.ba-img-wrap img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.ba-img-lbl{position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.45);color:#fff;font-size:9px;padding:2px 6px;border-radius:4px;letter-spacing:.06em;text-transform:uppercase}
+.bk-modal{position:fixed;inset:0;background:rgba(30,30,30,.7);z-index:850;display:flex;align-items:center;justify-content:center;padding:22px;pointer-events:auto}
+.bk-modal.hi{display:none}
+.bk-box{background:var(--wh);border-radius:14px;padding:24px 20px;width:100%;max-width:320px;text-align:center}
+.bk-icon{font-size:38px;margin-bottom:10px}
+.bk-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ch);margin-bottom:8px}
+.bk-msg{font-size:13px;color:var(--tl);line-height:1.5;margin-bottom:18px}
+.bk-acts{display:flex;flex-direction:column;gap:8px}
+.bk-primary{padding:12px;background:var(--ch);border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--crm);border-radius:8px;cursor:pointer}
+.bk-secondary{padding:11px;background:none;border:1px solid var(--bdr);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--tm);border-radius:8px;cursor:pointer}
+
+
+/* AM/PM VIEW TOGGLE */
+.rv-btn{padding:5px 12px;border:1px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:11px;color:var(--tm);border-radius:20px;cursor:pointer;white-space:nowrap}
+.rv-btn.on{background:var(--ch);border-color:var(--ch);color:var(--crm)}
+.rout-slot-hidden{display:none!important}
+/* SCHEDULE */
+.day-btn{padding:6px 10px;border:1px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:11px;color:var(--tm);border-radius:6px;cursor:pointer}
+.day-btn.on{background:var(--ch);border-color:var(--ch);color:var(--crm)}
+.sched-dot{width:6px;height:6px;background:var(--tpe);border-radius:50%;display:inline-block;margin-left:4px;vertical-align:middle}
+/* CHECKOUT MODE */
+.checkout-view{position:fixed;inset:0;background:var(--crm);z-index:400;display:flex;flex-direction:column}
+.checkout-view.hi{display:none}
+.checkout-hdr{background:var(--ch);padding:calc(var(--st)+14px) 18px 14px;display:flex;align-items:center;justify-content:space-between}
+.checkout-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--crm)}
+.checkout-scroll{flex:1;overflow-y:auto;padding:12px 15px;display:flex;flex-direction:column;gap:8px}
+.co-item{background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:14px 15px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:opacity .2s}
+.co-item:active{opacity:.7}
+.co-check{width:24px;height:24px;border:2px solid var(--bdr);border-radius:50%;flex-shrink:0}
+.co-body{flex:1}
+.co-name{font-size:14px;font-weight:500;color:var(--td)}
+.co-sub{font-size:11px;color:var(--tl);margin-top:2px}
+.co-price{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ch);flex-shrink:0}
+.checkout-footer{padding:12px 15px calc(var(--sb)+12px);background:var(--wh);border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.checkout-total{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ch)}
+/* STARS */
+.star.filled{color:#C9A030}
+.star{color:var(--stn)}
+/* WIDGET */
+.widget-panel{padding:10px 15px 0}
+.widget-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}
+.widget-tile{background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:10px 8px;text-align:center;cursor:pointer}
+.widget-icon{font-size:18px;margin-bottom:3px}
+.widget-val{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--ch);line-height:1.1}
+.widget-lbl{font-size:9px;color:var(--tl);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+.widget-alert{background:#FFF8E8;border:1px solid #E8D8A0;border-radius:6px;padding:8px 12px;font-size:12px;color:#7A5C00;cursor:pointer;margin-bottom:6px}
+.widget-streak{background:var(--wh);border:1px solid var(--bdr);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--tm);margin-bottom:6px}
+[data-theme="dark"] .widget-alert{background:#2A2210;border-color:#4A3A10;color:#C9A030}
+
 </style>
-</head>
 <body>
+
 <div class="onboard" id="onboard">
   <div class="ob-emoji">✨</div>
   <div class="ob-title">Your Skincare Space</div>
@@ -235,6 +307,7 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
   </header>
   <div class="scroll" id="scrollArea">
     <div id="tab-inventory">
+      <div class="widget-panel" id="widgetPanel"></div>
       <div class="stats" id="statsRow"></div>
       <div class="backup-banner hi" id="backupBanner">
         <div class="backup-msg" id="backupMsg">Back up your data</div>
@@ -256,7 +329,16 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
       <div class="total"><span class="tlbl">Estimated Total</span><span class="tval" id="shopTotal">₹0</span></div>
     </div>
     <div id="tab-routine" class="hi">
-      <div class="phdr"><div><div class="peye">Daily Protocol</div><div class="ptitle">Routine</div></div></div>
+      <div class="phdr">
+  <div><div class="peye">Daily Protocol</div><div class="ptitle">Routine</div></div>
+  <div style="display:flex;gap:6px;align-items:center">
+    <button class="sbtn" onclick="openTemplates()">Templates</button>
+    <button class="sbtn" onclick="shareRoutine()">Share</button>
+  </div>
+</div>
+<div style="display:flex;gap:6px;padding:8px 15px 0;overflow-x:auto;scrollbar-width:none" id="routViewToggle"></div>
+<div id="weeklySummary"></div>
+<div id="reorderAlerts"></div>
       <div id="streakBanner"></div>
       <div class="srch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="sinput" id="routSearchInput" placeholder="Search routine…" type="search"/></div>
       <div class="drag-hint">Hold ≡ to reorder</div>
@@ -266,7 +348,7 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
       <div class="wsec" id="weeklyList"></div>
     </div>
     <div id="tab-journal" class="hi">
-      <div class="phdr"><div><div class="peye">Daily Log</div><div class="ptitle">Skin Journal</div></div></div>
+      <div class="phdr"><div><div class="peye">Daily Log</div><div class="ptitle">Skin Journal</div></div><button class="sbtn" onclick="openProgress()">📸 Progress</button></div>
       <div class="srch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="sinput" id="journalSearchInput" placeholder="Search journal…" type="search"/></div>
       <div class="journal-list" id="journalList"></div>
     </div>
@@ -327,12 +409,99 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
   <div class="ov hi" id="batchCatOv" style="z-index:500"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle">Set Category</span><button class="drwclose" id="batchCatClose">×</button></div><div class="drwbody" style="gap:0;padding:12px 18px"><div id="batchCatGrid" style="display:flex;flex-wrap:wrap;gap:8px"></div></div></div></div>
   <!-- CONFIRM -->
   <div class="ov hi" id="confirmOv" style="align-items:center;padding:22px"><div class="conf-box"><div class="conf-msg" id="confirmMsg">Are you sure?</div><div class="conf-sub" id="confirmSub"></div><div class="conf-acts"><button class="conf-no" id="confirmNo">Cancel</button><button class="conf-yes" id="confirmYes">Remove</button></div></div></div>
+
+  <!-- TEMPLATE NAME OVERLAY -->
+  <div class="ov hi" id="tmplNameOv" style="z-index:500">
+    <div class="drw">
+      <div class="drwbar"></div>
+      <div class="drwhdr"><span class="drwtitle">Save Template</span><button class="drwclose" id="tmplNameClose">×</button></div>
+      <div class="drwbody">
+        <div class="fld full"><label>Template Name</label><input id="tmplNameInput" placeholder="e.g. Summer Routine, Travel Routine…"/></div>
+      </div>
+      <div class="drwfoot"><button class="bcancel" id="tmplNameCancel">Cancel</button><button class="bsave" id="tmplNameSave">Save</button></div>
+    </div>
+  </div>
+
+  <!-- PROGRESS OVERLAY -->
+  <div class="ov hi" id="progressOv">
+    <div class="drw" style="max-height:96vh">
+      <div class="drwbar"></div>
+      <div class="drwhdr"><span class="drwtitle">Skin Progress</span><button class="drwclose" id="progressClose">×</button></div>
+      <div style="display:flex;gap:6px;padding:10px 15px 0;overflow-x:auto;scrollbar-width:none">
+        <button class="progress-btn on" id="pbView" onclick="pgSwitch('view')">📊 Compare</button>
+        <button class="progress-btn" id="pbAdd" onclick="pgSwitch('add')">➕ Add Photo</button>
+      </div>
+      <div class="drwbody" style="padding:0;gap:0;overflow-y:auto" id="progressBody"></div>
+    </div>
+  </div>
+  <!-- BACKUP MODAL -->
+  <div class="bk-modal hi" id="bkModal">
+    <div class="bk-box">
+      <div class="bk-icon">💾</div>
+      <div class="bk-title">Time to Back Up</div>
+      <div class="bk-msg" id="bkMsg">Export your data to keep it safe.</div>
+      <div class="bk-acts">
+        <button class="bk-primary" id="bkExport">Download Backup Now</button>
+        <button class="bk-secondary" id="bkLater">Remind me in 3 days</button>
+        <button class="bk-secondary" id="bkSnooze" style="font-size:11px;color:var(--tl)">Snooze for a week</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROUTINE VIEW TOGGLE (injected into routine tab) -->
+
+  <!-- TEMPLATES OVERLAY -->
+  <div class="ov hi" id="templatesOv">
+    <div class="drw">
+      <div class="drwbar"></div>
+      <div class="drwhdr"><span class="drwtitle">Routine Templates</span><button class="drwclose" id="templatesClose">×</button></div>
+      <div class="drwbody" style="padding:0;gap:0;overflow-y:auto" id="templatesBody"></div>
+    </div>
+  </div>
+
+  <!-- SCHEDULE OVERLAY -->
+  <div class="ov hi" id="schedOv">
+    <div class="drw">
+      <div class="drwbar"></div>
+      <div class="drwhdr">
+        <div><div style="font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px">Schedule</div>
+        <span class="drwtitle" id="schedStepName"></span></div>
+        <button class="drwclose" id="schedClose">×</button>
+      </div>
+      <div class="drwbody">
+        <p style="font-size:12px;color:var(--tl)">Select which days to include this step. Leave all unselected for every day.</p>
+        <input type="hidden" id="schedStepId"/>
+        <div style="display:flex;gap:7px;flex-wrap:wrap" id="schedDays"></div>
+      </div>
+      <div class="drwfoot"><button class="bsave" id="schedDone">Done</button></div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT VIEW -->
+  <div class="checkout-view hi" id="checkoutView">
+    <div class="checkout-hdr">
+      <div>
+        <div style="font-size:10px;color:var(--tpe);letter-spacing:.14em;text-transform:uppercase;margin-bottom:2px">In Store</div>
+        <div class="checkout-title">Checkout Mode</div>
+      </div>
+      <button class="ibtn" onclick="exitCheckout()" style="font-size:18px">✕</button>
+    </div>
+    <div class="checkout-scroll" id="checkoutList"></div>
+    <div class="checkout-footer">
+      <span class="checkout-total" id="checkoutTotal"></span>
+      <button class="bsave" onclick="exitCheckout()">Done</button>
+    </div>
+  </div>
+
   <input type="file" id="importFile" accept=".json" class="hi"/>
   <div class="toast" id="toast"></div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded',function(){
+
+
+
 const CATOPTS=["Cleanser","Toner","Serum","Moisturiser","Sunscreen","Eye Care","Exfoliant","Face Oil","Essence","Lip Care"];
 const ST={active:{lbl:"Active",c:"#6B7D6E",bg:"#EEF1EE"},expiring:{lbl:"Expiring Soon",c:"#8B6914",bg:"#F5EDD4"},expired:{lbl:"Expired",c:"#8B3A3A",bg:"#F5E4E4"},low:{lbl:"Low Stock",c:"#4A6B8A",bg:"#E4EDF5"}};
 const PRI={High:{c:"#8B3A3A",bg:"#F5E4E4",bar:"#C97878"},Medium:{c:"#8B6914",bg:"#F5EDD4",bar:"#C9A96E"},Low:{c:"#5A6B5A",bg:"#E8EEE8",bar:"#8FAF90"}};
@@ -385,7 +554,7 @@ let darkMode=st?.darkMode||false;
 let cIC=st?.cIC||[];let cSC=st?.cSC||[];let cRC=st?.cRC||[];
 prods=prods.map(p=>({odate:"",pao:12,photo:"",...p}));
 shop=shop.map(s=>({purchased:false,...s}));
-rout=rout.map(r=>({category:"",...r}));
+rout=rout.map(r=>({category:"",days:[],...r}));
 let curTab=tabOrder[0]||"inventory";
 let srch="",catF="All",shopSrch="",routSrch="",jSrch="";
 let invSort="none",shopSort="none";
@@ -467,7 +636,8 @@ function switchTab(t){
   $("scrollArea").scrollTop=0;renderNav();
   if(t==="shopping")renderShop();
   if(t==="routine")renderRout();
-  if(t==="journal")renderJournal();
+  if(t==="journal"){renderJournal();renderWeeklySummary();}
+  renderWidget();
 }
 
 /* INVENTORY */
@@ -499,6 +669,7 @@ function renderProds(){
   con.innerHTML=list.map(p=>{
     const ed2=ee(p),d=dl(ed2),s=ST[so(d,p.qty)];
     const dc=d<0?"dexp":d<90?"dwarn":"dok";
+    const starHtml=p.rating?`<span style="font-size:11px;color:#C9A030">${'★'.repeat(p.rating)}${'☆'.repeat(5-p.rating)}</span>`:'';
     const sk=so(d,p.qty);
     const bc=sk==="expiring"?" expiring-card":sk==="expired"?" expired-card":sk==="low"?" lowstock-card":"";
     const sel=batchSel.has(p.id)?" selected-card":"";
@@ -507,7 +678,7 @@ function renderProds(){
       <div class="card-img">${p.photo?`<img src="${p.photo}" alt=""/>`:`<div class="card-img-ph">🧴</div>`}</div>
       <div class="card-body">
         <div class="ctop"><div><div class="cname">${p.name}</div><div class="cbrand">${p.brand}</div></div><span class="badge" style="color:${s.c};background:${s.bg}">${s.lbl}</span></div>
-        <div class="cmeta"><span class="chip">${p.category}</span>${p.step?`<span class="chip">${p.step}</span>`:""}${p.size?`<span class="chip">${p.size}ml</span>`:""}${paoi}<span class="${dc}">${d<0?Math.abs(d)+"d ago":d+"d left"}</span></div>
+        <div class="cmeta"><span class="chip">${p.category}</span>${p.step?`<span class="chip">${p.step}</span>`:""}${p.size?`<span class="chip">${p.size}ml</span>`:""}${paoi}<span class="${dc}">${d<0?Math.abs(d)+"d ago":d+"d left"}</span>${starHtml}</div>
         <div class="cbot"><div class="cprice">${fmt(p.qty*p.price)} <span style="font-size:11px;color:var(--tl);font-family:'DM Sans',sans-serif">×${p.qty}</span></div>
           <div class="cacts" onclick="event.stopPropagation()">
             <button class="abtn dup" onclick="dupP(${p.id})" title="Duplicate">⊕</button>
@@ -519,13 +690,13 @@ function renderProds(){
       ${invSort==="none"?`<div class="dh" onclick="event.stopPropagation()"><span></span><span></span><span></span></div>`:""}
     </div>`;
   }).join("");
-  if(invSort==="none")mdr(con,()=>prods,v=>{prods=v;},()=>{save();renderStats();renderProds();});
+  if(invSort==="none")mdr(con,()=>prods,v=>{prods=v;},()=>{save();renderStats();renderProds();}); setTimeout(attachProdSwipes,60);
 }
 function hCC(id,event){if(batchMode){batchSel.has(id)?batchSel.delete(id):batchSel.add(id);$("batchCount").textContent=batchSel.size;renderProds();}else viewProd(id);}
 
 /* SHOPPING */
 const SS=[{key:"name",lbl:"Name A–Z"},{key:"price",lbl:"Price ↑"},{key:"priority",lbl:"Priority"},{key:"category",lbl:"Category A–Z"}];
-function renderSSB(){$("shopSortBar").innerHTML=`<span class="sortbar-lbl">Sort</span>`+SS.map(s=>`<button class="spill ${shopSort===s.key?"on":""}" data-ssort="${s.key}">${s.lbl}</button>`).join("")+`<button class="spill" id="budgetBtn" style="margin-left:6px">💰 Budget</button>`;$("budgetBtn").onclick=()=>{$("bAmount").value=budget||"";sov("budgetOv");};}
+function renderSSB(){$("shopSortBar").innerHTML=`<span class="sortbar-lbl">Sort</span>`+SS.map(s=>`<button class="spill ${shopSort===s.key?"on":""}" data-ssort="${s.key}">${s.lbl}</button>`).join("")+`<button class="spill" id="budgetBtn" style="margin-left:6px">💰 Budget</button><button class="spill" id="checkoutBtn" style="margin-left:auto">🛒 Checkout</button>`;$("budgetBtn").onclick=()=>{$("bAmount").value=budget||"";sov("budgetOv");};$("checkoutBtn").onclick=enterCheckout;}
 function gSCO(){const all=[...new Set(shop.map(i=>i.category||"Other"))];const kn=shopCatOrder.filter(c=>all.includes(c));shopCatOrder=[...kn,...all.filter(c=>!kn.includes(c))];return shopCatOrder;}
 function sSh(list){if(shopSort==="none")return list;const s=[...list];if(shopSort==="name")s.sort((a,b)=>a.name.localeCompare(b.name));if(shopSort==="price")s.sort((a,b)=>a.price-b.price);if(shopSort==="priority"){const o={High:0,Medium:1,Low:2};s.sort((a,b)=>(o[a.priority]||1)-(o[b.priority]||1));}if(shopSort==="category")s.sort((a,b)=>(a.category||"").localeCompare(b.category||""));return s;}
 function renderShop(){
@@ -585,13 +756,21 @@ function mToInv(id){
 function renderRout(){
   const streak=calcStreak();const{done,tot}=rp();const allD=done===tot&&tot>0;
   $("streakBanner").innerHTML=`<div class="streak-banner"><div class="streak-fire">${allD?"🔥":"☀️"}</div><div><div class="streak-count">${streak}</div><div class="streak-lbl">Day Streak</div><div class="streak-today">${allD?"Today complete! 🎉":"Today: "+done+"/"+tot+" steps done"}</div></div></div>`;
+  renderRoutViewToggle();
+  renderWeeklySummary();
+  renderReorderAlerts();
   const q=routSrch.toLowerCase();
   let fr=q?rout.filter(r=>r.name.toLowerCase().includes(q)||r.am.toLowerCase().includes(q)||r.pm.toLowerCase().includes(q)):rout;
+  // Filter by schedule
+  fr=fr.filter(r=>isScheduledToday(r));
   const rc=$("routineList");const cm=new Map();const unc=[];
   fr.forEach(r=>{const c=(r.category||"").trim();if(c){if(!cm.has(c))cm.set(c,[]);cm.get(c).push(r);}else unc.push(r);});
   function sc2(r){
     const am=!!comp[`${TODAY}_${r.id}_am`],pm=!!comp[`${TODAY}_${r.id}_pm`];
-    return `<div class="di rcard" data-id="${r.id}"><div class="rdragcol"><div class="dh"><span></span><span></span><span></span></div></div><div class="rbody" onclick="viewRout(${r.id})" style="cursor:pointer"><div class="rchdr"><div class="rnum">${r.step}</div><div class="rname">${r.name}</div><div class="racts" onclick="event.stopPropagation()"><button class="sbtn" onclick="editRout(${r.id})">Edit</button><button class="sbtn del" onclick="delRout(${r.id})">×</button></div></div><div class="rslots"><div class="rslot"><div class="rslbl">Morning <span class="rcheck ${am?"done":""}" onclick="tCheck(${r.id},'am',event)">${am?"✓":""}</span></div><div class="rsval">${r.am}</div></div><div class="rslot"><div class="rslbl">Evening <span class="rcheck ${pm?"done":""}" onclick="tCheck(${r.id},'pm',event)">${pm?"✓":""}</span></div><div class="rsval">${r.pm}</div></div></div></div></div>`;
+    const schedDays=r.days&&r.days.length?r.days.map(d=>DAY_NAMES[d]).join(', '):'Every day';
+    const amHide=routView==='pm'?'rout-slot-hidden':'';
+    const pmHide=routView==='am'?'rout-slot-hidden':'';
+    return `<div class="di rcard" data-id="${r.id}"><div class="rdragcol"><div class="dh"><span></span><span></span><span></span></div></div><div class="rbody" onclick="viewRout(${r.id})" style="cursor:pointer"><div class="rchdr"><div class="rnum">${r.step}</div><div class="rname">${r.name}</div><div class="racts" onclick="event.stopPropagation()"><button class="sbtn" onclick="renderSchedulePicker(${r.id})" title="Schedule">📅</button><button class="sbtn" onclick="editRout(${r.id})">Edit</button><button class="sbtn del" onclick="delRout(${r.id})">×</button></div></div><div class="rslots"><div class="rslot ${amHide}"><div class="rslbl">Morning <span class="rcheck ${am?"done":""}" onclick="tCheck(${r.id},'am',event)">${am?"✓":""}</span></div><div class="rsval">${r.am}</div></div><div class="rslot ${pmHide}"><div class="rslbl">Evening <span class="rcheck ${pm?"done":""}" onclick="tCheck(${r.id},'pm',event)">${pm?"✓":""}</span></div><div class="rsval">${r.pm}</div></div></div></div></div>`;
   }
   let html="";
   cm.forEach((items,cat)=>{html+=`<div class="rcat-group"><div class="rcat-hdr">${cat}</div><div class="rcat-body" data-rcat="${cat}">${items.map(sc2).join("")}</div></div>`;});
@@ -617,31 +796,34 @@ function renderJournal(){
 
 /* VIEW */
 function viewProd(id){
-  const p=prods.find(x=>x.id===id);const ed2=ee(p);const d=dl(ed2),s=ST[so(d,p.qty)];const pei=pe(p.odate,p.pao);
+  const p=prods.find(x=>x.id===id);if(!p)return;const ed2=ee(p);const d=dl(ed2),s=ST[so(d,p.qty)];const pei=pe(p.odate,p.pao);
   $("viewEye").textContent=p.category;$("viewTitle").textContent=p.name;
   $("viewBody").innerHTML=`${p.photo?`<img src="${p.photo}" style="width:100%;max-height:180px;object-fit:cover;border-radius:6px;margin-bottom:8px" alt=""/>`:""}<div class="vrow"><span class="vlbl">Brand</span><span class="vval">${p.brand}</span></div><div class="vrow"><span class="vlbl">Status</span><span class="vval"><span class="badge" style="color:${s.c};background:${s.bg}">${s.lbl}</span></span></div><div class="vrow"><span class="vlbl">Step</span><span class="vval">${p.step||"—"}</span></div><div class="vrow"><span class="vlbl">Size</span><span class="vval">${p.size?p.size+"ml":"—"}</span></div><div class="vrow"><span class="vlbl">Quantity</span><span class="vval">${p.qty}</span></div><div class="vrow"><span class="vlbl">Price</span><span class="vval vbig">${fmt(p.price)}</span></div><div class="vrow"><span class="vlbl">Total Value</span><span class="vval">${fmt(p.qty*p.price)}</span></div><div class="vrow"><span class="vlbl">Purchased</span><span class="vval">${p.pdate||"—"}</span></div><div class="vrow"><span class="vlbl">Expires</span><span class="vval" style="color:${d<0?"var(--red)":d<90?"var(--amber)":"inherit"}">${ed2||"—"} ${ed2?"("+( d<0?Math.abs(d)+"d ago":d+"d left")+")":""}</span></div>${p.odate&&p.pao?`<div class="vrow"><span class="vlbl">Opened</span><span class="vval">${p.odate} · PAO ${p.pao}m</span></div><div class="vrow"><span class="vlbl">PAO Expiry</span><span class="vval" style="color:${pei&&dl(pei)<90?"var(--amber)":"inherit"}">${pei||"—"}</span></div>`:""}${p.notes?`<div class="vrow"><span class="vlbl">Notes</span><span class="vval vnote">${p.notes}</span></div>`:""}`;
+  const stars=renderStars(p.rating,id,true);const ph=renderPriceHistory(id);
+  if(stars)$("viewBody").innerHTML+=`<div class="vrow"><span class="vlbl">Rating</span><span class="vval" id="viewStars_${id}">${stars}</span></div>`;
+  if(ph)$("viewBody").innerHTML+=ph;
   $("viewEdit").onclick=()=>{hov("viewOv");editProd(id);};$("viewDel").onclick=()=>{hov("viewOv");delProd(id);};sov("viewOv");
 }
 function viewShop(id){
-  const item=shop.find(x=>x.id===id);const p=PRI[item.priority]||PRI.Medium;
+  const item=shop.find(x=>x.id===id);if(!item)return;const p=PRI[item.priority]||PRI.Medium;
   $("viewEye").textContent=item.category;$("viewTitle").textContent=item.name;
   $("viewBody").innerHTML=`<div class="vrow"><span class="vlbl">Brand</span><span class="vval">${item.brand||"—"}</span></div><div class="vrow"><span class="vlbl">Priority</span><span class="vval"><span class="badge" style="color:${p.c};background:${p.bg}">${item.priority}</span></span></div><div class="vrow"><span class="vlbl">Price</span><span class="vval vbig">${fmt(item.price)}</span></div><div class="vrow"><span class="vlbl">Where to Buy</span><span class="vval">${item.where||"—"}</span></div><div class="vrow"><span class="vlbl">Status</span><span class="vval">${item.purchased?"✓ Purchased":"Not yet purchased"}</span></div>${item.notes?`<div class="vrow"><span class="vlbl">Notes</span><span class="vval vnote">${item.notes}</span></div>`:""}`;
   $("viewEdit").onclick=()=>{hov("viewOv");editShop(id);};$("viewDel").onclick=()=>{hov("viewOv");delShop(id);};sov("viewOv");
 }
 function viewRout(id){
-  const r=rout.find(x=>x.id===id);const am=!!comp[`${TODAY}_${r.id}_am`],pm=!!comp[`${TODAY}_${r.id}_pm`];
+  const r=rout.find(x=>x.id===id);if(!r)return;const am=!!comp[`${TODAY}_${r.id}_am`],pm=!!comp[`${TODAY}_${r.id}_pm`];
   $("viewEye").textContent="Routine Step";$("viewTitle").textContent=r.name;
   $("viewBody").innerHTML=`<div class="vrow"><span class="vlbl">Step No.</span><span class="vval">${r.step}</span></div><div class="vrow"><span class="vlbl">Morning</span><span class="vval">${r.am||"—"} ${am?"✓":""}</span></div><div class="vrow"><span class="vlbl">Evening</span><span class="vval">${r.pm||"—"} ${pm?"✓":""}</span></div>${r.category?`<div class="vrow"><span class="vlbl">Category</span><span class="vval">${r.category}</span></div>`:""}`;
   $("viewEdit").onclick=()=>{hov("viewOv");editRout(id);};$("viewDel").onclick=()=>{hov("viewOv");delRout(id);};sov("viewOv");
 }
 function viewWeek(id){
-  const w=week.find(x=>x.id===id);
+  const w=week.find(x=>x.id===id);if(!w)return;
   $("viewEye").textContent="Weekly Treatment";$("viewTitle").textContent=w.name;
   $("viewBody").innerHTML=`<div class="vrow"><span class="vlbl">Frequency</span><span class="vval">${w.freq||"—"}</span></div><div class="vrow"><span class="vlbl">Notes</span><span class="vval vnote">${w.note||"—"}</span></div>`;
   $("viewEdit").onclick=()=>{hov("viewOv");editWeek(id);};$("viewDel").onclick=()=>{hov("viewOv");delWeek(id);};sov("viewOv");
 }
 function viewJournal(id){
-  const e=journal.find(x=>x.id===id);
+  const e=journal.find(x=>x.id===id);if(!e)return;
   $("viewEye").textContent="Journal Entry";$("viewTitle").textContent=e.date;
   $("viewBody").innerHTML=`${e.mood?`<div class="vrow"><span class="vlbl">Mood</span><span class="vval" style="font-size:20px">${e.mood}</span></div>`:""}<div class="vrow"><span class="vlbl">Notes</span><span class="vval vnote" style="text-align:left">${e.text||"—"}</span></div>${e.tags&&e.tags.length?`<div class="vrow"><span class="vlbl">Tags</span><span class="vval">${e.tags.join(", ")}</span></div>`:""}`;
   $("viewEdit").onclick=()=>{hov("viewOv");openJournal(id);};$("viewDel").onclick=()=>{hov("viewOv");delJournal(id);};sov("viewOv");
@@ -651,7 +833,7 @@ function viewJournal(id){
 function setCB(btnId,val,ph){const b=$(btnId);b.textContent=val||ph;b.classList.toggle("selected",!!val);}
 function openProd(id){
   epId=id;$("prodTitle").textContent=id?"Edit Product":"Add Product";_cpb64="";
-  if(id){const p=prods.find(x=>x.id===id);$("fName").value=p.name;$("fBrand").value=p.brand;$("fCat").value=p.category||"";setCB("fCatBtn",p.category,"Select");$("fStep").value=p.step;$("fSize").value=p.size;$("fPdate").value=p.pdate;$("fEdate").value=p.edate;$("fOdate").value=p.odate||"";$("fPao").value=p.pao||"";$("fQty").value=p.qty;$("fPrice").value=p.price;$("fNotes").value=p.notes;_cpb64=p.photo||"";}
+  if(id){const p=prods.find(x=>x.id===id);if(!p){hov("prodOv");return;}$("fName").value=p.name;$("fBrand").value=p.brand;$("fCat").value=p.category||"";setCB("fCatBtn",p.category,"Select");$("fStep").value=p.step;$("fSize").value=p.size;$("fPdate").value=p.pdate;$("fEdate").value=p.edate;$("fOdate").value=p.odate||"";$("fPao").value=p.pao||"";$("fQty").value=p.qty;$("fPrice").value=p.price;$("fNotes").value=p.notes;_cpb64=p.photo||"";}
   else{["fName","fBrand","fStep","fSize","fPdate","fEdate","fOdate","fPao","fPrice","fNotes"].forEach(f=>$(f).value="");$("fCat").value="";setCB("fCatBtn","","Select");$("fQty").value=1;}
   uPhUI();sov("prodOv");
 }
@@ -661,9 +843,9 @@ function saveProd(){
   if(!name||!brand){toast("Name and brand required");return;}
   const p={id:epId||Date.now(),name,brand,category:$("fCat").value,step:$("fStep").value,size:Number($("fSize").value)||0,pdate:$("fPdate").value,edate:$("fEdate").value,odate:$("fOdate").value,pao:Number($("fPao").value)||0,qty:Number($("fQty").value)||1,price:Number($("fPrice").value)||0,notes:$("fNotes").value,photo:_cpb64};
   if(epId)prods=prods.map(x=>x.id===epId?p:x);else prods.push(p);
-  hov("prodOv");save();renderStats();renderCats();renderProds();toast("Saved ✓");
+  if(p.price>0)addPriceHistory(p.id,p.price);hov("prodOv");save();renderStats();renderCats();renderProds();toast("Saved ✓");
 }
-function dupP(id){const p=prods.find(x=>x.id===id);const dup={...p,id:Date.now(),name:p.name+" (copy)"};prods.splice(prods.indexOf(p)+1,0,dup);save();renderStats();renderProds();toast("Duplicated ✓");}
+function dupP(id){const p=prods.find(x=>x.id===id);if(!p)return;const dup={...p,id:Date.now(),name:p.name+" (copy)"};prods.splice(prods.indexOf(p)+1,0,dup);save();renderStats();renderProds();toast("Duplicated ✓");}
 function delProd(id){askConf("Remove this product?","",()=>{prods=prods.filter(x=>x.id!==id);save();renderStats();renderCats();renderProds();toast("Removed");});}
 function uPhUI(){const has=!!_cpb64;$("fPhotoPreview").classList.toggle("hi",!has);$("fPhotoBtn").classList.toggle("hi",has);if(has)$("fPhotoPreview").src=_cpb64;}
 $("fPhotoBtn").onclick=()=>$("fPhotoInput").click();
@@ -671,25 +853,25 @@ $("fPhotoPreview").onclick=()=>$("fPhotoInput").click();
 $("fPhotoInput").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{_cpb64=ev.target.result;uPhUI();};r.readAsDataURL(f);};
 
 /* SHOPPING CRUD */
-function openShop(id){esId=id;$("shopTitle").textContent=id?"Edit Item":"Add Item";if(id){const i=shop.find(x=>x.id===id);$("sName").value=i.name;$("sBrand").value=i.brand;$("sCat").value=i.category||"";setCB("sCatBtn",i.category,"Select");$("sPri").value=i.priority;$("sPrice").value=i.price;$("sWhere").value=i.where;$("sNotes").value=i.notes;}else{["sName","sBrand","sWhere","sNotes","sPrice"].forEach(f=>$(f).value="");$("sCat").value="";setCB("sCatBtn","","Select");$("sPri").value="Medium";}sov("shopOv");}
+function openShop(id){esId=id;$("shopTitle").textContent=id?"Edit Item":"Add Item";if(id){const i=shop.find(x=>x.id===id);if(!i){hov("shopOv");return;}$("sName").value=i.name;$("sBrand").value=i.brand;$("sCat").value=i.category||"";setCB("sCatBtn",i.category,"Select");$("sPri").value=i.priority;$("sPrice").value=i.price;$("sWhere").value=i.where;$("sNotes").value=i.notes;}else{["sName","sBrand","sWhere","sNotes","sPrice"].forEach(f=>$(f).value="");$("sCat").value="";setCB("sCatBtn","","Select");$("sPri").value="Medium";}sov("shopOv");}
 function editShop(id){openShop(id);}
 function saveShop(){const name=$("sName").value.trim();if(!name){toast("Name required");return;}const cat=$("sCat").value.trim()||"Other";const item={id:esId||Date.now(),name,brand:$("sBrand").value,category:cat,priority:$("sPri").value,price:Number($("sPrice").value)||0,where:$("sWhere").value,notes:$("sNotes").value,purchased:false};if(esId)shop=shop.map(x=>x.id===esId?{...item,purchased:shop.find(s=>s.id===esId)?.purchased||false}:x);else shop.push(item);hov("shopOv");save();renderShop();toast("Saved ✓");}
 function delShop(id){askConf("Remove this item?","",()=>{shop=shop.filter(x=>x.id!==id);save();renderShop();toast("Removed");});}
 
 /* ROUTINE CRUD */
-function openRout(id){erId=id;$("routTitle").textContent=id?"Edit Step":"Add Step";if(id){const r=rout.find(x=>x.id===id);$("rStep").value=r.step;$("rName").value=r.name;$("rCat").value=r.category||"";setCB("rCatBtn",r.category,"None");$("rAm").value=r.am;$("rPm").value=r.pm;}else{["rStep","rName","rAm","rPm"].forEach(f=>$(f).value="");$("rCat").value="";setCB("rCatBtn","","None");}sov("routOv");}
+function openRout(id){erId=id;$("routTitle").textContent=id?"Edit Step":"Add Step";if(id){const r=rout.find(x=>x.id===id);if(!r){hov("routOv");return;}$("rStep").value=r.step;$("rName").value=r.name;$("rCat").value=r.category||"";setCB("rCatBtn",r.category,"None");$("rAm").value=r.am;$("rPm").value=r.pm;}else{["rStep","rName","rAm","rPm"].forEach(f=>$(f).value="");$("rCat").value="";setCB("rCatBtn","","None");}sov("routOv");}
 function editRout(id){openRout(id);}
 function saveRout(){const name=$("rName").value.trim();if(!name){toast("Step name required");return;}const r={id:erId||Date.now(),step:$("rStep").value,name,category:$("rCat").value.trim(),am:$("rAm").value,pm:$("rPm").value};if(erId)rout=rout.map(x=>x.id===erId?r:x);else rout.push(r);hov("routOv");save();renderRout();toast("Saved ✓");}
 function delRout(id){askConf("Remove this step?","",()=>{rout=rout.filter(x=>x.id!==id);save();renderRout();toast("Removed");});}
 
 /* WEEKLY CRUD */
-function openWeek(id){ewId=id;$("weekTitle").textContent=id?"Edit Treatment":"Add Treatment";if(id){const w=week.find(x=>x.id===id);$("wFreq").value=w.freq;$("wName").value=w.name;$("wNote").value=w.note;}else{["wFreq","wName","wNote"].forEach(f=>$(f).value="");}sov("weekOv");}
+function openWeek(id){ewId=id;$("weekTitle").textContent=id?"Edit Treatment":"Add Treatment";if(id){const w=week.find(x=>x.id===id);if(!w){hov("weekOv");return;}$("wFreq").value=w.freq;$("wName").value=w.name;$("wNote").value=w.note;}else{["wFreq","wName","wNote"].forEach(f=>$(f).value="");}sov("weekOv");}
 function editWeek(id){openWeek(id);}
 function saveWeek(){const name=$("wName").value.trim();if(!name){toast("Name required");return;}const w={id:ewId||Date.now(),freq:$("wFreq").value,name,note:$("wNote").value};if(ewId)week=week.map(x=>x.id===ewId?w:x);else week.push(w);hov("weekOv");save();renderRout();toast("Saved ✓");}
 function delWeek(id){askConf("Remove?","",()=>{week=week.filter(x=>x.id!==id);save();renderRout();toast("Removed");});}
 
 /* JOURNAL CRUD */
-function openJournal(id){ejId=id;$("journalTitle").textContent=id?"Edit Entry":"New Entry";_jmood="";if(id){const e=journal.find(x=>x.id===id);$("jDate").value=e.date;$("jText").value=e.text;$("jTags").value=(e.tags||[]).join(", ");_jmood=e.mood||"";}else{$("jDate").value=TODAY;$("jText").value="";$("jTags").value="";}$("jMood").value=_jmood;document.querySelectorAll("#moodPicker .cpchip").forEach(b=>b.classList.toggle("on",b.dataset.mood===_jmood));sov("journalOv");}
+function openJournal(id){ejId=id;$("journalTitle").textContent=id?"Edit Entry":"New Entry";_jmood="";if(id){const e=journal.find(x=>x.id===id);if(!e){hov("journalOv");return;}$("jDate").value=e.date;$("jText").value=e.text;$("jTags").value=(e.tags||[]).join(", ");_jmood=e.mood||"";}else{$("jDate").value=TODAY;$("jText").value="";$("jTags").value="";}$("jMood").value=_jmood;document.querySelectorAll("#moodPicker .cpchip").forEach(b=>b.classList.toggle("on",b.dataset.mood===_jmood));sov("journalOv");}
 function pickMood(m){_jmood=_jmood===m?"":m;$("jMood").value=_jmood;document.querySelectorAll("#moodPicker .cpchip").forEach(b=>b.classList.toggle("on",b.dataset.mood===_jmood));}
 function saveJournal(){const text=$("jText").value.trim();if(!text){toast("Write something first");return;}const e={id:ejId||Date.now(),date:$("jDate").value||TODAY,mood:_jmood,text,tags:$("jTags").value.split(",").map(t=>t.trim()).filter(Boolean)};if(ejId)journal=journal.map(x=>x.id===ejId?e:x);else journal.push(e);hov("journalOv");save();renderJournal();toast("Saved ✓");}
 function delJournal(id){askConf("Delete this entry?","",()=>{journal=journal.filter(x=>x.id!==id);save();renderJournal();toast("Deleted");});}
@@ -764,7 +946,7 @@ $("confirmOv").onclick=e=>{if(e.target===$("confirmOv"))hov("confirmOv");};
 
 /* EXPORT / IMPORT */
 function exportData(){
-  const blob=new Blob([JSON.stringify({prods,shop,rout,week,tabOrder,shopCatOrder,budget,journal,cIC,cSC,cRC},null,2)],{type:"application/json"});
+  const blob=new Blob([JSON.stringify({prods,shop,rout,week,tabOrder,shopCatOrder,budget,journal,darkMode,cIC,cSC,cRC},null,2)],{type:"application/json"});
   const url=URL.createObjectURL(blob),a=document.createElement("a");
   a.href=url;a.download="skincare-"+TODAY+".json";a.click();URL.revokeObjectURL(url);
   sle();cse=0;$("backupBanner").classList.add("hi");toast("Exported ✓");
@@ -778,7 +960,7 @@ function importData(file){
       shop=(d.shop||[]).map(s=>({purchased:false,...s}));
       rout=(d.rout||[]).map(r=>({category:"",...r}));
       week=d.week||[];tabOrder=d.tabOrder||[...DEF_TABS];shopCatOrder=d.shopCatOrder||[];
-      budget=d.budget||0;journal=d.journal||[];cIC=d.cIC||[];cSC=d.cSC||[];cRC=d.cRC||[];
+      budget=d.budget||0;journal=d.journal||[];darkMode=d.darkMode||false;cIC=d.cIC||[];cSC=d.cSC||[];cRC=d.cRC||[];applyDark();
       save();renderNav();renderStats();renderCats();renderProds();toast("Imported ✓");
     }catch{toast("Invalid file");}
   };
@@ -820,13 +1002,673 @@ window.viewShop=viewShop;window.editShop=editShop;window.delShop=delShop;window.
 window.viewRout=viewRout;window.editRout=editRout;window.delRout=delRout;window.tCheck=tCheck;
 window.viewWeek=viewWeek;window.editWeek=editWeek;window.delWeek=delWeek;
 window.viewJournal=viewJournal;window.openJournal=openJournal;window.delJournal=delJournal;
-window.openCatPicker=openCatPicker;window.pickCat=pickCat;window.pickMood=pickMood;window.applyBC=applyBC;
+window.openCatPicker=openCatPicker;window.pickCat=pickCat;window.pickMood=pickMood;window.applyBC=applyBC; window.openProgress=openProgress; window.pgSwitch=pgSwitch; window.savePGPhoto=savePGPhoto; window.deletePGPhoto=deletePGPhoto; window.clearPG=clearPG;
+window.openTemplates=openTemplates; window.saveCurrentTemplate=saveCurrentTemplate; window.confirmSaveTemplate=confirmSaveTemplate; window.loadTemplate=loadTemplate; window.deleteTemplate=deleteTemplate;
+window.renderSchedulePicker=renderSchedulePicker; window.toggleSchedDay=toggleSchedDay;
+window.setRoutView=setRoutView; window.shareRoutine=shareRoutine; window.goToAlerts=goToAlerts;
+window.addReorderToShop=addReorderToShop; window.renderReorderAlerts=renderReorderAlerts;
+window.enterCheckout=enterCheckout; window.exitCheckout=exitCheckout; window.checkoutTick=checkoutTick;
+window.rateProd=rateProd;
+window.enterBatch=enterBatch; window.exitBatch=exitBatch;
 
 /* INIT */
 $("btnExport").classList.remove("hi");$("btnImport").classList.remove("hi");
-checkOB();renderNav();renderStats();renderCats();renderProds();
-setTimeout(checkBR,2500);
+checkOB();renderNav();renderStats();renderCats();renderProds();renderWidget();
+setTimeout(checkBR,2500); setupValidation(); setTimeout(checkBKModal,4000); if(!localStorage.getItem('sk_fu'))localStorage.setItem('sk_fu',Date.now());
+
+/* SWIPE ACTIONS */
+const SW_THRESH = 80, SW_MAX = 120;
+function makeSwipeable(el, onLeft, onRight) {
+  if (!el || el.closest('.swipeable')) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'swipeable';
+  el.parentNode.insertBefore(wrapper, el);
+  const bgR = document.createElement('div');
+  bgR.className = 'swipe-bg swipe-bg-right';
+  bgR.innerHTML = '<span class="swipe-icon">🗑 Delete</span>';
+  const bgL = document.createElement('div');
+  bgL.className = 'swipe-bg swipe-bg-left';
+  bgL.innerHTML = '<span class="swipe-icon">✓ Purchased</span>';
+  const content = document.createElement('div');
+  content.className = 'swipe-content';
+  wrapper.appendChild(bgL); wrapper.appendChild(bgR); wrapper.appendChild(content); content.appendChild(el);
+  let sx=0,sy=0,dx=0,tracking=false,axis=null;
+  content.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;dx=0;tracking=true;axis=null;content.classList.add('swiping');},{passive:true});
+  content.addEventListener('touchmove',e=>{
+    if(!tracking)return;
+    const cx=e.touches[0].clientX-sx,cy=e.touches[0].clientY-sy;
+    if(!axis){if(Math.abs(cx)>8||Math.abs(cy)>8)axis=Math.abs(cx)>Math.abs(cy)?'x':'y';}
+    if(axis!=='x')return;
+    e.preventDefault();
+    dx=Math.max(-SW_MAX,Math.min(SW_MAX,cx));
+    content.style.transform='translateX('+dx+'px)';
+    bgR.style.opacity=dx<0?Math.min(1,Math.abs(dx)/SW_THRESH):0;
+    bgL.style.opacity=dx>0?Math.min(1,dx/SW_THRESH):0;
+  },{passive:false});
+  content.addEventListener('touchend',()=>{
+    if(!tracking)return;
+    tracking=false;axis=null;content.classList.remove('swiping');
+    content.style.transform='';bgR.style.opacity=0;bgL.style.opacity=0;
+    if(dx<-SW_THRESH&&onLeft)onLeft();
+    else if(dx>SW_THRESH&&onRight)onRight();
+    dx=0;
+  });
+}
+function attachProdSwipes(){
+  document.querySelectorAll('#productList .card').forEach(card=>{
+    if(card.closest('.swipeable'))return;
+    const id=Number(card.dataset.id);
+    makeSwipeable(card,
+      ()=>askConf('Remove this product?','',()=>{prods=prods.filter(x=>x.id!==id);save();renderStats();renderCats();renderProds();toast('Removed');}),
+      null
+    );
+  });
+}
+function attachShopSwipes(){
+  document.querySelectorAll('#shopSections .scard').forEach(card=>{
+    if(card.closest('.swipeable'))return;
+    const id=Number(card.dataset.id);
+    const item=shop.find(x=>x.id===id);if(!item)return;
+    makeSwipeable(card,
+      ()=>askConf('Remove this item?','',()=>{shop=shop.filter(x=>x.id!==id);save();renderShop();toast('Removed');}),
+      item.purchased?null:()=>askConf('Mark as purchased?','You can move it to Inventory after.',()=>{shop=shop.map(x=>x.id===id?{...x,purchased:true}:x);save();renderShop();toast('Marked as purchased ✓');})
+    );
+  });
+}
+
+/* INPUT VALIDATION */
+function setupValidation(){
+  const rules=[
+    {id:'fSize',min:0,max:2000,label:'Size',hint:'ml or g (e.g. 30)'},
+    {id:'fPao',min:1,max:36,label:'PAO',hint:'Months after opening (1-36)'},
+    {id:'fQty',min:0,max:999,label:'Qty',hint:''},
+    {id:'fPrice',min:0,max:99999,label:'Price',hint:''},
+    {id:'sPrice',min:0,max:99999,label:'Price',hint:''},
+    {id:'bAmount',min:0,max:999999,label:'Budget',hint:''},
+  ];
+  rules.forEach(({id,min,max,label,hint})=>{
+    const inp=document.getElementById(id);if(!inp)return;
+    if(hint){let h=inp.parentNode.querySelector('.field-hint');if(!h){h=document.createElement('span');h.className='field-hint';inp.parentNode.appendChild(h);}h.textContent=hint;}
+    inp.addEventListener('keypress',e=>{if(!/[\d.]/.test(e.key)&&e.key!=='Backspace'&&e.key!=='Delete'&&e.key!=='ArrowLeft'&&e.key!=='ArrowRight'&&e.key!=='Tab')e.preventDefault();});
+    inp.addEventListener('input',()=>{
+      const val=Number(inp.value);
+      let errEl=inp.parentNode.querySelector('.field-error');
+      if(!errEl){errEl=document.createElement('span');errEl.className='field-error';inp.parentNode.appendChild(errEl);}
+      if(inp.value===''){inp.classList.remove('invalid','valid');errEl.textContent='';return;}
+      if(isNaN(val)||val<min){inp.classList.add('invalid');inp.classList.remove('valid');errEl.textContent=label+' must be at least '+min;}
+      else if(val>max){inp.classList.add('invalid');inp.classList.remove('valid');errEl.textContent=label+' max is '+max;}
+      else{inp.classList.remove('invalid');inp.classList.add('valid');errEl.textContent='';}
+    });
+    inp.addEventListener('blur',()=>{if(inp.value==='')return;let v=Number(inp.value);if(isNaN(v)){inp.value='';return;}v=Math.max(min,Math.min(max,v));inp.value=v;inp.dispatchEvent(new Event('input'));});
+  });
+  ['fName','fBrand','sName','rName','wName'].forEach(id=>{
+    const inp=document.getElementById(id);if(!inp)return;
+    inp.addEventListener('blur',()=>{if(inp.value.trim()==='')inp.classList.add('invalid');else inp.classList.remove('invalid');});
+    inp.addEventListener('input',()=>{if(inp.value.trim()!=='')inp.classList.remove('invalid');});
+  });
+}
+
+/* PHOTO PROGRESS */
+const PG_KEY='skincare_progress';
+function loadPG(){try{return JSON.parse(localStorage.getItem(PG_KEY)||'[]');}catch(e){return[];}}
+function savePG(p){try{localStorage.setItem(PG_KEY,JSON.stringify(p));}catch(e){}}
+let pgPhotos=loadPG();
+let pgMode='view';
+let _pgPhoto='';
+
+function openProgress(){pgMode='view';pgSwitch('view');document.getElementById('progressOv').classList.remove('hi');}
+function pgSwitch(mode){
+  pgMode=mode;
+  document.getElementById('pbView').classList.toggle('on',mode==='view');
+  document.getElementById('pbAdd').classList.toggle('on',mode==='add');
+  renderPG();
+}
+function renderPG(){
+  const body=document.getElementById('progressBody');
+  if(pgMode==='add'){
+    _pgPhoto='';
+    body.innerHTML=`<div style="padding:14px 18px;display:flex;flex-direction:column;gap:12px">
+      <div class="fld full"><label>Photo</label>
+        <input type="file" id="pgPhotoIn" accept="image/*" style="display:none"/>
+        <div id="pgPhotoArea" onclick="document.getElementById('pgPhotoIn').click()" style="width:100%;height:170px;border:2px dashed var(--bdr);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:var(--ln);overflow:hidden;position:relative">
+          <div id="pgPhPH" style="display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--tl)"><span style="font-size:28px">📸</span><span style="font-size:12px">Tap to add photo</span></div>
+          <img id="pgPhPV" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none" alt=""/>
+        </div>
+      </div>
+      <div class="drow">
+        <div class="fld"><label>Date</label><input id="pgDate" type="date" value="${new Date().toISOString().slice(0,10)}"/></div>
+        <div class="fld"><label>Label</label><input id="pgLabel" placeholder="e.g. Week 4"/></div>
+      </div>
+      <div class="fld full"><label>Note</label><textarea id="pgNote" placeholder="Any observations…" style="min-height:56px"></textarea></div>
+      <div style="display:flex;gap:8px;padding-bottom:8px">
+        <button class="bcancel" onclick="pgSwitch('view')">Cancel</button>
+        <button class="bsave" onclick="savePGPhoto()">Save Photo</button>
+      </div>
+    </div>`;
+    document.getElementById('pgPhotoIn').addEventListener('change',e=>{
+      const f=e.target.files[0];if(!f)return;
+      const r=new FileReader();r.onload=ev=>{_pgPhoto=ev.target.result;document.getElementById('pgPhPV').src=_pgPhoto;document.getElementById('pgPhPV').style.display='block';document.getElementById('pgPhPH').style.display='none';};r.readAsDataURL(f);
+    });
+  } else {
+    if(!pgPhotos.length){body.innerHTML=`<div class="empty" style="padding:40px 20px">No progress photos yet.<br/>Tap + Add Photo to start.</div>`;return;}
+    let html=`<div style="padding:8px 15px 4px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;color:var(--tl)">${pgPhotos.length} photo${pgPhotos.length===1?'':'s'}</span><button class="sbtn del" onclick="clearPG()">Clear all</button></div>`;
+    if(pgPhotos.length>=2){
+      const f=pgPhotos[0],l=pgPhotos[pgPhotos.length-1];
+      html+=`<div class="ba-pair" style="margin:4px 15px 10px"><div class="ba-pair-hdr"><span class="ba-pair-title">Progress Comparison</span></div><div class="ba-pair-imgs"><div class="ba-img-wrap"><img src="${f.photo}" alt=""/><span class="ba-img-lbl">${f.label||f.date}</span></div><div class="ba-img-wrap"><img src="${l.photo}" alt=""/><span class="ba-img-lbl">${l.label||l.date}</span></div></div></div>`;
+    }
+    html+=`<div style="padding:0 15px 12px">`+pgPhotos.map(p=>`<div class="ba-pair"><div class="ba-pair-hdr"><span class="ba-pair-title">${p.label||p.date}</span><button class="sbtn del" onclick="deletePGPhoto(${p.id})">×</button></div><div style="position:relative"><img src="${p.photo}" style="width:100%;max-height:220px;object-fit:cover;display:block" alt=""/><div style="position:absolute;bottom:0;left:0;right:0;padding:7px 10px;background:linear-gradient(transparent,rgba(0,0,0,.5));color:#fff;font-size:11px">${p.date}${p.note?' · '+p.note:''}</div></div></div>`).join('')+`</div>`;
+    body.innerHTML=html;
+  }
+}
+function savePGPhoto(){
+  if(!_pgPhoto){toast('Please add a photo first');return;}
+  pgPhotos.push({id:Date.now(),date:document.getElementById('pgDate').value||new Date().toISOString().slice(0,10),label:document.getElementById('pgLabel').value,note:document.getElementById('pgNote').value,photo:_pgPhoto});
+  savePG(pgPhotos);pgSwitch('view');toast('Progress photo saved');
+}
+function deletePGPhoto(id){pgPhotos=pgPhotos.filter(p=>p.id!==id);savePG(pgPhotos);renderPG();}
+function clearPG(){askConf('Clear all progress photos?','This cannot be undone.',()=>{pgPhotos=[];savePG(pgPhotos);renderPG();toast('Cleared');});}
+
+/* SMART BACKUP MODAL */
+const BK_SNOOZE='skincare_bk_snooze';
+function checkBKModal(){
+  const snooze=Number(localStorage.getItem(BK_SNOOZE)||0);
+  if(Date.now()<snooze)return;
+  const last=gle(),days=(Date.now()-last)/86400000,never=last===0;
+  const fu=Number(localStorage.getItem('sk_fu')||Date.now());
+  if(!localStorage.getItem('sk_fu'))localStorage.setItem('sk_fu',Date.now());
+  let show=false,msg='';
+  if(never&&(Date.now()-fu)>3*86400000){show=true;msg="You haven't backed up yet. Export to keep your data safe if you clear your browser.";}
+  else if(!never&&days>=14){show=true;msg="Your last backup was "+Math.floor(days)+" days ago. Export regularly so you don't lose your data.";}
+  if(show){document.getElementById('bkMsg').textContent=msg;document.getElementById('bkModal').classList.remove('hi');}
+}
+
+// Backup modal button wiring
+document.getElementById('bkExport').onclick=function(){document.getElementById('bkModal').classList.add('hi');exportData();};
+document.getElementById('bkLater').onclick=function(){localStorage.setItem('skincare_bk_snooze',Date.now()+3*86400000);document.getElementById('bkModal').classList.add('hi');};
+document.getElementById('bkSnooze').onclick=function(){localStorage.setItem('skincare_bk_snooze',Date.now()+7*86400000);document.getElementById('bkModal').classList.add('hi');};
+
+// Templates overlay close
+document.getElementById('templatesClose').onclick=function(){document.getElementById('templatesOv').classList.add('hi');};
+document.getElementById('templatesOv').addEventListener('click',function(e){if(e.target===document.getElementById('templatesOv'))document.getElementById('templatesOv').classList.add('hi');});
+
+// Template name overlay
+document.getElementById('tmplNameClose').onclick=document.getElementById('tmplNameCancel').onclick=function(){document.getElementById('tmplNameOv').classList.add('hi');};
+document.getElementById('tmplNameSave').onclick=confirmSaveTemplate;
+document.getElementById('tmplNameInput').onkeydown=function(e){if(e.key==='Enter')confirmSaveTemplate();};
+document.getElementById('tmplNameOv').addEventListener('click',function(e){if(e.target===document.getElementById('tmplNameOv'))document.getElementById('tmplNameOv').classList.add('hi');});
+
+// Schedule overlay close
+document.getElementById('schedClose').onclick=function(){document.getElementById('schedOv').classList.add('hi');};
+document.getElementById('schedDone').onclick=function(){document.getElementById('schedOv').classList.add('hi');renderRout();};
+document.getElementById('schedOv').addEventListener('click',function(e){if(e.target===document.getElementById('schedOv'))document.getElementById('schedOv').classList.add('hi');});
+
+// Progress overlay close
+document.getElementById('progressClose').onclick=function(){document.getElementById('progressOv').classList.add('hi');};
+document.getElementById('progressOv').addEventListener('click',function(e){if(e.target===document.getElementById('progressOv'))document.getElementById('progressOv').classList.add('hi');});
+
+// Expose missing globals
+window.renderReorderAlerts = renderReorderAlerts;
+window.getReorderAlerts = getReorderAlerts;
+window.renderTemplatesBody = renderTemplatesBody;
+window.confirmSaveTemplate = confirmSaveTemplate;
+// Expose curTab so inline onclick handlers can read it
+Object.defineProperty(window, 'curTab', { get: () => curTab });
+/* ═══════════════════════════════════════════════════════════
+   NEW FEATURES v6
+   1. AM/PM split views       2. Routine templates
+   3. Weekly schedule         4. Price history
+   5. Weekly skin summary     6. Reorder alerts
+   7. Checkout mode           8. Product ratings
+   9. Gesture nav             10. Widget home screen
+   11. Share a routine
+═══════════════════════════════════════════════════════════ */
+
+/* ── 1. AM/PM SPLIT VIEW ──────────────────────────────────── */
+// routView: 'both' | 'am' | 'pm'
+let routView = 'both';
+
+function renderRoutViewToggle() {
+  const el = document.getElementById('routViewToggle');
+  if (!el) return;
+  el.innerHTML = ['both','am','pm'].map(v =>
+    `<button class="rv-btn ${routView===v?'on':''}" onclick="setRoutView('${v}')">${v==='both'?'Both':v==='am'?'☀️ AM':'🌙 PM'}</button>`
+  ).join('');
+}
+
+function setRoutView(v) {
+  routView = v;
+  renderRoutViewToggle();
+  renderRout();
+}
+
+/* ── 2. ROUTINE TEMPLATES ─────────────────────────────────── */
+const TMPL_KEY = 'sk_templates';
+function loadTemplates() { try { return JSON.parse(localStorage.getItem(TMPL_KEY)||'[]'); } catch(e) { return []; } }
+function saveTemplates(t) { try { localStorage.setItem(TMPL_KEY, JSON.stringify(t)); } catch(e) {} }
+let routTemplates = loadTemplates();
+
+function openTemplates() {
+  renderTemplatesBody();
+  sov('templatesOv');
+}
+
+function renderTemplatesBody() {
+  const body = document.getElementById('templatesBody');
+  const html = `
+    <div style="padding:12px 18px">
+      <button class="bsave" style="width:100%;margin-bottom:14px" onclick="saveCurrentTemplate()">💾 Save Current Routine as Template</button>
+      ${routTemplates.length === 0
+        ? '<div class="empty" style="padding:20px 0">No templates yet. Save your routine to create one.</div>'
+        : routTemplates.map(t => `
+          <div style="background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:12px 14px;margin-bottom:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+              <div style="font-size:14px;font-weight:500;color:var(--td)">${t.name}</div>
+              <div style="display:flex;gap:6px">
+                <button class="sbtn" onclick="loadTemplate(${t.id})">Load</button>
+                <button class="sbtn del" onclick="deleteTemplate(${t.id})">×</button>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--tl)">${t.steps.length} steps · ${t.date}</div>
+          </div>`).join('')}
+    </div>`;
+  body.innerHTML = html;
+}
+
+function saveCurrentTemplate() {
+  // Use in-app input instead of prompt() (blocked on mobile)
+  const nameInput = document.getElementById('tmplNameInput');
+  if (nameInput) nameInput.value = '';
+  document.getElementById('tmplNameOv').classList.remove('hi');
+}
+
+function confirmSaveTemplate() {
+  const name = document.getElementById('tmplNameInput').value.trim();
+  if (!name) { toast('Enter a template name'); return; }
+  const t = {
+    id: Date.now(),
+    name,
+    date: TODAY,
+    steps: JSON.parse(JSON.stringify(rout)),
+    weekly: JSON.parse(JSON.stringify(week))
+  };
+  routTemplates.push(t);
+  saveTemplates(routTemplates);
+  document.getElementById('tmplNameOv').classList.add('hi');
+  renderTemplatesBody();
+  toast('Template saved ✓');
+}
+
+function loadTemplate(id) {
+  const t = routTemplates.find(x => x.id === id);
+  if (!t) return;
+  askConf('Load "' + t.name + '"?', 'This will replace your current routine.', () => {
+    rout = JSON.parse(JSON.stringify(t.steps));
+    week = JSON.parse(JSON.stringify(t.weekly));
+    save(); hov('templatesOv'); renderRout(); toast('Template loaded ✓');
+  });
+}
+
+function deleteTemplate(id) {
+  routTemplates = routTemplates.filter(t => t.id !== id);
+  saveTemplates(routTemplates);
+  renderTemplatesBody();
+  toast('Template deleted');
+}
+
+/* ── 3. WEEKLY SCHEDULE ───────────────────────────────────── */
+// Each rout step gets a 'days' field: array of 0-6 (0=Sun)
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const TODAY_DOW = new Date().getDay(); // 0-6
+
+function isScheduledToday(step) {
+  if (!step.days || step.days.length === 0) return true; // no schedule = every day
+  return step.days.includes(TODAY_DOW);
+}
+
+function renderSchedulePicker(stepId) {
+  const r = rout.find(x => x.id === stepId);
+  if (!r) return;
+  document.getElementById('schedStepName').textContent = r.name;
+  document.getElementById('schedStepId').value = stepId;
+  const days = r.days || [];
+  document.getElementById('schedDays').innerHTML = DAY_NAMES.map((d,i) =>
+    `<button class="day-btn ${days.includes(i)?'on':''}" onclick="toggleSchedDay(${stepId},${i})">${d}</button>`
+  ).join('');
+  sov('schedOv');
+}
+
+function toggleSchedDay(stepId, day) {
+  rout = rout.map(r => {
+    if (r.id !== stepId) return r;
+    const days = r.days ? [...r.days] : [];
+    const idx = days.indexOf(day);
+    if (idx >= 0) days.splice(idx, 1); else days.push(day);
+    return {...r, days};
+  });
+  save();
+  // re-render the picker in place
+  const r = rout.find(x => x.id === stepId);
+  const days = r.days || [];
+  document.getElementById('schedDays').innerHTML = DAY_NAMES.map((d,i) =>
+    `<button class="day-btn ${days.includes(i)?'on':''}" onclick="toggleSchedDay(${stepId},${i})">${d}</button>`
+  ).join('');
+}
+
+/* ── 4. PRICE HISTORY ─────────────────────────────────────── */
+// priceHistory stored per product id: [{date, price}]
+// We add to history when a product is saved with a new price
+
+function addPriceHistory(prodId, price) {
+  if (!price || price <= 0) return;
+  const key = 'sk_ph_' + prodId;
+  try {
+    const hist = JSON.parse(localStorage.getItem(key) || '[]');
+    const last = hist[hist.length - 1];
+    if (!last || last.price !== price) {
+      hist.push({ date: TODAY, price });
+      localStorage.setItem(key, JSON.stringify(hist.slice(-20))); // keep last 20
+    }
+  } catch(e) {}
+}
+
+function getPriceHistory(prodId) {
+  try { return JSON.parse(localStorage.getItem('sk_ph_' + prodId) || '[]'); } catch(e) { return []; }
+}
+
+function renderPriceHistory(prodId) {
+  const hist = getPriceHistory(prodId);
+  if (hist.length < 2) return '';
+  const prices = hist.map(h => h.price);
+  const min = Math.min(...prices), max = Math.max(...prices);
+  const w = 200, h = 50;
+  const pts = hist.map((h, i) => {
+    const x = hist.length === 1 ? w/2 : (i / (hist.length-1)) * w;
+    const y = max === min ? h/2 : h - ((h.price - min) / (max - min)) * h;
+    return `${x},${y}`;
+  }).join(' ');
+  const trend = hist[hist.length-1].price <= hist[0].price ? '↓' : '↑';
+  const trendCol = trend === '↓' ? 'var(--green)' : 'var(--red)';
+  return `<div class="vrow"><span class="vlbl">Price History</span><span class="vval" style="font-size:11px;color:var(--tl)">${trend} ${hist.length} records</span></div>
+    <div style="padding:8px 0">
+      <svg viewBox="0 0 200 50" style="width:100%;height:50px;overflow:visible">
+        <polyline points="${pts}" fill="none" stroke="${trendCol}" stroke-width="1.5" stroke-linejoin="round"/>
+        ${hist.map((hh,i)=>{
+          const x = hist.length===1?w/2:(i/(hist.length-1))*w;
+          const y = max===min?h/2:h-((hh.price-min)/(max-min))*h;
+          return `<circle cx="${x}" cy="${y}" r="2.5" fill="${trendCol}"/>`;
+        }).join('')}
+      </svg>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--tl)">
+        <span>${hist[0].date}</span><span>${hist[hist.length-1].date}</span>
+      </div>
+    </div>`;
+}
+
+/* ── 5. WEEKLY SKIN SUMMARY ───────────────────────────────── */
+function getWeeklySummary() {
+  const now = new Date();
+  const days = Array.from({length:7}, (_,i) => {
+    const d = new Date(now); d.setDate(d.getDate()-i);
+    return d.toISOString().slice(0,10);
+  }).reverse();
+
+  const entries = journal.filter(e => days.includes(e.date));
+  if (entries.length === 0) return null;
+
+  const moodCounts = {};
+  entries.forEach(e => { if (e.mood) moodCounts[e.mood] = (moodCounts[e.mood]||0)+1; });
+  const topMood = Object.entries(moodCounts).sort((a,b)=>b[1]-a[1])[0];
+  const allTags = entries.flatMap(e => e.tags||[]);
+  const tagCounts = {};
+  allTags.forEach(t => tagCounts[t] = (tagCounts[t]||0)+1);
+  const topTags = Object.entries(tagCounts).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([t])=>t);
+  const streakVal = lstr().n || 0;
+
+  return {
+    entries: entries.length,
+    topMood: topMood ? topMood[0] : null,
+    topTags,
+    streak: streakVal,
+    days: days.length,
+    daysLogged: entries.length
+  };
+}
+
+function renderWeeklySummary() {
+  const el = document.getElementById('weeklySummary');
+  if (!el) return;
+  const s = getWeeklySummary();
+  if (!s) { el.innerHTML = ''; return; }
+  el.innerHTML = `<div style="margin:10px 15px 0;background:var(--wh);border:1px solid var(--bdr);border-radius:7px;overflow:hidden">
+    <div style="background:var(--ln);padding:8px 14px;font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase">Weekly Summary</div>
+    <div style="padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ch)">${s.entries}</div><div style="font-size:10px;color:var(--tl);text-transform:uppercase;letter-spacing:.07em">Journal entries</div></div>
+      <div><div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ch)">${s.streak}🔥</div><div style="font-size:10px;color:var(--tl);text-transform:uppercase;letter-spacing:.07em">Day streak</div></div>
+      ${s.topMood ? `<div><div style="font-size:22px">${s.topMood}</div><div style="font-size:10px;color:var(--tl);text-transform:uppercase;letter-spacing:.07em">Top mood</div></div>` : ''}
+      ${s.topTags.length ? `<div><div style="font-size:12px;color:var(--td)">${s.topTags.join(', ')}</div><div style="font-size:10px;color:var(--tl);text-transform:uppercase;letter-spacing:.07em">Common tags</div></div>` : ''}
+    </div>
+  </div>`;
+}
+
+/* ── 6. REORDER ALERTS ────────────────────────────────────── */
+function getReorderAlerts() {
+  return prods.filter(p => {
+    const s = so(dl(ee(p)), p.qty);
+    return (s === 'low' || s === 'expired') && !shop.some(i => i.name.toLowerCase() === p.name.toLowerCase());
+  });
+}
+
+function renderReorderAlerts() {
+  const el = document.getElementById('reorderAlerts');
+  if (!el) return;
+  const alerts = getReorderAlerts();
+  if (!alerts.length) { el.innerHTML = ''; return; }
+  el.innerHTML = `<div style="margin:8px 15px 0;background:#FFF8E8;border:1px solid #E8D8A0;border-radius:7px;overflow:hidden">
+    <div style="padding:8px 14px;font-size:10px;color:#7A5C00;letter-spacing:.1em;text-transform:uppercase">⚠ Reorder Suggestions</div>
+    ${alerts.map(p => `<div style="padding:8px 14px;border-top:1px solid #E8D8A0;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-size:13px;color:var(--td)">${p.name} <span style="font-size:11px;color:var(--tl)">· ${p.brand}</span></div>
+      <button class="sbtn" onclick="addReorderToShop(${p.id})" style="flex-shrink:0">+ Add to List</button>
+    </div>`).join('')}
+  </div>`;
+}
+
+function addReorderToShop(prodId) {
+  const p = prods.find(x => x.id === prodId);
+  if (!p) return;
+  shop.push({
+    id: Date.now(), name: p.name, brand: p.brand,
+    category: p.category, priority: 'High',
+    price: p.price, where: '', notes: 'Reorder — low/expired', purchased: false
+  });
+  save(); renderShop(); renderReorderAlerts();
+  toast(p.name + ' added to shopping list ✓');
+}
+
+/* ── 7. CHECKOUT MODE ─────────────────────────────────────── */
+let checkoutMode = false;
+
+function enterCheckout() {
+  checkoutMode = true;
+  document.getElementById('checkoutView').classList.remove('hi');
+  renderCheckout();
+}
+
+function exitCheckout() {
+  checkoutMode = false;
+  document.getElementById('checkoutView').classList.add('hi');
+}
+
+function renderCheckout() {
+  const items = shop.filter(i => !i.purchased);
+  const el = document.getElementById('checkoutList');
+  if (!items.length) {
+    el.innerHTML = `<div style="text-align:center;padding:60px 20px">
+      <div style="font-size:40px;margin-bottom:12px">🎉</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ch)">All done!</div>
+      <div style="font-size:13px;color:var(--tl);margin-top:6px">Everything is checked off.</div>
+    </div>`;
+    document.getElementById('checkoutTotal').textContent = '';
+    return;
+  }
+  el.innerHTML = items.map(item => {
+    const p = PRI[item.priority] || PRI.Medium;
+    return `<div class="co-item" onclick="checkoutTick(${item.id})">
+      <div class="co-check"></div>
+      <div class="co-body">
+        <div class="co-name">${item.name}</div>
+        <div class="co-sub">${item.brand} · ${item.category}</div>
+      </div>
+      <div class="co-price">${fmt(item.price)}</div>
+    </div>`;
+  }).join('');
+  const total = items.reduce((s,i)=>s+i.price,0);
+  document.getElementById('checkoutTotal').textContent = fmt(total) + ' remaining';
+}
+
+function checkoutTick(id) {
+  askConf('Mark as purchased?', '', () => {
+    shop = shop.map(i => i.id === id ? {...i, purchased: true} : i);
+    save(); renderCheckout(); renderShop();
+    toast('✓ Checked off');
+  });
+}
+
+/* ── 8. PRODUCT RATINGS ───────────────────────────────────── */
+function renderStars(rating, prodId, interactive) {
+  return Array.from({length:5}, (_,i) => {
+    const filled = i < (rating||0);
+    if (interactive) {
+      return `<span class="star ${filled?'filled':''}" onclick="rateProd(${prodId},${i+1})" style="cursor:pointer;font-size:16px">${filled?'★':'☆'}</span>`;
+    }
+    return `<span class="star ${filled?'filled':''}" style="font-size:13px">${filled?'★':'☆'}</span>`;
+  }).join('');
+}
+
+function rateProd(id, rating) {
+  const rp2=prods.find(p=>p.id===id);if(!rp2)return;
+  prods = prods.map(p => p.id === id ? {...p, rating} : p);
+  save();
+  // Update stars in view if open
+  const starsEl = document.getElementById('viewStars_' + id);
+  if (starsEl) starsEl.innerHTML = renderStars(rating, id, true);
+  toast('Rating saved ✓');
+}
+
+/* ── 9. GESTURE NAVIGATION ────────────────────────────────── */
+(function initGestureNav() {
+  let gsx = 0, gsy = 0, gTracking = false;
+  const scrollEl = document.getElementById('scrollArea');
+  
+  scrollEl.addEventListener('touchstart', e => {
+    if (e.touches.length !== 1) return;
+    gsx = e.touches[0].clientX;
+    gsy = e.touches[0].clientY;
+    gTracking = true;
+  }, {passive: true});
+
+  scrollEl.addEventListener('touchend', e => {
+    if (!gTracking) return;
+    gTracking = false;
+    const dx = e.changedTouches[0].clientX - gsx;
+    const dy = e.changedTouches[0].clientY - gsy;
+    // Only trigger if horizontal swipe is dominant and large enough
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    // Don't trigger if scrolled vertically much
+    if (Math.abs(dy) > 40) return;
+    const idx = tabOrder.indexOf(curTab);
+    if (dx < 0 && idx < tabOrder.length - 1) switchTab(tabOrder[idx + 1]);
+    else if (dx > 0 && idx > 0) switchTab(tabOrder[idx - 1]);
+  }, {passive: true});
+})();
+
+/* ── 10. WIDGET HOME SCREEN ───────────────────────────────── */
+function renderWidget() {
+  const el = document.getElementById('widgetPanel');
+  if (!el) return;
+  const {done, tot} = rp();
+  const alerts = getReorderAlerts().length + prods.filter(p => ['expiring','expired'].includes(so(dl(ee(p)),p.qty))).length;
+  const streak = lstr().n || 0;
+  const todayEntry = journal.find(e => e.date === TODAY);
+  const unpurchased = shop.filter(i => !i.purchased).length;
+
+  el.innerHTML = `
+    <div class="widget-row">
+      <div class="widget-tile" onclick="switchTab('routine')">
+        <div class="widget-icon">${done===tot&&tot>0?'🔥':'☀️'}</div>
+        <div class="widget-val">${done}/${tot}</div>
+        <div class="widget-lbl">Routine Today</div>
+      </div>
+      <div class="widget-tile" onclick="switchTab('inventory')">
+        <div class="widget-icon">🧴</div>
+        <div class="widget-val">${prods.length}</div>
+        <div class="widget-lbl">Products</div>
+      </div>
+      <div class="widget-tile" onclick="switchTab('shopping')">
+        <div class="widget-icon">🛒</div>
+        <div class="widget-val">${unpurchased}</div>
+        <div class="widget-lbl">To Buy</div>
+      </div>
+      <div class="widget-tile" onclick="switchTab('journal')">
+        <div class="widget-icon">${todayEntry?todayEntry.mood||'📓':'📓'}</div>
+        <div class="widget-val">${todayEntry?'✓':'—'}</div>
+        <div class="widget-lbl">Journal</div>
+      </div>
+    </div>
+    ${alerts > 0 ? `<div class="widget-alert" onclick="goToAlerts()">⚠ ${alerts} alert${alerts>1?'s':''} need attention</div>` : ''}
+    ${streak > 0 ? `<div class="widget-streak">🔥 ${streak} day streak — keep it up!</div>` : ''}
+  `;
+}
+
+function goToAlerts(){switchTab('inventory');}
+
+/* ── 11. SHARE A ROUTINE ──────────────────────────────────── */
+function shareRoutine() {
+  var text = '✨ My Skincare Routine\n\n☀️ Morning\n';
+  rout.forEach(function(r){ if(r.am && r.am !== '—') text += '  '+r.step+'. '+r.name+': '+r.am+'\n'; });
+  text += '\n🌙 Evening\n';
+  rout.forEach(function(r){ if(r.pm && r.pm !== '—') text += '  '+r.step+'. '+r.name+': '+r.pm+'\n'; });
+  if(week.length){ text += '\n📅 Weekly Treatments\n'; week.forEach(function(w){ text += '  '+w.freq+': '+w.name+'\n'; }); }
+  if(navigator.share){
+    navigator.share({title:'My Skincare Routine',text:text}).then(function(){toast('Shared ✓');}).catch(function(){doRoutineCopy(text);});
+  } else { doRoutineCopy(text); }
+}
+function doRoutineCopy(text){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){toast('Routine copied to clipboard ✓');}).catch(function(){doExecCopy(text);});
+  } else { doExecCopy(text); }
+}
+function doExecCopy(text){
+  var ta=document.createElement('textarea');
+  ta.value=text; ta.setAttribute('readonly','');
+  ta.style.cssText='position:fixed;top:0;left:0;width:2em;height:2em;opacity:0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try{ var ok=document.execCommand('copy'); toast(ok?'Routine copied ✓':'Copy failed'); }
+  catch(e){ toast('Copy failed — try a different browser'); }
+  document.body.removeChild(ta);
+}
+
+/* ── EXPOSE NEW GLOBALS ────────────────────────────────────── */
+window.setRoutView = setRoutView;
+window.openTemplates = openTemplates;
+window.saveCurrentTemplate = saveCurrentTemplate;
+window.loadTemplate = loadTemplate;
+window.deleteTemplate = deleteTemplate;
+window.renderSchedulePicker = renderSchedulePicker;
+window.toggleSchedDay = toggleSchedDay;
+window.addReorderToShop = addReorderToShop;
+window.enterCheckout = enterCheckout;
+window.exitCheckout = exitCheckout;
+window.checkoutTick = checkoutTick;
+window.rateProd = rateProd;
+window.shareRoutine = shareRoutine;
+window.goToAlerts = goToAlerts;
+window.pgSwitch = pgSwitch || function(){};
+
+
+
+
 });
+
 </script>
 </body>
 </html>
