@@ -13,6 +13,19 @@
 </head>
 <style>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{--ch:#3C3C3C;--tpe:#8C7B75;--stn:#E8E4E0;--ln:#F2EDE8;--crm:#FAF8F5;--wh:#FFFFFF;--td:#2C2C2C;--tm:#5A5550;--tl:#8C8580;--bdr:#DDD8D2;--green:#6B7D6E;--amber:#8B6914;--red:#8B3A3A;--blue:#4A6B8A;--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)}
 [data-theme="dark"]{--ch:#1C1C1E;--tpe:#9A8B85;--stn:#2C2C2E;--ln:#252527;--crm:#1C1C1E;--wh:#2C2C2E;--td:#F0EBE6;--tm:#B0AAA5;--tl:#706860;--bdr:#3A3A3C;--green:#7A9D7C;--amber:#C4A040;--red:#C47878;--blue:#6A9AB8}
@@ -219,15 +232,15 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
 .fld input.valid{border-color:var(--green)}
 .field-error{font-size:10px;color:var(--red);margin-top:2px}
 .field-hint{font-size:10px;color:var(--tl);margin-top:2px}
-.progress-btn{padding:5px 12px;border:1px solid var(--bdr);background:var(--wh);font-family:'DM Sans',sans-serif;font-size:11px;color:var(--tm);border-radius:20px;cursor:pointer;white-space:nowrap}
+
 .progress-btn.on{background:var(--ch);border-color:var(--ch);color:var(--crm)}
-.ba-pair{background:var(--wh);border:1px solid var(--bdr);border-radius:7px;overflow:hidden;margin-bottom:10px}
-.ba-pair-hdr{padding:8px 12px;background:var(--ln);display:flex;justify-content:space-between;align-items:center}
-.ba-pair-title{font-size:11px;font-weight:500;color:var(--tm);letter-spacing:.07em;text-transform:uppercase}
-.ba-pair-imgs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bdr)}
-.ba-img-wrap{position:relative;background:var(--ln)}
-.ba-img-wrap img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
-.ba-img-lbl{position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.45);color:#fff;font-size:9px;padding:2px 6px;border-radius:4px;letter-spacing:.06em;text-transform:uppercase}
+
+
+
+
+
+
+
 .bk-modal{position:fixed;inset:0;background:rgba(30,30,30,.7);z-index:850;display:flex;align-items:center;justify-content:center;padding:22px;pointer-events:auto}
 .bk-modal.hi{display:none}
 .bk-box{background:var(--wh);border-radius:14px;padding:24px 20px;width:100%;max-width:320px;text-align:center}
@@ -276,8 +289,97 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
 .widget-streak{background:var(--wh);border:1px solid var(--bdr);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--tm);margin-bottom:6px}
 [data-theme="dark"] .widget-alert{background:#2A2210;border-color:#4A3A10;color:#C9A030}
 
+
+/* EFFICACY STARS */
+.estar{font-size:22px;cursor:pointer;color:var(--stn);transition:color .15s;padding:0 2px}
+.estar.on{color:#C9A030}
+.score-btn{font-size:22px;cursor:pointer;color:var(--stn);background:none;border:none;padding:2px;transition:color .15s;line-height:1}
+.score-btn.on{color:#E07070}
+.ov-nav{display:flex;align-items:center;justify-content:space-between;padding:8px 18px;border-bottom:1px solid var(--bdr)}
+.ov-nav-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--td);text-align:center;flex:1}
+.ov-nav-btn{width:30px;height:30px;background:none;border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:16px;color:var(--tm);display:flex;align-items:center;justify-content:center}
+.ov-nav-btn:active{background:var(--ln)}
+.undo-btn{position:fixed;bottom:calc(var(--sb)+80px);left:16px;width:40px;height:40px;border-radius:50%;background:var(--wh);border:1px solid var(--bdr);box-shadow:0 2px 12px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;z-index:100;opacity:0;transition:opacity .3s;pointer-events:none}
+.undo-btn.show{opacity:1;pointer-events:auto}
+
+
+/* STORAGE QUOTA BAR */
+.quota-bar-wrap{margin:8px 15px;background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:11px 14px}
+.quota-bar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.quota-lbl{font-size:10px;color:var(--tl);letter-spacing:.09em;text-transform:uppercase}
+.quota-pct{font-size:12px;color:var(--tm);font-weight:500}
+.quota-track{height:6px;background:var(--stn);border-radius:3px;overflow:hidden}
+.quota-fill{height:100%;border-radius:3px;transition:width .5s}
+.quota-detail{font-size:10px;color:var(--tl);margin-top:5px}
+/* FINISHED PRODUCTS */
+.finished-card{background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:12px 14px;margin-bottom:8px;opacity:.85}
+.finished-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.finished-name{font-size:13px;font-weight:500;color:var(--td)}
+.finished-brand{font-size:11px;color:var(--tl);margin-top:1px}
+.finished-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.finished-date{font-size:10px;color:var(--tl);letter-spacing:.06em;text-transform:uppercase}
+.finished-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;background:var(--ln);color:var(--tm)}
+.finished-rating{font-size:12px;color:#C9A030}
+.finished-empty{padding:40px 20px;text-align:center;color:var(--tl);font-size:14px}
+/* CONFIRM EXTENDED — two action buttons */
+.conf-acts-col{display:flex;flex-direction:column;gap:8px}
+.conf-finish{width:100%;padding:11px;background:var(--ch);border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--crm);border-radius:8px;cursor:pointer;letter-spacing:.03em}
+.conf-finish:active{opacity:.85}
+
+
+/* STREAK RECOVERY BANNER */
+.streak-recovery{margin:8px 15px 0;background:linear-gradient(135deg,#FFF8E8,#FFF3D6);border:1px solid #E8C870;border-radius:7px;padding:12px 14px;display:flex;align-items:center;gap:12px}
+[data-theme="dark"] .streak-recovery{background:linear-gradient(135deg,#2A2210,#251E08);border-color:#5A4A10}
+.streak-recovery-icon{font-size:26px;flex-shrink:0}
+.streak-recovery-info{flex:1}
+.streak-recovery-title{font-size:13px;font-weight:500;color:#7A5000;margin-bottom:2px}
+[data-theme="dark"] .streak-recovery-title{color:#C9A030}
+.streak-recovery-sub{font-size:11px;color:#A07020;line-height:1.4}
+[data-theme="dark"] .streak-recovery-sub{color:#906010}
+.streak-recovery-btn{padding:7px 13px;background:#C9A030;border:none;font-family:'DM Sans',sans-serif;font-size:12px;color:#fff;border-radius:6px;cursor:pointer;flex-shrink:0;white-space:nowrap}
+.streak-recovery-btn:active{opacity:.85}
+
+
+/* WISHLIST / NEED LIST TOGGLE */
+.list-toggle-wrap{display:flex;gap:0;margin:0 15px 0;border:1px solid var(--bdr);border-radius:8px;overflow:hidden;background:var(--wh)}
+.list-toggle-btn{flex:1;padding:9px 0;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;border:none;background:none;cursor:pointer;color:var(--tl);letter-spacing:.03em;transition:background .15s,color .15s;display:flex;align-items:center;justify-content:center;gap:5px}
+.list-toggle-btn.on{background:var(--ch);color:var(--crm)}
+.list-toggle-btn:not(.on):active{background:var(--ln)}
+.list-toggle-sep{width:1px;background:var(--bdr);flex-shrink:0}
+.wish-badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:500;background:#EEE8F8;color:#7A5CA8;margin-left:4px;vertical-align:middle}
+[data-theme="dark"] .wish-badge{background:#2A1E3A;color:#B090E0}
+.need-badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:500;background:#E8F0E8;color:#4A7A4A;margin-left:4px;vertical-align:middle}
+[data-theme="dark"] .need-badge{background:#1A2A1A;color:#80B880}
+.wish-pribar{background:linear-gradient(180deg,#9B72CF,#C9A0E8) !important}
+.scard.wish-card .pribar{background:linear-gradient(180deg,#9B72CF,#C9A0E8)}
+/* List type selector in form */
+.list-type-btns{display:flex;gap:8px;margin-top:4px}
+.list-type-btn{flex:1;padding:9px;border:1px solid var(--bdr);border-radius:7px;background:var(--crm);font-family:'DM Sans',sans-serif;font-size:12px;color:var(--tm);cursor:pointer;text-align:center;transition:all .15s}
+.list-type-btn.on{border-color:var(--ch);background:var(--ch);color:var(--crm);font-weight:500}
+
+
+
+
+
+
+
+
+
+
 </style>
 <body>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="onboard" id="onboard">
   <div class="ob-emoji">✨</div>
@@ -309,10 +411,15 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
     <div id="tab-inventory">
       <div class="widget-panel" id="widgetPanel"></div>
       <div class="stats" id="statsRow"></div>
+      <div id="efficacyPrompts"></div>
+      <div class="quota-bar-wrap" id="storageQuotaBar"></div>
       <div class="backup-banner hi" id="backupBanner">
         <div class="backup-msg" id="backupMsg">Back up your data</div>
         <button class="backup-btn" id="backupNow">Export now</button>
         <button class="backup-dismiss" id="backupDismiss">×</button>
+      </div>
+      <div style="padding:8px 15px 0;display:flex;justify-content:flex-end">
+        <button class="sbtn" onclick="openFinished()" style="display:flex;align-items:center;gap:5px">✓ Finished (<span id="finishedCount">0</span>)</button>
       </div>
       <div class="srch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="sinput" id="searchInput" placeholder="Search products…" type="search"/></div>
       <div class="cats" id="catsRow"></div>
@@ -322,6 +429,7 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
     </div>
     <div id="tab-shopping" class="hi">
       <div class="phdr"><div><div class="peye">Wishlist</div><div class="ptitle">Shopping List</div></div><button class="sbtn" id="btnManageCats">Manage Categories</button></div>
+      <div class="list-toggle-wrap" id="listToggle"></div>
       <div class="srch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="sinput" id="shopSearchInput" placeholder="Search shopping list…" type="search"/></div>
       <div class="sortbar" id="shopSortBar"></div>
       <div class="budget-bar-wrap hi" id="budgetWrap"><div class="budget-bar-top"><span class="budget-lbl">Budget</span><span class="budget-amt" id="budgetAmt"></span></div><div class="budget-track"><div class="budget-fill" id="budgetFill"></div></div></div>
@@ -332,13 +440,13 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
       <div class="phdr">
   <div><div class="peye">Daily Protocol</div><div class="ptitle">Routine</div></div>
   <div style="display:flex;gap:6px;align-items:center">
+    <button class="sbtn" onclick="openCompletionHistory()">History</button>
     <button class="sbtn" onclick="openTemplates()">Templates</button>
     <button class="sbtn" onclick="shareRoutine()">Share</button>
   </div>
 </div>
 <div style="display:flex;gap:6px;padding:8px 15px 0;overflow-x:auto;scrollbar-width:none" id="routViewToggle"></div>
 <div id="weeklySummary"></div>
-<div id="reorderAlerts"></div>
       <div id="streakBanner"></div>
       <div class="srch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="sinput" id="routSearchInput" placeholder="Search routine…" type="search"/></div>
       <div class="drag-hint">Hold ≡ to reorder</div>
@@ -346,9 +454,10 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
       <div class="phdr" style="padding-top:4px"><div><div class="peye">Weekly Treatments</div></div><button class="sbtn" id="btnAddWeekly">+ Add</button></div>
       <div class="drag-hint" style="padding-bottom:2px">Hold ≡ to reorder</div>
       <div class="wsec" id="weeklyList"></div>
+      <div id="reorderAlerts" style="padding-bottom:8px"></div>
     </div>
     <div id="tab-journal" class="hi">
-      <div class="phdr"><div><div class="peye">Daily Log</div><div class="ptitle">Skin Journal</div></div><button class="sbtn" onclick="openProgress()">📸 Progress</button></div>
+      <div class="phdr"><div><div class="peye">Daily Log</div><div class="ptitle">Skin Journal</div></div></div>
       <div class="srch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input class="sinput" id="journalSearchInput" placeholder="Search journal…" type="search"/></div>
       <div class="journal-list" id="journalList"></div>
     </div>
@@ -380,6 +489,14 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
     <div class="fld full"><label>Product Name</label><input id="sName" placeholder="e.g. Snail Mucin"/></div>
     <div class="drow"><div class="fld"><label>Brand</label><input id="sBrand" placeholder="e.g. COSRX"/></div><div class="fld"><label>Category</label><button type="button" class="cat-picker-btn" id="sCatBtn" onclick="openCatPicker('shop')">Select</button><input type="hidden" id="sCat"/></div></div>
     <div class="drow"><div class="fld"><label>Priority</label><select id="sPri"><option>High</option><option>Medium</option><option>Low</option></select></div><div class="fld"><label>Price (₹)</label><input id="sPrice" type="number" placeholder="999"/></div></div>
+    <div class="fld full">
+      <label>List Type</label>
+      <div class="list-type-btns">
+        <button type="button" class="list-type-btn on" data-lt="need" onclick="setListTypeBtns('need')">🛒 Need — must restock</button>
+        <button type="button" class="list-type-btn" data-lt="wish" onclick="setListTypeBtns('wish')">✨ Wishlist — curious about</button>
+      </div>
+      <input type="hidden" id="sListType" value="need"/>
+    </div>
     <div class="fld full"><label>Where to Buy</label><input id="sWhere" placeholder="e.g. Nykaa"/></div>
     <div class="fld full"><label>Notes</label><textarea id="sNotes" placeholder="Any details…"></textarea></div>
   </div><div class="drwfoot"><button class="bcancel" id="shopCancel">Cancel</button><button class="bsave" id="shopSave">Save</button></div></div></div>
@@ -399,7 +516,7 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
     <div class="fld full"><label>Date</label><input id="jDate" type="date"/></div>
     <div class="fld full"><label>Mood / Skin Feeling</label><div style="display:flex;gap:8px;flex-wrap:wrap" id="moodPicker"><button type="button" class="cpchip" data-mood="😊" onclick="pickMood('😊')">😊 Good</button><button type="button" class="cpchip" data-mood="😐" onclick="pickMood('😐')">😐 Okay</button><button type="button" class="cpchip" data-mood="😔" onclick="pickMood('😔')">😔 Bad</button><button type="button" class="cpchip" data-mood="🔴" onclick="pickMood('🔴')">🔴 Breakout</button><button type="button" class="cpchip" data-mood="💧" onclick="pickMood('💧')">💧 Dry</button><button type="button" class="cpchip" data-mood="✨" onclick="pickMood('✨')">✨ Glowing</button></div><input type="hidden" id="jMood"/></div>
     <div class="fld full"><label>Notes</label><textarea id="jText" placeholder="How does your skin feel today?" style="min-height:90px"></textarea></div>
-    <div class="fld full"><label>Tags (comma separated)</label><input id="jTags" placeholder="e.g. dry, breakout, new product"/></div>
+    <div class="fld full"><label>Skin Score (1–5)</label><div id="scorePicker" style="display:flex;gap:4px;align-items:center"><button type="button" class="score-btn" onclick="pickScore(1)">♡</button><button type="button" class="score-btn" onclick="pickScore(2)">♡</button><button type="button" class="score-btn" onclick="pickScore(3)">♡</button><button type="button" class="score-btn" onclick="pickScore(4)">♡</button><button type="button" class="score-btn" onclick="pickScore(5)">♡</button></div><input type="hidden" id="jScore" value="0"/></div><div class="fld full"><label>Tags (comma separated)</label><input id="jTags" placeholder="e.g. dry, breakout, new product"/></div>
   </div><div class="drwfoot"><button class="bcancel" id="journalCancel">Cancel</button><button class="bsave" id="journalSave">Save</button></div></div></div>
   <!-- CAT PICKER -->
   <div class="ov hi" id="catPickerOv" style="z-index:500"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle">Choose Category</span><button class="drwclose" id="catPickerClose">×</button></div><div class="drwbody" style="gap:0;padding:12px 18px"><div id="catPickerGrid" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px"></div><div style="border-top:1px solid var(--stn);padding-top:12px"><div style="font-size:10px;color:var(--tl);letter-spacing:.09em;text-transform:uppercase;margin-bottom:7px">Add new category</div><div style="display:flex;gap:8px"><input id="catPickerNew" placeholder="e.g. Eye Care" style="flex:1;padding:9px 11px;border:1px solid var(--bdr);background:var(--crm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--td);border-radius:6px;outline:none;-webkit-appearance:none"/><button id="catPickerAdd" style="padding:9px 14px;background:var(--ch);border:none;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--crm);border-radius:6px;cursor:pointer;flex-shrink:0">Add</button></div></div></div></div></div>
@@ -408,7 +525,7 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
   <!-- BATCH CAT -->
   <div class="ov hi" id="batchCatOv" style="z-index:500"><div class="drw"><div class="drwbar"></div><div class="drwhdr"><span class="drwtitle">Set Category</span><button class="drwclose" id="batchCatClose">×</button></div><div class="drwbody" style="gap:0;padding:12px 18px"><div id="batchCatGrid" style="display:flex;flex-wrap:wrap;gap:8px"></div></div></div></div>
   <!-- CONFIRM -->
-  <div class="ov hi" id="confirmOv" style="align-items:center;padding:22px"><div class="conf-box"><div class="conf-msg" id="confirmMsg">Are you sure?</div><div class="conf-sub" id="confirmSub"></div><div class="conf-acts"><button class="conf-no" id="confirmNo">Cancel</button><button class="conf-yes" id="confirmYes">Remove</button></div></div></div>
+  <div class="ov hi" id="confirmOv" style="z-index:600" style="align-items:center;padding:22px"><div class="conf-box"><div class="conf-msg" id="confirmMsg">Are you sure?</div><div class="conf-sub" id="confirmSub"></div><div class="conf-acts"><button class="conf-no" id="confirmNo">Cancel</button><button class="conf-yes" id="confirmYes">Remove</button></div></div></div>
 
   <!-- TEMPLATE NAME OVERLAY -->
   <div class="ov hi" id="tmplNameOv" style="z-index:500">
@@ -423,18 +540,6 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
   </div>
 
   <!-- PROGRESS OVERLAY -->
-  <div class="ov hi" id="progressOv">
-    <div class="drw" style="max-height:96vh">
-      <div class="drwbar"></div>
-      <div class="drwhdr"><span class="drwtitle">Skin Progress</span><button class="drwclose" id="progressClose">×</button></div>
-      <div style="display:flex;gap:6px;padding:10px 15px 0;overflow-x:auto;scrollbar-width:none">
-        <button class="progress-btn on" id="pbView" onclick="pgSwitch('view')">📊 Compare</button>
-        <button class="progress-btn" id="pbAdd" onclick="pgSwitch('add')">➕ Add Photo</button>
-      </div>
-      <div class="drwbody" style="padding:0;gap:0;overflow-y:auto" id="progressBody"></div>
-    </div>
-  </div>
-  <!-- BACKUP MODAL -->
   <div class="bk-modal hi" id="bkModal">
     <div class="bk-box">
       <div class="bk-icon">💾</div>
@@ -493,6 +598,148 @@ html,body{height:100%;background:var(--crm);font-family:'DM Sans',sans-serif;col
     </div>
   </div>
 
+
+  <!-- EFFICACY CHECK-IN OVERLAY -->
+  <div class="ov hi" id="efficacyOv" style="z-index:400">
+    <div class="drw">
+      <div class="drwbar"></div>
+      <div class="drwhdr">
+        <div>
+          <div style="font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px">Efficacy Check-In</div>
+          <span class="drwtitle" id="effProdName"></span>
+        </div>
+        <button class="drwclose" id="efficacyClose">×</button>
+      </div>
+      <div class="drwbody">
+        <input type="hidden" id="effProdId"/>
+        <input type="hidden" id="effCp"/>
+        <input type="hidden" id="effRating" value="0"/>
+        <input type="hidden" id="effHelped"/>
+        <div class="fld full">
+          <label>Rating</label>
+          <div id="effStars" style="display:flex;gap:4px;padding:4px 0">
+            <span class="estar" onclick="pickEfficacyStar(1)">☆</span>
+            <span class="estar" onclick="pickEfficacyStar(2)">☆</span>
+            <span class="estar" onclick="pickEfficacyStar(3)">☆</span>
+            <span class="estar" onclick="pickEfficacyStar(4)">☆</span>
+            <span class="estar" onclick="pickEfficacyStar(5)">☆</span>
+          </div>
+        </div>
+        <div class="fld full">
+          <label>Did it help?</label>
+          <div id="effHelped-btns" style="display:flex;gap:8px">
+            <button type="button" class="cpchip" data-val="yes" onclick="pickEfficacyHelped('yes')">✓ Yes</button>
+            <button type="button" class="cpchip" data-val="mixed" onclick="pickEfficacyHelped('mixed')">~ Mixed</button>
+            <button type="button" class="cpchip" data-val="no" onclick="pickEfficacyHelped('no')">✗ No</button>
+          </div>
+        </div>
+        <div class="fld full"><label>Notes</label><textarea id="effNote" placeholder="Any observations, reactions, changes noticed…" style="min-height:80px"></textarea></div>
+      </div>
+      <div class="drwfoot"><button class="bcancel" id="efficacyCancel">Skip</button><button class="bsave" onclick="saveEfficacy()">Save Check-In</button></div>
+    </div>
+  </div>
+  <!-- COMPLETION HISTORY OVERLAY -->
+  <div class="ov hi" id="historyOv">
+    <div class="drw" style="max-height:92vh">
+      <div class="drwbar"></div>
+      <div class="drwhdr"><span class="drwtitle">30-Day Completion</span><button class="drwclose" id="historyClose">×</button></div>
+      <div class="drwbody" style="padding:0;gap:0;overflow-y:auto" id="historyBody"></div>
+    </div>
+  </div>
+  <!-- MONTHLY REPORT OVERLAY -->
+  <div class="ov hi" id="reportOv">
+    <div class="drw" style="max-height:96vh">
+      <div class="drwbar"></div>
+      <div class="drwhdr" style="padding-bottom:0;border-bottom:none">
+        <span class="drwtitle">Monthly Report</span>
+        <button class="drwclose" id="reportClose">×</button>
+      </div>
+      <div class="ov-nav">
+        <button class="ov-nav-btn" onclick="reportPrev()">&#8249;</button>
+        <span class="ov-nav-title" id="reportTitle"></span>
+        <button class="ov-nav-btn" onclick="reportNext()">&#8250;</button>
+      </div>
+      <div class="drwbody" style="padding:0;gap:0;overflow-y:auto" id="reportBody"></div>
+    </div>
+  </div>
+  <!-- UNDO FLOATING BUTTON -->
+  <button class="undo-btn" id="undoBtn" onclick="undoSave()" title="Undo last change">&#8617;</button>
+
+
+
+  <!-- FINISHED PRODUCTS OVERLAY -->
+  <div class="ov hi" id="finishedOv">
+    <div class="drw" style="max-height:96vh">
+      <div class="drwbar"></div>
+      <div class="drwhdr">
+        <div>
+          <div style="font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px">Archive</div>
+          <span class="drwtitle">Finished Products</span>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <button class="sbtn" onclick="clearAllFinished()" style="color:var(--red);font-size:11px">Clear all</button>
+          <button class="drwclose" id="finishedClose">×</button>
+        </div>
+      </div>
+      <div class="srch" style="margin:0">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="sinput" id="finSearchInput" placeholder="Search finished products…" type="search"/>
+      </div>
+      <div class="drwbody" style="padding:12px 15px;gap:0;overflow-y:auto" id="finishedList"></div>
+    </div>
+  </div>
+
+
+  <!-- FINISHED PRODUCT VIEW OVERLAY -->
+  <div class="ov hi" id="finViewOv">
+    <div class="drw">
+      <div class="drwbar"></div>
+      <div class="drwhdr">
+        <div>
+          <div id="finViewEye" style="font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px"></div>
+          <span class="drwtitle" id="finViewTitle"></span>
+        </div>
+        <button class="drwclose" id="finViewClose">×</button>
+      </div>
+      <div class="drwbody" id="finViewBody"></div>
+      <div style="padding:10px 18px;border-top:1px solid var(--bdr)">
+        <div style="font-size:10px;color:var(--tl);letter-spacing:.09em;text-transform:uppercase;margin-bottom:6px">Additional Notes</div>
+        <textarea id="finNotesInput" placeholder="How did this product work for you? Would you repurchase?" style="width:100%;padding:9px 11px;border:1px solid var(--bdr);background:var(--crm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--td);border-radius:6px;outline:none;resize:none;min-height:80px;-webkit-appearance:none"></textarea>
+      </div>
+      <div class="drwfoot">
+        <button class="bdel" id="finViewDel">Remove</button>
+        <button class="bsave" id="finViewSave">Save Notes</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- DELETE / FINISH CONFIRM OVERLAY -->
+  <div class="ov hi" id="delConfOv" style="align-items:center;padding:22px;z-index:500">
+    <div class="conf-box">
+      <div style="font-size:32px;margin-bottom:10px">🧴</div>
+      <div class="conf-msg">What would you like to do with</div>
+      <div class="conf-sub"><b id="delConfName"></b></div>
+      <div class="conf-acts-col">
+        <button class="conf-finish" id="delConfFinish">✓ Mark as Finished</button>
+        <div style="display:flex;gap:8px">
+          <button class="conf-no" id="delConfCancel">Cancel</button>
+          <button class="conf-yes" id="delConfRemove" style="background:var(--red)">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- LIGHTBOX -->
+  <div class="ov hi" id="lightboxOv" style="background:rgba(0,0,0,.92);z-index:900" onclick="this.classList.add('hi')">
+    <div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:20px">
+      <img id="lbImg" src="" alt="" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:4px"/>
+      <button onclick="event.stopPropagation();document.getElementById('lightboxOv').classList.add('hi')"
+        style="position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center">×</button>
+    </div>
+  </div>
+
   <input type="file" id="importFile" accept=".json" class="hi"/>
   <div class="toast" id="toast"></div>
 </div>
@@ -502,10 +749,43 @@ document.addEventListener('DOMContentLoaded',function(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const CATOPTS=["Cleanser","Toner","Serum","Moisturiser","Sunscreen","Eye Care","Exfoliant","Face Oil","Essence","Lip Care"];
 const ST={active:{lbl:"Active",c:"#6B7D6E",bg:"#EEF1EE"},expiring:{lbl:"Expiring Soon",c:"#8B6914",bg:"#F5EDD4"},expired:{lbl:"Expired",c:"#8B3A3A",bg:"#F5E4E4"},low:{lbl:"Low Stock",c:"#4A6B8A",bg:"#E4EDF5"}};
 const PRI={High:{c:"#8B3A3A",bg:"#F5E4E4",bar:"#C97878"},Medium:{c:"#8B6914",bg:"#F5EDD4",bar:"#C9A96E"},Low:{c:"#5A6B5A",bg:"#E8EEE8",bar:"#8FAF90"}};
-const KEY="skincare_v5",BKEY="skincare_lastExport",DEF_TABS=["inventory","shopping","routine","journal"];
+const KEY="skincare_v5",BKEY="skincare_lastExport",BK_SNOOZE="skincare_bk_snooze",DEF_TABS=["inventory","shopping","routine","journal"];
 const DEF_PRODS=[
   {id:1,name:"Vitamin C Brightening Serum",brand:"Minimalist",category:"Serum",step:"Step 3 – AM",size:30,pdate:"2025-01-10",edate:"2026-01-10",odate:"",pao:12,qty:1,price:699,notes:"Use within 3 months of opening",photo:""},
   {id:2,name:"Niacinamide 10% + Zinc 1%",brand:"Minimalist",category:"Serum",step:"Step 3 – AM/PM",size:30,pdate:"2025-02-05",edate:"2026-08-05",odate:"",pao:12,qty:2,price:599,notes:"Helps with pores & sebum",photo:""},
@@ -521,7 +801,7 @@ const DEF_PRODS=[
   {id:12,name:"Micellar Cleansing Water",brand:"Simple",category:"Cleanser",step:"Step 1 – AM",size:400,pdate:"2025-01-05",edate:"2027-07-05",odate:"",pao:24,qty:1,price:365,notes:"No-rinse; great for lazy mornings",photo:""},
 ];
 const DEF_SHOP=[
-  {id:1,name:"Snail Mucin Essence",brand:"COSRX",category:"Essence",priority:"High",price:1299,where:"Nykaa / Amazon",notes:"96% Snail Secretion Filtrate",purchased:false},
+  {id:1,name:"Snail Mucin Essence",brand:"COSRX",category:"Essence",priority:"High",price:1299,where:"Nykaa / Amazon",notes:"96% Snail Secretion Filtrate",purchased:false,listType:'need'},
   {id:2,name:"Barrier Repair Moisturiser",brand:"Dr. G",category:"Moisturiser",priority:"Medium",price:1800,where:"MyGlamm",notes:"For compromised skin days",purchased:false},
   {id:3,name:"Azelaic Acid 10%",brand:"Paula's Choice",category:"Serum",priority:"Low",price:2200,where:"Paula's Choice IN",notes:"For PIH & redness",purchased:false},
   {id:4,name:"Lip SPF Balm",brand:"dot & key",category:"Lip Care",priority:"High",price:349,where:"Nykaa",notes:"Tinted + SPF 30",purchased:false},
@@ -538,7 +818,7 @@ const DEF_ROUT=[
 const DEF_WEEK=[{id:1,freq:"Weekly",name:"AHA/BHA Exfoliant",note:"The Ordinary Peeling Solution – max 10 min, PM only"},{id:2,freq:"Monthly",name:"Face Mask",note:"Clay mask or hydrating sheet mask"}];
 
 function ld(){try{const d=localStorage.getItem(KEY);return d?JSON.parse(d):null;}catch(e){return null;}}
-function sd(){try{localStorage.setItem(KEY,JSON.stringify({prods,shop,rout,week,tabOrder,shopCatOrder,budget,journal,darkMode,cIC,cSC,cRC}));}catch(e){}}
+function sd(){try{localStorage.setItem(KEY,JSON.stringify({prods,shop,rout,week,tabOrder,shopCatOrder,budget,journal,darkMode,cIC,cSC,cRC,finished:finishedProds}));}catch(e){}setTimeout(function(){if(typeof updateStorageQuota==="function")updateStorageQuota();},100);}
 function gle(){try{return Number(localStorage.getItem(BKEY)||0);}catch(e){return 0;}}
 function sle(){try{localStorage.setItem(BKEY,Date.now());}catch(e){}}
 const st=ld();
@@ -553,11 +833,16 @@ let journal=st?.journal||[];
 let darkMode=st?.darkMode||false;
 let cIC=st?.cIC||[];let cSC=st?.cSC||[];let cRC=st?.cRC||[];
 prods=prods.map(p=>({odate:"",pao:12,photo:"",...p}));
+shop=shop.map(s=>({listType:"need",...s}));
+
+// Finished products — declared early so all functions can reference it
+var finishedProds = (function(){ try{ return JSON.parse(localStorage.getItem('sk_finished')||'[]'); }catch(e){ return []; } })();
+var finSearch = '';
 shop=shop.map(s=>({purchased:false,...s}));
 rout=rout.map(r=>({category:"",days:[],...r}));
 let curTab=tabOrder[0]||"inventory";
 let srch="",catF="All",shopSrch="",routSrch="",jSrch="";
-let invSort="none",shopSort="none";
+let invSort="none",shopSort="none";let shopListView="need";
 let epId=null,esId=null,erId=null,ewId=null,ejId=null;
 const coll=new Set();
 let batchMode=false;
@@ -570,6 +855,8 @@ let comp=lc();
 function lstr(){try{return JSON.parse(localStorage.getItem("sk_streak")||"{}");}catch(e){return{};}}
 function sstr(s){try{localStorage.setItem("sk_streak",JSON.stringify(s));}catch(e){}}
 function calcStreak(){
+  // Alias to the recovery-aware version once it's defined
+  if(typeof calcStreakWithRecovery==='function') return calcStreakWithRecovery();
   const s=lstr();const tot=rout.length*2;
   const done=rout.reduce((a,r)=>{if(comp[`${TODAY}_${r.id}_am`])a++;if(comp[`${TODAY}_${r.id}_pm`])a++;return a;},0);
   if(tot>0&&done===tot&&s.last!==TODAY){
@@ -586,7 +873,7 @@ function pe(od,pao){if(!od||!pao)return null;const d=new Date(od);d.setMonth(d.g
 function ee(p){const x=pe(p.odate,p.pao);if(!x)return p.edate;if(!p.edate)return x;return x<p.edate?x:p.edate;}
 function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2000);}
 function sov(id){$(id).classList.remove("hi");}function hov(id){$(id).classList.add("hi");}
-function save(){sd();cse++;clearTimeout(save._t);save._t=setTimeout(checkBR,1500);}
+function save(){pushUndo();sd();cse++;clearTimeout(save._t);save._t=setTimeout(checkBR,1500);showUndoBtn();}
 function checkBR(){
   if(Date.now()-bda<600000)return;
   const last=gle(),days=(Date.now()-last)/86400000,never=last===0;
@@ -635,8 +922,8 @@ function switchTab(t){
   $("btnBatch").classList.toggle("hi",t!=="inventory");
   $("scrollArea").scrollTop=0;renderNav();
   if(t==="shopping")renderShop();
-  if(t==="routine")renderRout();
-  if(t==="journal"){renderJournal();renderWeeklySummary();}
+  if(t==="routine"){comp=lc();renderRout();}
+  if(t==="journal"){renderJournal();renderWeeklySummary();renderSkinScoreTrend();}
   renderWidget();
 }
 
@@ -663,6 +950,7 @@ function renderISB(){$("invSortBar").innerHTML=`<span class="sortbar-lbl">Sort</
 function sP(list){if(invSort==="none")return list;const s=[...list];if(invSort==="name")s.sort((a,b)=>a.name.localeCompare(b.name));if(invSort==="expiry")s.sort((a,b)=>new Date(ee(a))-new Date(ee(b)));if(invSort==="price")s.sort((a,b)=>a.price-b.price);if(invSort==="category")s.sort((a,b)=>(a.category||"").localeCompare(b.category||""));if(invSort==="status"){const o={expired:0,expiring:1,low:2,active:3};s.sort((a,b)=>o[so(dl(ee(a)),a.qty)]-o[so(dl(ee(b)),b.qty)]);}return s;}
 function renderProds(){
   renderISB();
+  const _fc=document.getElementById("finishedCount");if(_fc)_fc.textContent=finishedProds.length+(finishedProds.length===1?" product":" products");
   let list=prods.filter(p=>{const q=srch.toLowerCase();return(p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q))&&(catF==="All"||p.category===catF);});
   list=sP(list);const con=$("productList");
   if(!list.length){con.innerHTML=`<div class="empty">No products found</div>`;return;}
@@ -699,11 +987,54 @@ const SS=[{key:"name",lbl:"Name A–Z"},{key:"price",lbl:"Price ↑"},{key:"prio
 function renderSSB(){$("shopSortBar").innerHTML=`<span class="sortbar-lbl">Sort</span>`+SS.map(s=>`<button class="spill ${shopSort===s.key?"on":""}" data-ssort="${s.key}">${s.lbl}</button>`).join("")+`<button class="spill" id="budgetBtn" style="margin-left:6px">💰 Budget</button><button class="spill" id="checkoutBtn" style="margin-left:auto">🛒 Checkout</button>`;$("budgetBtn").onclick=()=>{$("bAmount").value=budget||"";sov("budgetOv");};$("checkoutBtn").onclick=enterCheckout;}
 function gSCO(){const all=[...new Set(shop.map(i=>i.category||"Other"))];const kn=shopCatOrder.filter(c=>all.includes(c));shopCatOrder=[...kn,...all.filter(c=>!kn.includes(c))];return shopCatOrder;}
 function sSh(list){if(shopSort==="none")return list;const s=[...list];if(shopSort==="name")s.sort((a,b)=>a.name.localeCompare(b.name));if(shopSort==="price")s.sort((a,b)=>a.price-b.price);if(shopSort==="priority"){const o={High:0,Medium:1,Low:2};s.sort((a,b)=>(o[a.priority]||1)-(o[b.priority]||1));}if(shopSort==="category")s.sort((a,b)=>(a.category||"").localeCompare(b.category||""));return s;}
+
+function moveListType(id){
+  const item=shop.find(x=>x.id===id);if(!item)return;
+  const newType=(item.listType||'need')==='need'?'wish':'need';
+  shop=shop.map(x=>x.id===id?{...x,listType:newType}:x);
+  save();renderShop();
+  toast(item.name+' moved to '+(newType==='wish'?'Wishlist':'Need list')+' ✓');
+}
+window.moveListType=moveListType;
+
+function renderListToggle(){
+  const el=document.getElementById('listToggle');
+  if(!el)return;
+  const needCount=shop.filter(i=>(i.listType||'need')==='need'&&!i.purchased).length;
+  const wishCount=shop.filter(i=>i.listType==='wish'&&!i.purchased).length;
+  el.innerHTML=
+    '<button class="list-toggle-btn'+(shopListView==='need'?' on':'')+'" onclick="setListView(\'need\')">'
+    +'🛒 Need'+(needCount?'<span class="need-badge">'+needCount+'</span>':'')
+    +'</button>'
+    +'<div class="list-toggle-sep"></div>'
+    +'<button class="list-toggle-btn'+(shopListView==='wish'?' on':'')+'" onclick="setListView(\'wish\')">'
+    +'✨ Wishlist'+(wishCount?'<span class="wish-badge">'+wishCount+'</span>':'')
+    +'</button>';
+}
+
+function setListView(type){
+  shopListView=type;
+  renderShop();
+}
+
+function setListTypeBtns(val){
+  document.querySelectorAll('.list-type-btn').forEach(b=>{
+    b.classList.toggle('on',b.dataset.lt===val);
+  });
+  const inp=document.getElementById('sListType');
+  if(inp)inp.value=val;
+}
+
+window.setListView=setListView;
+window.setListTypeBtns=setListTypeBtns;
+
 function renderShop(){
   renderSSB();
+  renderListToggle();
   if(budget>0){const tot=shop.reduce((s,i)=>s+i.price,0);const pct=Math.min(100,(tot/budget)*100);const col=pct>100?"#C97878":pct>80?"#C9A030":"#6B7D6E";$("budgetWrap").classList.remove("hi");$("budgetAmt").textContent=fmt(tot)+" / "+fmt(budget);$("budgetFill").style.width=pct+"%";$("budgetFill").style.background=col;}else{$("budgetWrap").classList.add("hi");}
   const wrap=$("shopSections");const q=shopSrch.toLowerCase();
-  let filt=q?shop.filter(i=>i.name.toLowerCase().includes(q)||i.brand.toLowerCase().includes(q)):shop;
+  let filt=shop.filter(i=>(i.listType||'need')===shopListView);
+  filt=q?filt.filter(i=>i.name.toLowerCase().includes(q)||i.brand.toLowerCase().includes(q)):filt;
   if(!filt.length){wrap.innerHTML=`<div class="empty">No items — tap + to add</div>`;$("shopTotal").textContent=fmt(0);return;}
   const co=gSCO();const cm=new Map();
   filt.forEach(item=>{const c=item.category||"Other";if(!cm.has(c))cm.set(c,[]);cm.get(c).push(item);});
@@ -721,7 +1052,7 @@ function renderShop(){
         ${shopSort==="none"?'<div class="sechint">Hold ≡ to reorder</div>':""}
         ${items.map(item=>{
           const p=PRI[item.priority]||PRI.Medium;
-          return `<div class="di scard ${item.purchased?"purchased":""}" data-id="${item.id}">
+          return `<div class="di scard ${item.purchased?"purchased":""} ${(item.listType||'need')==='wish'?'wish-card':''}" data-id="${item.id}">
             <div class="pribar" style="background:${p.bar}"></div>
             <div class="purch-check ${item.purchased?"done":""}" onclick="tPurch(${item.id})">${item.purchased?"✓":""}</div>
             ${shopSort==="none"?`<div class="dh" style="opacity:.2" onclick="event.stopPropagation()"><span></span><span></span><span></span></div>`:""}
@@ -731,6 +1062,7 @@ function renderShop(){
               ${item.notes?`<div class="scnote">${item.notes}</div>`:""}
               <div class="scbot" onclick="event.stopPropagation()">
                 ${item.purchased?`<button class="abtn" onclick="mToInv(${item.id})" style="color:#6B7D6E;font-size:10px">→ Inventory</button>`:""}
+                <button class="abtn" onclick="moveListType(${item.id})" style="font-size:10px">${(item.listType||'need')==='need'?'→ Wishlist':'→ Need'}</button>
                 <button class="abtn" onclick="editShop(${item.id})">Edit</button>
                 <button class="abtn del" onclick="delShop(${item.id})">×</button>
               </div>
@@ -741,7 +1073,7 @@ function renderShop(){
     wrap.appendChild(sec);
     if(shopSort==="none"){const body=sec.querySelector(".secbody");mdr(body,()=>shop.filter(i=>(i.category||"Other")===cat),rv=>{shop=rbSh(cat,rv);},()=>{save();renderShop();});}
   });
-  $("shopTotal").textContent=fmt(shop.reduce((s,i)=>s+i.price,0));
+  $("shopTotal").textContent=fmt(filt.reduce((s,i)=>s+(i.purchased?0:i.price),0));
 }
 function rbSh(cat,rv){let ri=0;return shop.map(item=>(item.category||"Other")===cat?rv[ri++]:item);}
 function tSec(cat){coll.has(cat)?coll.delete(cat):coll.add(cat);renderShop();}
@@ -754,11 +1086,10 @@ function mToInv(id){
 
 /* ROUTINE */
 function renderRout(){
-  const streak=calcStreak();const{done,tot}=rp();const allD=done===tot&&tot>0;
-  $("streakBanner").innerHTML=`<div class="streak-banner"><div class="streak-fire">${allD?"🔥":"☀️"}</div><div><div class="streak-count">${streak}</div><div class="streak-lbl">Day Streak</div><div class="streak-today">${allD?"Today complete! 🎉":"Today: "+done+"/"+tot+" steps done"}</div></div></div>`;
+  renderStreakBanner();
+  const{done,tot}=rp();
   renderRoutViewToggle();
   renderWeeklySummary();
-  renderReorderAlerts();
   const q=routSrch.toLowerCase();
   let fr=q?rout.filter(r=>r.name.toLowerCase().includes(q)||r.am.toLowerCase().includes(q)||r.pm.toLowerCase().includes(q)):rout;
   // Filter by schedule
@@ -780,6 +1111,7 @@ function renderRout(){
   const wc=$("weeklyList");
   wc.innerHTML=week.map(w=>`<div class="di wcard" data-id="${w.id}"><div class="wdragcol"><div class="dh"><span></span><span></span><span></span></div></div><div class="winner" onclick="viewWeek(${w.id})"><div><div class="wfreq">${w.freq}</div><div class="wname">${w.name}</div><div class="wnote">${w.note}</div></div><div class="sacts" onclick="event.stopPropagation()"><button class="sbtn" onclick="editWeek(${w.id})">Edit</button><button class="sbtn del" onclick="delWeek(${w.id})">×</button></div></div></div>`).join("");
   mdr(wc,()=>week,v=>{week=v;},()=>{save();renderRout();});
+  renderReorderAlerts();
   renderNav();
 }
 function rbRt(cat,rv){let ri=0;return rout.map(r=>(r.category||"").trim()===cat?rv[ri++]:r);}
@@ -791,7 +1123,7 @@ function renderJournal(){
   const list=q?journal.filter(e=>e.text.toLowerCase().includes(q)||(e.tags||[]).join(" ").toLowerCase().includes(q)):journal;
   const jl=$("journalList");
   if(!list.length){jl.innerHTML=`<div class="empty">No entries yet — tap + to start</div>`;return;}
-  jl.innerHTML=[...list].sort((a,b)=>b.date.localeCompare(a.date)).map(e=>`<div class="jcard" onclick="viewJournal(${e.id})"><div class="jdate">${e.date}</div>${e.mood?`<div class="jmood">${e.mood}</div>`:""}<div class="jtext">${e.text.slice(0,160)}${e.text.length>160?"…":""}</div>${e.tags&&e.tags.length?`<div class="jtags">${e.tags.map(t=>`<span class="jtag">${t}</span>`).join("")}</div>`:""}</div>`).join("");
+  jl.innerHTML=[...list].sort((a,b)=>b.date.localeCompare(a.date)).map(e=>`<div class="jcard" onclick="viewJournal(${e.id})"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="jdate">${e.date}</div>${e.mood?`<div class="jmood">${e.mood}</div>`:""}</div><button class="abtn del" onclick="event.stopPropagation();delJournal(${e.id})" style="flex-shrink:0;margin-left:8px">×</button></div><div class="jtext">${e.text.slice(0,160)}${e.text.length>160?"…":""}</div>${e.tags&&e.tags.length?`<div class="jtags">${e.tags.map(t=>`<span class="jtag">${t}</span>`).join("")}</div>`:""}</div>`).join("");
 }
 
 /* VIEW */
@@ -802,7 +1134,7 @@ function viewProd(id){
   const stars=renderStars(p.rating,id,true);const ph=renderPriceHistory(id);
   if(stars)$("viewBody").innerHTML+=`<div class="vrow"><span class="vlbl">Rating</span><span class="vval" id="viewStars_${id}">${stars}</span></div>`;
   if(ph)$("viewBody").innerHTML+=ph;
-  $("viewEdit").onclick=()=>{hov("viewOv");editProd(id);};$("viewDel").onclick=()=>{hov("viewOv");delProd(id);};sov("viewOv");
+  $("viewEdit").onclick=()=>{hov("viewOv");editProd(id);};$("viewDel").onclick=()=>{hov("viewOv");delProd(id);};const effHtml=renderEfficacyHistory(p);if(effHtml)$("viewBody").innerHTML+=effHtml;sov("viewOv");
 }
 function viewShop(id){
   const item=shop.find(x=>x.id===id);if(!item)return;const p=PRI[item.priority]||PRI.Medium;
@@ -846,16 +1178,31 @@ function saveProd(){
   if(p.price>0)addPriceHistory(p.id,p.price);hov("prodOv");save();renderStats();renderCats();renderProds();toast("Saved ✓");
 }
 function dupP(id){const p=prods.find(x=>x.id===id);if(!p)return;const dup={...p,id:Date.now(),name:p.name+" (copy)"};prods.splice(prods.indexOf(p)+1,0,dup);save();renderStats();renderProds();toast("Duplicated ✓");}
-function delProd(id){askConf("Remove this product?","",()=>{prods=prods.filter(x=>x.id!==id);save();renderStats();renderCats();renderProds();toast("Removed");});}
+function delProd(id){
+  const p=prods.find(x=>x.id===id);if(!p)return;
+  document.getElementById("delConfName").textContent=p.name;
+  document.getElementById("delConfOv").classList.remove("hi");
+  document.getElementById("delConfFinish").onclick=function(){
+    document.getElementById("delConfOv").classList.add("hi");
+    archiveAsFinished(id);
+  };
+  document.getElementById("delConfRemove").onclick=function(){
+    document.getElementById("delConfOv").classList.add("hi");
+    prods=prods.filter(x=>x.id!==id);save();renderStats();renderCats();renderProds();toast("Removed");
+  };
+  document.getElementById("delConfCancel").onclick=function(){
+    document.getElementById("delConfOv").classList.add("hi");
+  };
+}
 function uPhUI(){const has=!!_cpb64;$("fPhotoPreview").classList.toggle("hi",!has);$("fPhotoBtn").classList.toggle("hi",has);if(has)$("fPhotoPreview").src=_cpb64;}
 $("fPhotoBtn").onclick=()=>$("fPhotoInput").click();
 $("fPhotoPreview").onclick=()=>$("fPhotoInput").click();
-$("fPhotoInput").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{_cpb64=ev.target.result;uPhUI();};r.readAsDataURL(f);};
+$("fPhotoInput").onchange=e=>{const f=e.target.files[0];if(!f)return;compressImage(f).then(b64=>{_cpb64=b64;uPhUI();}).catch(()=>{const r=new FileReader();r.onload=ev=>{_cpb64=ev.target.result;uPhUI();};r.readAsDataURL(f);});};
 
 /* SHOPPING CRUD */
-function openShop(id){esId=id;$("shopTitle").textContent=id?"Edit Item":"Add Item";if(id){const i=shop.find(x=>x.id===id);if(!i){hov("shopOv");return;}$("sName").value=i.name;$("sBrand").value=i.brand;$("sCat").value=i.category||"";setCB("sCatBtn",i.category,"Select");$("sPri").value=i.priority;$("sPrice").value=i.price;$("sWhere").value=i.where;$("sNotes").value=i.notes;}else{["sName","sBrand","sWhere","sNotes","sPrice"].forEach(f=>$(f).value="");$("sCat").value="";setCB("sCatBtn","","Select");$("sPri").value="Medium";}sov("shopOv");}
+function openShop(id){esId=id;$("shopTitle").textContent=id?"Edit Item":"Add Item";if(id){const i=shop.find(x=>x.id===id);if(!i){hov("shopOv");return;}$("sName").value=i.name;$("sBrand").value=i.brand;$("sCat").value=i.category||"";setCB("sCatBtn",i.category,"Select");$("sPri").value=i.priority;$("sPrice").value=i.price;$("sWhere").value=i.where;$("sNotes").value=i.notes;$("sListType").value=i.listType||'need';setListTypeBtns(i.listType||'need');}else{["sName","sBrand","sWhere","sNotes","sPrice"].forEach(f=>$(f).value="");$("sCat").value="";setCB("sCatBtn","","Select");$("sPri").value="Medium";$("sListType").value=shopListView==='wish'?'wish':'need';setListTypeBtns(shopListView==='wish'?'wish':'need');}sov("shopOv");}
 function editShop(id){openShop(id);}
-function saveShop(){const name=$("sName").value.trim();if(!name){toast("Name required");return;}const cat=$("sCat").value.trim()||"Other";const item={id:esId||Date.now(),name,brand:$("sBrand").value,category:cat,priority:$("sPri").value,price:Number($("sPrice").value)||0,where:$("sWhere").value,notes:$("sNotes").value,purchased:false};if(esId)shop=shop.map(x=>x.id===esId?{...item,purchased:shop.find(s=>s.id===esId)?.purchased||false}:x);else shop.push(item);hov("shopOv");save();renderShop();toast("Saved ✓");}
+function saveShop(){const name=$("sName").value.trim();if(!name){toast("Name required");return;}const cat=$("sCat").value.trim()||"Other";const lt=$("sListType").value||'need';const item={id:esId||Date.now(),name,brand:$("sBrand").value,category:cat,priority:$("sPri").value,price:Number($("sPrice").value)||0,where:$("sWhere").value,notes:$("sNotes").value,purchased:false,listType:lt};if(esId)shop=shop.map(x=>x.id===esId?{...item,purchased:shop.find(s=>s.id===esId)?.purchased||false}:x);else shop.push(item);hov("shopOv");save();renderShop();toast("Saved ✓");}
 function delShop(id){askConf("Remove this item?","",()=>{shop=shop.filter(x=>x.id!==id);save();renderShop();toast("Removed");});}
 
 /* ROUTINE CRUD */
@@ -871,9 +1218,9 @@ function saveWeek(){const name=$("wName").value.trim();if(!name){toast("Name req
 function delWeek(id){askConf("Remove?","",()=>{week=week.filter(x=>x.id!==id);save();renderRout();toast("Removed");});}
 
 /* JOURNAL CRUD */
-function openJournal(id){ejId=id;$("journalTitle").textContent=id?"Edit Entry":"New Entry";_jmood="";if(id){const e=journal.find(x=>x.id===id);if(!e){hov("journalOv");return;}$("jDate").value=e.date;$("jText").value=e.text;$("jTags").value=(e.tags||[]).join(", ");_jmood=e.mood||"";}else{$("jDate").value=TODAY;$("jText").value="";$("jTags").value="";}$("jMood").value=_jmood;document.querySelectorAll("#moodPicker .cpchip").forEach(b=>b.classList.toggle("on",b.dataset.mood===_jmood));sov("journalOv");}
+function openJournal(id){ejId=id;$("journalTitle").textContent=id?"Edit Entry":"New Entry";_jmood="";if(id){const e=journal.find(x=>x.id===id);if(!e){hov("journalOv");return;}$("jDate").value=e.date;$("jText").value=e.text;$("jTags").value=(e.tags||[]).join(", ");_jmood=e.mood||"";$("jScore").value=e.score||0;}else{$("jDate").value=TODAY;$("jText").value="";$("jTags").value="";$("jScore").value=0;}$("jMood").value=_jmood;document.querySelectorAll("#moodPicker .cpchip").forEach(b=>b.classList.toggle("on",b.dataset.mood===_jmood));{const _sc=Number($("jScore").value)||0;document.querySelectorAll("#scorePicker .score-btn").forEach((b,i)=>{b.classList.toggle("on",i<_sc);b.textContent=i<_sc?"♥":"♡";});}sov("journalOv");}
 function pickMood(m){_jmood=_jmood===m?"":m;$("jMood").value=_jmood;document.querySelectorAll("#moodPicker .cpchip").forEach(b=>b.classList.toggle("on",b.dataset.mood===_jmood));}
-function saveJournal(){const text=$("jText").value.trim();if(!text){toast("Write something first");return;}const e={id:ejId||Date.now(),date:$("jDate").value||TODAY,mood:_jmood,text,tags:$("jTags").value.split(",").map(t=>t.trim()).filter(Boolean)};if(ejId)journal=journal.map(x=>x.id===ejId?e:x);else journal.push(e);hov("journalOv");save();renderJournal();toast("Saved ✓");}
+function saveJournal(){const text=$("jText").value.trim();if(!text){toast("Write something first");return;}const _jscore=Number($("jScore").value)||0;const e={id:ejId||Date.now(),date:$("jDate").value||TODAY,mood:_jmood,text,score:_jscore||undefined,tags:$("jTags").value.split(",").map(t=>t.trim()).filter(Boolean)};if(ejId)journal=journal.map(x=>x.id===ejId?e:x);else journal.push(e);hov("journalOv");save();renderJournal();renderSkinScoreTrend();toast("Saved ✓");}
 function delJournal(id){askConf("Delete this entry?","",()=>{journal=journal.filter(x=>x.id!==id);save();renderJournal();toast("Deleted");});}
 
 /* BATCH */
@@ -946,7 +1293,7 @@ $("confirmOv").onclick=e=>{if(e.target===$("confirmOv"))hov("confirmOv");};
 
 /* EXPORT / IMPORT */
 function exportData(){
-  const blob=new Blob([JSON.stringify({prods,shop,rout,week,tabOrder,shopCatOrder,budget,journal,darkMode,cIC,cSC,cRC},null,2)],{type:"application/json"});
+  const blob=new Blob([JSON.stringify({prods,shop,rout,week,tabOrder,shopCatOrder,budget,journal,darkMode,cIC,cSC,cRC,finished:(typeof finishedProds!=="undefined"?finishedProds:[])},null,2)],{type:"application/json"});
   const url=URL.createObjectURL(blob),a=document.createElement("a");
   a.href=url;a.download="skincare-"+TODAY+".json";a.click();URL.revokeObjectURL(url);
   sle();cse=0;$("backupBanner").classList.add("hi");toast("Exported ✓");
@@ -957,10 +1304,11 @@ function importData(file){
     try{
       const d=JSON.parse(e.target.result);if(!d.prods)throw 0;
       prods=d.prods.map(p=>({odate:"",pao:12,photo:"",...p}));
-      shop=(d.shop||[]).map(s=>({purchased:false,...s}));
+      shop=(d.shop||[]).map(s=>({listType:'need',purchased:false,...s}));
       rout=(d.rout||[]).map(r=>({category:"",...r}));
       week=d.week||[];tabOrder=d.tabOrder||[...DEF_TABS];shopCatOrder=d.shopCatOrder||[];
       budget=d.budget||0;journal=d.journal||[];darkMode=d.darkMode||false;cIC=d.cIC||[];cSC=d.cSC||[];cRC=d.cRC||[];applyDark();
+      if(d.finished){finishedProds=d.finished;saveFinished(finishedProds);}
       save();renderNav();renderStats();renderCats();renderProds();toast("Imported ✓");
     }catch{toast("Invalid file");}
   };
@@ -992,6 +1340,7 @@ $("searchInput").oninput=e=>{srch=e.target.value;renderProds();};
 $("shopSearchInput").oninput=e=>{shopSrch=e.target.value;renderShop();};
 $("routSearchInput").oninput=e=>{routSrch=e.target.value;renderRout();};
 $("journalSearchInput").oninput=e=>{jSrch=e.target.value;renderJournal();};
+$("finSearchInput").oninput=e=>{finSearch=e.target.value;renderFinishedList();};
 $("catsRow").onclick=e=>{if(e.target.dataset.cat){catF=e.target.dataset.cat;renderCats();renderProds();}};
 $("invSortBar").onclick=e=>{const k=e.target.dataset.isort;if(!k)return;invSort=invSort===k?"none":k;renderProds();};
 $("shopSortBar").onclick=e=>{const k=e.target.dataset.ssort;if(!k)return;shopSort=shopSort===k?"none":k;renderShop();};
@@ -1002,7 +1351,7 @@ window.viewShop=viewShop;window.editShop=editShop;window.delShop=delShop;window.
 window.viewRout=viewRout;window.editRout=editRout;window.delRout=delRout;window.tCheck=tCheck;
 window.viewWeek=viewWeek;window.editWeek=editWeek;window.delWeek=delWeek;
 window.viewJournal=viewJournal;window.openJournal=openJournal;window.delJournal=delJournal;
-window.openCatPicker=openCatPicker;window.pickCat=pickCat;window.pickMood=pickMood;window.applyBC=applyBC; window.openProgress=openProgress; window.pgSwitch=pgSwitch; window.savePGPhoto=savePGPhoto; window.deletePGPhoto=deletePGPhoto; window.clearPG=clearPG;
+window.openCatPicker=openCatPicker;window.pickCat=pickCat;window.pickMood=pickMood;window.applyBC=applyBC;
 window.openTemplates=openTemplates; window.saveCurrentTemplate=saveCurrentTemplate; window.confirmSaveTemplate=confirmSaveTemplate; window.loadTemplate=loadTemplate; window.deleteTemplate=deleteTemplate;
 window.renderSchedulePicker=renderSchedulePicker; window.toggleSchedDay=toggleSchedDay;
 window.setRoutView=setRoutView; window.shareRoutine=shareRoutine; window.goToAlerts=goToAlerts;
@@ -1010,11 +1359,168 @@ window.addReorderToShop=addReorderToShop; window.renderReorderAlerts=renderReord
 window.enterCheckout=enterCheckout; window.exitCheckout=exitCheckout; window.checkoutTick=checkoutTick;
 window.rateProd=rateProd;
 window.enterBatch=enterBatch; window.exitBatch=exitBatch;
+window.save=save;
+window.switchTab=switchTab;
+
+window.goToAlerts=goToAlerts;
+window.openFinished=openFinished; window.delFinished=delFinished; window.archiveAsFinished=archiveAsFinished;
+window.setListView=setListView; window.setListTypeBtns=setListTypeBtns;
 
 /* INIT */
 $("btnExport").classList.remove("hi");$("btnImport").classList.remove("hi");
-checkOB();renderNav();renderStats();renderCats();renderProds();renderWidget();
+document.getElementById('efficacyClose').onclick=document.getElementById('efficacyCancel').onclick=function(){document.getElementById('efficacyOv').classList.add('hi');};
+document.getElementById('finishedClose').onclick=function(){document.getElementById('finishedOv').classList.add('hi');};
+document.getElementById('delConfOv').addEventListener('click',function(e){if(e.target===document.getElementById('delConfOv'))document.getElementById('delConfOv').classList.add('hi');});
+document.getElementById('finishedOv').addEventListener('click',function(e){if(e.target===document.getElementById('finishedOv'))document.getElementById('finishedOv').classList.add('hi');});
+document.getElementById('finViewClose').onclick=function(){document.getElementById('finViewOv').classList.add('hi');};
+document.getElementById('finViewOv').addEventListener('click',function(e){if(e.target===document.getElementById('finViewOv'))document.getElementById('finViewOv').classList.add('hi');});
+document.getElementById('historyClose').onclick=function(){document.getElementById('historyOv').classList.add('hi');};
+document.getElementById('historyOv').addEventListener('click',function(e){if(e.target===document.getElementById('historyOv'))document.getElementById('historyOv').classList.add('hi');});
+document.getElementById('reportClose').onclick=function(){document.getElementById('reportOv').classList.add('hi');};
+document.getElementById('reportOv').addEventListener('click',function(e){if(e.target===document.getElementById('reportOv'))document.getElementById('reportOv').classList.add('hi');});
+if(!localStorage.getItem(KEY)){sd();}checkOB();renderNav();renderStats();renderCats();renderProds();renderWidget();setTimeout(checkEfficacyPrompts,800);setTimeout(updateStorageQuota,600);
 setTimeout(checkBR,2500); setupValidation(); setTimeout(checkBKModal,4000); if(!localStorage.getItem('sk_fu'))localStorage.setItem('sk_fu',Date.now());
+
+
+
+function openLightbox(src){
+  if(!src)return;
+  document.getElementById('lbImg').src=src;
+  document.getElementById('lightboxOv').classList.remove('hi');
+}
+window.openLightbox=openLightbox;
+
+/* ── STREAK RECOVERY ─────────────────────────────────────────────
+   Rules:
+   - Missed 1 day: show recovery nudge — complete today's full routine
+     to save your streak (streak continues from previous count)
+   - Missed 2+ days: streak resets to 1 on completion, but show
+     encouragement ("You had a N-day streak — start a new one!")
+   - Recovery window expires after 1 missed day becomes 2 missed days
+   - Once today is complete the streak advances normally regardless
+*/
+
+function getStreakState() {
+  const s = lstr();
+  if (!s.last) return { streak: s.n || 0, missed: 0, canRecover: false, isNew: true };
+
+  const lastDate = new Date(s.last);
+  const todayDate = new Date(TODAY);
+  const daysSince = Math.round((todayDate - lastDate) / 86400000);
+
+  const streak = s.n || 0;
+  const missed = Math.max(0, daysSince - 1); // days between last and today minus 1
+
+  // Already completed today
+  if (daysSince === 0) return { streak, missed: 0, canRecover: false, isToday: true };
+
+  // Missed exactly 1 day — still within recovery window
+  if (missed === 1) return { streak, missed: 1, canRecover: true, prevStreak: streak };
+
+  // Missed 2+ days — streak will reset on next completion
+  return { streak, missed, canRecover: false, willReset: true, prevStreak: streak };
+}
+
+function renderStreakBanner() {
+  const { done, tot } = rp();
+  const allD = done === tot && tot > 0;
+  const state = getStreakState();
+  const streak = calcStreak(); // updates storage if today is complete
+
+  let bannerHtml = '';
+
+  if (allD) {
+    // Today complete
+    bannerHtml = `<div class="streak-banner">
+      <div class="streak-fire">🔥</div>
+      <div>
+        <div class="streak-count">${streak}</div>
+        <div class="streak-lbl">Day Streak</div>
+        <div class="streak-today">Today complete! 🎉</div>
+      </div>
+    </div>`;
+  } else if (state.canRecover) {
+    // Missed 1 day — show recovery nudge
+    bannerHtml = `<div class="streak-recovery">
+      <div class="streak-recovery-icon">⚡</div>
+      <div class="streak-recovery-info">
+        <div class="streak-recovery-title">Streak rescue available — ${state.streak} days</div>
+        <div class="streak-recovery-sub">You missed yesterday. Complete today's full routine to keep your streak alive.</div>
+      </div>
+    </div>
+    <div class="streak-banner" style="margin-top:6px;background:var(--ln)">
+      <div class="streak-fire">☀️</div>
+      <div>
+        <div class="streak-count">${done}/${tot}</div>
+        <div class="streak-lbl">Steps Today</div>
+        <div class="streak-today">Complete all steps to rescue your streak</div>
+      </div>
+    </div>`;
+  } else if (state.willReset) {
+    // Missed 2+ days — encouraging reset message
+    bannerHtml = `<div class="streak-recovery" style="background:linear-gradient(135deg,var(--ln),var(--wh));border-color:var(--bdr)">
+      <div class="streak-recovery-icon">🌱</div>
+      <div class="streak-recovery-info">
+        <div class="streak-recovery-title" style="color:var(--td)">Time to start fresh</div>
+        <div class="streak-recovery-sub" style="color:var(--tl)">Your ${state.prevStreak}-day streak ended — complete today's routine to begin a new one.</div>
+      </div>
+    </div>
+    <div class="streak-banner" style="margin-top:6px;background:var(--ln)">
+      <div class="streak-fire">☀️</div>
+      <div>
+        <div class="streak-count">${done}/${tot}</div>
+        <div class="streak-lbl">Steps Today</div>
+        <div class="streak-today">Let's go — new streak starts now</div>
+      </div>
+    </div>`;
+  } else {
+    // Normal — today not yet complete, no missed days
+    bannerHtml = `<div class="streak-banner">
+      <div class="streak-fire">☀️</div>
+      <div>
+        <div class="streak-count">${streak}</div>
+        <div class="streak-lbl">Day Streak</div>
+        <div class="streak-today">Today: ${done}/${tot} steps done</div>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('streakBanner').innerHTML = bannerHtml;
+}
+
+// Also patch calcStreak to handle recovery:
+// If missed exactly 1 day and today is now complete, continue the streak (don't reset to 1)
+function calcStreakWithRecovery() {
+  const s = lstr();
+  const tot = rout.length * 2;
+  const done = rout.reduce((a, r) => {
+    if (comp[`${TODAY}_${r.id}_am`]) a++;
+    if (comp[`${TODAY}_${r.id}_pm`]) a++;
+    return a;
+  }, 0);
+
+  if (tot > 0 && done === tot && s.last !== TODAY) {
+    const lastDate = new Date(s.last || '2000-01-01');
+    const todayDate = new Date(TODAY);
+    const daysSince = Math.round((todayDate - lastDate) / 86400000);
+
+    let newStreak;
+    if (daysSince === 1) {
+      // Normal continuation
+      newStreak = (s.n || 0) + 1;
+    } else if (daysSince === 2) {
+      // Recovery: missed 1 day — continue streak rather than reset
+      newStreak = (s.n || 0) + 1;
+    } else {
+      // Missed 2+ days — reset
+      newStreak = 1;
+    }
+    sstr({ n: newStreak, last: TODAY });
+    return newStreak;
+  }
+  return s.n || 0;
+}
+
 
 /* SWIPE ACTIONS */
 const SW_THRESH = 80, SW_MAX = 120;
@@ -1109,67 +1615,13 @@ function setupValidation(){
 }
 
 /* PHOTO PROGRESS */
-const PG_KEY='skincare_progress';
-function loadPG(){try{return JSON.parse(localStorage.getItem(PG_KEY)||'[]');}catch(e){return[];}}
-function savePG(p){try{localStorage.setItem(PG_KEY,JSON.stringify(p));}catch(e){}}
-let pgPhotos=loadPG();
-let pgMode='view';
-let _pgPhoto='';
 
-function openProgress(){pgMode='view';pgSwitch('view');document.getElementById('progressOv').classList.remove('hi');}
-function pgSwitch(mode){
-  pgMode=mode;
-  document.getElementById('pbView').classList.toggle('on',mode==='view');
-  document.getElementById('pbAdd').classList.toggle('on',mode==='add');
-  renderPG();
-}
-function renderPG(){
-  const body=document.getElementById('progressBody');
-  if(pgMode==='add'){
-    _pgPhoto='';
-    body.innerHTML=`<div style="padding:14px 18px;display:flex;flex-direction:column;gap:12px">
-      <div class="fld full"><label>Photo</label>
-        <input type="file" id="pgPhotoIn" accept="image/*" style="display:none"/>
-        <div id="pgPhotoArea" onclick="document.getElementById('pgPhotoIn').click()" style="width:100%;height:170px;border:2px dashed var(--bdr);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:var(--ln);overflow:hidden;position:relative">
-          <div id="pgPhPH" style="display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--tl)"><span style="font-size:28px">📸</span><span style="font-size:12px">Tap to add photo</span></div>
-          <img id="pgPhPV" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none" alt=""/>
-        </div>
-      </div>
-      <div class="drow">
-        <div class="fld"><label>Date</label><input id="pgDate" type="date" value="${new Date().toISOString().slice(0,10)}"/></div>
-        <div class="fld"><label>Label</label><input id="pgLabel" placeholder="e.g. Week 4"/></div>
-      </div>
-      <div class="fld full"><label>Note</label><textarea id="pgNote" placeholder="Any observations…" style="min-height:56px"></textarea></div>
-      <div style="display:flex;gap:8px;padding-bottom:8px">
-        <button class="bcancel" onclick="pgSwitch('view')">Cancel</button>
-        <button class="bsave" onclick="savePGPhoto()">Save Photo</button>
-      </div>
-    </div>`;
-    document.getElementById('pgPhotoIn').addEventListener('change',e=>{
-      const f=e.target.files[0];if(!f)return;
-      const r=new FileReader();r.onload=ev=>{_pgPhoto=ev.target.result;document.getElementById('pgPhPV').src=_pgPhoto;document.getElementById('pgPhPV').style.display='block';document.getElementById('pgPhPH').style.display='none';};r.readAsDataURL(f);
-    });
-  } else {
-    if(!pgPhotos.length){body.innerHTML=`<div class="empty" style="padding:40px 20px">No progress photos yet.<br/>Tap + Add Photo to start.</div>`;return;}
-    let html=`<div style="padding:8px 15px 4px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;color:var(--tl)">${pgPhotos.length} photo${pgPhotos.length===1?'':'s'}</span><button class="sbtn del" onclick="clearPG()">Clear all</button></div>`;
-    if(pgPhotos.length>=2){
-      const f=pgPhotos[0],l=pgPhotos[pgPhotos.length-1];
-      html+=`<div class="ba-pair" style="margin:4px 15px 10px"><div class="ba-pair-hdr"><span class="ba-pair-title">Progress Comparison</span></div><div class="ba-pair-imgs"><div class="ba-img-wrap"><img src="${f.photo}" alt=""/><span class="ba-img-lbl">${f.label||f.date}</span></div><div class="ba-img-wrap"><img src="${l.photo}" alt=""/><span class="ba-img-lbl">${l.label||l.date}</span></div></div></div>`;
-    }
-    html+=`<div style="padding:0 15px 12px">`+pgPhotos.map(p=>`<div class="ba-pair"><div class="ba-pair-hdr"><span class="ba-pair-title">${p.label||p.date}</span><button class="sbtn del" onclick="deletePGPhoto(${p.id})">×</button></div><div style="position:relative"><img src="${p.photo}" style="width:100%;max-height:220px;object-fit:cover;display:block" alt=""/><div style="position:absolute;bottom:0;left:0;right:0;padding:7px 10px;background:linear-gradient(transparent,rgba(0,0,0,.5));color:#fff;font-size:11px">${p.date}${p.note?' · '+p.note:''}</div></div></div>`).join('')+`</div>`;
-    body.innerHTML=html;
-  }
-}
-function savePGPhoto(){
-  if(!_pgPhoto){toast('Please add a photo first');return;}
-  pgPhotos.push({id:Date.now(),date:document.getElementById('pgDate').value||new Date().toISOString().slice(0,10),label:document.getElementById('pgLabel').value,note:document.getElementById('pgNote').value,photo:_pgPhoto});
-  savePG(pgPhotos);pgSwitch('view');toast('Progress photo saved');
-}
-function deletePGPhoto(id){pgPhotos=pgPhotos.filter(p=>p.id!==id);savePG(pgPhotos);renderPG();}
-function clearPG(){askConf('Clear all progress photos?','This cannot be undone.',()=>{pgPhotos=[];savePG(pgPhotos);renderPG();toast('Cleared');});}
 
-/* SMART BACKUP MODAL */
-const BK_SNOOZE='skincare_bk_snooze';
+
+
+
+
+
 function checkBKModal(){
   const snooze=Number(localStorage.getItem(BK_SNOOZE)||0);
   if(Date.now()<snooze)return;
@@ -1203,8 +1655,6 @@ document.getElementById('schedDone').onclick=function(){document.getElementById(
 document.getElementById('schedOv').addEventListener('click',function(e){if(e.target===document.getElementById('schedOv'))document.getElementById('schedOv').classList.add('hi');});
 
 // Progress overlay close
-document.getElementById('progressClose').onclick=function(){document.getElementById('progressOv').classList.add('hi');};
-document.getElementById('progressOv').addEventListener('click',function(e){if(e.target===document.getElementById('progressOv'))document.getElementById('progressOv').classList.add('hi');});
 
 // Expose missing globals
 window.renderReorderAlerts = renderReorderAlerts;
@@ -1554,33 +2004,6 @@ function rateProd(id, rating) {
   toast('Rating saved ✓');
 }
 
-/* ── 9. GESTURE NAVIGATION ────────────────────────────────── */
-(function initGestureNav() {
-  let gsx = 0, gsy = 0, gTracking = false;
-  const scrollEl = document.getElementById('scrollArea');
-  
-  scrollEl.addEventListener('touchstart', e => {
-    if (e.touches.length !== 1) return;
-    gsx = e.touches[0].clientX;
-    gsy = e.touches[0].clientY;
-    gTracking = true;
-  }, {passive: true});
-
-  scrollEl.addEventListener('touchend', e => {
-    if (!gTracking) return;
-    gTracking = false;
-    const dx = e.changedTouches[0].clientX - gsx;
-    const dy = e.changedTouches[0].clientY - gsy;
-    // Only trigger if horizontal swipe is dominant and large enough
-    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-    // Don't trigger if scrolled vertically much
-    if (Math.abs(dy) > 40) return;
-    const idx = tabOrder.indexOf(curTab);
-    if (dx < 0 && idx < tabOrder.length - 1) switchTab(tabOrder[idx + 1]);
-    else if (dx > 0 && idx > 0) switchTab(tabOrder[idx - 1]);
-  }, {passive: true});
-})();
-
 /* ── 10. WIDGET HOME SCREEN ───────────────────────────────── */
 function renderWidget() {
   const el = document.getElementById('widgetPanel');
@@ -1662,7 +2085,774 @@ window.checkoutTick = checkoutTick;
 window.rateProd = rateProd;
 window.shareRoutine = shareRoutine;
 window.goToAlerts = goToAlerts;
-window.pgSwitch = pgSwitch || function(){};
+
+
+
+
+
+
+function showUndoBtn(){
+  const btn=document.getElementById('undoBtn');if(!btn)return;
+  btn.classList.add('show');
+  clearTimeout(showUndoBtn._t);
+  showUndoBtn._t=setTimeout(()=>btn.classList.remove('show'),4000);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NEW FEATURES — v7
+   1. Data Versioning (undo last 5 saves)
+   2. Product Efficacy Tracking
+   3. Routine Completion History (heatmap)
+   4. Skin Score (daily 1–5 + trend)
+   5. Monthly Skin Report
+   6. Image Compression (canvas resize before store)
+═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. DATA VERSIONING ──────────────────────────────────────────
+   Rolling undo buffer: last 5 full snapshots stored separately.
+   Triggered on every save(). Exposed as undoSave().
+*/
+const UNDO_KEY = 'sk_undo';
+const UNDO_DEPTH = 5;
+
+function loadUndo() {
+  try { return JSON.parse(localStorage.getItem(UNDO_KEY) || '[]'); } catch(e) { return []; }
+}
+function pushUndo() {
+  try {
+    const stack = loadUndo();
+    const snap = JSON.stringify({prods,shop,rout,week,tabOrder,shopCatOrder,
+      budget,journal,darkMode,cIC,cSC,cRC, _savedAt: Date.now()});
+    stack.push(snap);
+    if (stack.length > UNDO_DEPTH) stack.shift();
+    localStorage.setItem(UNDO_KEY, JSON.stringify(stack));
+  } catch(e) {}
+}
+function undoSave() {
+  const stack = loadUndo();
+  if (!stack.length) { toast('Nothing to undo'); return; }
+  const snap = JSON.parse(stack.pop());
+  localStorage.setItem(UNDO_KEY, JSON.stringify(stack));
+  const age = snap._savedAt ? Math.round((Date.now()-snap._savedAt)/1000) : 0;
+  const ageStr = age < 60 ? age+'s ago' : Math.round(age/60)+'m ago';
+  // Restore state
+  prods = (snap.prods||[]).map(p=>({odate:'',pao:12,photo:'',rating:0,...p}));
+  shop  = (snap.shop||[]).map(s=>({purchased:false,...s}));
+  rout  = (snap.rout||[]).map(r=>({category:'',days:[],...r}));
+  week  = snap.week || [];
+  journal = snap.journal || [];
+  budget = snap.budget || 0;
+  darkMode = snap.darkMode || false;
+  cIC = snap.cIC||[]; cSC = snap.cSC||[]; cRC = snap.cRC||[];
+  applyDark();
+  sd(); // Save restored state (but don't push to undo again)
+  renderNav(); renderStats(); renderCats(); renderProds(); renderWidget();
+  toast('Restored to ' + ageStr + ' \u2713');
+}
+window.undoSave = undoSave;
+
+/* ── 2. PRODUCT EFFICACY TRACKING ───────────────────────────────
+   After 28 days of having a product open (odate set), prompt for
+   an efficacy check-in: rating + "did it help?" + note.
+   Stored as efficacy[] on each product.
+   Shown as a timeline in the product view drawer.
+*/
+function checkEfficacyPrompts() {
+  const THRESHOLD = 28; // days
+  prods.forEach(p => {
+    if (!p.odate) return;
+    const daysOpen = Math.floor((Date.now() - new Date(p.odate)) / 86400000);
+    const checkpoints = [28, 56, 90];
+    checkpoints.forEach(cp => {
+      if (daysOpen < cp) return;
+      const already = (p.efficacy||[]).some(e => e.checkpoint === cp);
+      if (!already) {
+        // Show a prompt banner (stored so we only show one at a time)
+        const key = 'sk_eff_prompt';
+        try {
+          const pending = JSON.parse(localStorage.getItem(key)||'[]');
+          const alreadyPending = pending.some(x => x.prodId===p.id && x.cp===cp);
+          if (!alreadyPending) {
+            pending.push({prodId:p.id, cp, name:p.name});
+            localStorage.setItem(key, JSON.stringify(pending));
+          }
+        } catch(e) {}
+      }
+    });
+  });
+  renderEfficacyPrompts();
+}
+
+function renderEfficacyPrompts() {
+  const el = document.getElementById('efficacyPrompts');
+  if (!el) return;
+  let pending = [];
+  try { pending = JSON.parse(localStorage.getItem('sk_eff_prompt')||'[]'); } catch(e) {}
+  // Filter to ones that still exist and don't have this checkpoint logged
+  pending = pending.filter(x => {
+    const p = prods.find(p=>p.id===x.prodId);
+    if (!p) return false;
+    return !(p.efficacy||[]).some(e=>e.checkpoint===x.cp);
+  });
+  try { localStorage.setItem('sk_eff_prompt', JSON.stringify(pending)); } catch(e) {}
+  if (!pending.length) { el.innerHTML=''; return; }
+  const first = pending[0];
+  el.innerHTML = `<div style="margin:8px 15px 0;background:linear-gradient(135deg,#F0EDE8,#E8EEF0);border:1px solid var(--bdr);border-radius:7px;padding:12px 14px">
+    <div style="font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">Efficacy Check-In</div>
+    <div style="font-size:13px;color:var(--td);margin-bottom:8px">You've used <b>${first.name}</b> for ${first.cp} days — how is it working?</div>
+    <div style="display:flex;gap:8px">
+      <button class="sbtn" onclick="openEfficacyForm(${first.prodId},${first.cp})" style="background:var(--ch);color:var(--crm);border-color:var(--ch)">Rate it</button>
+      <button class="sbtn" onclick="dismissEfficacy(${first.prodId},${first.cp})">Skip</button>
+    </div>
+  </div>`;
+}
+
+function openEfficacyForm(prodId, cp) {
+  const p = prods.find(x=>x.id===prodId);
+  if (!p) return;
+  document.getElementById('effProdId').value = prodId;
+  document.getElementById('effCp').value = cp;
+  document.getElementById('effProdName').textContent = p.name + ' (' + cp + ' days)';
+  document.getElementById('effNote').value = '';
+  // Reset stars
+  document.querySelectorAll('#effStars .estar').forEach((s,i) => s.classList.toggle('on', false));
+  document.getElementById('effRating').value = '0';
+  document.getElementById('effHelped').value = '';
+  document.querySelectorAll('#effHelped-btns button').forEach(b=>b.classList.remove('on'));
+  document.getElementById('efficacyOv').classList.remove('hi');
+}
+
+function pickEfficacyStar(n) {
+  document.getElementById('effRating').value = n;
+  document.querySelectorAll('#effStars .estar').forEach((s,i)=>s.classList.toggle('on', i<n));
+}
+
+function pickEfficacyHelped(val) {
+  document.getElementById('effHelped').value = val;
+  document.querySelectorAll('#effHelped-btns button').forEach(b=>b.classList.toggle('on', b.dataset.val===val));
+}
+
+function saveEfficacy() {
+  const prodId = Number(document.getElementById('effProdId').value);
+  const cp = Number(document.getElementById('effCp').value);
+  const rating = Number(document.getElementById('effRating').value);
+  const helped = document.getElementById('effHelped').value;
+  const note = document.getElementById('effNote').value.trim();
+  if (!rating) { toast('Please give a star rating'); return; }
+  const entry = { checkpoint: cp, date: TODAY, rating, helped, note };
+  prods = prods.map(p => p.id===prodId ? {...p, efficacy:[...(p.efficacy||[]),entry]} : p);
+  dismissEfficacy(prodId, cp);
+  document.getElementById('efficacyOv').classList.add('hi');
+  save();
+  toast('Efficacy logged \u2713');
+}
+
+function dismissEfficacy(prodId, cp) {
+  try {
+    let pending = JSON.parse(localStorage.getItem('sk_eff_prompt')||'[]');
+    pending = pending.filter(x=>!(x.prodId===prodId&&x.cp===cp));
+    localStorage.setItem('sk_eff_prompt', JSON.stringify(pending));
+  } catch(e) {}
+  renderEfficacyPrompts();
+}
+
+function renderEfficacyHistory(p) {
+  if (!p.efficacy || !p.efficacy.length) return '';
+  return '<div class="vrow"><span class="vlbl">Efficacy Log</span><span class="vval"></span></div>' +
+    p.efficacy.map(e => {
+      const stars = '\u2605'.repeat(e.rating) + '\u2606'.repeat(5-e.rating);
+      const helpedLabel = e.helped==='yes'?'\u2713 Helped':e.helped==='no'?'\u2717 No change':e.helped==='mixed'?'\u007e Mixed':'';
+      return `<div style="padding:6px 0;border-bottom:1px solid var(--stn);display:flex;flex-direction:column;gap:2px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:11px;color:var(--tl)">${e.date} \u00b7 Day ${e.checkpoint}</span>
+          <span style="font-size:13px;color:#C9A030">${stars}</span>
+        </div>
+        ${helpedLabel?`<span style="font-size:11px;color:var(--tm)">${helpedLabel}</span>`:''}
+        ${e.note?`<span style="font-size:11px;color:var(--tl);font-style:italic">${e.note}</span>`:''}
+      </div>`;
+    }).join('');
+}
+window.openEfficacyForm = openEfficacyForm;
+window.saveEfficacy = saveEfficacy;
+window.dismissEfficacy = dismissEfficacy;
+window.pickEfficacyStar = pickEfficacyStar;
+window.pickEfficacyHelped = pickEfficacyHelped;
+
+/* ── 3. ROUTINE COMPLETION HISTORY ──────────────────────────────
+   Read all sk_comp-like entries from localStorage and build a
+   30-day heatmap. One cell per day, colour = % steps completed.
+*/
+function getCompletionHistory() {
+  // comp is keyed TODAY_stepId_slot — read all days from it
+  const days = {};
+  const totalSteps = rout.length * 2;
+  if (totalSteps === 0) return [];
+  Object.keys(comp).forEach(k => {
+    const parts = k.split('_');
+    if (parts.length < 3) return;
+    const day = parts[0];
+    if (!days[day]) days[day] = 0;
+    days[day]++;
+  });
+  // Build last 30 days
+  const result = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate()-i);
+    const ds = d.toISOString().slice(0,10);
+    const count = days[ds] || 0;
+    const pct = totalSteps > 0 ? Math.round((count/totalSteps)*100) : 0;
+    result.push({ date: ds, count, pct, isToday: ds===TODAY });
+  }
+  return result;
+}
+
+function renderCompletionHeatmap() {
+  const data = getCompletionHistory();
+  if (!data.length) return '<div class="empty" style="padding:20px">No history yet</div>';
+  const cells = data.map(d => {
+    const alpha = d.pct === 0 ? 0.06 : d.pct < 50 ? 0.3 : d.pct < 100 ? 0.6 : 1;
+    const bg = d.pct===0 ? 'var(--stn)' : `rgba(107,125,110,${alpha})`;
+    const border = d.isToday ? '2px solid var(--ch)' : '1px solid transparent';
+    const dayNum = new Date(d.date).getDate();
+    return `<div title="${d.date}: ${d.pct}% complete" style="width:28px;height:28px;border-radius:5px;background:${bg};border:${border};display:flex;align-items:center;justify-content:center;font-size:9px;color:${d.pct>50?'#fff':'var(--tl)'};">${dayNum}</div>`;
+  }).join('');
+  const daysLogged = data.filter(d=>d.count>0).length;
+  const avgPct = data.length ? Math.round(data.reduce((s,d)=>s+d.pct,0)/data.length) : 0;
+  const perfect = data.filter(d=>d.pct===100).length;
+  return `<div style="padding:12px 15px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">${cells}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+      <div style="text-align:center;background:var(--wh);border:1px solid var(--bdr);border-radius:6px;padding:8px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ch)">${daysLogged}</div>
+        <div style="font-size:9px;color:var(--tl);text-transform:uppercase;letter-spacing:.07em">Days active</div>
+      </div>
+      <div style="text-align:center;background:var(--wh);border:1px solid var(--bdr);border-radius:6px;padding:8px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ch)">${avgPct}%</div>
+        <div style="font-size:9px;color:var(--tl);text-transform:uppercase;letter-spacing:.07em">Avg complete</div>
+      </div>
+      <div style="text-align:center;background:var(--wh);border:1px solid var(--bdr);border-radius:6px;padding:8px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ch)">${perfect}</div>
+        <div style="font-size:9px;color:var(--tl);text-transform:uppercase;letter-spacing:.07em">Perfect days</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function openCompletionHistory() {
+  const el = document.getElementById('historyBody');
+  el.innerHTML = renderCompletionHeatmap();
+  document.getElementById('historyOv').classList.remove('hi');
+}
+window.openCompletionHistory = openCompletionHistory;
+
+/* ── 4. SKIN SCORE ───────────────────────────────────────────────
+   A 1–5 daily skin score stored on journal entries (score field).
+   Shown as a mini trend line at the top of the Journal tab.
+   Added to the journal entry form.
+*/
+function renderSkinScoreTrend() {
+  const el = document.getElementById('skinScoreTrend');
+  if (!el) return;
+  // Get last 14 days with scores
+  const scored = journal
+    .filter(e => e.score && e.date)
+    .sort((a,b)=>a.date.localeCompare(b.date))
+    .slice(-14);
+  if (scored.length < 2) { el.innerHTML=''; return; }
+  const scores = scored.map(e=>e.score);
+  const avg = (scores.reduce((s,v)=>s+v,0)/scores.length).toFixed(1);
+  const max=5, min=1, w=280, h=50;
+  const pts = scored.map((e,i) => {
+    const x = (i/(scored.length-1))*w;
+    const y = h - ((e.score-min)/(max-min))*(h-8) - 4;
+    return x+','+y;
+  }).join(' ');
+  const trend = scores[scores.length-1] >= scores[0] ? '\u2191' : '\u2193';
+  const tCol = trend==='\u2191' ? 'var(--green)' : 'var(--red)';
+  el.innerHTML = `<div style="margin:10px 15px 0;background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:12px 14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <div>
+        <div style="font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase">Skin Score Trend</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ch);line-height:1.1">${avg}<span style="font-size:14px;color:var(--tl)">/5</span></div>
+      </div>
+      <span style="font-size:20px;color:${tCol};font-weight:bold">${trend}</span>
+    </div>
+    <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:${h}px;overflow:visible">
+      <polyline points="${pts}" fill="none" stroke="var(--tpe)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      ${scored.map((e,i)=>{
+        const x=(i/(scored.length-1))*w;
+        const y=h-((e.score-min)/(max-min))*(h-8)-4;
+        return `<circle cx="${x}" cy="${y}" r="3" fill="var(--tpe)"/>`;
+      }).join('')}
+    </svg>
+    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--tl);margin-top:2px">
+      <span>${scored[0].date}</span><span>${scored[scored.length-1].date}</span>
+    </div>
+  </div>`;
+}
+
+/* ── 5. MONTHLY SKIN REPORT ──────────────────────────────────────
+   Auto-generated summary for the current/previous month.
+   Opens as a full overlay with stats, mood breakdown, top tags,
+   products started, best streak, and skin score trend.
+*/
+function generateMonthReport(year, month) {
+  // month is 1-indexed
+  const prefix = `${year}-${String(month).padStart(2,'0')}`;
+  const entries = journal.filter(e=>e.date && e.date.startsWith(prefix));
+  const daysInMonth = new Date(year, month, 0).getDate();
+
+  const moodCounts = {};
+  entries.forEach(e=>{ if(e.mood) moodCounts[e.mood]=(moodCounts[e.mood]||0)+1; });
+  const tagCounts = {};
+  entries.flatMap(e=>e.tags||[]).forEach(t=>tagCounts[t]=(tagCounts[t]||0)+1);
+  const topTags = Object.entries(tagCounts).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const scores = entries.filter(e=>e.score).map(e=>e.score);
+  const avgScore = scores.length ? (scores.reduce((s,v)=>s+v,0)/scores.length).toFixed(1) : null;
+  const topMood = Object.entries(moodCounts).sort((a,b)=>b[1]-a[1])[0];
+
+  // Products opened this month
+  const opened = prods.filter(p=>p.odate && p.odate.startsWith(prefix));
+  const expiring = prods.filter(p=>{
+    const ed = p.edate || '';
+    return ed.startsWith(prefix) || (p.odate && (() => {
+      const pe = new Date(p.odate); pe.setMonth(pe.getMonth()+(p.pao||12));
+      return pe.toISOString().slice(0,7)===prefix;
+    })());
+  });
+
+  // Completion rate this month
+  const monthDays = {};
+  const totalSteps = rout.length * 2;
+  Object.keys(comp).forEach(k=>{
+    const [day] = k.split('_');
+    if (day.startsWith(prefix)) monthDays[day]=(monthDays[day]||0)+1;
+  });
+  const completedDays = Object.values(monthDays).filter(c=>c>=totalSteps).length;
+  const activeDays = Object.keys(monthDays).length;
+
+  const monthName = new Date(year,month-1,1).toLocaleString('default',{month:'long',year:'numeric'});
+  return { monthName, entries, daysInMonth, moodCounts, topTags, avgScore, topMood,
+           opened, expiring, completedDays, activeDays, totalSteps };
+}
+
+function renderMonthReport(year, month) {
+  const r = generateMonthReport(year, month);
+  const body = document.getElementById('reportBody');
+  if (!r.entries.length && r.activeDays===0) {
+    body.innerHTML = '<div class="empty" style="padding:30px">No data for this month yet.</div>';
+    return;
+  }
+  const moodBar = Object.entries(r.moodCounts).map(([m,c])=>
+    `<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+      <span style="font-size:16px;width:24px">${m}</span>
+      <div style="flex:1;height:6px;background:var(--stn);border-radius:3px;overflow:hidden">
+        <div style="height:100%;background:var(--tpe);border-radius:3px;width:${Math.round(c/r.entries.length*100)}%"></div>
+      </div>
+      <span style="font-size:11px;color:var(--tl);width:20px;text-align:right">${c}</span>
+    </div>`).join('');
+  body.innerHTML = `
+    <div style="padding:0 15px 16px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        ${[
+          ['Journal entries', r.entries.length + ' / ' + r.daysInMonth + ' days'],
+          ['Perfect routine days', r.completedDays],
+          ['Active routine days', r.activeDays],
+          ['Avg skin score', r.avgScore ? r.avgScore+'/5' : '—'],
+          ['Top mood', r.topMood ? r.topMood[0]+' '+r.topMood[1]+'×' : '—'],
+          ['Products opened', r.opened.length],
+        ].map(([lbl,val])=>`<div style="background:var(--wh);border:1px solid var(--bdr);border-radius:6px;padding:10px 12px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ch)">${val}</div>
+          <div style="font-size:9px;color:var(--tl);text-transform:uppercase;letter-spacing:.07em;margin-top:2px">${lbl}</div>
+        </div>`).join('')}
+      </div>
+      ${r.entries.length ? `<div style="background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:12px 14px">
+        <div style="font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Mood Breakdown</div>
+        ${moodBar}
+      </div>` : ''}
+      ${r.topTags.length ? `<div style="background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:12px 14px">
+        <div style="font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">Most Common Tags</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          ${r.topTags.map(([t,c])=>`<span style="background:var(--ln);border:1px solid var(--bdr);border-radius:12px;padding:4px 10px;font-size:12px;color:var(--tm)">${t} <span style="color:var(--tl)">${c}×</span></span>`).join('')}
+        </div>
+      </div>` : ''}
+      ${r.opened.length ? `<div style="background:var(--wh);border:1px solid var(--bdr);border-radius:7px;padding:12px 14px">
+        <div style="font-size:10px;color:var(--tl);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">Products Opened This Month</div>
+        ${r.opened.map(p=>`<div style="font-size:13px;color:var(--td);padding:4px 0;border-bottom:1px solid var(--stn)">${p.name} <span style="font-size:11px;color:var(--tl)">${p.brand}</span></div>`).join('')}
+      </div>` : ''}
+    </div>`;
+}
+
+let _reportYear = new Date().getFullYear();
+let _reportMonth = new Date().getMonth()+1;
+
+function openReport() {
+  _reportYear = new Date().getFullYear();
+  _reportMonth = new Date().getMonth()+1;
+  updateReportHeader();
+  renderMonthReport(_reportYear, _reportMonth);
+  document.getElementById('reportOv').classList.remove('hi');
+}
+
+function updateReportHeader() {
+  const name = new Date(_reportYear, _reportMonth-1, 1).toLocaleString('default',{month:'long',year:'numeric'});
+  document.getElementById('reportTitle').textContent = name;
+}
+
+function reportPrev() {
+  _reportMonth--;
+  if (_reportMonth < 1) { _reportMonth=12; _reportYear--; }
+  updateReportHeader();
+  renderMonthReport(_reportYear, _reportMonth);
+}
+function reportNext() {
+  const now = new Date();
+  if (_reportYear > now.getFullYear() || (_reportYear===now.getFullYear() && _reportMonth>=now.getMonth()+1)) return;
+  _reportMonth++;
+  if (_reportMonth > 12) { _reportMonth=1; _reportYear++; }
+  updateReportHeader();
+  renderMonthReport(_reportYear, _reportMonth);
+}
+window.openReport = openReport;
+window.reportPrev = reportPrev;
+window.reportNext = reportNext;
+
+/* ── 6. IMAGE COMPRESSION ────────────────────────────────────────
+   Compress product photos to max 800×800px / ~120KB before
+   storing. Uses canvas. Replaces the raw FileReader approach.
+*/
+function compressImage(file, maxSize=800, quality=0.75) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = ev => {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = () => {
+        let {width: w, height: h} = img;
+        if (w > maxSize || h > maxSize) {
+          if (w > h) { h = Math.round(h*(maxSize/w)); w = maxSize; }
+          else       { w = Math.round(w*(maxSize/h)); h = maxSize; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        const compressed = canvas.toDataURL('image/jpeg', quality);
+        const origKB = Math.round(ev.target.result.length * 0.75 / 1024);
+        const compKB = Math.round(compressed.length * 0.75 / 1024);
+        console.log(`Image compressed: ${origKB}KB → ${compKB}KB (${w}×${h})`);
+        resolve(compressed);
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* Also compress progress photos */
+const _origPGInput = null; // will be set below
+
+/* ── SKIN SCORE IN JOURNAL FORM ──────────────────────────────────
+   Patch saveJournal to include score. The form has a score picker
+   injected into the journal overlay HTML.
+*/
+function pickScore(n) {
+  document.getElementById('jScore').value = n;
+  document.querySelectorAll('#scorePicker .score-btn').forEach((b,i)=>{
+    b.classList.toggle('on', i < n);
+    b.textContent = i < n ? '\u2665' : '\u2661';
+  });
+}
+window.pickScore = pickScore;
+
+
+
+/* ═══════════════════════════════════════════════════════════
+   FEATURE: FINISHED PRODUCTS LOG
+   Storage key: sk_finished  (separate from main save)
+   Each entry: { id, name, brand, category, finishedAt,
+                 price, rating, notes, usedDays }
+═══════════════════════════════════════════════════════════ */
+const FIN_KEY = 'sk_finished';
+function loadFinished(){ try{ return JSON.parse(localStorage.getItem(FIN_KEY)||'[]'); }catch(e){ return []; } }
+function saveFinished(arr){ try{ localStorage.setItem(FIN_KEY, JSON.stringify(arr)); }catch(e){} }
+
+function archiveAsFinished(id){
+  const p = prods.find(x => x.id === id);
+  if(!p) return;
+  const usedDays = p.odate ? Math.floor((Date.now()-new Date(p.odate))/86400000) : null;
+  const entry = {
+    id: Date.now(),
+    origId: p.id,
+    name: p.name,
+    brand: p.brand,
+    category: p.category || '',
+    price: p.price || 0,
+    rating: p.rating || 0,
+    notes: p.notes || '',
+    photo: p.photo || '',
+    finishedAt: TODAY,
+    openedAt: p.odate || null,
+    usedDays,
+    efficacy: p.efficacy || [],
+  };
+  finishedProds.push(entry);
+  saveFinished(finishedProds);
+  // Now remove from active inventory
+  prods = prods.filter(x => x.id !== id);
+  save();
+  renderStats(); renderCats(); renderProds();
+  toast(p.name + ' archived as finished ✓');
+}
+
+function delFinished(id){
+  document.getElementById('finishedOv').classList.add('hi');
+  askConf('Remove from history?','This entry will be permanently deleted.',()=>{
+    finishedProds=finishedProds.filter(x=>x.id!==id);
+    saveFinished(finishedProds);
+    document.getElementById('finishedOv').classList.remove('hi');
+    renderFinishedList();
+    toast('Removed');
+  });
+  $('confirmNo').onclick=function(){hov('confirmOv');document.getElementById('finishedOv').classList.remove('hi');};
+}
+
+function renderFinishedList(){
+  const el = document.getElementById('finishedList');
+  if(!el) return;
+  const q = finSearch.toLowerCase();
+  let list = q
+    ? finishedProds.filter(p => p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q))
+    : finishedProds;
+  // Most recently finished first
+  list = [...list].sort((a,b) => b.finishedAt.localeCompare(a.finishedAt));
+
+  const countEl = document.getElementById('finishedCount');
+  if(countEl) countEl.textContent = finishedProds.length + ' product' + (finishedProds.length===1?'':'s');
+
+  if(!list.length){
+    el.innerHTML = '<div class="finished-empty">' +
+      (q ? 'No matches found.' : 'No finished products yet.<br/>When you mark a product as finished it will appear here.') +
+      '</div>';
+    return;
+  }
+  el.innerHTML = list.map(p => {
+    const stars = p.rating ? '★'.repeat(p.rating)+'☆'.repeat(5-p.rating) : '';
+    const usedStr = p.usedDays ? p.usedDays + ' days used' : '';
+    const effCount = (p.efficacy||[]).length;
+    const hasPhoto = !!p.photo;
+    return '<div class="finished-card" onclick="viewFinished(' + p.id + ')" style="cursor:pointer">' +
+      '<div class="finished-card-top">' +
+        (hasPhoto ? '<img src="'+p.photo+'" style="width:44px;height:44px;object-fit:cover;border-radius:5px;flex-shrink:0;margin-right:10px" alt=""/>' : '') +
+        '<div style="flex:1;min-width:0">' +
+          '<div class="finished-name">' + p.name + '</div>' +
+          '<div class="finished-brand">' + p.brand + '</div>' +
+        '</div>' +
+        '<button class="sbtn del" onclick="event.stopPropagation();delFinished(' + p.id + ')">×</button>' +
+      '</div>' +
+      '<div class="finished-meta" style="margin-top:7px">' +
+        (p.category ? '<span class="finished-badge">' + p.category + '</span>' : '') +
+        (stars ? '<span class="finished-rating">' + stars + '</span>' : '') +
+        (p.price ? '<span class="finished-badge">₹' + Number(p.price).toLocaleString('en-IN') + '</span>' : '') +
+        (usedStr ? '<span class="finished-badge">' + usedStr + '</span>' : '') +
+        (effCount ? '<span class="finished-badge">' + effCount + ' check-in' + (effCount===1?'':'s') + '</span>' : '') +
+      '</div>' +
+      '<div class="finished-date" style="margin-top:6px">Finished ' + p.finishedAt + '</div>' +
+      (p.finNotes ? '<div style="font-size:11px;color:var(--tl);font-style:italic;margin-top:4px">'+p.finNotes+'</div>' : '') +
+    '</div>';
+  }).join('');
+}
+
+function clearAllFinished(){
+  if(!finishedProds.length){toast("Nothing to clear");return;}
+  document.getElementById('finishedOv').classList.add('hi');
+  askConf("Clear all "+finishedProds.length+" finished products?","This cannot be undone.",()=>{
+    finishedProds=[];saveFinished(finishedProds);
+    document.getElementById('finishedOv').classList.remove('hi');
+    renderFinishedList();toast("Cleared ✓");
+  });
+  // Reopen finished if cancelled
+  const origNo=$('confirmNo').onclick;
+  $('confirmNo').onclick=function(){hov('confirmOv');document.getElementById('finishedOv').classList.remove('hi');};
+}
+window.clearAllFinished=clearAllFinished;
+
+function openFinished(){
+  finSearch = '';
+  const si = document.getElementById('finSearchInput');
+  if(si) si.value = '';
+  renderFinishedList();
+  document.getElementById('finishedOv').classList.remove('hi');
+}
+
+window.archiveAsFinished = archiveAsFinished;
+window.delFinished = delFinished;
+window.openFinished = openFinished;
+
+
+function viewFinished(id){
+  var p = finishedProds.find(function(x){ return x.id===id; });
+  if(!p) return;
+  var stars = p.rating ? '★'.repeat(p.rating)+'☆'.repeat(5-p.rating) : '—';
+  var usedStr = p.usedDays ? p.usedDays+' days' : '—';
+  var effHtml = '';
+  if(p.efficacy && p.efficacy.length){
+    effHtml = '<div style="padding-top:10px;border-top:1px solid var(--stn);margin-top:4px">' +
+      '<div style="font-size:10px;color:var(--tl);letter-spacing:.09em;text-transform:uppercase;margin-bottom:8px">Efficacy Check-ins</div>' +
+      p.efficacy.map(function(e){
+        var es='★'.repeat(e.rating)+'☆'.repeat(5-e.rating);
+        var hl=e.helped==='yes'?'✓ Helped':e.helped==='no'?'✗ No change':e.helped==='mixed'?'~ Mixed':'';
+        return '<div style="padding:6px 0;border-bottom:1px solid var(--stn)">' +
+          '<div style="display:flex;justify-content:space-between">' +
+            '<span style="font-size:11px;color:var(--tl)">Day '+e.checkpoint+' · '+e.date+'</span>' +
+            '<span style="font-size:13px;color:#C9A030">'+es+'</span>' +
+          '</div>' +
+          (hl?'<div style="font-size:11px;color:var(--tm);margin-top:2px">'+hl+'</div>':'') +
+          (e.note?'<div style="font-size:11px;color:var(--tl);font-style:italic;margin-top:2px">'+e.note+'</div>':'') +
+        '</div>';
+      }).join('') +
+    '</div>';
+  }
+
+  // Populate view overlay
+  document.getElementById('finViewTitle').textContent = p.name;
+  document.getElementById('finViewEye').textContent = p.category || 'Finished Product';
+  document.getElementById('finViewBody').innerHTML =
+    (p.photo ? '<img src="'+p.photo+'" style="width:100%;max-height:180px;object-fit:cover;border-radius:6px;margin-bottom:10px" alt=""/>' : '') +
+    '<div class="vrow"><span class="vlbl">Brand</span><span class="vval">'+p.brand+'</span></div>' +
+    '<div class="vrow"><span class="vlbl">Rating</span><span class="vval" style="color:#C9A030">'+stars+'</span></div>' +
+    '<div class="vrow"><span class="vlbl">Price</span><span class="vval vbig">'+(p.price?'₹'+Number(p.price).toLocaleString('en-IN'):'—')+'</span></div>' +
+    '<div class="vrow"><span class="vlbl">Days Used</span><span class="vval">'+usedStr+'</span></div>' +
+    (p.openedAt?'<div class="vrow"><span class="vlbl">Opened</span><span class="vval">'+p.openedAt+'</span></div>':'') +
+    '<div class="vrow"><span class="vlbl">Finished</span><span class="vval">'+p.finishedAt+'</span></div>' +
+    (p.notes?'<div class="vrow"><span class="vlbl">Product Notes</span><span class="vval vnote">'+p.notes+'</span></div>':'') +
+    effHtml;
+
+  // Notes field
+  document.getElementById('finNotesInput').value = p.finNotes || '';
+  document.getElementById('finViewSave').onclick = function(){ saveFinishedNotes(id); };
+  document.getElementById('finViewDel').onclick  = function(){
+    document.getElementById('finViewOv').classList.add('hi');
+    delFinished(id);
+  };
+  document.getElementById('finViewOv').classList.remove('hi');
+}
+
+function saveFinishedNotes(id){
+  var notes = document.getElementById('finNotesInput').value.trim();
+  finishedProds = finishedProds.map(function(p){
+    return p.id===id ? Object.assign({},p,{finNotes:notes}) : p;
+  });
+  saveFinished(finishedProds);
+  document.getElementById('finViewOv').classList.add('hi');
+  renderFinishedList();
+  toast('Notes saved ✓');
+}
+
+window.viewFinished = viewFinished;
+window.saveFinishedNotes = saveFinishedNotes;
+
+/* ═══════════════════════════════════════════════════════════
+   FEATURE: STORAGE QUOTA WARNING
+   Uses navigator.storage.estimate() (Chromium/Firefox).
+   Falls back to estimating localStorage byte size.
+   Shown as a bar in the inventory tab below stats.
+   Also warns via toast if > 80% full.
+═══════════════════════════════════════════════════════════ */
+const QUOTA_KEY = 'sk_quota_warn'; // timestamp of last warning
+
+async function updateStorageQuota(){
+  const el = document.getElementById('storageQuotaBar');
+  if(!el) return;
+
+  let used = 0, quota = 5 * 1024 * 1024; // 5MB default
+  let methodLabel = 'localStorage estimate';
+
+  // Method 1: navigator.storage.estimate() — most accurate
+  if(navigator.storage && navigator.storage.estimate){
+    try{
+      const est = await navigator.storage.estimate();
+      if(est.quota && est.quota > 0){
+        used  = est.usage  || 0;
+        quota = est.quota;
+        methodLabel = 'browser storage';
+      }
+    }catch(e){}
+  }
+
+  // Method 2: Fallback — count localStorage bytes
+  if(used === 0){
+    try{
+      let bytes = 0;
+      for(let i=0; i<localStorage.length; i++){
+        const k = localStorage.key(i);
+        bytes += (k.length + (localStorage.getItem(k)||'').length) * 2; // UTF-16
+      }
+      used = bytes;
+    }catch(e){}
+  }
+
+  const pct = Math.min(100, Math.round((used/quota)*100));
+  // In some environments (headless/file://) usage=0; compute from localStorage as fallback
+  let finalPct=pct;
+  if(finalPct===0&&used===0){try{let b=0;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);b+=(k.length+(localStorage.getItem(k)||"").length)*2;}finalPct=Math.min(100,Math.round((b/(5*1024*1024))*100));}catch(e){}}
+  const usedKB  = Math.round(used/1024);
+  const quotaMB = (quota/(1024*1024)).toFixed(0);
+  const color = finalPct > 85 ? 'var(--red)' : finalPct > 65 ? 'var(--amber)' : 'var(--green)';
+
+  el.innerHTML =
+    '<div class="quota-bar-top">' +
+      '<span class="quota-lbl">Storage Used</span>' +
+      '<span class="quota-pct" style="color:' + color + '">' + finalPct + '%</span>' +
+    '</div>' +
+    '<div class="quota-track"><div class="quota-fill" style="width:' + pct + '%;background:' + color + '"></div></div>' +
+    '<div class="quota-detail">' + usedKB.toLocaleString() + ' KB of ' + quotaMB + ' MB (' + methodLabel + ')</div>';
+
+  // Warn if > 80% and haven't warned in 24h
+  if(finalPct > 80){
+    const lastWarn = Number(localStorage.getItem(QUOTA_KEY)||0);
+    if(Date.now() - lastWarn > 86400000){
+      localStorage.setItem(QUOTA_KEY, Date.now());
+      setTimeout(()=>{
+        toast('⚠ Storage ' + pct + '% full — export a backup and consider clearing old photos');
+      }, 1500);
+    }
+  }
+}
+
+// Call on init and after every save
+const _origSd = sd;
+
+window.updateStorageQuota = updateStorageQuota;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
